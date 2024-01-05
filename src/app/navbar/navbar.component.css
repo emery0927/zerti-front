@@ -1,0 +1,48 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 73px;
+  display: flex;
+  z-index: 1;
+  align-items: center;
+  background-color: rgb(177, 100, 72);
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.button-toolbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent !important;
+  appearance: inherit;
+  border: inherit;
+  color: white !important;
+}
