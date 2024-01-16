@@ -1,0 +1,28 @@
+.header {
+  padding: 10px 20px;
+  padding-left: 7px;
+  background: #b16448;
+  color: #fff;
+}
+
+.title-nav {
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 15px;
+}
+
+.page-header-title{
+  background-color: #b16448;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-left: 75px;
+}
+
+.jim {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+}

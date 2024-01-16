@@ -1,0 +1,23 @@
+<div class="sidenav_container" (mouseenter)="onSinenavToggle()" (mouseleave)="onSinenavToggle()"
+  [@onSideNavChange]="sideNavState ? 'open' : 'close'">
+  <div fxLayout="column" fxLayoutGap="10px" style="height: 100%;">
+
+    <div class="link-container">
+      <mat-nav-list>
+        <mat-list-item routerLink="home">
+          <mat-icon style="color: #b16448;">home</mat-icon>
+          <span class="ng-star-inserted"> 0 </span>
+          <span [@animateText]="linkText ? 'show' : 'hide'"> Inicio </span>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item style="display: flex;" *ngFor="let page of pages; last as last" [routerLink]="page.link">
+          <mat-icon style="color: #b16448;">{{ page?.icon }}</mat-icon>
+          <span mat-line class="ng-star-inserted">{{ page?.id}} </span>
+          <span mat-line [@animateText]="linkText ? 'show' : 'hide'">{{ page?.name }} </span>
+          <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+        </mat-list-item>
+      </mat-nav-list>
+
+    </div>
+  </div>
+</div>

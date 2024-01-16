@@ -1,0 +1,14 @@
+p {
+  font-family: Lato;
+}
+
+.main_content {
+  width:100%;
+  height: calc(100vh - 100px);
+  background: #efefef;
+  text-align: center;
+}
+
+.sidenav-container {
+  position: initial;
+}
