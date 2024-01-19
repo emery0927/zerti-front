@@ -16,13 +16,30 @@ import { SidenavService } from './services/sidenav.service';
 import { HomeComponent } from './components/home/home.component';
 import { EducationalInstitutionsComponent } from './components/educational-institutions/educational-institutions.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { EducationalInstitutionsManagementComponent } from './components/educational-institutions-management/educational-institutions-management.component';
+import { OfficialsComponent } from './components/officials/officials.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CreateEducationalInstituteComponent } from './components/create-educational-institute/create-educational-institute.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     SidebarComponent,
     HomeComponent,
-    EducationalInstitutionsComponent
+    EducationalInstitutionsComponent,
+    EducationalInstitutionsManagementComponent,
+    OfficialsComponent,
+    CreateEducationalInstituteComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +51,18 @@ import { MatDividerModule } from '@angular/material/divider';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatInputModule,
+    MatMenuModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatCardModule,
+    MatCheckboxModule,
   ],
   providers: [SidenavService],
   bootstrap: [AppComponent]

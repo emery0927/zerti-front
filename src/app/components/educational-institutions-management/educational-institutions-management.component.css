@@ -1,0 +1,101 @@
+
+.py-4 {
+  padding-top: 1.5rem!important;
+  padding-bottom: 1.5rem!important;
+}
+
+.px-3 {
+  padding-right: 1rem!important;
+  padding-left: 1rem!important;
+}
+.container-fluid {
+  --bs-gutter-x: 24px;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
+  --bs-gutter-x: 24px;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+}
+
+.col-12 {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.row>* {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-top: var(--bs-gutter-y);
+}
+
+.col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+}
+
+.mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+}
+.mat-form-field {
+  font-size: inherit;
+  font-weight: 400;
+  line-height: 1.125;
+  font-family: Roboto,Helvetica Neue,sans-serif;
+  letter-spacing: normal;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-select {
+  display: inline-block;
+  width: 100%;
+  outline: none;
+  flex: 1;
+  margin-right: 10px;
+
+}
+
+.mat-select-trigger {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 1.125em
+}
+
+.select {
+  color: #fff;
+  display: flex;
+  padding-top: 2rem;
+  width: 100%;
+
+  /*box-shadow: 0 3px 4px #0003, 0 3px 3px -2px #00000024, 0 1px 8px #0000001f;*/
+}
+
+.ancho-igual {
+  flex: 1;
+  margin-left: 10px;
+  margin-right: 10px; /* Puedes ajustar este margen según tus necesidades */
+  max-width: calc(100% / 3 - 10px); /* Divide el ancho en tres y resta el margen */
+  box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
+}
