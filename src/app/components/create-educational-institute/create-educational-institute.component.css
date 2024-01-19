@@ -45,6 +45,14 @@
   margin-right: 10px;
   --mdc-outlined-text-field-focus-outline-color: #b16448;
   --mdc-outlined-text-field-focus-label-text-color: #b16448;
+  --mdc-checkbox-selected-focus-icon-color: #b16448;
+  --mdc-checkbox-selected-hover-icon-color: #b16448;
+  --mdc-checkbox-selected-icon-color: #b16448;
+  --mat-option-selected-state-label-text-color: #b16448;
+  --mdc-checkbox-selected-pressed-icon-color: #b16448;
+  --mdc-checkbox-selected-focus-state-layer-color: #b16448;
+  --mdc-checkbox-selected-hover-state-layer-color: #b16448;
+  --mdc-checkbox-selected-pressed-state-layer-color: #b16448;
 }
 
 .full-width {
