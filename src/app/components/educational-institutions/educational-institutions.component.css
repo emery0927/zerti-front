@@ -43,3 +43,9 @@
   margin-right: calc(-.5 * var(--bs-gutter-x));
   margin-left: calc(-.5 * var(--bs-gutter-x));
 }
+
+::ng-deep .mdc-tab.mdc-tab--active{
+  background-color: #fafafa !important;
+  font-weight: 900;
+  color: #fff;
+}

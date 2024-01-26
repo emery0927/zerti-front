@@ -24,10 +24,10 @@ body {
 }
 
 .mat-mdc-tab-group {
-  --mdc-tab-indicator-active-indicator-color: #b16448;
+  --mdc-tab-indicator-active-indicator-color: #fafafa;
   --mat-tab-header-disabled-ripple-color: rgba(0, 0, 0, 0.38);
   --mat-tab-header-pagination-icon-color: #000;
-  --mat-tab-header-inactive-label-text-color: rgba(0, 0, 0, 0.6);
+  --mat-tab-header-inactive-label-text-color: rgb(255, 255, 255);
   --mat-tab-header-active-label-text-color: #b16448;
   --mat-tab-header-active-ripple-color: #b16448;
   --mat-tab-header-inactive-ripple-color: #b16448;
@@ -35,9 +35,9 @@ body {
   --mat-tab-header-inactive-hover-label-text-color: rgba(0, 0, 0, 0.6);
   --mat-tab-header-active-focus-label-text-color: #b16448;
   --mat-tab-header-active-hover-label-text-color: #b16448;
-  --mat-tab-header-active-focus-indicator-color: #b16448;
-  --mat-tab-header-active-hover-indicator-color: #b16448;
-  --mdc-filled-text-field-focus-active-indicator-color: #b16448;
+  --mat-tab-header-active-focus-indicator-color: #fafafa;
+  --mat-tab-header-active-hover-indicator-color: #fafafa;
+  --mdc-filled-text-field-focus-active-indicator-color: #fafafa;
   --mat-select-focused-arrow-color: #b16448;
 }
 
@@ -112,4 +112,7 @@ body {
   background-color: #ffeab0a1;
 }
 
+.mat-mdc-tab-labels {
+  background-color: #b16448;
+}
 
