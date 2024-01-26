@@ -1,0 +1,14 @@
+<div style="padding: 92px;" *ngIf="!imageUrl">
+  <label for="fileInput">
+    <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color"
+    aria-hidden="true" data-mat-icon-type="font">photo_library</mat-icon>
+  </label>
+  <input id="fileInput" type="file" (change)="onFileSelected($event)" />
+</div>
+<div style="display: flex; " *ngIf="imageUrl">
+  <label style="padding: 0;" for="fileInput">
+    <img class="img" [src]="imageUrl" alt="Preview"/>
+  </label>
+  <input id="fileInput" type="file" (change)="onFileSelected($event)" />
+</div>
+

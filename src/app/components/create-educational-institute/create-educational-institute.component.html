@@ -68,7 +68,8 @@
             <mat-label style="font-size: 14px;">Clase de Institución</mat-label>
             <mat-label style="color: red;"> *</mat-label>
             <div class="mat-form-field-wrapper">
-              <mat-select style="font-size: 14px;" matInput >
+              <mat-select style="font-size: 14px;">
+                <mat-option *ngFor="let class of institutionsClasses" [value]="class">{{class.class}}</mat-option>
               </mat-select>
             </div>
           </mat-form-field>
@@ -114,7 +115,8 @@
           <mat-label style="font-size: 14px;">Equipo de Servicio Zerti</mat-label>
           <mat-label style="color: red;"> *</mat-label>
           <div>
-            <mat-select matInput>
+            <mat-select>
+              <mat-option *ngFor="let team of servicesTeam" [value]="team">{{team.team}}</mat-option>
             </mat-select>
           </div>
         </mat-form-field>
@@ -130,6 +132,7 @@
             <mat-label style="color: red;"> *</mat-label>
             <div class="mat-form-field-wrapper">
               <mat-select>
+                <mat-option *ngFor="let department of departments" [value]="department">{{department.name}}</mat-option>
               </mat-select>
             </div>
           </mat-form-field>
@@ -139,7 +142,8 @@
           <mat-label style="font-size: 14px;">Distrito/Municipio</mat-label>
           <mat-label style="color: red;"> *</mat-label>
           <div>
-            <mat-select matInput >
+            <mat-select>
+              <mat-option *ngFor="let district of districts" [value]="district">{{district.name}}</mat-option>
             </mat-select>
           </div>
         </mat-form-field>
@@ -147,7 +151,8 @@
         <mat-form-field appearance="outline" class="ancho-50">
           <mat-label style="font-size: 14px;">Centro Poblado</mat-label>
           <div>
-            <mat-select matInput >
+            <mat-select>
+              <mat-option *ngFor="let village of villageCenters" [value]="village">{{village.name}}</mat-option>
             </mat-select>
           </div>
         </mat-form-field>
@@ -194,9 +199,7 @@
         <div class="col-4">
           <div mattooltip="Cargar imagen" class="image-upload-container">
             <div class="default-image ancho-50" style="height: 196px;width: auto;">
-              <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color"
-                aria-hidden="true" data-mat-icon-type="font">photo_library</mat-icon>
-                <input type="file" accept="image/*" class="ng-star-inserted">
+              <app-image-upload></app-image-upload>
             </div>
 
           </div>
@@ -206,7 +209,7 @@
     </div>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions style="min-height: 78px;" align="end">
+<mat-dialog-actions style="min-height: 78px; margin-right: 20px;" align="end">
   <button style="background-color: #ffeab0;" mat-button [mat-dialog-close]="true" cdkFocusInitial>Guardar</button>
   <button mat-button mat-dialog-close>Salir</button>
 </mat-dialog-actions>

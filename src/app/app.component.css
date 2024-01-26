@@ -25,3 +25,9 @@ p {
   min-height: inherit;
   max-height: inherit;
 }
+
+.mat-drawer {
+  position: fixed;
+}
+
+

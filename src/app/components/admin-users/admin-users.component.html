@@ -1,0 +1,73 @@
+<div>
+  <mat-card class="card-admin-users">
+    <mat-card-header class="header-admin-users">
+      <mat-card-title class="title-admin-users">Usuarios Administrativos</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="main-content">
+
+        <div class="admin-list">
+          <div class="select">
+            <mat-form-field style="max-width: 40%;" class="ancho-igual">
+              <mat-label style="font-size: 14px;">Entidad Territorial</mat-label>
+              <mat-select>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="ancho-igual">
+              <mat-label style="font-size: 14px;">Nombre de Institución Educativa</mat-label>
+              <mat-select>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="select" style="padding-top: 5px;">
+          <mat-form-field style="max-width: 40%;" class="ancho-igual">
+            <mat-label style="font-size: 14px;">Roles</mat-label>
+            <mat-select>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="ancho-igual">
+            <mat-label style="font-size: 14px;">Nombre de Usuarios con Rol</mat-label>
+            <mat-select>
+            </mat-select>
+          </mat-form-field>
+
+
+
+
+      </div>
+      <div>
+        <mat-card-actions class="admin-button">
+          <button style="background-color: #ffeab0;" mat-button>Guardar</button>
+        </mat-card-actions>
+      </div>
+        </div>
+
+        <div style="width: 100%;
+        margin-left: 50px;
+        margin-right: 30px;">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w100" style="display: table;">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="rol">
+              <th style="background-color: #ffeab0; color: #b16448; font-weight: 600; text-align: center;" mat-header-cell *matHeaderCellDef> Rol </th>
+              <td style="text-align: center;" mat-cell *matCellDef="let element"> {{element.rol}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="username">
+              <th style="background-color: #ffeab0; color: #b16448; font-weight: 600; text-align: center;"mng  mat-header-cell *matHeaderCellDef> Nombre de Usuario </th>
+              <td style="text-align: center;" mat-cell *matCellDef="let element"> {{element.username}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+      </mat-card-content>
+
+  </mat-card>
+</div>

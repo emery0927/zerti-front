@@ -30,6 +30,22 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CreateEducationalInstituteComponent } from './components/create-educational-institute/create-educational-institute.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { AdminUsersComponent } from './components/admin-users/admin-users.component';
+import { EduacationalInstitutionsCustodyComponent } from './components/eduacational-institutions-custody/eduacational-institutions-custody.component';
+import { StudentsUsersComponent } from './components/students-users/students-users.component';
+import { AdministrativeUsersComponent } from './components/administrative-users/administrative-users.component';
+import { EducationalCertificatesComponent } from './components/educational-certificates/educational-certificates.component';
+import { AreasComponent } from './components/areas/areas.component';
+import { ServiceTeamComponent } from './components/service-team/service-team.component';
+import { FinalValuationDigitalBooksComponent } from './components/final-valuation-digital-books/final-valuation-digital-books.component';
+import { DigitalGradeValidationBookComponent } from './components/digital-grade-validation-book/digital-grade-validation-book.component';
+import { GraduationBooksComponent } from './components/graduation-books/graduation-books.component';
+import { TerritorialEnttitiesComponent } from './components/territorial-enttities/territorial-enttities.component';
+import { TerritorialEntitiesComponent } from './components/territorial-entities/territorial-entities.component';
+import { OperationalRolesComponent } from './components/operational-roles/operational-roles.component';
+import { GoodsAndServicesSuppliersComponent } from './components/goods-and-services-suppliers/goods-and-services-suppliers.component';
+import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +55,23 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     EducationalInstitutionsComponent,
     EducationalInstitutionsManagementComponent,
     OfficialsComponent,
-    CreateEducationalInstituteComponent
+    CreateEducationalInstituteComponent,
+    ImageUploadComponent,
+    AdminUsersComponent,
+    EduacationalInstitutionsCustodyComponent,
+    StudentsUsersComponent,
+    AdministrativeUsersComponent,
+    EducationalCertificatesComponent,
+    AreasComponent,
+    ServiceTeamComponent,
+    FinalValuationDigitalBooksComponent,
+    DigitalGradeValidationBookComponent,
+    GraduationBooksComponent,
+    TerritorialEnttitiesComponent,
+    TerritorialEntitiesComponent,
+    OperationalRolesComponent,
+    GoodsAndServicesSuppliersComponent,
+    RightSidebarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,67 @@
+.card-admin-users {
+  margin: 20px;
+
+}
+
+.header-admin-users {
+  background-color: #ffeab0;
+  align-items: center;
+  height: 50px;
+  padding: 0px 15px 0;
+  font-weight: 600;
+}
+
+.title-admin-users {
+  --mat-card-title-text-size: 16px;
+  font-weight: 600;
+  color: #b16448;
+}
+
+.main-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.select {
+  color: #fff;
+  display: flex;
+  padding-top: 2rem;
+  width: 100%;
+
+  /*box-shadow: 0 3px 4px #0003, 0 3px 3px -2px #00000024, 0 1px 8px #0000001f;*/
+}
+
+.ancho-igual {
+  flex: 1;
+  margin-left: 10px;
+  margin-right: 10px; /* Puedes ajustar este margen según tus necesidades */
+  max-width: 50%; /* Divide el ancho en tres y resta el margen */
+  box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
+}
+
+.admin-list {
+  max-width: 50%;
+  width: -webkit-fill-available;
+  --mdc-outlined-text-field-focus-outline-color: #b16448;
+  --mdc-outlined-text-field-focus-label-text-color: #b16448;
+  --mdc-checkbox-selected-focus-icon-color: #b16448;
+  --mdc-checkbox-selected-hover-icon-color: #b16448;
+  --mdc-checkbox-selected-icon-color: #b16448;
+  --mat-option-selected-state-label-text-color: #b16448;
+  --mdc-checkbox-selected-pressed-icon-color: #b16448;
+  --mdc-checkbox-selected-focus-state-layer-color: #b16448;
+  --mdc-checkbox-selected-hover-state-layer-color: #b16448;
+  --mdc-checkbox-selected-pressed-state-layer-color: #b16448;
+  --mat-option-selected-state-label-text-color: #faccbb;
+  --mat-select-focused-arrow-color: #b16448;
+  --mdc-filled-text-field-focus-label-text-color: #b16448;
+}
+
+.admin-button {
+  justify-content: end;
+}
+
+.w100 {
+  width: 100%;
+}

@@ -53,6 +53,11 @@
   --mdc-checkbox-selected-focus-state-layer-color: #b16448;
   --mdc-checkbox-selected-hover-state-layer-color: #b16448;
   --mdc-checkbox-selected-pressed-state-layer-color: #b16448;
+  --mat-option-selected-state-label-text-color: #faccbb;
+  --mat-select-focused-arrow-color: #b16448;
+  --mdc-dialog-container-elevation-shadow: 0px 11px 15px -7px rgb(51 51 51);
+  --mdc-dialog-container-shadow-color: #000;
+  --mdc-dialog-container-shape: 10px;
 }
 
 .full-width {
@@ -147,4 +152,15 @@
   background-color: red !important;
   height: 50px;
   transition: height ease-in-out 400ms;
+}
+
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #0000000a;
+}
+
+.mat-form-field.mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0.95em 0.75em 0;
+  border-radius: 4px;
+  border: 1px solid #e7e7e7;
 }
