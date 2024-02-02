@@ -1,69 +1,78 @@
 <div class="select">
-    <mat-form-field class="ancho-igual">
+    <mat-form-field class="ancho-igual" *ngFor="let territorialEntity of territorialEntitiesFilter">
       <mat-label style="font-size: 14px;">Entidad Territorial</mat-label>
-      <mat-select>
+      <mat-select [value]="territorialEntity.defaultValue" (selectionChange)="filterByTerritorialEntity($event, territorialEntity)">
+        <mat-option *ngFor="let op of territorialEntity.options" [value]="op">{{op}}</mat-option>
     </mat-select>
     </mat-form-field>
     <mat-form-field class="ancho-igual">
-      <mat-label style="font-size: 14px;">Buscar
+      <mat-label style="font-size: 14px;">Buscar por Nombre
       </mat-label>
-      <input matInput>
+      <input placeholder="Buscar por Nombre" matInput (keyup)="applyFilter($event, 'shortname')" #input>
       <mat-icon style="color: #00000099;" matSuffix>search</mat-icon>
     </mat-form-field>
 </div>
 
 <div class="mat-elevation-z8">
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-  showFirstLastButtons
-  aria-label="Select page of periodic elements">
-</mat-paginator>
-  <table mat-table [dataSource]="data">
+  <div class="paginator-container">
+    <mat-paginator appBubblePagination class="header-style"
+    [appCustomLength]="data.data.length"
+    [length]="data.data.length"
+    [pageSize]="1"
+    aria-label="Select page"
+    >
+  </mat-paginator>
+  <mat-form-field class="specific-page-input">
+    <input matInput type="number" placeholder="#" [(ngModel)]="pageNumberInput" (keyup)="goToPage()">
+  </mat-form-field>
+  </div>
+  <table mat-table [dataSource]="data" matSort>
 
     <!-- Position Column -->
     <ng-container matColumnDef="ieo">
-      <th style="background-color: #ffeab0; color: #b16448; font-weight: 600;" role="columnheader" mat-header-cell *matHeaderCellDef> NOMBRE DE INSTITUCIÓN EDUCATIVA / EN CUSTODIA </th>
-      <td role="row" mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE DE INSTITUCIÓN EDUCATIVA / EN CUSTODIA </th>
+      <td class="row-style" role="row" mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="shortname">
-      <th style="background-color: #ffeab0; color: #b16448; font-weight: 600;" role="columnheader" aria-sort="ascending" mat-header-cell *matHeaderCellDef> NOMBRE CORTO </th>
-      <td role="row" mat-cell *matCellDef="let element"> {{element.shortname}} </td>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE CORTO </th>
+      <td class="row-style" mat-cell *matCellDef="let element"> {{element.shortname}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="code">
-      <th style="background-color: #ffeab0; color: #b16448; font-weight: 600;" role="columnheader" mat-header-cell *matHeaderCellDef> CÓDIGO </th>
-      <td role="row" mat-cell *matCellDef="let element"> {{element.code}} </td>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header> CÓDIGO </th>
+      <td class="row-style" mat-cell *matCellDef="let element"> {{element.code}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="nit">
-      <th style="background-color: #ffeab0; color: #b16448; font-weight: 600;" role="columnheader" mat-header-cell *matHeaderCellDef> NIT </th>
-      <td role="row" mat-cell *matCellDef="let element"> {{element.nit}} </td>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef> NIT </th>
+      <td class="row-style" mat-cell *matCellDef="let element"> {{element.nit}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="location">
-      <th style="background-color: #ffeab0; color: #b16448; font-weight: 600;" role="columnheader" mat-header-cell *matHeaderCellDef> UBICACIÓN </th>
-      <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header> UBICACIÓN </th>
+      <td class="row-style" mat-cell *matCellDef="let element"> {{element.location}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="zone">
-      <th style="background-color: #ffeab0; color: #b16448; font-weight: 600;" role="columnheader" mat-header-cell *matHeaderCellDef> ZONA </th>
-      <td mat-cell *matCellDef="let element"> {{element.zone}} </td>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header> ZONA </th>
+      <td class="row-style" mat-cell *matCellDef="let element"> {{element.zone}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="class">
-      <th style="background-color: #ffeab0; color: #b16448; font-weight: 600;" role="columnheader" mat-header-cell *matHeaderCellDef> CLASE </th>
-      <td mat-cell *matCellDef="let element"> {{element.class}} </td>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header> CLASE </th>
+      <td class="row-style" mat-cell *matCellDef="let element"> {{element.class}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="options">
-      <th style="background-color: #ffeab0; width: 80px; right: 0px; z-index: 1;" role="columnheader" mat-header-cell *matHeaderCellDef>
+      <th class="header-style" style="z-index: 1;" role="columnheader" mat-header-cell *matHeaderCellDef>
         <div>
           <button mat-button matTooltip="Debe de seleccionar una (1) Entidad Territorial" [matMenuTriggerFor]="menu" style="cursor: pointer;background-color: transparent; border: none;">
             <span>

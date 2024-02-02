@@ -46,6 +46,14 @@ import { TerritorialEntitiesComponent } from './components/territorial-entities/
 import { OperationalRolesComponent } from './components/operational-roles/operational-roles.component';
 import { GoodsAndServicesSuppliersComponent } from './components/goods-and-services-suppliers/goods-and-services-suppliers.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
+import { MatSortModule } from '@angular/material/sort';
+import { EditEducationalInstitutionComponent } from './components/edit-educational-institution/edit-educational-institution.component';
+import { StudentUserManagementComponent } from './components/student-user-management/student-user-management.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { EditStudentUserComponent } from './components/edit-student-user/edit-student-user.component';
+import { CreateStudentUserComponent } from './components/create-student-user/create-student-user.component';
+import { BubblePaginationDirective } from './directives/bubble-pagination.directive';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +80,10 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
     OperationalRolesComponent,
     GoodsAndServicesSuppliersComponent,
     RightSidebarComponent,
+    EditEducationalInstitutionComponent,
+    StudentUserManagementComponent,
+    EditStudentUserComponent,
+    CreateStudentUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +107,10 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
     MatDialogModule,
     MatCardModule,
     MatCheckboxModule,
+    MatSortModule,
+    NgxSpinnerModule,
+    BubblePaginationDirective,
+    FormsModule
   ],
   providers: [SidenavService],
   bootstrap: [AppComponent]

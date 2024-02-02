@@ -28,17 +28,19 @@ body {
   --mat-tab-header-disabled-ripple-color: rgba(0, 0, 0, 0.38);
   --mat-tab-header-pagination-icon-color: #000;
   --mat-tab-header-inactive-label-text-color: rgb(255, 255, 255);
-  --mat-tab-header-active-label-text-color: #b16448;
-  --mat-tab-header-active-ripple-color: #b16448;
-  --mat-tab-header-inactive-ripple-color: #b16448;
+  --mat-tab-header-active-label-text-color: #8f5b35;
+  --mat-tab-header-active-ripple-color: #8f5b35;
+  --mat-tab-header-inactive-ripple-color: #8f5b35;
   --mat-tab-header-inactive-focus-label-text-color: rgba(0, 0, 0, 0.6);
   --mat-tab-header-inactive-hover-label-text-color: rgba(0, 0, 0, 0.6);
-  --mat-tab-header-active-focus-label-text-color: #b16448;
-  --mat-tab-header-active-hover-label-text-color: #b16448;
+  --mat-tab-header-active-focus-label-text-color: #8f5b35;
+  --mat-tab-header-active-hover-label-text-color: #8f5b35;
   --mat-tab-header-active-focus-indicator-color: #fafafa;
   --mat-tab-header-active-hover-indicator-color: #fafafa;
   --mdc-filled-text-field-focus-active-indicator-color: #fafafa;
-  --mat-select-focused-arrow-color: #b16448;
+  --mat-select-focused-arrow-color: #8f5b35;
+  --mat-menu-item-hover-state-layer-color: #fff5c2;
+  --mat-menu-item-focus-state-layer-color: #fff5c2;
 }
 
 .mat-mdc-form-field-input-control {
@@ -95,11 +97,11 @@ body {
 }
 
 .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
-  color: #b16448;
+  color: #8f5b35;
 }
 
 .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
-  color: #b16448 !important;
+  color: #8f5b35 !important;
 }
 
 
@@ -113,6 +115,67 @@ body {
 }
 
 .mat-mdc-tab-labels {
-  background-color: #b16448;
+  background-color: #8f5b35;
 }
 
+.mat-mdc-tab-body-wrapper {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-elevation-shadow: 0px 11px 15px -7px rgb(0 0 0 / 38%), 0px 24px 38px 3px rgb(0 0 0 / 0%), 0px 9px 46px 8px rgb(0 0 0 / 0%) !important;
+  --mdc-dialog-container-shadow-color: #000;
+  --mdc-dialog-container-shape: 2px;
+  --mdc-dialog-container-elevation: var(--mdc-dialog-container-elevation-shadow);
+  outline: 0;
+}
+
+.g-bubble-container {
+  display: flex;
+  gap: 10px;
+}
+
+.g-bubble {
+  background-color: transparent;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8f5b35;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.g-bubble:hover {
+  background-color: #8f5b35;
+  color: white;
+}
+
+.g-bubble__active {
+  background-color: #8f5b35;
+  color: white;
+}
+
+/* .g-bubble__disabled {
+  cursor: default;
+  opacity: 0.5;
+  pointer-events: none;
+  color: 919191;
+} */
+
+/* TODO(mdc-migration): The following rule targets internal classes of paginator that may no longer apply for the MDC version. */
+mat-paginator {
+  background: transparent !important;
+}
+
+.mat-mdc-paginator-range-actions {
+  margin-right: 12px !important;
+}
+
+.mdc-text-field {
+  align-items: center !important;
+}

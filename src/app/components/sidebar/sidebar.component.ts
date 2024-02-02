@@ -9,6 +9,17 @@ interface Page {
   icon: string;
 }
 
+interface User {
+  id: number;
+  rolId: number;
+}
+
+interface Menu {
+  id: number;
+  rolId: number;
+
+}
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',

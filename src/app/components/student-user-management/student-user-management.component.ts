@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Injectable, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CreateEducationalInstituteComponent } from '../create-educational-institute/create-educational-institute.component';
 import { Subject } from 'rxjs';
@@ -9,8 +9,9 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
 import { EditEducationalInstitutionComponent } from '../edit-educational-institution/edit-educational-institution.component';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { CreateStudentUserComponent } from '../create-student-user/create-student-user.component';
 import { BubblePaginationDirective } from 'src/app/directives/bubble-pagination.directive';
-
 
 export interface TerritorialEntitiesFilter {
   name:string;
@@ -19,19 +20,17 @@ export interface TerritorialEntitiesFilter {
 }
 
 @Component({
-  selector: 'app-educational-institutions-management',
-  templateUrl: './educational-institutions-management.component.html',
-  styleUrls: ['./educational-institutions-management.component.css'],
-  providers: [{ provide: MatPaginatorIntl}],
-
+  selector: 'app-student-user-management',
+  templateUrl: './student-user-management.component.html',
+  styleUrls: ['./student-user-management.component.css']
 })
-export class EducationalInstitutionsManagementComponent implements AfterViewInit, OnInit {
+export class StudentUserManagementComponent implements AfterViewInit, OnInit {
 
   territorialEntities: string[]=['Todas', 'Santiago de Cali', 'Valle del Cauca', 'Jamundí'];
   territorialEntitiesFilter: TerritorialEntitiesFilter[]=[];
 
-  displayedColumns: string[] = ['ieo', 'shortname', 'code', 'nit', 'location', 'zone', 'class', 'options'];
-  data = new MatTableDataSource<EducationalInstitutions>(ELEMENT_DATA);
+  displayedColumns: string[] = ['fullname', 'document', 'code', 'site', 'school_day', 'grade', 'status', 'email', 'options'];
+  data = new MatTableDataSource<StudentsUsers>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -46,20 +45,18 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
   pageIndex!: number;
 
   defaultValue!: "Todas";
-
   pageNumberInput!: number;
 
-  totalItems = this.data.data.length;
+  totalItems = 2;
   itemsPerPage = 1;
   currentPage = 0;
 
   filterDictionary= new Map<string,string>();
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private spinner: NgxSpinnerService) {}
 
   /* Metodo encargado de filtrar la información de la tabla */
   applyFilter(event: Event, columnName: string) {
-    if (columnName === 'shortname') {
       const filterValue = (event.target as HTMLInputElement).value;
       this.data.filter = filterValue.trim().toLowerCase();
 
@@ -68,6 +65,15 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
         this.data.paginator.firstPage();
       }
   }
+
+mostrarLoader(): void {
+  this.spinner.show();
+
+  // Simula una acción asincrónica (por ejemplo, una solicitud HTTP)
+  setTimeout(() => {
+    // Después de completar la acción, oculta el loader
+    this.spinner.hide();
+  }, 500); // Cambia este valor según tus necesidades
 }
 
   ngOnInit(): void {
@@ -87,7 +93,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
             var map = new Map(JSON.parse(filter));
             let isMatch = false;
             for(let [key,value] of map){
-              isMatch = (value=="Todas") || (record[key as keyof EducationalInstitutions] == value);
+              isMatch = (value=="Todas") || (record[key as keyof StudentsUsers] == value);
               if (!isMatch) {
                 return false;
               }
@@ -128,7 +134,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
   }
 
   abrirCrearIE() {
-    const dialogRef = this.dialog.open(CreateEducationalInstituteComponent, {restoreFocus: false});
+    const dialogRef = this.dialog.open(CreateStudentUserComponent, {restoreFocus: false});
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
 
   }
@@ -149,7 +155,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
       this.paginator.pageIndex = totalPages -1
       console.log(
         this.paginator.page.next({
-          pageIndex: totalPages - 1,
+          pageIndex: totalPages -1,
           pageSize: this.paginator.pageSize,
           length: this.paginator.length
         }));
@@ -158,26 +164,22 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
 
 }
 
-export interface EducationalInstitutions {
-  position: number;
-  name: string;
-  shortname: string;
+export interface StudentsUsers {
+  id: number;
+  full_name: string;
+  document: string;
   code: string;
-  nit: string;
-  location: string;
-  zone: string;
-  class: string;
+  site: string;
+  school_day: string;
+  grade: string;
+  status: string;
+  email: string;
 }
 
-const ELEMENT_DATA: EducationalInstitutions[] = [
-  {position: 1, name: '01 Institución Educativa Liceo Departamental', shortname: 'Liceo Departamental', code: '10001', nit: '800.125.539-1', location: 'Santiago de Cali', zone:'Urbana', class:'Oficial'},
-  {position: 2, name: '02 Institución Educativa DE SANTA LIBRADA', shortname: 'Santa Librada - Cali', code: '10002', nit: '800.145.251-0', location: 'Santiago de Cali', zone:'Urbana', class:'Oficial'},
-  {position: 3, name: '03 Institución Educativa Técnico Indusatrial ANTONIO JOSÉ CAMACHO', shortname: 'IETI Antonio José Camacho', code: '10003', nit: '805.235.444-7', location: 'Santiago de Cali', zone:'Rural', class:'Oficial'},
-  {position: 4, name: '04 Institución Educativa SIMÓN BOLIVAR', shortname: 'Simón Bolivar', code: '10004', nit: '800.145.478-5', location: 'Jamundí', zone:'Rural', class:'No Oficial'},
-  {position: 5, name: '05 Institución Educativa GENERAL FRANCISCO DE PAULA SANTANDER', shortname: 'Fco de Paula Santander', code: '10005', nit: '900.478.565-3', location: 'Buenaventura', zone:'Urbana', class:'Oficial'},
-  {position: 6, name: '06 Institución Educativa Liceo Departamental', shortname: 'Liceo Departamental', code: '10001', nit: '800.125.539-1', location: 'Santiago de Cali', zone:'Urbana', class:'Oficial'},
-  {position: 7, name: '07 Institución Educativa Liceo Departamental', shortname: 'Liceo Departamental', code: '10001', nit: '800.125.539-1', location: 'Santiago de Cali', zone:'Urbana', class:'Oficial'},
-  {position: 8, name: '08 Institución Educativa Liceo Departamental', shortname: 'Liceo Departamental', code: '10001', nit: '800.125.539-1', location: 'Santiago de Cali', zone:'Urbana', class:'Oficial'},
-  {position: 9, name: '09 Institución Educativa Liceo Departamental', shortname: 'Liceo Departamental', code: '10001', nit: '800.125.539-1', location: 'Santiago de Cali', zone:'Urbana', class:'Oficial'},
-  {position: 10, name: '10 Institución Educativa Liceo Departamental', shortname: 'Liceo Departamental', code: '10001', nit: '800.125.539-1', location: 'Santiago de Cali', zone:'Urbana', class:'Oficial'},
-];
+const ELEMENT_DATA: StudentsUsers[] = [
+  {id: 1, full_name: 'Abadia Arce Santiago', document: '1105379250', code: '107533',
+  site: 'La Gran Colombia', school_day: 'Tarde', grade:'7', status:'7-2', email:'abasan23@hotmail.com',},
+  {id: 2, full_name: 'Acevedo Padilla Valentina', document: '1006168805', code: '107290',
+  site: 'Liceo Departamental', school_day: 'Mañana', grade:'10', status:'10-1', email:'valen093@gmail.com'},
+ ];
+
