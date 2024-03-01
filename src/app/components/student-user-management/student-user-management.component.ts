@@ -146,19 +146,18 @@ mostrarLoader(): void {
     const totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
     if (this.pageNumberInput == totalPages || this.pageNumberInput <= totalPages) {
       this.currentPage = this.pageNumberInput;
-      console.log(this.paginator.page.next({
+      this.paginator.page.next({
         pageIndex: this.pageNumberInput - 1,
         pageSize: this.paginator.pageSize,
         length: this.paginator.length
-      }));
+      });
     } else {
       this.paginator.pageIndex = totalPages -1
-      console.log(
         this.paginator.page.next({
           pageIndex: totalPages -1,
           pageSize: this.paginator.pageSize,
           length: this.paginator.length
-        }));
+        });
     }
   }
 

@@ -6,14 +6,14 @@
       <mat-nav-list>
         <mat-list-item routerLink="home">
           <mat-icon style="color: #8f5b35;">home</mat-icon>
-          <span style="color: aliceblue;" class="ng-star-inserted"> 0 </span>
+          <span style="color: white;" class="ng-star-inserted"> 0 </span>
           <span [@animateText]="linkText ? 'show' : 'hide'"> Inicio </span>
         </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item style="display: flex;" *ngFor="let page of pages; last as last" [routerLink]="page.link">
+        <mat-list-item style="display: flex; font-weight: 400;" *ngFor="let page of pages; last as last" [routerLink]="page.link">
           <mat-icon style="color: #8f5b35;">{{ page?.icon }}</mat-icon>
           <span mat-line class="ng-star-inserted">{{ page?.id}} </span>
-          <span mat-line [@animateText]="linkText ? 'show' : 'hide'">{{ page?.name }} </span>
+          <span style="font-weight: 400;" mat-line [@animateText]="linkText ? 'show' : 'hide'">{{ page?.name }} </span>
           <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
         </mat-list-item>
       </mat-nav-list>

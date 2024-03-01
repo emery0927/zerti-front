@@ -46,10 +46,22 @@ export const animateText = trigger('animateText', [
       opacity: 1,
       'margin-left': '10px',
       'font-weight': '400',
+      'font-size': '.9375rem',
+      'font-family': 'Roboto, sans-serif',
     })
   ),
-  transition('close => open', animate('350ms ease-in')),
+  transition('close => open', animate('250ms ease-in')),
   transition('open => close', animate('200ms ease-out')),
 ]);
 
-
+export const expandCollapse = trigger('expandCollapse', [
+  state('collapsed', style({
+    width: '0',
+    display: 'none'
+  })),
+  state('expanded', style({
+    width: '*',
+    display: 'block'
+  })),
+  transition('collapsed <=> expanded', animate('800ms ease-out'))
+]);

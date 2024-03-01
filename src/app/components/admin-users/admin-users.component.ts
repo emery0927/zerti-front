@@ -6,6 +6,12 @@ export interface RolXUser {
   username: string;
 }
 
+export interface TerritorialEntitiesFilter {
+  name:string;
+  options:string[];
+  defaultValue:string;
+}
+
 const ELEMENT_DATA: RolXUser[] = [
   {id: 1, rol: 'Rectoría:', username: 'Carlos Pastrana'},
   {id: 2, rol: 'Pagaduría:', username: 'Carlos Pastrana'},
@@ -21,7 +27,27 @@ const ELEMENT_DATA: RolXUser[] = [
   styleUrls: ['./admin-users.component.css']
 })
 export class AdminUsersComponent {
+eliminar() {
+throw new Error('Method not implemented.');
+}
+editar() {
+throw new Error('Method not implemented.');
+}
+showOnCustody() {
+throw new Error('Method not implemented.');
+}
+showIdle() {
+throw new Error('Method not implemented.');
+}
+abrirCrearIE() {
+throw new Error('Method not implemented.');
+}
+showOficials() {
+throw new Error('Method not implemented.');
+}
 
-  displayedColumns: string[] = ['rol', 'username'];
+  territorialEntities: string[]=['Todas', 'Santiago de Cali', 'Valle del Cauca', 'Jamundí'];
+  territorialEntitiesFilter: TerritorialEntitiesFilter[]=[];
+  displayedColumns: string[] = ['rol', 'username', 'options'];
   dataSource = ELEMENT_DATA;
 }

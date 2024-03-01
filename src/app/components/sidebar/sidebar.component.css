@@ -7,10 +7,10 @@
 .ng-star-inserted{
   color: #8f5b35;
   font-size: 12px;
-  font-weight: 500;
-  --mdc-list-list-item-hover-state-layer-color: #ffd563;
+  font-weight: 600;
+  --mdc-list-list-item-hover-state-layer-color: #cccccc9a;
   --mdc-list-list-item-hover-state-layer-opacity: 0.3;
-  --mdc-list-list-item-focus-state-layer-color: #ffd563;
+  --mdc-list-list-item-focus-state-layer-color: transparent;
   --mdc-list-list-item-focus-state-layer-opacity: 0.3;
   --mdc-list-list-item-hover-label-text-color: #924d34;
   --mdc-list-list-item-focus-label-text-color: #924d34;

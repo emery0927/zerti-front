@@ -9,46 +9,47 @@ import { map, startWith } from 'rxjs';
 export class BubblePaginationDirective implements AfterViewInit, OnChanges {
 
   /**
-   * declare the auxiliary variable prevIndexAux with initial value 0
+   * declarar la variable auxiliar prevIndexAux con valor inicial 0.
    */
   prevIndexAux: number = 0;
 
   /**
-   * custom emitter for parent component
+   * emisor de eventos personalizado para el componente padre.
    */
   @Output() pageIndexChangeEmitter: EventEmitter<number> =
     new EventEmitter<number>();
 
   /**
-   * whether we want to display first/last button and dots
+   * si queremos mostrar el primer/último botón y los puntos.
    */
   @Input() showFirstButton = true;
   @Input() showLastButton = true;
 
+  @Input() filter: any;
+
   /**
-   * how many buttons to display before and after
-   * the selected button
+   * cuántos botones mostrar antes y después del botón seleccionado.
    */
   @Input() renderButtonsNumber = 1;
 
   /**
-   * how many elements are in the table
+   * cuántos elementos hay en la tabla.
    */
   @Input() appCustomLength: number = 0;
 
   /**
-   * set true to hide left and right arrows surrounding the bubbles
+   * definir true para ocultar las flechas izquierda y derecha que rodean las burbujas.
    */
   @Input() hideDefaultArrows = false;
 
   /**
-   * references to DOM elements
+   * referencias a los elementos del DOM.
    */
   private dotsEndRef!: HTMLElement;
   private dotsStartRef!: HTMLElement;
   private bubbleContainerRef!: HTMLElement;
 
-  // remember rendered buttons on UI that we can remove them when page index change
+  // guardar los botones renderizados en la interfaz de usuario para poder eliminarlos cuando cambie el índice de la página.
   private buttonsRef: HTMLElement[] = [];
 
   constructor(
@@ -64,113 +65,132 @@ export class BubblePaginationDirective implements AfterViewInit, OnChanges {
   }
 
   /**
-   * react on parent component changing the appCustomLength - rerender bubbles
+   * reacciona cuando el componente padre cambia la appCustomLength, entonces rerenderiza las burbujas.
    */
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes?.['appCustomLength']?.firstChange) {
-      // remove buttons before creating new ones
+    console.log(this.appCustomLength/this.matPag.pageSize > 1);
+    //debugger;
+    if(!changes?.['appCustomLength']?.firstChange && this.appCustomLength/this.matPag.pageSize > 1) {
       this.removeButtons();
-      // switch back to page 0
+      this.removeDotsEndElement();
+      this.removeDotsStartElement();
+      this.styleDefaultPagination();
+      this.createBubbleDivRef();
+      this.buildButtons();
+      this.switchPage(0);
+    } else if (!changes?.['appCustomLength']?.firstChange && this.appCustomLength/this.matPag.pageSize < 1) {
+
+      this.removeButtons();
+      this.removeDotsEndElement();
+      this.removeDotsStartElement();
+
+    } else if (!changes?.['appCustomLength']?.firstChange) {
+      // elimina botones antes de crear otros nuevos.
+      this.removeButtons();
+      // volver a la página 0.
       this.switchPage(0);
       this.renderButtons();
     }
   }
 
   private renderButtons(): void {
-    // build buttons to UI
+    //debugger;
+    // crear botones en la interfaz de usuario.
     this.buildButtons();
 
-    // when pagination change -> change button styles
-    console.log(this.matPag.page
+    // al cambiar la paginación -> cambiar el estilo de los botones.
+    this.matPag.page
       .pipe(
         map((e) => [e.previousPageIndex ?? 0, e.pageIndex]),
         startWith([0, 0])
-
-        // takeUntilDestroyed() // <-- does not work
       )
       .subscribe(([prev, curr]) => {
         this.changeActiveButtonStyles(prev, curr);
-      }));
+      });
   }
 
+
   /**
-   * change the active button style to the current one and display/hide additional buttons
-   * based on the navigated index
+   * cambiar el estilo del botón activo por el actual y
+   * mostrar/ocultar botones adicionales en función del índice navegado.
    */
   private changeActiveButtonStyles(previousIndex: number, newIndex: number) {
-
-    console.log(this.prevIndexAux, newIndex);
+    this.prevIndexAux, newIndex;
   /**
-   * validates that the newIndex that arrives negative because the input was deleted and
-   * set to index 0, is changed to 0.
+   * valida que en el newIndex que llega negativo
+   * porque la entrada fue borrada y puesta a índice 0, se cambie a 0.
    */
     if (newIndex < 0) {
       newIndex = 0;
     }
 
-    console.log(this.prevIndexAux, newIndex);
+    this.prevIndexAux, newIndex;
 
 
     const previouslyActive = this.buttonsRef[this.prevIndexAux];
     const currentActive = this.buttonsRef[newIndex];
 
   /**
-   * an auxiliary attribute is used to keep the real previous index, because when the input
-   * is deleted it gets 0.
+   * se utiliza un atributo auxiliar para mantener el índice previo real,
+   * ya que cuando se elimina la entrada se pone en 0.
    */
     this.prevIndexAux = newIndex;
 
-    // remove active style from previously active button
-    this.ren.removeClass(previouslyActive, 'g-bubble__active');
+    if(previouslyActive == undefined) {
 
-    // add active style to new active button
-    this.ren.addClass(currentActive, 'g-bubble__active');
+    } else {
+      // eliminar el estilo activo del botón previamente activo.
+      this.ren.removeClass(previouslyActive, 'g-bubble__active');
+      // añadir estilo activo al nuevo botón activo.
+      this.ren.addClass(currentActive, 'g-bubble__active');
 
-    // hide all buttons
-    this.buttonsRef.forEach((button) =>
-      this.ren.setStyle(button, 'display', 'none')
-    );
-
-    // show N previous buttons and X next buttons
-    const renderElements = this.renderButtonsNumber;
-    const endDots = newIndex < this.buttonsRef.length - renderElements - 1;
-    const startDots = newIndex - renderElements > 0;
-
-    const firstButton = this.buttonsRef[0];
-    const lastButton = this.buttonsRef[this.buttonsRef.length - 1];
-
-    // last bubble and dots
-    if (this.showLastButton) {
-      this.ren.setStyle(this.dotsEndRef, 'display', endDots ? 'block' : 'none');
-      this.ren.setStyle(lastButton, 'display', endDots ? 'flex' : 'none');
-    }
-
-    // first bubble and dots
-    if (this.showFirstButton) {
-      this.ren.setStyle(
-        this.dotsStartRef,
-        'display',
-        startDots ? 'block' : 'none'
+      // ocultar todos los botones.
+      this.buttonsRef.forEach((button) =>
+        this.ren.setStyle(button, 'display', 'none')
       );
-      this.ren.setStyle(firstButton, 'display', startDots ? 'flex' : 'none');
+
+      // mostrar N botones anteriores y X botones siguientes.
+      const renderElements = this.renderButtonsNumber;
+      const endDots = newIndex < this.buttonsRef.length - renderElements - 1;
+      const startDots = newIndex - renderElements > 0;
+
+      const firstButton = this.buttonsRef[0];
+      const lastButton = this.buttonsRef[this.buttonsRef.length - 1];
+
+      // última burbuja y puntos.
+      if (this.showLastButton) {
+        this.ren.setStyle(this.dotsEndRef, 'display', endDots ? 'block' : 'none');
+        this.ren.setStyle(lastButton, 'display', endDots ? 'flex' : 'none');
+      }
+
+      // primera burbuja y puntos.
+      if (this.showFirstButton) {
+        this.ren.setStyle(
+          this.dotsStartRef,
+          'display',
+          startDots ? 'block' : 'none'
+        );
+        this.ren.setStyle(firstButton, 'display', startDots ? 'flex' : 'none');
+      }
+
+      // resuelve el índice inicial y final para mostrar los botones.
+      const startingIndex = startDots ? newIndex - renderElements : 0;
+
+      const endingIndex = endDots
+        ? newIndex + renderElements
+        : this.buttonsRef.length - 1;
+
+      // botones de inicio de pantalla.
+      for (let i = startingIndex; i <= endingIndex; i++) {
+        const button = this.buttonsRef[i];
+        this.ren.setStyle(button, 'display', 'flex');
+      }
     }
 
-    // resolve starting and ending index to show buttons
-    const startingIndex = startDots ? newIndex - renderElements : 0;
-
-    const endingIndex = endDots
-      ? newIndex + renderElements
-      : this.buttonsRef.length - 1;
-
-    // display starting buttons
-    for (let i = startingIndex; i <= endingIndex; i++) {
-      const button = this.buttonsRef[i];
-      this.ren.setStyle(button, 'display', 'flex');
-    }
   }
 
   /**
-   * Removes or change styling of some html elements
+   * elimina o cambia el estilo de algunos elementos html.
    */
   private styleDefaultPagination() {
     const {nativeElement} = this.elementRef;
@@ -187,17 +207,17 @@ export class BubblePaginationDirective implements AfterViewInit, OnChanges {
       'button.mat-mdc-paginator-navigation-next'
     );
 
-    // remove 'items per page'
+    // eliminar "elementos por página".
     this.ren.setStyle(itemsPerPage, 'display', 'none');
 
-    // style text of how many elements are currently displayed
+    // estilo de texto de cuántos elementos se muestran actualmente.
     this.ren.setStyle(howManyDisplayedEl, 'position', 'absolute');
     this.ren.setStyle(howManyDisplayedEl, 'display', 'none');
     this.ren.setStyle(howManyDisplayedEl, 'left', '0');
     this.ren.setStyle(howManyDisplayedEl, 'color', '#919191');
     this.ren.setStyle(howManyDisplayedEl, 'font-size', '14px');
 
-    // check whether the user wants to remove left & right default arrow
+    // comprobar si el usuario desea eliminar la flecha izquierda y derecha por defecto.
     if (this.hideDefaultArrows) {
       this.ren.setStyle(previousButton, 'display', 'none');
       this.ren.setStyle(nextButtonDefault, 'display', 'none');
@@ -205,7 +225,7 @@ export class BubblePaginationDirective implements AfterViewInit, OnChanges {
   }
 
   /**
-   * creates `bubbleContainerRef` where all buttons will be rendered
+   * crea 'bubbleContainerRef' donde se mostrarán todos los botones.
    */
   private createBubbleDivRef(): void {
     const actionContainer = this.elementRef.nativeElement.querySelector(
@@ -215,13 +235,13 @@ export class BubblePaginationDirective implements AfterViewInit, OnChanges {
       'button.mat-mdc-paginator-navigation-next'
     );
 
-    // create a HTML element where all bubbles will be rendered
+    // crear un elemento HTML donde se mostrarán todas las burbujas.
     this.bubbleContainerRef = this.ren.createElement('div') as HTMLElement;
     this.ren.addClass(this.bubbleContainerRef, 'g-bubble-container');
     this.ren.setStyle(this.bubbleContainerRef, 'display', 'flex');
     this.ren.setStyle(this.bubbleContainerRef, 'cursor', 'pointer');
 
-    // render element before the 'next button' is displayed
+    // renderizar el elemento antes de que se muestre el 'botón siguiente'.
     this.ren.insertBefore(
       actionContainer,
       this.bubbleContainerRef,
@@ -230,109 +250,118 @@ export class BubblePaginationDirective implements AfterViewInit, OnChanges {
   }
 
   /**
-   * helper function that builds all button and add dots
-   * between the first button, the rest and the last button
+   * función auxiliar que construye todos los botones
+   * y añade puntos entre el primer botón, el resto y el último botón.
    *
-   * end result: (1) .... (4) (5) (6) ... (25)
+   * resultado: (1) .... (4) (5) (6) ... (25)
    */
   private buildButtons(): void {
     const neededButtons = Math.ceil(
       this.appCustomLength / this.matPag.pageSize
     );
 
-    // if there is only one page, do not render buttons
-    if (neededButtons === 1) {
-      this.ren.setStyle(this.elementRef.nativeElement, 'display', 'none');
-      return;
-    }
-
-    // create first button
+    // crea el primer botón.
     this.buttonsRef = [this.createButton(0)];
 
-    // add dots (....) to UI
+    // añadir puntos (....) a la interfaz de usuario.
     this.dotsStartRef = this.createDotsElement();
 
-    // create all buttons needed for navigation (except the first & last one)
+    // crea todos los botones necesarios para la navegación (excepto el primero y el último).
     for (let index = 1; index < neededButtons - 1; index++) {
       this.buttonsRef = [...this.buttonsRef, this.createButton(index)];
     }
 
-    // add dots (....) to UI
+    // añadir puntos (....) a la interfaz de usuario.
     this.dotsEndRef = this.createDotsElement();
 
-    // create last button to UI after the dots (....)
-    this.buttonsRef = [
-      ...this.buttonsRef,
-      this.createButton(neededButtons - 1),
-    ];
+    // crea el último botón a IU después de los puntos (....)
+    if (neededButtons != 1){
+      this.buttonsRef = [
+        ...this.buttonsRef,
+        this.createButton(neededButtons - 1),
+      ];
+    }
   }
 
+  removeDotsStartElement() {
+    if (this.dotsStartRef && this.dotsStartRef.parentNode) {
+        this.dotsStartRef.parentNode.removeChild(this.dotsStartRef);
+    }
+}
+
+// Método para eliminar los puntos suspensivos al final
+  removeDotsEndElement() {
+    if (this.dotsEndRef && this.dotsEndRef.parentNode) {
+        this.dotsEndRef.parentNode.removeChild(this.dotsEndRef);
+    }
+}
+
   /**
-   * Remove all buttons from DOM
+   * eliminar todos los botones del DOM.
    */
   private removeButtons(): void {
     this.buttonsRef.forEach((button) => {
       this.ren.removeChild(this.bubbleContainerRef, button);
     });
 
-    // Empty state array
+    // array de estados vacío.
     this.buttonsRef.length = 0;
   }
 
   /**
-   * create button HTML element
+   * crear el elemento HTML botón.
    */
   private createButton(i: number): HTMLElement {
     const bubbleButton = this.ren.createElement('div');
     const text = this.ren.createText(String(i + 1));
 
-    // add class & text
+    // añade clase y texto.
     this.ren.addClass(bubbleButton, 'g-bubble');
     this.ren.setStyle(bubbleButton, 'margin-right', '15px');
     this.ren.appendChild(bubbleButton, text);
 
-    // react on click
+    // reacciona al click.
     this.ren.listen(bubbleButton, 'click', () => {
       this.switchPage(i);
     });
 
-    // render on UI
+    // renderiza en la interfaz de usuario.
     this.ren.appendChild(this.bubbleContainerRef, bubbleButton);
 
-    // set style to hidden by default
+    // cambia el estilo a 'none' por defecto.
     this.ren.setStyle(bubbleButton, 'display', 'none');
 
     return bubbleButton;
   }
 
   /**
-   * helper function to create dots (....) on DOM indicating that there are
-   * many more bubbles until the last one
+   * función auxiliar para crear puntos (....) en DOM
+   * indicando que hay muchas más burbujas hasta la última.
    */
   private createDotsElement(): HTMLElement {
     const dotsEl = this.ren.createElement('span');
-    const dotsText = this.ren.createText('... ');
+    const dotsText = this.ren.createText('...');
 
-    // add class
+    // añadir clase
     this.ren.setStyle(dotsEl, 'font-size', '18px');
     this.ren.setStyle(dotsEl, 'margin-right', '10px');
     this.ren.setStyle(dotsEl, 'padding-top', '6px');
     this.ren.setStyle(dotsEl, 'color', '#8f5b35');
 
-    // append text to element
+    // adjuntar texto al elemento.
     this.ren.appendChild(dotsEl, dotsText);
 
-    // render dots to UI
+    // renderizar puntos en la interfaz de usuario.
     this.ren.appendChild(this.bubbleContainerRef, dotsEl);
 
-    // set style none by default
+    // cambiar el estilo a 'none' por defecto.
     this.ren.setStyle(dotsEl, 'display', 'none');
 
     return dotsEl;
   }
 
   /**
-   * Helper function to switch page
+   * Función auxiliar para cambiar de página.
    */
   private switchPage(i: number): void {
     const previousPageIndex = this.matPag.pageIndex;

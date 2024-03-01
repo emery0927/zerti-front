@@ -5,7 +5,7 @@ p {
 .main_content {
   width:100%;
   /*height: calc(100vh - 100px);*/
-  background: #ffffff;
+  background: #fafafa;
   text-align: center;
 }
 
@@ -29,5 +29,3 @@ p {
 .mat-drawer {
   position: fixed;
 }
-
-

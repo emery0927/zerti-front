@@ -20,9 +20,9 @@
 }
 
 .right-sidebar .navbar-options {
-  background: #8f5b35;
+  background: #59320f;
   color: #fff;
-  height: 63px;
+  height: 50px;
 }
 
 .v-center {
@@ -126,7 +126,7 @@ img, svg {
 .role.role-active {
   margin-bottom: 15px;
   border-radius: 10px;
-  background: #ffeab0ab;
+  background: #e9d165a6;
 }
 
 .role {
@@ -143,7 +143,7 @@ img, svg {
 }
 
 .role.role-active .role-name {
-  color: #b16448;
+  color: #59320f;
 }
 
 .role .role-name {
@@ -156,7 +156,7 @@ img, svg {
 }
 
 .role.role-active .role-description {
-  color: #b16448;
+  color: #59320f;
 }
 
 .role .role-description {

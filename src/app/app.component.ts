@@ -15,7 +15,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     state('closed', style({
       transform: 'translateX(-100%)',
     })),
-    transition('closed <=> open', animate('100ms ease-in-out')),
+    transition('closed <=> open', animate('900ms ease-in')),
   ]),
 ],
 })

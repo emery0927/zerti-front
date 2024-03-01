@@ -9,13 +9,12 @@ body {
   font-family: 'Roboto', sans-serif;
   height: 100%;
   min-height: 100%;
-  /* background: #303030; */
+  background: #fafafa;
 }
 
 * {
   -webkit-font-smoothing: antialased;
   -moz-osx-font-smoothing: antialased;
-  font-family: 'Roboto', sans-serif;
 }
 
 /* SPACER */
@@ -27,7 +26,7 @@ body {
   --mdc-tab-indicator-active-indicator-color: #fafafa;
   --mat-tab-header-disabled-ripple-color: rgba(0, 0, 0, 0.38);
   --mat-tab-header-pagination-icon-color: #000;
-  --mat-tab-header-inactive-label-text-color: rgb(255, 255, 255);
+  --mat-tab-header-inactive-label-text-color: #573509;
   --mat-tab-header-active-label-text-color: #8f5b35;
   --mat-tab-header-active-ripple-color: #8f5b35;
   --mat-tab-header-inactive-ripple-color: #8f5b35;
@@ -41,6 +40,9 @@ body {
   --mat-select-focused-arrow-color: #8f5b35;
   --mat-menu-item-hover-state-layer-color: #fff5c2;
   --mat-menu-item-focus-state-layer-color: #fff5c2;
+  --mat-table-header-container-height: 50px;
+  --mat-table-footer-container-height: 38px;
+  --mat-table-row-item-container-height: 38px;
 }
 
 .mat-mdc-form-field-input-control {
@@ -66,6 +68,7 @@ body {
 
 .mdc-tab__text-label{
   font-weight: 600;
+  color: #573509;
 }
 
 .mat-elevation-z8 {
@@ -73,6 +76,7 @@ body {
   margin: 13px;
   -webkit-text-stroke-width: thin;
   font-family: Roboto,Helvetica Neue,sans-serif;
+  margin-top: 0.2rem;
 }
 
 .mat-mdc-dialog-container {
@@ -96,6 +100,10 @@ body {
   max-height: inherit;
 }
 
+.mat-mdc-form-field-focus-overlay {
+  background-color: rgb(201 201 201 / 72%);
+}
+
 .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
   color: #8f5b35;
 }
@@ -111,16 +119,16 @@ body {
 }
 
 .mat-ripple-element {
-  background-color: #ffeab0a1;
+  background-color: #fafafa5e;
 }
 
 .mat-mdc-tab-labels {
-  background-color: #8f5b35;
+  background-color:#c3994ca6;
 }
 
 .mat-mdc-tab-body-wrapper {
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .mat-mdc-dialog-container {
@@ -139,24 +147,24 @@ body {
 .g-bubble {
   background-color: transparent;
   border-radius: 50%;
-  width: 34px;
-  height: 34px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #8f5b35;
+  color: #c3994ca6;
   font-size: 14px;
   cursor: pointer;
   transition: 0.1s;
 }
 
 .g-bubble:hover {
-  background-color: #8f5b35;
+  background-color: #c3994ca6;
   color: white;
 }
 
 .g-bubble__active {
-  background-color: #8f5b35;
+  background-color: #c3994ca6;
   color: white;
 }
 
@@ -178,4 +186,13 @@ mat-paginator {
 
 .mdc-text-field {
   align-items: center !important;
+}
+
+.mdc-button {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color:  #573509 !important;
+  padding: 0 16px 0 16px !important;
+  height: 40px !important;
 }

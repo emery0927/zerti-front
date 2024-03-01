@@ -54,6 +54,10 @@ import { EditStudentUserComponent } from './components/edit-student-user/edit-st
 import { CreateStudentUserComponent } from './components/create-student-user/create-student-user.component';
 import { BubblePaginationDirective } from './directives/bubble-pagination.directive';
 import { FormsModule } from '@angular/forms';
+import { AdministrativeUsersManagementComponent } from './components/administrative-users-management/administrative-users-management.component';
+import { StylePaginatorDirective } from './directives/style-paginator.directive';
+import { SedesComponent } from './components/sedes/sedes.component';
+import { SedesManagementComponent } from './components/sedes-management/sedes-management.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +88,10 @@ import { FormsModule } from '@angular/forms';
     StudentUserManagementComponent,
     EditStudentUserComponent,
     CreateStudentUserComponent,
+    AdministrativeUsersManagementComponent,
+    SedesComponent,
+    SedesManagementComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -110,7 +118,8 @@ import { FormsModule } from '@angular/forms';
     MatSortModule,
     NgxSpinnerModule,
     BubblePaginationDirective,
-    FormsModule
+    FormsModule,
+    StylePaginatorDirective,
   ],
   providers: [SidenavService],
   bootstrap: [AppComponent]

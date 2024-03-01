@@ -1,0 +1,66 @@
+<div>
+    <div class="main-content">
+       <div class="admin-list">
+         <div class="select">
+           <mat-form-field appearance="fill" style="max-width: 40%;" class="ancho-igual specific-select-input">
+             <mat-label style="font-size: 16px;  color: #59320f;">Entidad Territorial</mat-label>
+             <mat-select tabIndex="0" role="combobox" value="Santiago de Cali">
+               <mat-option *ngFor="let op of territorialEntities" [value]="op">{{op}}</mat-option>
+             </mat-select>
+           </mat-form-field>
+           <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
+             <mat-label style="font-size: 16px;  color: #59320f;">Nombre de Institución Educativa</mat-label>
+             <mat-select value="Liceo Departamental">
+               <mat-option value="Liceo Departamental">Liceo Departamental</mat-option>
+               <mat-option value="Santa Librada">Santa Librada</mat-option>
+             </mat-select>
+           </mat-form-field>
+        </div>
+      </div>
+
+        <div style="width: 48.8%;
+        margin-left: 0.7rem;">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w100" style="display: table; margin-top: 1.5rem; margin-left: 0; margin-right: 0;">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="orden">
+              <th style="background-color: #c3994ca6; color: #59320f; font-weight: 600; text-align: center;" mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element" [ngClass]="{'align-right': true}"> {{element.orden}} </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="nombre">
+              <th style="background-color: #c3994ca6; color: #59320f; font-weight: 600; text-align: center;" mat-header-cell *matHeaderCellDef> Nombres de Sedes de Institución Educativa </th>
+              <td mat-cell *matCellDef="let element" [ngClass]="{'align-left': true}"> {{element.nombre}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="options">
+            <th style="background-color: #c3994ca6; color: #59320f;" role="columnheader" mat-header-cell *matHeaderCellDef [ngClass]="{'align-right': true}">
+            </th>
+            <td mat-cell *matCellDef="let element" [ngClass]="{'just-align-right': true}">
+              <div style="margin-right: -20px;">
+                <button mat-button [matMenuTriggerFor]="menu" style="cursor: pointer; background-color: transparent; border: none;"
+                aria-haspopup="true">
+                  <span>
+                    <mat-icon style="color: #8c8c8c;">more_horiz</mat-icon>
+                  </span>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="editar()">Editar
+                      <mat-icon>create</mat-icon>
+                    </button>
+                    <button mat-menu-item (click)="eliminar()">Eliminar
+                      <mat-icon>delete</mat-icon></button>
+                  </mat-menu>
+                </button>
+              </div>
+             </td>
+            </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+</div>

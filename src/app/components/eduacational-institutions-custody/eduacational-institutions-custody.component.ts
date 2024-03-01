@@ -22,7 +22,7 @@ const ELEMENT_DATA: EducationalInstitutionsCustody[] = [
 })
 export class EduacationalInstitutionsCustodyComponent {
 
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['name', 'options'];
   dataSource = ELEMENT_DATA;
 
 }
