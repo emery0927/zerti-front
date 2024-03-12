@@ -1,0 +1,54 @@
+<h2 style="background-color: #ffffffa6 ; font-weight: 600; padding-inline: 32px;" mat-dialog-title>Creación de Sede Educativa</h2>
+<mat-dialog-content class="mat-dialog-container">
+  <form action="">
+    <!--Nombre de Sede Educativa-->
+    <div>
+      <div class="row-full-width mb-2">
+        <div>
+          <mat-form-field appearance="outline" class="w100">
+            <mat-label style="font-size: 14px;">Nombre de Sede Educativa</mat-label>
+            <mat-label style="color: red;"> *</mat-label>
+            <div class="mat-form-field-wrapper">
+              <input style="font-size: 14px;" matInput placeholder="Nombre de Sede Educativa">
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <!--Orden-->
+    <div>
+      <div class="row-full-width mb-2">
+        <div>
+          <div>
+            <mat-form-field appearance="outline" class="w25">
+              <mat-label style="font-size: 14px;">Orden</mat-label>
+              <mat-label style="color: red;"> *</mat-label>
+              <div class="mat-form-field-wrapper">
+                <input style="font-size: 14px;" matInput placeholder="Orden *">
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Observación General-->
+    <div>
+      <div class="row-full-width mb-2">
+        <div>
+          <div>
+            <mat-form-field appearance="outline" class="w100 h125">
+              <mat-label style="font-size: 14px;">Observación General</mat-label>
+              <div class="mat-form-field-wrapper">
+                <textarea style="font-size: 14px; height: 87px;" matInput placeholder="Observación General"></textarea>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions style="min-height: 78px; margin-right: 20px;" align="end">
+  <button style="background-color: #ffeab0;" mat-button [mat-dialog-close]="true" cdkFocusInitial>Guardar</button>
+  <button mat-button mat-dialog-close>Salir</button>
+</mat-dialog-actions>

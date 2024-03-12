@@ -1,0 +1,44 @@
+<mat-card class="card-admin-users">
+  <mat-card-header class="header-admin-users">
+  <mat-card-title class="title-admin-users">Creación de Equipo de Servicio</mat-card-title>
+</mat-card-header>
+<mat-card-content>
+  <div class="main-content">
+    <div class="admin-list">
+      <div class="select">
+        <mat-form-field appearance="outline" style="max-width: 40%;" class="ancho-igual specific-select-input">
+          <mat-label style="font-size: 16px;  color: #59320f;">Departamento</mat-label>
+          <mat-label style="color: red;"> *</mat-label>
+          <mat-select value="Anti">
+            <mat-option value="Anti">Antioquia</mat-option>
+            <mat-option value="Cundi">Cundinamarca</mat-option>
+            <mat-option value="Valle">Valle del Cauca</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="ancho-igual specific-select-input">
+          <mat-label style="font-size: 16px;  color: #59320f;">Distrito / Municipio</mat-label>
+          <mat-select value="Medellin">
+            <mat-option value="Medellin">Medellín</mat-option>
+            <mat-option value="Rionegro">Rionegro</mat-option>
+            <mat-option value="Envi">Envigado</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div style="padding-top: 5px;" class="select">
+        <mat-form-field appearance="outline" class="w100 h125">
+          <mat-label style="font-size: 14px;">Observación General</mat-label>
+          <div class="mat-form-field-wrapper">
+            <textarea style="font-size: 14px; height: 45px;" matInput placeholder="Observación General"></textarea>
+          </div>
+        </mat-form-field>
+      </div>
+      <div>
+      <mat-card-actions class="justify-right">
+        <button style="background-color: #c3994ca6;" mat-button>Guardar</button>
+        <button mat-button mat-dialog-close="">Salir</button>
+      </mat-card-actions>
+    </div>
+    </div>
+  </div>
+</mat-card-content>
+</mat-card>

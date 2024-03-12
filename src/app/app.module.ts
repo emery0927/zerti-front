@@ -1,63 +1,79 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSelectModule } from "@angular/material/select";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatSortModule } from "@angular/material/sort";
+import { MatTableModule } from "@angular/material/table";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatTreeModule } from "@angular/material/tree";
+import { BrowserModule } from "@angular/platform-browser";
+import { NgxSpinnerModule } from "ngx-spinner";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { NavbarComponent } from './components/navbar/navbar.component'
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
+
 import { MatListModule } from '@angular/material/list';
-import { SidenavService } from './services/sidenav.service';
-import { HomeComponent } from './components/home/home.component';
-import { EducationalInstitutionsComponent } from './components/educational-institutions/educational-institutions.component';
+
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { EducationalInstitutionsManagementComponent } from './components/educational-institutions-management/educational-institutions-management.component';
-import { OfficialsComponent } from './components/officials/officials.component';
-import { MatSelectModule } from '@angular/material/select';
-import { MatPaginatorModule} from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatDialogModule } from '@angular/material/dialog';
-import { CreateEducationalInstituteComponent } from './components/create-educational-institute/create-educational-institute.component';
-import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ImageUploadComponent } from './components/image-upload/image-upload.component';
-import { AdminUsersComponent } from './components/admin-users/admin-users.component';
-import { EduacationalInstitutionsCustodyComponent } from './components/eduacational-institutions-custody/eduacational-institutions-custody.component';
-import { StudentsUsersComponent } from './components/students-users/students-users.component';
-import { AdministrativeUsersComponent } from './components/administrative-users/administrative-users.component';
-import { EducationalCertificatesComponent } from './components/educational-certificates/educational-certificates.component';
-import { AreasComponent } from './components/areas/areas.component';
-import { ServiceTeamComponent } from './components/service-team/service-team.component';
-import { FinalValuationDigitalBooksComponent } from './components/final-valuation-digital-books/final-valuation-digital-books.component';
-import { DigitalGradeValidationBookComponent } from './components/digital-grade-validation-book/digital-grade-validation-book.component';
-import { GraduationBooksComponent } from './components/graduation-books/graduation-books.component';
-import { TerritorialEnttitiesComponent } from './components/territorial-enttities/territorial-enttities.component';
-import { TerritorialEntitiesComponent } from './components/territorial-entities/territorial-entities.component';
-import { OperationalRolesComponent } from './components/operational-roles/operational-roles.component';
-import { GoodsAndServicesSuppliersComponent } from './components/goods-and-services-suppliers/goods-and-services-suppliers.component';
-import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
-import { MatSortModule } from '@angular/material/sort';
-import { EditEducationalInstitutionComponent } from './components/edit-educational-institution/edit-educational-institution.component';
-import { StudentUserManagementComponent } from './components/student-user-management/student-user-management.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { EditStudentUserComponent } from './components/edit-student-user/edit-student-user.component';
-import { CreateStudentUserComponent } from './components/create-student-user/create-student-user.component';
-import { BubblePaginationDirective } from './directives/bubble-pagination.directive';
-import { FormsModule } from '@angular/forms';
-import { AdministrativeUsersManagementComponent } from './components/administrative-users-management/administrative-users-management.component';
-import { StylePaginatorDirective } from './directives/style-paginator.directive';
-import { SedesComponent } from './components/sedes/sedes.component';
-import { SedesManagementComponent } from './components/sedes-management/sedes-management.component';
+
+
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { AdminUsersComponent } from "./components/administrador-general/admin-users/admin-users.component";
+import { AdministrativeUsersManagementComponent } from "./components/administrador-general/administrative-users-management/administrative-users-management.component";
+import { AdministrativeUsersComponent } from "./components/administrador-general/administrative-users/administrative-users.component";
+import { AreasComponent } from "./components/administrador-general/areas/areas.component";
+import { CrearSedeComponent } from "./components/administrador-general/crear-sede/crear-sede.component";
+import { CreateEducationalInstituteComponent } from "./components/administrador-general/create-educational-institute/create-educational-institute.component";
+import { CreateStudentUserComponent } from "./components/administrador-general/create-student-user/create-student-user.component";
+import { DigitalGradeValidationBookComponent } from "./components/administrador-general/digital-grade-validation-book/digital-grade-validation-book.component";
+import { EditEducationalInstitutionComponent } from "./components/administrador-general/edit-educational-institution/edit-educational-institution.component";
+import { EditStudentUserComponent } from "./components/administrador-general/edit-student-user/edit-student-user.component";
+import { EditarSedeComponent } from "./components/administrador-general/editar-sede/editar-sede.component";
+import { EduacationalInstitutionsCustodyComponent } from "./components/administrador-general/eduacational-institutions-custody/eduacational-institutions-custody.component";
+import { EducationalCertificatesComponent } from "./components/administrador-general/educational-certificates/educational-certificates.component";
+import { EducationalInstitutionsManagementComponent } from "./components/administrador-general/educational-institutions-management/educational-institutions-management.component";
+import { EducationalInstitutionsComponent } from "./components/administrador-general/educational-institutions/educational-institutions.component";
+import { EntidadesTerritorialesComponent } from "./components/administrador-general/entidades-territoriales/entidades-territoriales.component";
+import { EquiposServicioCreacionComponent } from "./components/administrador-general/equipos-servicio-creacion/equipos-servicio-creacion.component";
+import { FinalValuationDigitalBooksComponent } from "./components/administrador-general/final-valuation-digital-books/final-valuation-digital-books.component";
+import { FormularioCreacionEntidadesComponent } from "./components/administrador-general/formulario-creacion-entidades/formulario-creacion-entidades.component";
+import { FormularioCreacionEquiposComponent } from "./components/administrador-general/formulario-creacion-equipos/formulario-creacion-equipos.component";
+import { FormularioEdicionEntidadesComponent } from "./components/administrador-general/formulario-edicion-entidades/formulario-edicion-entidades.component";
+import { FormularioEdicionEquiposComponent } from "./components/administrador-general/formulario-edicion-equipos/formulario-edicion-equipos.component";
+import { GoodsAndServicesSuppliersComponent } from "./components/administrador-general/goods-and-services-suppliers/goods-and-services-suppliers.component";
+import { GraduationBooksComponent } from "./components/administrador-general/graduation-books/graduation-books.component";
+import { HomeComponent } from "./components/administrador-general/home/home.component";
+import { ImageUploadComponent } from "./components/administrador-general/image-upload/image-upload.component";
+import { NavbarComponent } from "./components/administrador-general/navbar/navbar.component";
+import { OfficialsComponent } from "./components/administrador-general/officials/officials.component";
+import { OperationalRolesComponent } from "./components/administrador-general/operational-roles/operational-roles.component";
+import { RightSidebarComponent } from "./components/administrador-general/right-sidebar/right-sidebar.component";
+import { SedesManagementComponent } from "./components/administrador-general/sedes-management/sedes-management.component";
+import { SedesComponent } from "./components/administrador-general/sedes/sedes.component";
+import { ServiceTeamComponent } from "./components/administrador-general/service-team/service-team.component";
+import { SidebarComponent } from "./components/administrador-general/sidebar/sidebar.component";
+import { StudentUserManagementComponent } from "./components/administrador-general/student-user-management/student-user-management.component";
+import { StudentsUsersComponent } from "./components/administrador-general/students-users/students-users.component";
+import { TerritorialEntitiesComponent } from "./components/administrador-general/territorial-entities/territorial-entities.component";
+import { BubblePaginationDirective } from "./directives/bubble-pagination.directive";
+import { StylePaginatorDirective } from "./directives/style-paginator.directive";
+import { SidenavService } from "./services/sidenav.service";
+import { FuncionariosComponent } from './components/administrador-general/funcionarios/funcionarios.component';
+import { UsuariosAdministrativosComponent } from './components/administrador-general/usuarios-administrativos/usuarios-administrativos.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +95,6 @@ import { SedesManagementComponent } from './components/sedes-management/sedes-ma
     FinalValuationDigitalBooksComponent,
     DigitalGradeValidationBookComponent,
     GraduationBooksComponent,
-    TerritorialEnttitiesComponent,
     TerritorialEntitiesComponent,
     OperationalRolesComponent,
     GoodsAndServicesSuppliersComponent,
@@ -91,6 +106,16 @@ import { SedesManagementComponent } from './components/sedes-management/sedes-ma
     AdministrativeUsersManagementComponent,
     SedesComponent,
     SedesManagementComponent,
+    EditarSedeComponent,
+    CrearSedeComponent,
+    EntidadesTerritorialesComponent,
+    EquiposServicioCreacionComponent,
+    FormularioCreacionEquiposComponent,
+    FormularioEdicionEquiposComponent,
+    FormularioEdicionEntidadesComponent,
+    FormularioCreacionEntidadesComponent,
+    FuncionariosComponent,
+    UsuariosAdministrativosComponent,
 
   ],
   imports: [
@@ -120,6 +145,7 @@ import { SedesManagementComponent } from './components/sedes-management/sedes-ma
     BubblePaginationDirective,
     FormsModule,
     StylePaginatorDirective,
+    MatTreeModule,
   ],
   providers: [SidenavService],
   bootstrap: [AppComponent]

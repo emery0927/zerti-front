@@ -1,0 +1,83 @@
+<div>
+  <mat-card class="card-admin-users">
+    <mat-card-header class="header-admin-users">
+      <mat-card-title class="title-admin-users">Usuarios Administrativos</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="main-content">
+        <div class="admin-list">
+          <div class="select">
+            <mat-form-field appearance="fill" style="max-width: 40%;" class="ancho-igual specific-select-input">
+              <mat-label style="font-size: 16px;  color: #59320f;">Entidad Territorial</mat-label>
+              <mat-select tabIndex="0" role="combobox" value="Santiago de Cali">
+                <mat-option *ngFor="let op of territorialEntities" [value]="op">{{op}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
+              <mat-label style="font-size: 16px;  color: #59320f;">Nombre de Institución Educativa</mat-label>
+              <mat-select value="Liceo Departamental">
+                <mat-option value="Liceo Departamental">Liceo Departamental</mat-option>
+                <mat-option value="Santa Librada">Santa Librada</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="select" style="padding-top: 5px;">
+          <mat-form-field appearance="fill" style="max-width: 40%;" class="ancho-igual specific-select-input">
+            <mat-label style="font-size: 16px;  color: #59320f;">Roles</mat-label>
+            <mat-select value="Rector">
+              <mat-option value="Rector">Rector</mat-option>
+              <mat-option value="Pagador">Pagador</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
+            <mat-label style="font-size: 16px;  color: #59320f;">Nombre de Usuarios con Rol</mat-label>
+            <mat-select value="Carlos">
+              <mat-option value="Pedro">Pedro José Santamaria Zapata</mat-option>
+              <mat-option value="Carlos">Carlos Pastrana</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+      <div>
+        <mat-card-actions class="admin-button">
+          <button style="background-color: #c3994ca6;" mat-button>Guardar</button>
+        </mat-card-actions>
+      </div>
+        </div>
+        <div style="width: 100%;
+        margin-left: 50px;
+        margin-right: 50px;">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w100" style="display: table; margin-top: 1.5rem; margin-left: 0; margin-right: 0;">
+
+            <ng-container matColumnDef="rol">
+              <th style="background-color: #c3994ca6; color: #59320f; font-weight: 600; text-align: center;" mat-header-cell *matHeaderCellDef> Rol </th>
+              <td mat-cell *matCellDef="let element" [ngClass]="{'align-right': true}"> {{element.rol}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="username">
+              <th style="background-color: #c3994ca6; color: #59320f; font-weight: 600; text-align: left;"mng  mat-header-cell *matHeaderCellDef> Nombre de Usuario </th>
+              <td mat-cell *matCellDef="let element" [ngClass]="{'align-left': true}"> {{element.username}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="options">
+            <th style="background-color: #c3994ca6; color: #59320f;" role="columnheader" mat-header-cell *matHeaderCellDef [ngClass]="{'align-right': true}">
+            </th>
+            <td mat-cell *matCellDef="let element" [ngClass]="{'align-right': true}">
+              <div>
+                <button mat-button style="cursor: pointer; background-color: transparent; border: none; margin-left: 142px;"
+                aria-haspopup="true">
+                  <span>
+                    <mat-icon style="color: #59320f; font-size: 20px; float: inline-end;">delete</mat-icon>
+                  </span>
+                </button>
+              </div>
+            </td>
+            </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+      </mat-card-content>
+
+  </mat-card>
+</div>

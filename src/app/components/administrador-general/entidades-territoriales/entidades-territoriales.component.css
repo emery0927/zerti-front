@@ -1,0 +1,275 @@
+
+.py-4 {
+  padding-top: 1.5rem!important;
+  padding-bottom: 1.5rem!important;
+}
+
+.px-3 {
+  padding-right: 1rem!important;
+  padding-left: 1rem!important;
+}
+.container-fluid {
+  --bs-gutter-x: 24px;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
+  --bs-gutter-x: 24px;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+}
+
+.col-12 {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.row>* {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-top: var(--bs-gutter-y);
+}
+
+.col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+}
+
+.mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+}
+.mat-form-field {
+  font-size: inherit;
+  font-weight: 400;
+  line-height: 1.125;
+  font-family: Roboto,Helvetica Neue,sans-serif;
+  letter-spacing: normal;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-select {
+  display: inline-block;
+  width: 100%;
+  outline: none;
+  flex: 1;
+  margin-right: 10px;
+
+}
+
+.mat-select-trigger {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 1.125em
+}
+
+.select {
+  display: flex;
+  padding-top: 2rem;
+  width: 100%;
+  --mdc-outlined-text-field-focus-outline-color: #b16448;
+  --mdc-outlined-text-field-focus-label-text-color: #b16448;
+  --mdc-checkbox-selected-focus-icon-color: #b16448;
+  --mdc-checkbox-selected-hover-icon-color: #b16448;
+  --mdc-checkbox-selected-icon-color: #b16448;
+  --mat-option-selected-state-label-text-color: #b16448;
+  --mdc-checkbox-selected-pressed-icon-color: #b16448;
+  --mdc-checkbox-selected-focus-state-layer-color: #b16448;
+  --mdc-checkbox-selected-hover-state-layer-color: #b16448;
+  --mdc-checkbox-selected-pressed-state-layer-color: #b16448;
+  --mat-option-selected-state-label-text-color: #faccbb;
+  --mat-select-focused-arrow-color: #b16448;
+  --mdc-filled-text-field-focus-label-text-color: #b16448;
+
+  /*box-shadow: 0 3px 4px #0003, 0 3px 3px -2px #00000024, 0 1px 8px #0000001f;*/
+}
+
+.ancho-igual {
+  display: flex;
+  flex: 1;
+  max-width: 100%;
+  box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.header-style {
+  background-color: #c3994ca6 !important;
+  color: #59320f;
+  font-weight: 900;
+  font-size: 16px;
+  font-family: 'Inria Sans', sans-serif !important;
+}
+
+.row-style {
+  color: #3d3d3d;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 0 1px 0 40px;
+
+
+}
+
+.mat-mdc-row:hover {
+  background-color: #fff5c236;
+}
+
+.mat-mdc-menu-item {
+  --mat-menu-item-hover-state-layer-color: #fff5c2;
+  --mat-menu-item-focus-state-layer-color: #fff5c2;
+}
+
+.student-filter-row {
+  --bs-gutter-x: 24px;
+  --bs-gutter-y: 0;
+  padding-top: 2rem;
+  margin-left: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  --mdc-outlined-text-field-focus-outline-color: #59320f;
+  --mdc-outlined-text-field-focus-label-text-color: #59320f;
+  --mdc-checkbox-selected-focus-icon-color: #59320f;
+  --mdc-checkbox-selected-hover-icon-color: #59320f;
+  --mdc-checkbox-selected-icon-color: #59320f;
+  --mat-option-selected-state-label-text-color: #59320f;
+  --mdc-checkbox-selected-pressed-icon-color: #59320f;
+  --mdc-checkbox-selected-focus-state-layer-color: #59320f;
+  --mdc-checkbox-selected-hover-state-layer-color: #59320f;
+  --mdc-checkbox-selected-pressed-state-layer-color: #59320f;
+  --mat-option-selected-state-label-text-color: #faccbb;
+  --mat-select-focused-arrow-color: #59320f;
+  --mdc-filled-text-field-focus-label-text-color: #59320f;
+}
+
+.search-filter {
+  flex: 0 0 auto;
+  width: 33.33333333%;
+}
+
+.align-self-center {
+  align-self: center!important;
+}
+.col-2 {
+  flex: 0 0 auto;
+  width: 16.66666667%;
+}
+
+.ofsset-xl-4 {
+  margin-left: 33.3333333%;
+}
+
+.paginator-container {
+  display: flex;
+  background-color: #c3994ca6;
+  justify-content: flex-end;
+  height: 57px;
+}
+
+.specific-page-input {
+  height: 60px;
+  padding: 10px;
+  width: 60px;
+  margin-right: 30px;
+  font-size: 15px;
+
+    .mdc-text-field {
+      align-items: center !important;
+      background-color: transparent !important;
+      border: solid;
+      border-color: #59320f;
+      --mdc-filled-text-field-active-indicator-height: 0px;
+      --mdc-filled-text-field-focus-active-indicator-height: 0px;
+      --mdc-filled-text-field-container-shape: 4px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      padding: 13px !important;
+    }
+}
+
+.specific-name-input {
+  .mdc-text-field {
+    border: solid;
+    border-color: lightgrey;
+    border-width: thin;
+    --mdc-filled-text-field-active-indicator-height: 0;
+    --mdc-filled-text-field-focus-active-indicator-height: 0px;
+    --mdc-filled-text-field-container-shape: 4px;
+  }
+
+  .mat-mdc-form-field-infix {
+    flex: auto;
+    min-width: 0;
+    width: 180px;
+    position: relative;
+    box-sizing: border-box;
+    margin-left: 47px;
+}
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] { -moz-appearance:textfield; }
+
+.img-empty-data {
+  width: 10rem;
+  margin-bottom: 0;
+  margin-top: 39px;
+}
+
+.h1-empty-data {
+  font-family: 'Inria Sans', sans-serif;
+  font-size: 17px;
+  color: #59320f;
+  margin-top: 0;
+}
+
+.filter-empty {
+  padding-bottom: 5px;
+}
+
+.departamento {
+  background-color: #fff5c2;
+  font-weight: bold;
+  padding: 0 16px 0 16px;
+}
+
+.mat-mdc-button {
+  --mat-mdc-button-persistent-ripple-color: #fff0;
+  --mat-mdc-button-ripple-color: rgb(255 255 255 / 10%);
+}
+
+.w100 {
+  width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.justify-right {
+  justify-content: flex-end;
+}
