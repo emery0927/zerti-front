@@ -73,6 +73,7 @@ import { StylePaginatorDirective } from "./directives/style-paginator.directive"
 import { SidenavService } from "./services/sidenav.service";
 import { FuncionariosComponent } from './components/administrador-general/funcionarios/funcionarios.component';
 import { UsuariosAdministrativosComponent } from './components/administrador-general/usuarios-administrativos/usuarios-administrativos.component';
+import { GestionCertificadosEstudioComponent } from './components/administrador-general/gestion-certificados-estudio/gestion-certificados-estudio.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { UsuariosAdministrativosComponent } from './components/administrador-gen
     FormularioCreacionEntidadesComponent,
     FuncionariosComponent,
     UsuariosAdministrativosComponent,
+    GestionCertificadosEstudioComponent,
 
   ],
   imports: [

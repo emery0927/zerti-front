@@ -49,21 +49,29 @@ const ENTIDAD_TERRITORIAL: EntidadTerritorial[] = [
         'z-index': '0'
       })),
       transition('collapsed <=> expanded', animate('350ms ease-out'))
-    ])
-  ]
+    ]),
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 
 })
 export class EducationalInstitutionsManagementComponent implements AfterViewInit, OnInit {
 
+  data = new MatTableDataSource<EducationalInstitute>(EDUCATIONAL_INSTITUTION);
+  displayedColumns = ['nombre_ie', 'nombre_c', 'cod_zerti', 'nit', 'id_mun', 'zone', 'clase', 'options'];
+  columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
+  expandedElement!: EducationalInstitutions | null;
+
   entidadesTerritoriales: EntidadTerritorial[] = ENTIDAD_TERRITORIAL;
   territorialEntitiesFilter: TerritorialEntitiesFilter[]=[];
-  displayedColumns: string[] = ['nombre_ie', 'nombre_c', 'cod_zerti', 'nit', 'id_mun', 'zone', 'clase', 'options'];
 
   typeOfClass: string[]=['Oficial', 'No Oficial'];
 
   filtroSeleccionado: string = '';
 
-  data = new MatTableDataSource<EducationalInstitute>(EDUCATIONAL_INSTITUTION);
 
   showFormField: boolean = false;
 
