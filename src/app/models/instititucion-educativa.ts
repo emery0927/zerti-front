@@ -1,5 +1,7 @@
+import { Sede } from "./sede";
+
 // Educational Institute Model
-export class EducationalInstitute {
+export class InstitucionEducativa {
   id_ie: number;
   cod_zerti: string;
   cod_zeti: string;
@@ -19,10 +21,11 @@ export class EducationalInstitute {
   telefono: string;
   observacion: string;
   id_crea: number;
+  sedes: Sede[];
 
   constructor(id_ie: number, cod_zerti: string, cod_zeti: string, estado: boolean, nombre_ie: string,
     nombre_c: string, id_custo: number, id_et: number, id_serv: number, clase: number, nit: string,
-    cod_trd: string, id_dep: number, id_mun: number, id_cpo: number, correo: string, telefono: string, observacion: string, id_crea: number) {
+    cod_trd: string, id_dep: number, id_mun: number, id_cpo: number, correo: string, telefono: string, observacion: string, id_crea: number, sedes: Sede[]) {
       this.id_ie = id_ie;
       this.cod_zerti = cod_zerti;
       this.cod_zeti = cod_zeti;
@@ -42,5 +45,6 @@ export class EducationalInstitute {
       this.telefono = telefono;
       this.observacion = observacion;
       this.id_crea=id_crea;
+      this.sedes = sedes;
     }
 }

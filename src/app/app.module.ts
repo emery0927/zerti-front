@@ -118,7 +118,6 @@ import { GestionCertificadosEstudioComponent } from './components/administrador-
     FuncionariosComponent,
     UsuariosAdministrativosComponent,
     GestionCertificadosEstudioComponent,
-
   ],
   imports: [
     BrowserModule,

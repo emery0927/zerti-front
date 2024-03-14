@@ -1,5 +1,5 @@
 // User Model
-export class User {
+export class Usuario {
   id_usu: number;
   tipo_doc: number;
   num_doc: string;

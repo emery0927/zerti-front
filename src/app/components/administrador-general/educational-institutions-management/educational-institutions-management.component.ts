@@ -8,8 +8,10 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
 import { EditEducationalInstitutionComponent } from '../edit-educational-institution/edit-educational-institution.component';
 import Swal from 'sweetalert2';
-import { EducationalInstitute } from 'src/app/models/educational-institute';
+import { InstitucionEducativa } from 'src/app/models/instititucion-educativa';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { EntidadTerritorial } from 'src/app/models/entidad-territorial';
+import { Sede } from 'src/app/models/sede';
 
 
 export interface TerritorialEntitiesFilter {
@@ -18,16 +20,11 @@ export interface TerritorialEntitiesFilter {
   defaultValue:string;
 }
 
-export interface EntidadTerritorial {
-  id: number;
-  nombre: string;
-}
-
 const ENTIDAD_TERRITORIAL: EntidadTerritorial[] = [
-  { id: 1, nombre: 'Todas' },
-  { id: 2, nombre: 'Santiago de Cali' },
-  { id: 3, nombre: 'Valle del Cauca' },
-  { id: 4, nombre: 'Jamundí' }
+  { id_et: 1, id_dep: 1, id_divipol: 1, nombre_et: 'Todas', observacion: 'ob' },
+  { id_et: 2, id_dep: 1, id_divipol: 1, nombre_et: 'Santiago de Cali', observacion: 'ob' },
+  { id_et: 3, id_dep: 1, id_divipol: 1, nombre_et: 'Valle del Cauca', observacion: 'ob' },
+  { id_et: 4, id_dep: 1, id_divipol: 1, nombre_et: 'Jamundí', observacion: 'ob' }
 ];
 
 
@@ -60,10 +57,9 @@ const ENTIDAD_TERRITORIAL: EntidadTerritorial[] = [
 })
 export class EducationalInstitutionsManagementComponent implements AfterViewInit, OnInit {
 
-  data = new MatTableDataSource<EducationalInstitute>(EDUCATIONAL_INSTITUTION);
+  data = new MatTableDataSource<InstitucionEducativa>(EDUCATIONAL_INSTITUTION);
   displayedColumns = ['nombre_ie', 'nombre_c', 'cod_zerti', 'nit', 'id_mun', 'zone', 'clase', 'options'];
-  columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
-  expandedElement!: EducationalInstitutions | null;
+  expandedElement!: InstitucionEducativa | null;
 
   entidadesTerritoriales: EntidadTerritorial[] = ENTIDAD_TERRITORIAL;
   territorialEntitiesFilter: TerritorialEntitiesFilter[]=[];
@@ -172,7 +168,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
       var map = new Map(JSON.parse(filter));
       let isMatch = false;
       for(let [key,value] of map){
-        isMatch = (value=="Todas") || (record[key as keyof EducationalInstitute] == value);
+        isMatch = (value=="Todas") || (record[key as keyof InstitucionEducativa] == value);
         if (!isMatch) {
           return false;
         }
@@ -280,26 +276,29 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
 
     }
 
-    export interface EducationalInstitutions {
-      position: number;
-      name: string;
-      shortname: string;
-      code: string;
-      nit: string;
-      location: string;
-      zone: string;
-      class: string;
-    }
+const SEDES_LICEO: Sede[] = [
+  {id_sede: 1, nombre_sede: 'Sede Principal', orden: '01', observacion: 'op'},
+  {id_sede: 2, nombre_sede: 'La Santamaría', orden: '02', observacion: 'op'},
+  {id_sede: 3, nombre_sede: 'El Almendro', orden: '03', observacion: 'op'},
+  {id_sede: 4, nombre_sede: 'José María Sandoval', orden: '04', observacion: 'op'},
+]
 
-const EDUCATIONAL_INSTITUTION: EducationalInstitute[] = [
-  {id_ie: 1, cod_zerti: '1001', cod_zeti: '1001', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1},
-  {id_ie: 2, cod_zerti: '1002', cod_zeti: '1002', estado: true, nombre_ie: 'Institución Educativa DE SANTA LIBRADA', nombre_c: 'Santa Librada - Cali', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.145.251-0', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1},
-  {id_ie: 3, cod_zerti: '1003', cod_zeti: '1003', estado: true, nombre_ie: 'Institución Educativa Técnico Indusatrial ANTONIO JOSÉ CAMACHO', nombre_c: 'IETI Antonio José Camacho', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '805.235.444-7', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1},
-  {id_ie: 4, cod_zerti: '1004', cod_zeti: '1004', estado: true, nombre_ie: 'Institución Educativa SIMÓN BOLIVAR', nombre_c: 'Simón Bolivar', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.145.478-5', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1},
-  {id_ie: 5, cod_zerti: '1005', cod_zeti: '1005', estado: true, nombre_ie: 'Institución Educativa GENERAL FRANCISCO DE PAULA SANTANDER', nombre_c: 'Fco de Paula Santander', id_custo: 1, id_et: 1, id_serv: 1, clase:1, nit: '900.478.565-3', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1},
-  {id_ie: 6, cod_zerti: '1006', cod_zeti: '1006', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1},
-  {id_ie: 7, cod_zerti: '1007', cod_zeti: '1007', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1},
-  {id_ie: 8, cod_zerti: '1008', cod_zeti: '1008', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1},
-  {id_ie: 9, cod_zerti: '1009', cod_zeti: '1009', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 1, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1},
-  {id_ie: 10, cod_zerti: '1010', cod_zeti: '1010', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 1, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1},
+const SEDES_SANTA_LIBRADA: Sede[] = [
+  {id_sede: 1, nombre_sede: 'Sede Principal', orden: '01', observacion: 'op'},
+  {id_sede: 2, nombre_sede: 'La Pintada', orden: '02', observacion: 'op'},
+  {id_sede: 3, nombre_sede: 'El Portal', orden: '03', observacion: 'op'},
+]
+
+
+const EDUCATIONAL_INSTITUTION: InstitucionEducativa[] = [
+  {id_ie: 1, cod_zerti: '1001', cod_zeti: '1001', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: SEDES_LICEO},
+  {id_ie: 2, cod_zerti: '1002', cod_zeti: '1002', estado: true, nombre_ie: 'Institución Educativa DE SANTA LIBRADA', nombre_c: 'Santa Librada - Cali', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.145.251-0', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: SEDES_SANTA_LIBRADA},
+  {id_ie: 3, cod_zerti: '1003', cod_zeti: '1003', estado: true, nombre_ie: 'Institución Educativa Técnico Indusatrial ANTONIO JOSÉ CAMACHO', nombre_c: 'IETI Antonio José Camacho', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '805.235.444-7', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: []},
+  {id_ie: 4, cod_zerti: '1004', cod_zeti: '1004', estado: true, nombre_ie: 'Institución Educativa SIMÓN BOLIVAR', nombre_c: 'Simón Bolivar', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.145.478-5', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: []},
+  {id_ie: 5, cod_zerti: '1005', cod_zeti: '1005', estado: true, nombre_ie: 'Institución Educativa GENERAL FRANCISCO DE PAULA SANTANDER', nombre_c: 'Fco de Paula Santander', id_custo: 1, id_et: 1, id_serv: 1, clase:1, nit: '900.478.565-3', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: []},
+  {id_ie: 6, cod_zerti: '1006', cod_zeti: '1006', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: []},
+  {id_ie: 7, cod_zerti: '1007', cod_zeti: '1007', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: []},
+  {id_ie: 8, cod_zerti: '1008', cod_zeti: '1008', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: []},
+  {id_ie: 9, cod_zerti: '1009', cod_zeti: '1009', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 1, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: []},
+  {id_ie: 10, cod_zerti: '1010', cod_zeti: '1010', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 1, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: []},
 ];

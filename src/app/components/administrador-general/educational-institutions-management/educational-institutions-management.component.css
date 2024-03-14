@@ -138,6 +138,16 @@ table {
   background-color: #fff5c236;
 }
 
+.mat-mdc-row:focus-visible {
+  background-color: #ffd500;
+}
+
+.expand-hover {
+  .mat-mdc-row {
+    background-color: #f9f9f9;;
+  }
+}
+
 .mat-mdc-menu-item {
   --mat-menu-item-hover-state-layer-color: #fff5c2;
   --mat-menu-item-focus-state-layer-color: #fff5c2;
@@ -275,6 +285,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
+  padding-left: 20px;
 }
 
 .example-element-diagram {
@@ -300,9 +311,26 @@ tr.example-element-row:not(.example-expanded-row):active {
   opacity: 0.5;
 }
 
+.example-expanded-row {
+  background-color: #f0e1958f!important;
+}
+
 .item-lista {
-  height: 20px;
+  height: 25px;
   .mdc-list-item__primary-text {
-    font-size: 14px;
+    font-size: 0.8rem;
+    color: #3d3d3d;
+    font-weight: 400;
+    font-family: 'Fira Sans', sans-serif;
   }
+}
+
+.mat-list-item::before {
+  content: "•"; /* Punto Unicode */
+  margin-right: 8px; /* Espacio entre el punto y el texto */
+}
+
+
+.cursor-pointer {
+  cursor: pointer;
 }

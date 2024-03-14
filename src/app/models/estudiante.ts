@@ -1,5 +1,5 @@
 // Student Model
-export class Student {
+export class Estudiante {
   id_stu: number;
   nombres: string;
   apellidos: string;

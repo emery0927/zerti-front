@@ -1,5 +1,5 @@
 // Class of Educational Institute Model
-export class Class {
+export class ClaseInstitucion {
   id_class: number;
   type_class: string;
 
