@@ -12,6 +12,7 @@ import { InstitucionEducativa } from 'src/app/models/instititucion-educativa';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { EntidadTerritorial } from 'src/app/models/entidad-territorial';
 import { Sede } from 'src/app/models/sede';
+import { EditarSedeComponent } from '../editar-sede/editar-sede.component';
 
 
 export interface TerritorialEntitiesFilter {
@@ -76,9 +77,6 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
 
   @ViewChild('menuTrigger')
   menuTrigger!: MatMenuTrigger;
-
-  @ViewChild(MatSort)
-  sort!: MatSort;
 
   @ViewChild('inputField') inputField: any;
 
@@ -150,7 +148,6 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
 
   ngAfterViewInit() {
     this.data.paginator = this.paginator;
-    this.data.sort = this.sort;
   }
 
   // filtrarEntidadTerritorial() {
@@ -215,6 +212,11 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
     const dialogRef = this.dialog.open(CreateEducationalInstituteComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
 
+  }
+
+  abrirEdicionSedes(sede: HTMLElement, colegio: HTMLElement) {
+    const dialogRef = this.dialog.open(EditarSedeComponent, {restoreFocus: true, data: {sede, colegio}});
+    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
   }
 
   addFilter() {

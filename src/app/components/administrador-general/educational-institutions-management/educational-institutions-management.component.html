@@ -40,26 +40,26 @@
 
 <!-- Esta división contiene la tabla con las siguientes columnas: NOMBRE DE INSTITUCIÓN EDUCATIVA / EN CUSTODIA | NOMBRE CORTO
   | CÓDIGO | NIT | UBICACIÓN |ZONA | CLASE | OPCIONES, con su respectivo páginador -->
-<div class="mat-elevation-z8">
+<div  class="mat-elevation-z8">
   <!-- Esta división contiene el páginador de la tabla con su resectiva configuración -->
-  <table mat-table [dataSource]="data" multiTemplateDataRows matSort>
+  <table mat-table [dataSource]="data" multiTemplateDataRows>
 
     <!-- Nombre de Institución Educativa - Columna -->
     <ng-container matColumnDef="nombre_ie">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef>
         Nombre de Institución Educativa / En Custodia </th>
       <td [innerHTML]="replaceEspacios(element.nombre_ie)" class="row-style espacios cursor-pointer" role="row" mat-cell *matCellDef="let element"></td>
     </ng-container>
 
     <!-- Nombre Corto - Columna -->
     <ng-container matColumnDef="nombre_c">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Corto </th>
-      <td  class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.nombre_c}} </td>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Nombre Corto </th>
+      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.nombre_c}} </td>
     </ng-container>
 
     <!-- Código - Columna -->
     <ng-container matColumnDef="cod_zerti">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Código </th>
       <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.cod_zerti}} </td>
     </ng-container>
 
@@ -71,19 +71,19 @@
 
     <!-- Ubicación - Columna -->
     <ng-container matColumnDef="id_mun">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header> Ubicación </th>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Ubicación </th>
       <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.id_mun}} </td>
     </ng-container>
 
     <!-- Zona - Columna -->
     <ng-container matColumnDef="zone">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header> Zona </th>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Zona </th>
       <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.zone}} </td>
     </ng-container>
 
     <!-- Clase - Columna -->
     <ng-container matColumnDef="clase">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef mat-sort-header> Clase </th>
+      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Clase </th>
       <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.class}} </td>
     </ng-container>
 
@@ -127,9 +127,6 @@
               <button mat-menu-item (click)="eliminar()">Eliminar
                 <mat-icon>delete</mat-icon>
               </button>
-              <button mat-menu-item (click)="eliminar()">Sedes
-                <mat-icon>home_filled</mat-icon>
-              </button>
             </mat-menu>
 
           </button>
@@ -143,8 +140,10 @@
                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
               <div style="display: flex; align-items: center;">
                 <mat-list role="list">
-                  <mat-list-item *ngFor="let item of element.sedes" class="item-lista" role="listitem">{{item.orden}}&nbsp;&nbsp;{{item.nombre_sede}}</mat-list-item>
-                </mat-list>
+                  <span *ngFor="let item of element.sedes" style="text-decoration: underline;" (click)="abrirEdicionSedes(item, element)">
+                    <mat-list-item style="cursor: pointer;" class="item-lista" role="listitem">{{item.orden}}&nbsp;&nbsp;{{item.nombre_sede}}</mat-list-item>
+                  </span>
+                  </mat-list>
               </div>
               <div *ngIf="element.sedes.length === 0" style="display: flex; align-items: center;">
                 <p>No hay sedes</p>

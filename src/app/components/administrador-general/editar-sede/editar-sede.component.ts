@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { AfterViewInit, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
@@ -49,7 +49,7 @@ export class EditarSedeComponent implements AfterViewInit, OnInit {
 
   filterDictionary= new Map<string,string>();
 
-  constructor(public dialog: MatDialog, private spinner: NgxSpinnerService) {}
+  constructor(public dialog: MatDialog, private spinner: NgxSpinnerService, @Inject(MAT_DIALOG_DATA) public dataSede:any) {}
 
   /* Metodo encargado de filtrar la información de la tabla */
   applyFilter(event: Event, columnName: string) {
@@ -82,6 +82,8 @@ addFilter() {
 }
 
   ngOnInit(): void {
+    console.log(this.dataSede);
+
 
   }
 
