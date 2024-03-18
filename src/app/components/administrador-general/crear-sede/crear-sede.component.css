@@ -43,8 +43,8 @@
   max-height: 80vh;
   max-width: 800px;
   margin-right: 10px;
-  --mdc-outlined-text-field-focus-outline-color: #59320f;
-  --mdc-outlined-text-field-focus-label-text-color: #59320f;
+  --mdc-filled-text-field-focus-outline-color: #59320f;
+  --mdc-filled-text-field-focus-label-text-color: #59320f;
   --mdc-checkbox-selected-focus-icon-color: #59320f;
   --mdc-checkbox-selected-hover-icon-color: #59320f;
   --mdc-checkbox-selected-icon-color: #59320f;
@@ -198,4 +198,25 @@ input[type="number"] {
   --mdc-dialog-container-shape: 2px;
   --mdc-dialog-container-elevation: var(--mdc-dialog-container-elevation-shadow);
   outline: 0;
+}
+
+.specific-select-input {
+  .mdc-text-field {
+    border: solid;
+    border-color: lightgrey;
+    border-width: thin;
+    --mdc-filled-text-field-active-indicator-height: 0;
+    --mdc-filled-text-field-focus-active-indicator-height: 0px;
+    --mdc-filled-text-field-container-shape: 4px;
+  }
+
+  .mdc-text-field--filled.mdc-text-field--disabled {
+    background-color: #fff5d7;
+  }
+}
+
+.text-area-observacion-general {
+  font-size: 14px;
+  height: 40px;
+  resize: none;
 }

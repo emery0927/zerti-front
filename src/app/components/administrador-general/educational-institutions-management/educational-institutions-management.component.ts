@@ -13,6 +13,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { EntidadTerritorial } from 'src/app/models/entidad-territorial';
 import { Sede } from 'src/app/models/sede';
 import { EditarSedeComponent } from '../editar-sede/editar-sede.component';
+import { CrearSedeComponent } from '../crear-sede/crear-sede.component';
+import { Municipio } from 'src/app/models/municipio';
 
 
 export interface TerritorialEntitiesFilter {
@@ -21,12 +23,6 @@ export interface TerritorialEntitiesFilter {
   defaultValue:string;
 }
 
-const ENTIDAD_TERRITORIAL: EntidadTerritorial[] = [
-  { id_et: 1, id_dep: 1, id_divipol: 1, nombre_et: 'Todas', observacion: 'ob' },
-  { id_et: 2, id_dep: 1, id_divipol: 1, nombre_et: 'Santiago de Cali', observacion: 'ob' },
-  { id_et: 3, id_dep: 1, id_divipol: 1, nombre_et: 'Valle del Cauca', observacion: 'ob' },
-  { id_et: 4, id_dep: 1, id_divipol: 1, nombre_et: 'Jamundí', observacion: 'ob' }
-];
 
 
 @Component({
@@ -97,8 +93,6 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
   constructor(public dialog: MatDialog) {
     this.itemsPerPage = 5;
     this.currentPage = 0
-
-
   }
 
   /* Metodo encargado de filtrar la información de la tabla */
@@ -136,6 +130,9 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
 
   ngOnInit(): void {
 
+    console.log(EDUCATIONAL_INSTITUTION);
+
+
   }
 
   habilitarInputPaginador() {
@@ -151,36 +148,36 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
   }
 
   // filtrarEntidadTerritorial() {
-  //   if (this.filtroSeleccionado != '') {
-  //     this.data = this.data.filter(op => op.territorialEntities === this.filtroSeleccionado);
-  //   } else {
-  //     this.data = [...this.data];
-  //   }
-  // }
+    //   if (this.filtroSeleccionado != '') {
+      //     this.data = this.data.filter(op => op.territorialEntities === this.filtroSeleccionado);
+      //   } else {
+        //     this.data = [...this.data];
+        //   }
+        // }
 
 
-  filterByTerritorialEntity(ob:MatSelectChange,territorialEntitiesFilter:TerritorialEntitiesFilter) {
-    this.data.filterPredicate = function (record,filter) {
-      // sourcery skip: avoid-using-var
-      var map = new Map(JSON.parse(filter));
-      let isMatch = false;
-      for(let [key,value] of map){
-        isMatch = (value=="Todas") || (record[key as keyof InstitucionEducativa] == value);
-        if (!isMatch) {
-          return false;
+        filterByTerritorialEntity(ob:MatSelectChange,territorialEntitiesFilter:TerritorialEntitiesFilter) {
+          this.data.filterPredicate = function (record,filter) {
+            // sourcery skip: avoid-using-var
+            var map = new Map(JSON.parse(filter));
+            let isMatch = false;
+            for(let [key,value] of map){
+              isMatch = (value=="Todas") || (record[key as keyof InstitucionEducativa] == value);
+              if (!isMatch) {
+                return false;
+              }
+            }
+            return isMatch;
+          }
+
+          this.filterDictionary.set(territorialEntitiesFilter.name,ob.value);
+          // sourcery skip: avoid-using-var
+          var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
+          this.data.filter = jsonString;
         }
-      }
-      return isMatch;
-    }
 
-    this.filterDictionary.set(territorialEntitiesFilter.name,ob.value);
-    // sourcery skip: avoid-using-var
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    this.data.filter = jsonString;
-  }
-
-  editar() {
-    const dialogRef = this.dialog.open(EditEducationalInstitutionComponent, {restoreFocus: false});
+        editar() {
+          const dialogRef = this.dialog.open(EditEducationalInstitutionComponent, {restoreFocus: false});
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
   }
   eliminar() {
@@ -206,16 +203,18 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
   }
 
   abrirCrearIE() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.position = { top: '0' };
-
-    const dialogRef = this.dialog.open(CreateEducationalInstituteComponent, dialogConfig);
+    const dialogRef = this.dialog.open(CreateEducationalInstituteComponent, {restoreFocus: true, disableClose: true});
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
 
   }
 
   abrirEdicionSedes(sede: HTMLElement, colegio: HTMLElement) {
-    const dialogRef = this.dialog.open(EditarSedeComponent, {restoreFocus: true, data: {sede, colegio}});
+    const dialogRef = this.dialog.open(EditarSedeComponent, {restoreFocus: true, data: {sede, colegio}, disableClose: true});
+    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
+  }
+
+  abrirCreacionSedes(colegio: HTMLElement) {
+    const dialogRef = this.dialog.open(CrearSedeComponent, {restoreFocus: true, data: colegio, disableClose: true});
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
   }
 
@@ -233,50 +232,59 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
    * (Oficial/No Oficial) */
    showOficials() {
 
-    }
+  }
 
-    /**Falta organizar lógica: se debe implementar que para
-     * realizar el filtro se utilice el id que representa el estado de la Institución Educativa
-     * (Activo/Inactivo) */
-     showIdle() {
+  /**Falta organizar lógica: se debe implementar que para
+   * realizar el filtro se utilice el id que representa el estado de la Institución Educativa
+   * (Activo/Inactivo) */
+   showIdle() {
 
-    }
+  }
 
-    showOnCustody() {
+  showOnCustody() {
 
-    }
+  }
 
 
 
-    irAPaginaEspecifica() {
-      this.paginator.pageIndex = this.pageNumberInput - 1;
+  irAPaginaEspecifica() {
+    this.paginator.pageIndex = this.pageNumberInput - 1;
     // Siempre y cuando el filtro arroje resultados, de lo contrario no va funcionar el input
-      if (this.paginator.length > 1) {
-        // Validar que la página deseada esté dentro del rango válido
-        const totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-        if (this.pageNumberInput == totalPages || this.pageNumberInput <= totalPages) {
-          this.currentPage = this.pageNumberInput;
-            this.paginator.page.next({
-              pageIndex: this.pageNumberInput - 1,
-              pageSize: this.paginator.pageSize,
-              length: this.paginator.length
-          });
-        } else {
-          this.paginator.pageIndex = totalPages -1
-            this.paginator.page.next({
-              pageIndex: totalPages - 1,
-              pageSize: this.paginator.pageSize,
-              length: this.paginator.length
-            });
-          }
+    if (this.paginator.length > 1) {
+      // Validar que la página deseada esté dentro del rango válido
+      const totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+      if (this.pageNumberInput == totalPages || this.pageNumberInput <= totalPages) {
+        this.currentPage = this.pageNumberInput;
+        this.paginator.page.next({
+          pageIndex: this.pageNumberInput - 1,
+          pageSize: this.paginator.pageSize,
+          length: this.paginator.length
+        });
+      } else {
+        this.paginator.pageIndex = totalPages -1
+        this.paginator.page.next({
+          pageIndex: totalPages - 1,
+          pageSize: this.paginator.pageSize,
+          length: this.paginator.length
+        });
       }
-      }
-
-      replaceEspacios(texto: string) {
-        return texto.replace(/ /g, '&nbsp');
-      }
-
     }
+  }
+
+  replaceEspacios(texto: string) {
+    return texto.replace(/ /g, '&nbsp');
+  }
+
+}
+const ENTIDAD_TERRITORIAL: EntidadTerritorial[] = [
+  { id_et: 1, id_dep: 1, id_divipol: 1, nombre_et: 'Todas', observacion: 'ob' },
+  { id_et: 2, id_dep: 1, id_divipol: 1, nombre_et: 'Santiago de Cali', observacion: 'ob' },
+  { id_et: 3, id_dep: 1, id_divipol: 1, nombre_et: 'Valle del Cauca', observacion: 'ob' },
+  { id_et: 4, id_dep: 1, id_divipol: 1, nombre_et: 'Jamundí', observacion: 'ob' },
+  { id_et: 5, id_dep: 1, id_divipol: 1, nombre_et: 'Buenaventura', observacion: 'ob' },
+  { id_et: 6, id_dep: 1, id_divipol: 1, nombre_et: 'Buga', observacion: 'ob' },
+  { id_et: 7, id_dep: 1, id_divipol: 1, nombre_et: 'Palmira', observacion: 'ob' }
+];
 
 const SEDES_LICEO: Sede[] = [
   {id_sede: 1, nombre_sede: 'Sede Principal', orden: '01', observacion: 'op'},
@@ -291,9 +299,18 @@ const SEDES_SANTA_LIBRADA: Sede[] = [
   {id_sede: 3, nombre_sede: 'El Portal', orden: '03', observacion: 'op'},
 ]
 
+const MUNICIPIOS: Municipio[] = [
+  {id_municipio: 1, nombre_mun: 'Santiago de Cali', id_departamento: 1, codigo_dane: 76001, id_et: 2},
+  {id_municipio: 2, nombre_mun: 'Alcalá', id_departamento: 1, codigo_dane: 76020, id_et: 3},
+  {id_municipio: 3, nombre_mun: 'Buenaventura', id_departamento: 1, codigo_dane: 76109, id_et: 5},
+  {id_municipio: 4, nombre_mun: 'Buga', id_departamento: 1, codigo_dane: 76111, id_et: 6},
+  {id_municipio: 5, nombre_mun: 'Jamundí', id_departamento: 1, codigo_dane: 76364, id_et: 4},
+  {id_municipio: 6, nombre_mun: 'Palmira', id_departamento: 1, codigo_dane: 76520, id_et: 7}
+]
+
 
 const EDUCATIONAL_INSTITUTION: InstitucionEducativa[] = [
-  {id_ie: 1, cod_zerti: '1001', cod_zeti: '1001', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: SEDES_LICEO},
+  {id_ie: 1, cod_zerti: '1001', cod_zeti: '1001', estado: true, nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', id_custo: 1, id_et: ENTIDAD_TERRITORIAL.at(1)?.id_et, id_serv: 1, clase:1, nit: '800.125.539-1', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: SEDES_LICEO},
   {id_ie: 2, cod_zerti: '1002', cod_zeti: '1002', estado: true, nombre_ie: 'Institución Educativa DE SANTA LIBRADA', nombre_c: 'Santa Librada - Cali', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.145.251-0', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: SEDES_SANTA_LIBRADA},
   {id_ie: 3, cod_zerti: '1003', cod_zeti: '1003', estado: true, nombre_ie: 'Institución Educativa Técnico Indusatrial ANTONIO JOSÉ CAMACHO', nombre_c: 'IETI Antonio José Camacho', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '805.235.444-7', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: []},
   {id_ie: 4, cod_zerti: '1004', cod_zeti: '1004', estado: true, nombre_ie: 'Institución Educativa SIMÓN BOLIVAR', nombre_c: 'Simón Bolivar', id_custo: 1, id_et: 2, id_serv: 1, clase:1, nit: '800.145.478-5', cod_trd: 'ABC123', id_dep: 1, id_mun: 1, id_cpo: 1, correo: '', telefono: '', observacion: '', id_crea: 1, sedes: []},

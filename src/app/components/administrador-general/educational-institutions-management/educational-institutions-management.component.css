@@ -135,7 +135,7 @@ table {
 }
 
 .mat-mdc-row:hover {
-  background-color: #fff5c236;
+  background-color: #fff5c2;
 }
 
 .mat-mdc-row:focus-visible {
@@ -312,12 +312,12 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 .example-expanded-row {
-  background-color: #fff5c236!important;
+  background-color: #fff5c2!important;
 
 }
 
 tr.example-element-row:not(.example-expanded-row):hover {
-  background: #fff5c236;
+  background: #fff5c2;
 }
 
 .item-lista {

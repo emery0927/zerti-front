@@ -9,7 +9,7 @@ export class InstitucionEducativa {
   nombre_ie: string;
   nombre_c: string;
   id_custo: number;
-  id_et: number;
+  id_et?: number;
   id_serv: number;
   clase: number;
   nit: string;
