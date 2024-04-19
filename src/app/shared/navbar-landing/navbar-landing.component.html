@@ -1,0 +1,98 @@
+<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom headroom--top headroom--pinned">
+  <div class="container">
+
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbar_global" collapse="isCollapsed">
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+          </div>
+          <div class="col-6 collapse-close">
+            <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed"
+                  [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+          <a routerLink="/landing" class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link-inner--text text-white">Inicio</span>
+          </a>
+        <li class="nav-item dropdown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link-inner--text text-white">Servicios</span>
+          </a>
+          <div class="dropdown-menu-xl dropdown-menu" >
+            <div class="dropdown-menu-inner">
+              <a routerLinkActive="active" routerLink="" class="media d-flex align-items-center">
+                <div class="icon icon-shape bg-gradient-transparent rounded-circle text-white">
+                  <i class="ni ni-spaceship">
+                  <img class="icon" src="./assets/img/icons/common/cert.png"></i>
+                </div>
+                <div class="media-body ml-3">
+                  <h6 style="text-align: start;" class="heading text-black mb-md-1">Certificados de Estudio</h6>
+                  <p class="description d-none d-md-inline-block mb-0">Solicita y descarga certificados de estudio.</p>
+                </div>
+              </a>
+              <a routerLinkActive="active" routerLink="" class="media d-flex align-items-center">
+                <div class="icon icon-shape bg-gradient-transparent rounded-circle text-white">
+                  <i class="ni ni-palette">
+                  <img class="icon" src="./assets/img/icons/common/gorro.png"></i>
+                </div>
+                <div class="media-body ml-3">
+                  <h6 style="text-align: start;" class="heading text-black mb-md-1">Duplicados Actas de Grado</h6>
+                  <p class="description d-none d-md-inline-block mb-0">Solicita duplicados de actas de grado.</p>
+                </div>
+              </a>
+              <a routerLinkActive="active" routerLink="" class="media d-flex align-items-center">
+                <div class="icon icon-shape bg-gradient-transparent rounded-circle text-white">
+                  <i class="ni ni-ui-04">
+                  <img class="icon" src="./assets/img/icons/common/duplicar.png"></i>
+                </div>
+                <div class="media-body ml-3">
+                  <h6 style="text-align: start;" class="heading text-black mb-md-1">Duplicados de Diplomas</h6>
+                  <p class="description d-none d-md-inline-block mb-0">Solicita duplicados de diplomas.</p>
+                </div>
+              </a>
+              <a routerLinkActive="active" routerLink="" class="media d-flex align-items-center">
+                <div class="icon icon-shape bg-gradient-transparent rounded-circle text-white">
+                  <i class="ni ni-ui-04">
+                  <img class="icon" src="./assets/img/icons/common/verificar.png"></i>
+                </div>
+                <div class="media-body ml-3">
+                  <h6 style="text-align: start;" class="heading text-black mb-md-1">Verificar Titulos Expedidos</h6>
+                  <p class="description d-none d-md-inline-block mb-0">Verifica los titulos que solicitaste.</p>
+                </div>
+              </a>
+              <a routerLinkActive="active" routerLink="" class="media d-flex align-items-center">
+                <div class="icon icon-shape bg-gradient-transparent rounded-circle text-white">
+                  <i class="ni ni-ui-04">
+                  <img class="icon" src="./assets/img/icons/common/institucional.png"></i>
+                </div>
+                <div class="media-body ml-3">
+                  <h6 style="text-align: start;" class="heading text-black mb-md-1">Instituciones Usuarias</h6>
+                  <p class="description d-none d-md-inline-block mb-0">Listado de instituciones con las que trabajamos.</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+          <a  href="#contactenos" class="nav-link " data-toggle="dropdown" role="button">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner--text text-white">Contáctenos</span>
+          </a>
+          <a routerLink="login" class="button-login" data-toggle="dropdown" role="button">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span style="font-weight: 800; font-size: 1rem; font-family: 'Dosis', sans-serif; letter-spacing: 0; color: #59320F!important;" class="nav-link-inner--text text-white">Iniciar Sesión</span>
+          </a>
+      </ul>
+    </div>
+  </div>
+</nav>

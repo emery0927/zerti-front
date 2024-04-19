@@ -16,7 +16,7 @@
   margin-left: 10px;
 }
 
-.breadcrumb {
+.breadcrumb-certificados {
   font-size: 15px;
 }
 
@@ -32,16 +32,6 @@
 .px-3 {
   padding-right: 1rem!important;
   padding-left: 1rem!important;
-}
-
-.row {
-  --bs-gutter-x: 24px;
-  --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(-1 * var(--bs-gutter-y));
-  margin-right: calc(-.5 * var(--bs-gutter-x));
-  margin-left: calc(-.5 * var(--bs-gutter-x));
 }
 
 ::ng-deep .mdc-tab.mdc-tab--active{

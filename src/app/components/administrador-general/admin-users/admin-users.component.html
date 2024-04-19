@@ -7,22 +7,7 @@
       <div class="main-content">
 
         <div class="admin-list">
-          <div class="select">
-            <mat-form-field appearance="fill" style="max-width: 40%;" class="ancho-igual specific-select-input">
-              <mat-label style="font-size: 16px;  color: #59320f;">Entidad Territorial</mat-label>
-              <mat-select tabIndex="0" role="combobox" value="Santiago de Cali">
-                <mat-option *ngFor="let op of territorialEntities" [value]="op">{{op}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
-              <mat-label style="font-size: 16px;  color: #59320f;">Nombre de Institución Educativa</mat-label>
-              <mat-select value="Liceo Departamental">
-                <mat-option value="Liceo Departamental">Liceo Departamental</mat-option>
-                <mat-option value="Santa Librada">Santa Librada</mat-option>
-              </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="select" style="padding-top: 5px;">
+        <div class="select-admin">
           <mat-form-field appearance="fill" style="max-width: 40%;" class="ancho-igual specific-select-input">
             <mat-label style="font-size: 16px;  color: #59320f;">Roles</mat-label>
             <mat-select value="Rector">
@@ -37,10 +22,6 @@
               <mat-option value="Carlos">Carlos Pastrana</mat-option>
             </mat-select>
           </mat-form-field>
-
-
-
-
       </div>
       <div>
         <mat-card-actions class="admin-button">
@@ -52,7 +33,7 @@
         <div style="width: 100%;
         margin-left: 50px;
         margin-right: 50px;">
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w100" style="display: table; margin-top: 1.5rem; margin-left: 0; margin-right: 0;">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w100" style=" margin-top: 1.5rem; margin-left: 0; margin-right: 0;">
 
             <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->

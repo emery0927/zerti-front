@@ -1,0 +1,78 @@
+<main>
+  <div class="position-relative">
+    <!-- shape Hero -->
+    <section id="inicio" style="width: 100%; max-width: 100%; padding-bottom: 0; padding-top: 7.1rem !important; height: 992px;" class="section section-lg section-shaped">
+      <div  class="shape shape-style-1 shape-default">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div style="padding-top: 0rem !important; padding-bottom: 12.8rem !important;" class="container py-lg-md d-flex">
+        <div style="margin-top: -50px;" class="col px-0">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="contenedor">
+                <div style="box-shadow: none !important; background-color: transparent !important;" class="card bg-secondary shadow border-0">
+
+                  <div class="card-body px-lg-5 py-lg-5">
+                    <div class="text-center text-muted mb-4">
+                      <h1 class="display-2  text-titulo-zerti ">Zerti
+                      </h1>
+                      <div class="contenedor">
+                        <p style="font-family: 'Sora', sans-serif; font-size: 2.4rem;" class="lead text-titulo-zerti">
+                          Login</p>
+                      </div>
+                    </div>
+                    <form role="form">
+                      <div style="text-align: -webkit-center;" class="form-group mb-3" [ngClass]="{'focused':focus===true}">
+                        <div style="width: 50%;" class="input-group input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                          </div>
+                          <input style="font-size: 15px;" class="form-control" placeholder="Usuario" type="email" (focus)="focus=true" (blur)="focus=false">
+                        </div>
+                      </div>
+                      <div style="text-align: -webkit-center;" class="form-group" [ngClass]="{'focused':focus1===true}">
+                        <div style="width: 50%;" class="input-group input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                          </div>
+                          <input style="font-size: 15px;" class="form-control" placeholder="Contraseña" type="password" (focus)="focus1=true" (blur)="focus1=false">
+                        </div>
+                      </div>
+                      <div style="padding-left: 0px; padding-right: 0px;" class="custom-control custom-control-alternative custom-checkbox">
+                        <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+                        <label class="custom-control-label" for=" customCheckLogin">
+                          <span>Recuérdame</span>
+                        </label>
+                          <span><a style="font-family: Roboto,Helvetica Neue,sans-serif; font-size: 12px; color: #59320F; margin-left: 80px;"
+                            routerLink="/password-recovery">
+                            ¿Olvidaste tu contraseña?</a></span>
+                      </div>
+                      <div class="text-center">
+                        <button style="background-color: #59320F; border-color: #59320F; width: 335px;" type="button" class="btn btn-primary my-4">
+                          Iniciar Sesión</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-6 col-md-6--ml--100 ta-c">
+                <img style="margin-top: 5rem; width: 25rem;" class="logo-zerti" src="./assets/img/brand/1000.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 1st Hero Variation -->
+  </div>
+
+  </main>

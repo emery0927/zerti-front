@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 
+export interface TerritorialEntitiesFilter {
+  name:string;
+  options:string[];
+  defaultValue:string;
+}
+
 @Component({
   selector: 'app-educational-institutions',
   templateUrl: './educational-institutions.component.html',
@@ -7,5 +13,7 @@ import { Component } from '@angular/core';
 })
 export class EducationalInstitutionsComponent {
 
+  territorialEntities: string[]=['Todas', 'Santiago de Cali', 'Valle del Cauca', 'Jamundí'];
+  territorialEntitiesFilter: TerritorialEntitiesFilter[]=[];
 
 }

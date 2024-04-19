@@ -14,6 +14,9 @@ import { ServiceTeamComponent } from './components/administrador-general/service
 import { StudentsUsersComponent } from './components/administrador-general/students-users/students-users.component';
 import { TerritorialEntitiesComponent } from './components/administrador-general/territorial-entities/territorial-entities.component';
 import { UsuariosAdministrativosComponent } from './components/administrador-general/usuarios-administrativos/usuarios-administrativos.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { LoginComponent } from './components/login/login.component';
+import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 
 
 const routes: Routes = [
@@ -31,6 +34,9 @@ const routes: Routes = [
   { path: 'operational-roles', component: OperationalRolesComponent },
   { path: 'service-team', component: ServiceTeamComponent },
   { path: 'territorial-entities', component: TerritorialEntitiesComponent },
+  { path: 'landing', component: LandingComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'password-recovery', component: PasswordRecoveryComponent },
 ];
 
 @NgModule({

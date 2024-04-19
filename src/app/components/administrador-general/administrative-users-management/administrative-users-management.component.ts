@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { CreateStudentUserComponent } from '../create-student-user/create-student-user.component';
 import { EditEducationalInstitutionComponent } from '../edit-educational-institution/edit-educational-institution.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { FormularioCreacionUsuarioAdminComponent } from '../formulario-creacion-usuario-admin/formulario-creacion-usuario-admin.component';
 
 export interface TerritorialEntitiesFilter {
   name:string;
@@ -42,7 +43,7 @@ export class AdministrativeUsersManagementComponent implements AfterViewInit, On
   territorialEntities: string[]=['Todas', 'Santiago de Cali', 'Valle del Cauca', 'Jamundí'];
   territorialEntitiesFilter: TerritorialEntitiesFilter[]=[];
 
-  displayedColumns: string[] = ['fullname', 'document', 'code', 'site', 'school_day', 'grade', 'status', 'email', 'options'];
+  displayedColumns: string[] = ['fullname', 'document', 'code', 'site', 'school_day', 'grade', 'status', 'options'];
   data = new MatTableDataSource<StudentsUsers>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator)
@@ -65,8 +66,10 @@ export class AdministrativeUsersManagementComponent implements AfterViewInit, On
   pageNumberInput!: number;
 
   totalItems = 2;
-  itemsPerPage = 1;
+  itemsPerPage = 2;
   currentPage = 0;
+
+  inputDeshabilitado!: boolean;
 
   filterDictionary= new Map<string,string>();
 
@@ -74,13 +77,22 @@ export class AdministrativeUsersManagementComponent implements AfterViewInit, On
 
   /* Metodo encargado de filtrar la información de la tabla */
   applyFilter(event: Event, columnName: string) {
+    if (columnName === 'shortname') {
       const filterValue = (event.target as HTMLInputElement).value;
       this.data.filter = filterValue.trim().toLowerCase();
 
       // Si la tabla tiene paginación, regresa a la primera página al aplicar el filtro
       if (this.data.paginator) {
+        this.paginator.length = this.data.filteredData.length;
         this.data.paginator.firstPage();
       }
+
+      if (this.paginator.length < 1) {
+        this.deshabilitarInputPaginador();
+      } else {
+        this.habilitarInputPaginador();
+      }
+    }
   }
 
 mostrarLoader(): void {
@@ -137,6 +149,14 @@ addFilter() {
     const dialogRef = this.dialog.open(EditEducationalInstitutionComponent, {restoreFocus: false});
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
   }
+
+  habilitarInputPaginador() {
+    this.inputDeshabilitado = false;
+  }
+
+  deshabilitarInputPaginador() {
+    this.inputDeshabilitado = true;
+  }
   eliminar() {
     Swal.fire({
       title: "Estás seguro?",
@@ -159,8 +179,8 @@ addFilter() {
     });
   }
 
-  abrirCrearIE() {
-    const dialogRef = this.dialog.open(CreateStudentUserComponent, {restoreFocus: false});
+  abrirCrearUsuario() {
+    const dialogRef = this.dialog.open(FormularioCreacionUsuarioAdminComponent, {restoreFocus: false, disableClose: true});
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
 
   }
@@ -184,6 +204,30 @@ addFilter() {
           pageSize: this.paginator.pageSize,
           length: this.paginator.length
         });
+    }
+  }
+
+  irAPaginaEspecifica() {
+    this.paginator.pageIndex = this.pageNumberInput - 1;
+    // Siempre y cuando el filtro arroje resultados, de lo contrario no va funcionar el input
+    if (this.paginator.length > 1) {
+      // Validar que la página deseada esté dentro del rango válido
+      const totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+      if (this.pageNumberInput == totalPages || this.pageNumberInput <= totalPages) {
+        this.currentPage = this.pageNumberInput;
+        this.paginator.page.next({
+          pageIndex: this.pageNumberInput - 1,
+          pageSize: this.paginator.pageSize,
+          length: this.paginator.length
+        });
+      } else {
+        this.paginator.pageIndex = totalPages -1
+        this.paginator.page.next({
+          pageIndex: totalPages - 1,
+          pageSize: this.paginator.pageSize,
+          length: this.paginator.length
+        });
+      }
     }
   }
 

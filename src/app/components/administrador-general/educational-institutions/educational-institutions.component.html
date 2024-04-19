@@ -9,7 +9,7 @@
           <span>
             Instituciones Educativas
           </span> </h3>
-          <span class="breadcrumb">
+          <span class="breadcrumb-instituciones">
             1. Instituciones Educativas
           </span>
       </div>
@@ -18,8 +18,23 @@
       <mat-tab label="1. Instituciones Educativas">
         <app-educational-institutions-management></app-educational-institutions-management>
       </mat-tab>
-      <mat-tab label="2. Usuarios Administrativos/IE en Custodia">
-        <div style="display: flex;">
+      <mat-tab label="2. Usuarios Administrativos / IE en Custodia">
+        <div class="select">
+          <mat-form-field appearance="fill" style="max-width: 20%;" class="ancho-igual specific-select-input">
+              <mat-label style="font-size: 16px;  color: #59320f;">Entidad Territorial</mat-label>
+              <mat-select tabIndex="0" role="combobox" value="Santiago de Cali">
+                 <mat-option *ngFor="let op of territorialEntities" [value]="op">{{op}}</mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
+              <mat-label style="font-size: 16px;  color: #59320f;">Nombre de Institución Educativa</mat-label>
+             <mat-select value="Liceo Departamental">
+                <mat-option value="Liceo Departamental">Liceo Departamental</mat-option>
+                <mat-option value="Santa Librada">Santa Librada</mat-option>
+             </mat-select>
+          </mat-form-field>
+      </div>
+        <div style="display: flex; margin-top: -30px">
           <div>
             <app-funcionarios></app-funcionarios>
           </div>

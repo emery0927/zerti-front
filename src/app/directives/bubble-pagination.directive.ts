@@ -68,8 +68,6 @@ export class BubblePaginationDirective implements AfterViewInit, OnChanges {
    * reacciona cuando el componente padre cambia la appCustomLength, entonces rerenderiza las burbujas.
    */
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.appCustomLength/this.matPag.pageSize > 1);
-    //debugger;
     if(!changes?.['appCustomLength']?.firstChange && this.appCustomLength/this.matPag.pageSize > 1) {
       this.removeButtons();
       this.removeDotsEndElement();

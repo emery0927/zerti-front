@@ -22,6 +22,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class AppComponent implements AfterViewInit {
   title = 'zerti';
   public onSideNavChange!: boolean;
+  public inicioSesion = true;
 
   @ViewChild('sidenav')
   sidenav!: MatSidenav;

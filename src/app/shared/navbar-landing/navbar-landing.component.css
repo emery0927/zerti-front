@@ -1,0 +1,29 @@
+.button-login {
+  background-color: #ffeab0;
+  border-radius: 20px;
+  border-color: white;
+  margin-left: 15px;
+  border: solid;
+  color: #ffeab0;
+  cursor: pointer;
+  width: 130px;
+  text-align: center;
+}
+
+.nav-link:hover {
+  background: #4e2b0bb0;
+}
+
+.login:hover {
+  background: #ffeab0;
+}
+
+.button-login:hover {
+  background: #e9ce85;
+  color: #e9ce85;
+}
+
+.media:hover {
+  background: #c5c3c36b;
+  border-radius: 8px;
+}

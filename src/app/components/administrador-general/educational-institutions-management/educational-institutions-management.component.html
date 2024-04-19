@@ -3,7 +3,7 @@
 <div class="select">
   <mat-form-field style="max-width: 25%;" appearance="fill" class=" ancho-igual specific-select-input" >
     <mat-label style="font-size: 16px;  color: #59320f;">Entidad Territorial</mat-label>
-    <mat-select class="" tabIndex="0" role="combobox" (selectionChange)="onSelect($event)" [value]="1">
+    <mat-select class="" tabIndex="0" role="combobox" #entidadSeleccionada (selectionChange)="onSelect($event)" [value]="1">
     <mat-option *ngFor="let entidadTerritorial of entidadesTerritoriales" [value]="entidadTerritorial.id_et">{{entidadTerritorial.nombre_et}}</mat-option>
   </mat-select>
 </mat-form-field>
@@ -34,7 +34,7 @@
 </div>
 
 <div class="cantidad-instituciones-educativas">
-  <p style="text-align: end;font-size: 13.58px; color: #59320f;">{{data.filteredData.length}} Instituciones Educativa(s)</p>
+  <p style="text-align: end;font-size: 13.58px; color: #59320f;">{{data.filteredData.length}} Institucion(es) Educativa(s)</p>
 </div>
 <!-------------------------------------------------------------------------------------------------------------------------------->
 
@@ -72,32 +72,33 @@
     <!-- Ubicación - Columna -->
     <ng-container matColumnDef="id_mun">
       <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Ubicación </th>
-      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.id_mun}} </td>
+      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.municipio.nombre_mun}} </td>
     </ng-container>
 
     <!-- Zona - Columna -->
     <ng-container matColumnDef="zone">
       <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Zona </th>
-      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.zone}} </td>
+      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.municipio.zona}} </td>
     </ng-container>
 
     <!-- Clase - Columna -->
     <ng-container matColumnDef="clase">
       <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Clase </th>
-      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.class}} </td>
+      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.clase.clase_ie}} </td>
     </ng-container>
 
     <!-- Opciones - Columna -->
     <ng-container matColumnDef="options">
-      <th class="header-style" style="z-index: 1;" role="columnheader" mat-header-cell *matHeaderCellDef [ngClass]="{'align-right': true}">
+      <th class="header-style" style="z-index: 1;" role="columnheader" mat-header-cell *matHeaderCellDef [ngClass]="{'align-right': true}"
+       matTooltip="Debe de seleccionar una (1) Entidad Territorial" [matTooltipDisabled]="!mostrarTooltip">
         <div style="margin-right: -20px;">
-          <button mat-button matTooltip="Debe de seleccionar una (1) Entidad Territorial" [matMenuTriggerFor]="menu"
+          <button [disabled]="habilitarCrear" mat-button  [matMenuTriggerFor]="menu"
           style="cursor: pointer;background-color: transparent; border: none;">
             <span>
               <mat-icon style="color: #59320f;">more_vert</mat-icon>
             </span>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="abrirCrearIE()">Crear IE
+              <button mat-menu-item (click)="abrirCrearIE(entidadSeleccionada)">Crear IE
                 <mat-icon>add_circle_outline</mat-icon>
               </button>
               <button mat-menu-item (click)="showOficials()">Ver Oficiales
@@ -121,13 +122,13 @@
               <mat-icon style="color: #8c8c8c;">more_horiz</mat-icon>
             </span>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="editar()">Editar
+              <button mat-menu-item (click)="editar(element)">Editar
                 <mat-icon>create</mat-icon>
               </button>
               <button mat-menu-item (click)="eliminar()">Eliminar
                 <mat-icon>delete</mat-icon>
               </button>
-              <button mat-menu-item (click)="abrirCreacionSedes(element)">Sedes
+              <button mat-menu-item (click)="abrirCreacionSedes(element)">Crear Sede
                 <mat-icon>home_filed</mat-icon>
               </button>
             </mat-menu>
@@ -143,7 +144,7 @@
                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
               <div style="display: flex; align-items: center;">
                 <mat-list role="list">
-                  <span *ngFor="let item of element.sedes" style="text-decoration: underline;" (click)="abrirEdicionSedes(item, element)">
+                  <span *ngFor="let item of element.sedes" (click)="abrirEdicionSedes(item, element)">
                     <mat-list-item style="cursor: pointer;" class="item-lista" role="listitem">{{item.orden}}&nbsp;&nbsp;{{item.nombre_sede}}</mat-list-item>
                   </span>
                   </mat-list>

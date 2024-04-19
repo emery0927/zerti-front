@@ -16,7 +16,7 @@
   margin-left: 10px;
 }
 
-.breadcrumb {
+.breadcrumb-instituciones {
   font-size: 15px;
 }
 
@@ -34,20 +34,48 @@
   padding-left: 1rem!important;
 }
 
-.row {
-  --bs-gutter-x: 24px;
-  --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(-1 * var(--bs-gutter-y));
-  margin-right: calc(-.5 * var(--bs-gutter-x));
-  margin-left: calc(-.5 * var(--bs-gutter-x));
-}
-
 ::ng-deep .mdc-tab.mdc-tab--active{
   background-color: #fafafa !important;
   font-weight: 900;
   color: #fff;
 }
 
+.select {
+  color: #fff;
+  display: flex;
+  padding-top: 1.5rem;
+  width: 100%;
+  --mdc-outlined-text-field-focus-outline-color: #59320f;
+  --mdc-outlined-text-field-focus-label-text-color: #59320f;
+  --mdc-checkbox-selected-focus-icon-color: #59320f;
+  --mdc-checkbox-selected-hover-icon-color: #59320f;
+  --mdc-checkbox-selected-icon-color: #59320f;
+  --mat-option-selected-state-label-text-color: #59320f;
+  --mdc-checkbox-selected-pressed-icon-color: #59320f;
+  --mdc-checkbox-selected-focus-state-layer-color: #59320f;
+  --mdc-checkbox-selected-hover-state-layer-color: #59320f;
+  --mdc-checkbox-selected-pressed-state-layer-color: #59320f;
+  --mat-option-selected-state-label-text-color: #faccbb;
+  --mat-select-focused-arrow-color: #59320f;
+  --mdc-filled-text-field-focus-label-text-color: #59320f;
 
+  /*box-shadow: 0 3px 4px #0003, 0 3px 3px -2px #00000024, 0 1px 8px #0000001f;*/
+}
+.ancho-igual {
+  flex: 1;
+  margin-left: 12px;
+  margin-right: 0px; /* Puedes ajustar este margen según tus necesidades */
+  max-width: 27.7%;
+  box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
+}
+
+.specific-select-input {
+  .mdc-text-field {
+    border: solid;
+    border-color: lightgrey;
+    border-width: thin;
+    --mdc-filled-text-field-active-indicator-height: 0;
+    --mdc-filled-text-field-focus-active-indicator-height: 0px;
+    --mdc-filled-text-field-container-shape: 4px;
+  }
+}

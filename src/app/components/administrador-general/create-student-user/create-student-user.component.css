@@ -82,7 +82,7 @@
   width: 130px;
 }
 
-.row {
+.row-crear-estudiante {
   --bs-gutter-x: 24px;
   --bs-gutter-y: 0;
   display: flex;

@@ -6,7 +6,6 @@ html {
 
 body {
   margin: 0px;
-  font-family: 'Roboto', sans-serif;
   height: 100%;
   min-height: 100%;
   background: #fafafa;
@@ -15,6 +14,7 @@ body {
 * {
   -webkit-font-smoothing: antialased;
   -moz-osx-font-smoothing: antialased;
+  box-sizing: border-box;
 }
 
 /* SPACER */
@@ -139,6 +139,18 @@ body {
   outline: 0;
 }
 
+.mat-datepicker-content {
+  --mat-datepicker-calendar-date-focus-state-background-color: #8f5b3585 !important;
+  --mat-datepicker-calendar-date-hover-state-background-color: #8f5b3559 !important;
+  --mat-datepicker-toggle-active-state-icon-color: #8f5b35 !important;
+  --mat-datepicker-calendar-date-selected-state-background-color: #8f5b35 !important;
+}
+
+.mat-mdc-raised-button.mat-primary {
+  --mdc-protected-button-container-color: #c3994ca6;
+  --mdc-protected-button-label-text-color: #fff;
+}
+
 .g-bubble-container {
   display: flex;
   gap: 10px;
@@ -147,13 +159,13 @@ body {
 .g-bubble {
   background-color: transparent;
   border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #c3994ca6;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   transition: 0.1s;
 }

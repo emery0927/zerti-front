@@ -82,9 +82,6 @@ addFilter() {
 }
 
   ngOnInit(): void {
-    console.log(this.dataSede);
-
-
   }
 
   ngAfterViewInit() {

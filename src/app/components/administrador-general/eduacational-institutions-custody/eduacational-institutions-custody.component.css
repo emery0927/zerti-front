@@ -39,7 +39,7 @@
 .ancho-igual {
   flex: 1;
   margin-left: 10px;
-  margin-right: 10px; /* Puedes ajustar este margen según tus necesidades */
+  margin-right: 196px; /* Puedes ajustar este margen según tus necesidades */
   max-width: 100%; /* Divide el ancho en tres y resta el margen */
   box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
 }
@@ -71,7 +71,7 @@
 
 .align-right {
   text-align: right;
-  max-width: 116px;
+  width: 100px;
 }
 
 .mat-mdc-row:hover {
@@ -92,4 +92,12 @@
     --mdc-filled-text-field-focus-active-indicator-height: 0px;
     --mdc-filled-text-field-container-shape: 4px;
   }
+}
+
+tr.mat-mdc-row:nth-child(even) {
+  background-color: #b387520d !important;
+}
+
+td.mdc-data-table__cell {
+  padding: 0px 0px 0 16px;
 }

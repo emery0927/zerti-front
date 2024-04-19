@@ -22,10 +22,5 @@ export class RightSidebarComponent {
   }
 
   elegirContexto() {
-    //Si el mat-card is clicked entonces cargar la ventana deseada
-    console.log("i'm touched");
-
-
-
   }
 }

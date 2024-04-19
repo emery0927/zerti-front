@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -57,23 +57,37 @@ import { GoodsAndServicesSuppliersComponent } from "./components/administrador-g
 import { GraduationBooksComponent } from "./components/administrador-general/graduation-books/graduation-books.component";
 import { HomeComponent } from "./components/administrador-general/home/home.component";
 import { ImageUploadComponent } from "./components/administrador-general/image-upload/image-upload.component";
-import { NavbarComponent } from "./components/administrador-general/navbar/navbar.component";
+import { NavbarComponent } from "./shared/navbar/navbar.component";
 import { OfficialsComponent } from "./components/administrador-general/officials/officials.component";
 import { OperationalRolesComponent } from "./components/administrador-general/operational-roles/operational-roles.component";
 import { RightSidebarComponent } from "./components/administrador-general/right-sidebar/right-sidebar.component";
 import { SedesManagementComponent } from "./components/administrador-general/sedes-management/sedes-management.component";
 import { SedesComponent } from "./components/administrador-general/sedes/sedes.component";
 import { ServiceTeamComponent } from "./components/administrador-general/service-team/service-team.component";
-import { SidebarComponent } from "./components/administrador-general/sidebar/sidebar.component";
+import { SidebarComponent } from "./shared/sidebar/sidebar.component";
 import { StudentUserManagementComponent } from "./components/administrador-general/student-user-management/student-user-management.component";
 import { StudentsUsersComponent } from "./components/administrador-general/students-users/students-users.component";
 import { TerritorialEntitiesComponent } from "./components/administrador-general/territorial-entities/territorial-entities.component";
 import { BubblePaginationDirective } from "./directives/bubble-pagination.directive";
-import { StylePaginatorDirective } from "./directives/style-paginator.directive";
 import { SidenavService } from "./services/sidenav.service";
 import { FuncionariosComponent } from './components/administrador-general/funcionarios/funcionarios.component';
 import { UsuariosAdministrativosComponent } from './components/administrador-general/usuarios-administrativos/usuarios-administrativos.component';
 import { GestionCertificadosEstudioComponent } from './components/administrador-general/gestion-certificados-estudio/gestion-certificados-estudio.component';
+import { FormularioCreacionUsuarioAdminComponent } from './components/administrador-general/formulario-creacion-usuario-admin/formulario-creacion-usuario-admin.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatExpansionModule } from '@angular/material/expansion';
+import { LandingComponent } from './components/landing/landing.component';
+import { LoginComponent } from './components/login/login.component';
+import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { NavbarLandingComponent } from "./shared/navbar-landing/navbar-landing.component";
+import { ConsultarLibrosComponent } from './components/gestion-operacional-ieo/consultar-libros/consultar-libros.component';
+import { CrearCertificadoComponent } from './components/gestion-operacional-ieo/crear-certificado/crear-certificado.component';
+import { InicioGestionOperacionalComponent } from './components/gestion-operacional-ieo/inicio-gestion-operacional/inicio-gestion-operacional.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +132,15 @@ import { GestionCertificadosEstudioComponent } from './components/administrador-
     FuncionariosComponent,
     UsuariosAdministrativosComponent,
     GestionCertificadosEstudioComponent,
+    FormularioCreacionUsuarioAdminComponent,
+    LandingComponent,
+    LoginComponent,
+    PasswordRecoveryComponent,
+    FooterComponent,
+    NavbarLandingComponent,
+    ConsultarLibrosComponent,
+    CrearCertificadoComponent,
+    InicioGestionOperacionalComponent,
   ],
   imports: [
     BrowserModule,
@@ -145,8 +168,15 @@ import { GestionCertificadosEstudioComponent } from './components/administrador-
     NgxSpinnerModule,
     BubblePaginationDirective,
     FormsModule,
-    StylePaginatorDirective,
+    ReactiveFormsModule,
     MatTreeModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatExpansionModule,
+    NgbModule,
+    RouterModule,
+    CommonModule,
+    NgbCollapseModule,
   ],
   providers: [SidenavService],
   bootstrap: [AppComponent]

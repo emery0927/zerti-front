@@ -20,7 +20,7 @@
 }
 
 .right-sidebar .navbar-options {
-  background: #59320f;
+  background: #c3994ca6;
   color: #fff;
   height: 50px;
 }
@@ -44,6 +44,14 @@
 
 .right-sidebar .navbar-options .navbar-title {
   font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 0;
+  color: #ffffff;
+  font-size: 16px;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .user-card {

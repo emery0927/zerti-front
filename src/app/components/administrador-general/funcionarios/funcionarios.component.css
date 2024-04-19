@@ -69,7 +69,7 @@
 
 .align-right {
   text-align: right;
-  max-width: 116px;
+  width: 100px;
 }
 
 .align-left {
@@ -94,4 +94,13 @@
     --mdc-filled-text-field-focus-active-indicator-height: 0px;
     --mdc-filled-text-field-container-shape: 4px;
   }
+}
+
+tr.mat-mdc-row:nth-child(even) {
+  background-color: #b387520d !important;
+}
+
+
+td.mdc-data-table__cell {
+  padding: 0px 0px 0 16px;
 }

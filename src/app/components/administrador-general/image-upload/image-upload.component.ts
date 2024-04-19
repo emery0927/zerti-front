@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-image-upload',
@@ -7,7 +7,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 })
 export class ImageUploadComponent {
 
-  imageUrl: string | ArrayBuffer | null = null;
+  @Input() imageUrl: string | ArrayBuffer | null = null;
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
 
   onFileSelected(event: any): void {

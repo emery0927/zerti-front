@@ -1,21 +1,26 @@
-<h2 style="background-color: #c3994ca6 ; font-weight: 600; padding-inline: 32px;" mat-dialog-title>Edición de Institución Educativa</h2>
+<h2 style="font-weight: 600; padding-inline: 32px;" mat-dialog-title>Edición de Institución Educativa</h2>
 <mat-dialog-content class="mat-dialog-container">
   <form action="">
-    <!--Territorial Entity and Zerti Code Row-->
+    <!--Territorial Entity and Zeti Code Row-->
     <div>
       <div class="mb-2">
         <div>
-          <mat-form-field appearance="outline" class="ancho-igual fondo-color-input">
-            <mat-label style="font-size: 14px; color: rgb(54, 54, 54); font-weight: 600;">Entidad Territorial</mat-label>
+          <mat-form-field appearance="fill" class="ancho-igual specific-select-input fondo-color-input">
+            <mat-label style="font-size: 14px; color: rgb(54, 54, 54);">Entidad Territorial</mat-label>
             <div class="mat-form-field-wrapper">
-              <input style="font-size: 14px; color: rgb(54, 54, 54);" matInput value="Valle del Cauca" disabled="true">
+              <input style="font-size: 14px; color: rgb(54, 54, 54);" matInput [value]="dataInstitucion.institucion.entidad_territorial.nombre_et" disabled="true">
             </div>
           </mat-form-field>
-
-          <mat-form-field appearance="outline" class="end-input">
+          <mat-form-field appearance="fill" class="specific-select-input end-input-zeti-code">
+            <mat-label style="font-size: 14px;">Código Zeti</mat-label>
+            <div>
+              <input style="font-size: 14px;" matInput [value]="dataInstitucion.institucion.cod_zeti">
+            </div>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="end-input specific-select-input fondo-color-input">
             <mat-label style="font-size: 14px;">Código Zerti</mat-label>
             <div>
-              <input style="font-size: 14px;" matInput>
+              <input style="font-size: 14px;" matInput [value]="dataInstitucion.institucion.cod_zerti">
             </div>
           </mat-form-field>
         </div>
@@ -26,11 +31,11 @@
       <div class="row-full-width mb-2">
         <div>
           <div>
-            <mat-form-field appearance="outline" class="w100">
+            <mat-form-field appearance="fill" class="w100 specific-select-input">
               <mat-label style="font-size: 14px;">Nombre de Institución Educativa</mat-label>
               <mat-label style="color: red;"> *</mat-label>
               <div class="mat-form-field-wrapper">
-                <input style="font-size: 14px;" matInput placeholder="Nombre de Institución Educativa *">
+                <input style="font-size: 14px;" matInput cdkFocusInitial [value]="dataInstitucion.institucion.nombre_ie">
               </div>
             </mat-form-field>
           </div>
@@ -38,178 +43,242 @@
       </div>
     </div>
     <!--Shortname and NIT Row-->
-    <div>
-      <div class="row mb-2">
-        <div class="col-8">
-
-          <mat-form-field appearance="outline" class="w100">
-          <mat-label style="font-size: 14px;">Nombre Corto</mat-label>
-          <mat-label style="color: red;"> *</mat-label>
-            <div class="mat-form-field-wrapper">
-              <input style="font-size: 14px;" matInput>
-            </div>
-          </mat-form-field>
-        </div>
-
-        <mat-form-field appearance="outline" class="ancho-igual">
-          <mat-label style="font-size: 14px;">NIT</mat-label>
-          <mat-label style="color: red;"> *</mat-label>
-          <div>
-            <input style="font-size: 14px;" matInput>
-          </div>
-        </mat-form-field>
-      </div>
-    </div>
-  <!--Class of Institution, Inactive and Zeti Code Row-->
-    <div>
-      <div class="mb-2">
+    <div class="row-editar-institucion">
+      <div class="col8">
         <div>
-          <mat-form-field appearance="outline" class="ancho-igual">
-            <mat-label style="font-size: 14px;">Clase de Institución</mat-label>
-            <mat-label style="color: red;"> *</mat-label>
-            <div class="mat-form-field-wrapper">
-              <mat-select style="font-size: 14px;">
-                <mat-option *ngFor="let class of institutionsClasses" [value]="class">{{class.class}}</mat-option>
-              </mat-select>
-            </div>
-          </mat-form-field>
-          <mat-checkbox style="padding-left: 0;" class="example-margin">
-            <mat-label >Inactiva</mat-label>
-          </mat-checkbox>
-          <mat-form-field appearance="outline" class="end-input">
-            <mat-label style="font-size: 14px;">Código Zeti</mat-label>
+
+          <div class="mb-2">
             <div>
-              <input style="font-size: 14px;" matInput>
-            </div>
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
-    <!--Educational Institution in Custody Row-->
-    <div>
-      <div class="row mb-2">
-        <div class="col-8">
-          <mat-form-field appearance="outline" class="w100">
-          <mat-label style="font-size: 14px;">Institución Educativa en Custodia</mat-label>
-            <div class="mat-form-field-wrapper">
-              <input style="font-size: 14px;" matInput>
-            </div>
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
-    <!--Zerti's Services Team and TRD Code Row-->
-    <div>
-      <div class="row mb-2">
-        <div class="col-5">
 
-          <mat-form-field appearance="outline" class="w100">
-            <mat-label style="font-size: 14px;">Código TRD</mat-label>
-            <div class="mat-form-field-wrapper">
-              <input style="font-size: 14px;" matInput>
+              <mat-form-field style="max-width: 438px; width: 438px;" appearance="fill" class=" ancho-igual specific-select-input">
+                <mat-label style="font-size: 14px;">Nombre Corto</mat-label>
+                <mat-label style="color: red;"> *</mat-label>
+                <div class="mat-form-field-wrapper">
+                  <input style="font-size: 14px;" matInput [value]="dataInstitucion.institucion.nombre_c">
+                </div>
+              </mat-form-field>
             </div>
-          </mat-form-field>
-        </div>
-
-        <mat-form-field appearance="outline" class="ancho-50">
-          <mat-label style="font-size: 14px;">Equipo de Servicio Zerti</mat-label>
-          <mat-label style="color: red;"> *</mat-label>
-          <div>
-            <mat-select>
-              <mat-option *ngFor="let team of servicesTeam" [value]="team">{{team.team}}</mat-option>
-            </mat-select>
           </div>
-        </mat-form-field>
+        </div>
+        <!--Class of Institution, Inactive and Zeti Code Row-->
+        <div>
+          <div class="mb-2">
+            <div>
+              <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
+                <mat-label style="font-size: 14px;">Clase de Institución</mat-label>
+                <mat-label style="color: red;"> *</mat-label>
+                <div class="mat-form-field-wrapper">
+                  <mat-select [(value)]="claseSeleccionada"  name="clase" style="font-size: 14px;">
+                    <mat-option *ngFor="let clase of clases_institucion" [value]="clase.id_clase">{{clase.clase_ie}}</mat-option>
+                  </mat-select>
+                </div>
+              </mat-form-field>
+              <mat-form-field style="margin-left: 0; margin-right: 0;" appearance="fill" class="ancho-igual specific-select-input">
+                <mat-label style="font-size: 14px;">Modalidad Educativa</mat-label>
+                <mat-label style="color: red;"> *</mat-label>
+                <div class="mat-form-field-wrapper">
+                  <mat-select [(value)]="modalidadSeleccionada"  name="modalidad" style="font-size: 14px;">
+                    <mat-option *ngFor="let modalidad of modalidades" [value]="modalidad.id_modalidad">{{modalidad.modalidad}}</mat-option>
+                  </mat-select>
+                  </div>
+                </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <!--Fila de NIT y Codigo DANE-->
+        <div>
+          <div class="mb-2">
+            <div>
+              <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
+                <mat-label style="font-size: 14px;">NIT</mat-label>
+                <mat-label style="color: red;"> *</mat-label>
+                <div>
+                  <input style="font-size: 14px;" matInput [value]="dataInstitucion.institucion.nit">
+                </div>
+              </mat-form-field>
+              <mat-form-field style="margin-left: 0; margin-right: 0;" appearance="fill" class="ancho-igual specific-select-input">
+                <mat-label style="font-size: 14px;">Código DANE</mat-label>
+                    <mat-label style="color: red;"> *</mat-label>
+                    <div>
+                      <input style="font-size: 14px;" matInput [value]="dataInstitucion.institucion.cod_dane">
+                    </div>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+        <!--Fila de Código TRD y Equipo de Servicio Zerti-->
+      </div>
+      <div class="col4">
+        <div mattooltip="Cargar imagen" class="image-upload-container">
+          <div class="default-image ancho-50" style="height: 201px;width: auto;">
+            <app-image-upload [imageUrl]="dataInstitucion.institucion.escudo"></app-image-upload>
+          </div>
+
+        </div>
+
       </div>
     </div>
     <!--Department, Municipality/District and Village Center Row-->
+    <div class="row-editar-institucion mb-2">
+        <div>
+            <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
+              <mat-label style="font-size: 14px;">Código TRD</mat-label>
+              <div>
+                <input style="font-size: 14px;" matInput [value]="dataInstitucion.institucion.cod_trd">
+              </div>
+            </mat-form-field>
+            <mat-form-field style="margin-left: 0; margin-right: 0;" appearance="fill" class="ancho-igual specific-select-input">
+              <mat-label style="font-size: 14px;">Equipo de Servicio Zerti</mat-label>
+              <mat-label style="color: red;"> *</mat-label>
+              <div>
+                <mat-select [(value)]="equipoSeleccionado"  name="equipo">
+                  <mat-option *ngFor="let equipo of equipos" [value]="equipo.id_equipo">{{equipo.nombre_es}}</mat-option>
+                </mat-select>
+              </div>
+            </mat-form-field>
+          </div>
+          <div style="display: flex; align-items: center;">
+            <mat-label style="font-style: normal; font-weight: 600; font-size: 14px;" >Cerrada</mat-label>
+            <mat-checkbox #checked style="padding-left: 0;" class="example-margin" (change)="cambioEstado($event)" [value]="dataInstitucion.institucion.cerrada" [checked]="dataInstitucion.institucion.cerrada">
+            </mat-checkbox>
+          </div>
+    </div>
     <div>
-      <div class="row mb-2">
-        <div class="col-3">
+      <div class="row-full-width mb-2">
+        <div>
+          <div>
+            <mat-form-field *ngIf="dataInstitucion.institucion.cerrada" appearance="fill" class="w100 h125 specific-select-input fondo-color-input">
+              <mat-label style="font-size: 14px;">Institución Educativa que Custodia</mat-label>
+              <div class="mat-form-field-wrapper">
+                <mat-select [(value)]="ieCustodiaSeleccionada" name="ieCustodia" style="font-size: 14px;">
+                  <mat-option *ngFor="let ie of instituciones_educativas" [value]="ie.id_ie">{{ie.nombre_ie}}</mat-option>
 
-          <mat-form-field appearance="outline" class="w100">
+                </mat-select>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Department, Municipality/District and Village Center Row-->
+    <mat-accordion>
+      <mat-expansion-panel class="expansion-panel" style="margin: 10px; margin-right: -3px; border: solid; border-color: #d1c194; border-width: thin; margin-top: 0px;">
+        <mat-expansion-panel-header class="panel-header" style="height: 35px;">
+          <mat-panel-title>
+            Datos de Ubicación
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+    <div style="margin-top: 20px; margin-right: 20px;">
+      <div class="row-editar-institucion mb-2">
+        <div class="col3">
+
+          <mat-form-field appearance="fill" class="w95 specific-select-input">
             <mat-label style="font-size: 14px;">Departamento</mat-label>
             <mat-label style="color: red;"> *</mat-label>
             <div class="mat-form-field-wrapper">
-              <mat-select>
-                <mat-option *ngFor="let department of departments" [value]="department">{{department.name}}</mat-option>
+              <mat-select [(value)]="departamentoSeleccionado"  name="departamento">
+                <mat-option *ngFor="let departamento of departamentos" [value]="departamento.id_departamento">{{departamento.nombre_dep}}</mat-option>
               </mat-select>
             </div>
           </mat-form-field>
         </div>
-
-        <mat-form-field appearance="outline" class="ancho-mitad">
+        <div class="col3">
+        <mat-form-field appearance="fill" class="ancho-mitad specific-select-input">
           <mat-label style="font-size: 14px;">Distrito/Municipio</mat-label>
           <mat-label style="color: red;"> *</mat-label>
           <div>
-            <mat-select>
-              <mat-option *ngFor="let district of districts" [value]="district">{{district.name}}</mat-option>
+            <mat-select [(value)]="municipioSeleccionado"  name="municipio">
+              <mat-option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">{{municipio.nombre_mun}}</mat-option>
             </mat-select>
           </div>
         </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="outline" class="ancho-50">
-          <mat-label style="font-size: 14px;">Centro Poblado</mat-label>
-          <div>
-            <mat-select>
-              <mat-option *ngFor="let village of villageCenters" [value]="village">{{village.name}}</mat-option>
-            </mat-select>
-          </div>
-        </mat-form-field>
+        <div class="col3">
+          <mat-form-field appearance="fill" class="ancho-60 specific-select-input">
+            <mat-label style="font-size: 14px;">Centro Poblado</mat-label>
+            <div>
+              <mat-select [(value)]="cpoSeleccionado"  name="centro_poblado">
+                <mat-option *ngFor="let centro_poblado of centros_poblados" [value]="centro_poblado.id_et">{{centro_poblado.nombre_cpo}}</mat-option>
+              </mat-select>
+            </div>
+          </mat-form-field>
+        </div>
       </div>
     </div>
   <!--Address, E-mail, Phone numbers and Emblem-->
     <div>
-      <div class="row">
-        <div class="col-8">
+      <div style="margin-right: 10px;" class="row-editar-institucion">
+        <div class="col8">
           <div class="mb-2">
-            <div class="col-12">
-              <mat-form-field appearance="outline" class="w100">
+            <div class="col12">
+              <mat-form-field appearance="fill" class="w100 specific-select-input">
                 <mat-label style="font-size: 14px;">Dirección</mat-label>
                 <mat-label style="color: red;"> *</mat-label>
                 <div class="mat-form-field-wrapper">
-                  <input matInput>
+                  <input matInput [value]="dataInstitucion.institucion.direccion">
                 </div>
               </mat-form-field>
             </div>
           </div>
           <div class="mb-2">
-            <div class="col-12">
-              <mat-form-field appearance="outline" class="w100">
+            <div class="col12">
+              <mat-form-field appearance="fill" class="w100 specific-select-input">
                 <mat-label style="font-size: 14px;">Correo Electrónico</mat-label>
                 <mat-label style="color: red;"> *</mat-label>
                 <div class="mat-form-field-wrapper">
-                  <input matInput type="email">
+                  <input matInput type="email" [value]="dataInstitucion.institucion.correo">
                 </div>
               </mat-form-field>
             </div>
           </div>
           <div class="mb-2">
-            <div class="col-12">
-              <mat-form-field appearance="outline" class="w100">
+            <div class="col12">
+              <mat-form-field appearance="fill" class="w100 specific-select-input">
                 <mat-label style="font-size: 14px;">Teléfonos de Contacto Institución</mat-label>
                 <mat-label style="color: red;"> *</mat-label>
                 <div class="mat-form-field-wrapper">
-                  <input matInput type="number">
+                  <input matInput [value]="dataInstitucion.institucion.telefonos">
                 </div>
               </mat-form-field>
             </div>
           </div>
         </div>
-        <div class="col-4">
-          <div mattooltip="Cargar imagen" class="image-upload-container">
-            <div class="default-image ancho-50" style="height: 196px;width: auto;">
-              <app-image-upload></app-image-upload>
-            </div>
 
+      </div>
+    </div>
+    <div>
+      <div class="row-full-width mb-2">
+        <div>
+          <div>
+            <mat-form-field appearance="fill" style="margin-right: 105px; width: 97%; margin-bottom: -30px" class="w100 h125 specific-select-input">
+              <mat-label style="font-size: 14px;">Observación General</mat-label>
+              <div class="mat-form-field-wrapper">
+                <textarea style="font-size: 14px; height: 45px; resize: none;" matInput placeholder="Observación General" [value]="dataInstitucion.institucion.observacion"></textarea>
+              </div>
+            </mat-form-field>
           </div>
-
         </div>
       </div>
     </div>
+  </mat-expansion-panel>
+</mat-accordion>
+<!--Persiana para ingresar otros datos en un futuro-->
+<!--
+<mat-accordion>
+  <mat-expansion-panel class="expansion-panel" style="margin: 10px;">
+    <mat-expansion-panel-header class="panel-header" style="height: 35px;">
+      <mat-panel-title>
+        Otros Datos
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+</mat-accordion> -->
   </form>
+  <div>
+    <mat-dialog-actions style="min-height: 78px; margin-right: -10px; padding-top: 0; margin-top: -13px;" align="end">
+      <button style="background-color: #ffeab0;" mat-button [mat-dialog-close]="true">Guardar</button>
+      <button style="border: solid; border-width: thin; border-color: #59320f; background-color: #59320f; color: white !important;" mat-button mat-dialog-close>Salir</button>
+    </mat-dialog-actions>
+  </div>
 </mat-dialog-content>
-<mat-dialog-actions style="min-height: 78px; margin-right: 20px;" align="end">
-  <button style="background-color: #ffeab0;" mat-button [mat-dialog-close]="true" cdkFocusInitial>Guardar</button>
-  <button mat-button mat-dialog-close>Salir</button>
-</mat-dialog-actions>
