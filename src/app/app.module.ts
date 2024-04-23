@@ -60,7 +60,7 @@ import { ImageUploadComponent } from "./components/administrador-general/image-u
 import { NavbarComponent } from "./shared/navbar/navbar.component";
 import { OfficialsComponent } from "./components/administrador-general/officials/officials.component";
 import { OperationalRolesComponent } from "./components/administrador-general/operational-roles/operational-roles.component";
-import { RightSidebarComponent } from "./components/administrador-general/right-sidebar/right-sidebar.component";
+import { RightSidebarComponent } from "./shared/right-sidebar/right-sidebar.component";
 import { SedesManagementComponent } from "./components/administrador-general/sedes-management/sedes-management.component";
 import { SedesComponent } from "./components/administrador-general/sedes/sedes.component";
 import { ServiceTeamComponent } from "./components/administrador-general/service-team/service-team.component";
@@ -88,6 +88,8 @@ import { NavbarLandingComponent } from "./shared/navbar-landing/navbar-landing.c
 import { ConsultarLibrosComponent } from './components/gestion-operacional-ieo/consultar-libros/consultar-libros.component';
 import { CrearCertificadoComponent } from './components/gestion-operacional-ieo/crear-certificado/crear-certificado.component';
 import { InicioGestionOperacionalComponent } from './components/gestion-operacional-ieo/inicio-gestion-operacional/inicio-gestion-operacional.component';
+import { RecargaDirective } from './directives/recarga.directive';
+import { SeleccionarInstitucionComponent } from './components/gestion-operacional-ieo/seleccionar-institucion/seleccionar-institucion.component';
 
 @NgModule({
   declarations: [
@@ -141,6 +143,8 @@ import { InicioGestionOperacionalComponent } from './components/gestion-operacio
     ConsultarLibrosComponent,
     CrearCertificadoComponent,
     InicioGestionOperacionalComponent,
+    RecargaDirective,
+    SeleccionarInstitucionComponent,
   ],
   imports: [
     BrowserModule,

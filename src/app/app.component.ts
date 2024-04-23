@@ -18,19 +18,20 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     transition('closed <=> open', animate('900ms ease-in')),
   ]),
 ],
-})
-export class AppComponent implements AfterViewInit {
+}) export class AppComponent implements AfterViewInit {
   title = 'zerti';
   public onSideNavChange!: boolean;
   public inicioSesion = true;
+  recarga: number = 0;
+  rol!: number;
 
   @ViewChild('sidenav')
   sidenav!: MatSidenav;
 
   constructor(private sidenavService: SidenavService) {
-    this.sidenavService.sideNavState$.subscribe( res=> {
+    console.log(this.sidenavService.sideNavState$.subscribe( res=> {
       this.onSideNavChange = res;
-    })
+    }))
   }
   ngAfterViewInit(): void {
     this.sidenavService.setSidenav(this.sidenav);

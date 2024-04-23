@@ -13,13 +13,28 @@ export class NavbarComponent implements OnInit {
   public sideNavState: boolean = false;
   public linkText: boolean = false;
 
+  titulo_ventana: string = "";
+
   @Input()
   sidenav!: MatSidenav;
 
-  constructor(private _sidenavService: SidenavService) {
+  constructor(private _sidenavService: SidenavService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
+    this.titulo_ventana = 'Administrador General';
+    this._sidenavService.buttonClick$.subscribe(res => {
+      console.log(res.nombre);
+      this.cdr.detectChanges();
+      if (res.nombre == "") {
+        this.titulo_ventana = 'Administrador General';
+      } else {
+        this.titulo_ventana = res.nombre;
+      }
+      console.log(this.titulo_ventana);
+
+    })
+
 
 
   }

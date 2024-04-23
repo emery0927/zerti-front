@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { onSideNavChange, animateText } from 'src/app/animations/animations';
 import { SidenavService } from 'src/app/services/sidenav.service';
 
@@ -52,7 +52,8 @@ export class SidebarComponent implements OnInit {
     {id:1 ,name: 'Creación de Certificados', link:'crear-certificado', icon: 'history_edu'},
     {id:2 ,name: 'Consulta de Libros', link:'consultar-libros', icon: 'book'},
   ]
-  constructor(private _sidenavService: SidenavService) { }
+  constructor(private sidenavService: SidenavService, private cdr: ChangeDetectorRef) {
+   }
 
   ngOnInit(): void {
     this.rol = 1;
@@ -62,6 +63,23 @@ export class SidebarComponent implements OnInit {
     } else if (this.rol === 2) {
       this.pages = this.gestion_operacional;
     }
+
+    this.sidenavService.buttonClick$.subscribe(res => {
+      this.cdr.detectChanges();
+      console.log(res);
+      if (res === null) {
+        this.rol = 1;
+      } else {
+        this.rol = res.rol;
+      }
+
+      if (this.rol === 1) {
+        this.pages = this.administrador_general;
+      } else if (this.rol === 2) {
+        this.pages = this.gestion_operacional;
+      }
+    });
+
   }
 
   onSinenavToggle() {
@@ -70,7 +88,7 @@ export class SidebarComponent implements OnInit {
     setTimeout(() => {
       this.linkText = this.sideNavState;
     }, 100)
-    this._sidenavService.sideNavState$.next(this.sideNavState)
+    this.sidenavService.sideNavState$.next(this.sideNavState)
   }
 
 }

@@ -23,8 +23,8 @@
   </div>
   <p class="fs-sm text-muted subtitle">Ventanas de trabajo</p>
   <div class="role-card ng-star-inserted">
-    <div matripple="" class="mat-ripple role role-active ng-star-inserted">
-      <span class="role-description" (click)="elegirContexto()">
+    <div routerLink="/home" (click)="elegirContexto(1)" tabindex="1" matripple="" class="mat-ripple role role-active ng-star-inserted">
+      <span class="role-description">
         <mat-icon _ngcontent-eln-c241="" role="img" fontset="material-icons-outlined" class="mat-icon notranslate icon-xxs
         me-1 material-icons-outlined mat-icon-no-color" aria-hidden="true"
         data-mat-icon-type="font" data-mat-icon-namespace="material-icons-outlined"> admin_panel_settings
@@ -32,7 +32,7 @@
       <p class="role-name">Administrador General</p>
       </span>
     </div>
-    <div matripple="" class="mat-ripple role role-active ng-star-inserted">
+    <div routerLink="/inicio-gestion-operacional" (click)="elegirContexto(2)" tabindex="2" matripple="" class="mat-ripple role role-active ng-star-inserted">
       <span class="role-description">
         <mat-icon _ngcontent-eln-c241="" role="img" fontset="material-icons-outlined" class="mat-icon notranslate icon-xxs
         me-1 material-icons-outlined mat-icon-no-color" aria-hidden="true"
@@ -41,7 +41,7 @@
       <p class="role-name">Gestión Operacional IE</p>
       </span>
     </div>
-    <div matripple="" class="mat-ripple role role-active ng-star-inserted">
+    <div (click)="elegirContexto(3)" tabindex="3" matripple="" class="mat-ripple role role-active ng-star-inserted">
       <span class="role-description">
         <mat-icon _ngcontent-eln-c241="" role="img" fontset="material-icons-outlined" class="mat-icon notranslate icon-xxs
         me-1 material-icons-outlined mat-icon-no-color" aria-hidden="true"
@@ -50,7 +50,7 @@
       <p class="role-name">Gestión Operacional SED</p>
       </span>
     </div>
-    <div matripple="" class="mat-ripple role role-active ng-star-inserted">
+    <div (click)="elegirContexto(4)" tabindex="4" matripple="" class="mat-ripple role role-active ng-star-inserted">
       <span class="role-description">
         <mat-icon _ngcontent-eln-c241="" role="img" fontset="material-icons-outlined" class="mat-icon notranslate icon-xxs
         me-1 material-icons-outlined mat-icon-no-color" aria-hidden="true"

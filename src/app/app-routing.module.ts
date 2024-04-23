@@ -17,6 +17,7 @@ import { UsuariosAdministrativosComponent } from './components/administrador-gen
 import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
+import { InicioGestionOperacionalComponent } from './components/gestion-operacional-ieo/inicio-gestion-operacional/inicio-gestion-operacional.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'password-recovery', component: PasswordRecoveryComponent },
+  { path: 'inicio-gestion-operacional', component: InicioGestionOperacionalComponent },
 ];
 
 @NgModule({

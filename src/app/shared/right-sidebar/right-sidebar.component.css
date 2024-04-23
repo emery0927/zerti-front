@@ -137,6 +137,14 @@ img, svg {
   background: #e9d165a6;
 }
 
+.role.role-active:hover{
+  background: #886422a6;
+}
+
+.role.role-active:focus{
+  background: #886422a6;
+}
+
 .role {
   cursor: pointer;
   padding: 0.8rem 1rem;
