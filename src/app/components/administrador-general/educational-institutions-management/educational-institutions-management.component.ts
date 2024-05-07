@@ -20,6 +20,7 @@ import { Departamento } from 'src/app/models/departamento';
 import { CentroPoblado } from 'src/app/models/centro-poblado';
 import { ClaseInstitucion } from 'src/app/models/clase-institucion';
 import { ModalidadEducativa } from 'src/app/models/modalidad';
+import { Subject } from 'rxjs/internal/Subject';
 
 
 export interface TerritorialEntitiesFilter {
@@ -28,7 +29,23 @@ export interface TerritorialEntitiesFilter {
   defaultValue:string;
 }
 
+export class PaginatorIntl implements MatPaginatorIntl {
+  firstPageLabel = $localize`First page`;
+  itemsPerPageLabel = $localize`Items per page:`;
+  lastPageLabel = $localize`Last page`;
 
+  getRangeLabel(page: number, pageSize: number, length: number): string {
+    if (length === 0) {
+      return $localize`Page 1 of 1`;
+    }
+    const amountPages = Math.ceil(length / pageSize);
+    return $localize`Page ${page + 1} of ${amountPages}`;
+  }
+  changes = new Subject<void>();
+
+  nextPageLabel = 'Siguiente página';
+  previousPageLabel = 'Anterior página';
+}
 
 @Component({
   selector: 'app-educational-institutions-management',

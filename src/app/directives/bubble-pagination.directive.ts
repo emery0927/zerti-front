@@ -1,6 +1,6 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Host, Input, OnChanges, Optional, Output, Renderer2, Self, SimpleChanges } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { map, startWith } from 'rxjs';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { Subject, map, startWith } from 'rxjs';
 
 @Directive({
   selector: '[appBubblePagination]',
@@ -55,8 +55,11 @@ export class BubblePaginationDirective implements AfterViewInit, OnChanges {
   constructor(
     @Host() @Self() @Optional() private readonly matPag: MatPaginator,
     private elementRef: ElementRef,
-    private ren: Renderer2
-  ) {}
+    private ren: Renderer2, private matPaginatorIntl: MatPaginatorIntl
+  ) {
+    this.matPaginatorIntl.nextPageLabel = 'Siguiente página';
+    this.matPaginatorIntl.previousPageLabel = 'Anterior página';
+  }
 
   ngAfterViewInit(): void {
     this.styleDefaultPagination();

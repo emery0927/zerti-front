@@ -40,6 +40,22 @@
   color: #000; /* Ajusta el color del texto según tus necesidades */
 }
 
+.selected {
+  background-color: #f0f0f0;
+  border-right: solid 3px #8f5b35;
+}
+
+.mdc-list-item:focus {
+  outline: none;
+  background-color: #f0f0f0;
+  border-right: solid 3px #8f5b35;
+}
+
+.mdc-list-item:local-link {
+  background-color: #fafafa;
+  border-left: solid 3px #59320f;
+}
+
 .mat-divider.mat-divider-inset {
   margin-left: 0px;
 }

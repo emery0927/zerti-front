@@ -1,1 +1,61 @@
-<p>seleccionar-institucion works!</p>
+<div class="flex-position">
+  <h2 style="font-weight: 600; padding-inline: 32px;" mat-dialog-title>Gestión Operacional IE</h2>
+  <button class="boton-regresar" (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-dialog-content class="mat-dialog-container">
+  <form action="">
+    <div>
+      <mat-form-field appearance="fill" class=" ancho-igual specific-select-input" >
+        <mat-label style="font-size: 16px;  color: #59320f;">Entidad Territorial</mat-label>
+        <mat-select class="select" tabIndex="0" role="combobox" #entidadSeleccionada (selectionChange)="onSelect($event)" [value]="1">
+        <mat-option *ngFor="let entidadTerritorial of entidadesTerritoriales" [value]="entidadTerritorial.id_et">{{entidadTerritorial.nombre_et}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="width: 71%;" appearance="fill" class="ancho-igual specific-select-input">
+      <mat-icon matPrefix>search</mat-icon>
+      <mat-label style="font-size: 16px; color: #59320f;">Buscar por Nombre
+      </mat-label>
+      <input #inputField matInput (keyup)="applyFilter($event, 'shortname')" #input>
+      </mat-form-field>
+    </div>
+    <div>
+      <div class="mat-elevation-z8">
+        <!-- Esta división contiene el páginador de la tabla con su resectiva configuración -->
+        <mat-table mat-table [dataSource]="data" multiTemplateDataRows>
+          <!-- Nombre de Institución Educativa - Columna -->
+          <ng-container matColumnDef="nombre_ie">
+            <th class="header-style header-nombre" role="columnheader" mat-header-cell *matHeaderCellDef>
+              Nombre de Institución Educativa</th>
+              <td [innerHTML]="replaceEspacios(element.nombre_c)" class="row-style espacios cursor-pointer" role="row" mat-cell *matCellDef="let element"></td>
+        </ng-container>
+        <!-- NIT - Columna -->
+        <ng-container matColumnDef="nit">
+          <th class="header-style header-nit" role="columnheader" mat-header-cell *matHeaderCellDef> NIT </th>
+          <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.nit}} </td>
+        </ng-container>
+        <!-- Código - Columna -->
+        <ng-container matColumnDef="cod_zerti">
+          <th class="header-style header-codigo" role="columnheader" mat-header-cell *matHeaderCellDef > Códi </th>
+          <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.cod_zerti}} </td>
+        </ng-container>
+        <!-- Ubicación - Columna -->
+        <ng-container matColumnDef="id_mun">
+          <th class="header-style header-ubicacion" role="columnheader" mat-header-cell *matHeaderCellDef > Ubicación </th>
+          <td class="row-style cursor-pointer celda-ubicacion"  mat-cell *matCellDef="let element"> {{element.municipio.nombre_mun}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row (click)="cargarVentanaRol(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+      </mat-table>
+        <!-- Contenedor que muestra mensaje si el filtro no arroja resultados -->
+        <ng-container *ngIf="data.filteredData.length == 0">
+          <div class="filter-empty">
+            <img class="img-empty-data" src="../../../assets/img/empty-data.png" alt="">
+            <h1 class="h1-empty-data">No hay registros.</h1>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>

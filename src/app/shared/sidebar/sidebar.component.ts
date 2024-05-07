@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { onSideNavChange, animateText } from 'src/app/animations/animations';
 import { SidenavService } from 'src/app/services/sidenav.service';
 
@@ -33,6 +34,8 @@ export class SidebarComponent implements OnInit {
   rol!: number;
   pages!: Page[];
 
+  selectedItem!: string;
+
 
   public administrador_general: Page[] = [
     {id:1 ,name: 'Instituciones Educativas', link:'educational-institutions', icon: 'apartment'},
@@ -52,10 +55,11 @@ export class SidebarComponent implements OnInit {
     {id:1 ,name: 'Creación de Certificados', link:'crear-certificado', icon: 'history_edu'},
     {id:2 ,name: 'Consulta de Libros', link:'consultar-libros', icon: 'book'},
   ]
-  constructor(private sidenavService: SidenavService, private cdr: ChangeDetectorRef) {
+  constructor(private sidenavService: SidenavService, private cdr: ChangeDetectorRef, private router: Router) {
    }
 
   ngOnInit(): void {
+    this.setSelectedItemFromRoute();
     this.rol = 1;
 
     if (this.rol === 1) {
@@ -80,6 +84,17 @@ export class SidebarComponent implements OnInit {
       }
     });
 
+  }
+
+  setSelectedItemFromRoute() {
+    const currentUrl = this.router.url;
+    this.selectedItem = currentUrl.substring(1);
+  }
+
+  selectItem(item: string) {
+    this.selectedItem = item;
+    this.router.navigateByUrl('/' + item);
+    localStorage.setItem('selectedItem', item);
   }
 
   onSinenavToggle() {

@@ -1,6 +1,5 @@
 .right-sidebar {
   display: block;
-  position: relative;
   top: 0;
   right: -300px;
   bottom: 0;
@@ -137,17 +136,38 @@ img, svg {
   background: #e9d165a6;
 }
 
-.role.role-active:hover{
-  background: #886422a6;
+.role:hover{
+  background: #a76a34ad;
 }
 
-.role.role-active:focus{
-  background: #886422a6;
+.selected {
+  background-color: #e0e0e0; /* Estilo para el ítem seleccionado */
+}
+
+.role::selection {
+  background-color: #a76a34ad;
+}
+
+.role-active {
+  background: #a76a34ad;
+}
+
+
+.role:focus{
+  background: #a76a34ad;
+}
+
+.role.role-active:link {
+  background: #a76a34ad;
+
 }
 
 .role {
   cursor: pointer;
-  padding: 0.8rem 1rem;
+  padding: 1.2rem 0.9rem;
+  margin-bottom: 15px;
+   border-radius: 10px;
+  background: #e9d165a6;
 }
 
 .mat-ripple:not(:empty) {
