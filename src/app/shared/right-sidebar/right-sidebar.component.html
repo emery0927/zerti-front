@@ -23,21 +23,19 @@
   </div>
   <ng-container *ngIf="roles.length > 0; else noRoles">
     <div class="role-card">
-      <div
-        *ngFor="let role of roles"
-        class="role"
-        [ngClass]="{ 'role-active': (role$ | async)?.id == role.id }"
-        (click)="openClientSelectionDialog(role)"
-        matRipple [class.selected]="selectedItem === 'home'"
-      >
-      <span class="role-description">
-        <mat-icon _ngcontent-eln-c241="" role="img" fontset="material-icons-outlined" class="mat-icon notranslate icon-xxs
-        me-1 material-icons-outlined mat-icon-no-color" aria-hidden="true"
-        data-mat-icon-type="font" data-mat-icon-namespace="material-icons-outlined"> {{role.icon}}
-      </mat-icon>
-      <p class="role-name">{{ role.name }}</p>
-      </span>
-      </div>
+      <mat-nav-list>
+        <mat-list-item class="role" style="height: 68px;"
+        *ngFor="let role of roles; last as last" [routerLink]="role.link" (click)="openClientSelectionDialog(role)"
+        [class.selected]="selectedItem === role.link" routerLinkActive="selected">
+        <span class="role-description">
+          <mat-icon _ngcontent-eln-c241="" role="img" fontset="material-icons-outlined" class="mat-icon notranslate icon-xxs
+          me-1 material-icons-outlined mat-icon-no-color" aria-hidden="true"
+          data-mat-icon-type="font" data-mat-icon-namespace="material-icons-outlined"> {{role.icon}}
+        </mat-icon>
+        <p class="role-name">{{ role.name }}</p>
+        </span>
+       </mat-list-item>
+      </mat-nav-list>
     </div>
   </ng-container>
   <ng-template #noRoles>

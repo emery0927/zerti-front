@@ -5,14 +5,15 @@
     <div class="link-container">
       <mat-nav-list>
         <mat-list-item routerLink="home" (click)="selectItem('home')"
-        [class.selected]="selectedItem === 'home'">
+        [class.selected]="selectedItem === 'home'" routerLinkActive="selected">
           <mat-icon style="color: #8f5b35;">home</mat-icon>
-          <span style="color: transparent;" class="ng-star-inserted"> 0 </span>
+          <span style="color: transparent;" class="ng-star-inserted"> &nbsp; </span>
           <span [@animateText]="linkText ? 'show' : 'hide'"> Inicio </span>
         </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item style="display: flex; font-weight: 400;" *ngFor="let page of pages; last as last" [routerLink]="page.link" (click)="selectItem(page.link)"
-        [class.selected]="selectedItem === page.link">
+        <mat-list-item style="display: flex; font-weight: 400;" *ngFor="let page of pages;
+        last as last" [routerLink]="page.link" (click)="selectItem(page.link)"
+        [class.selected]="selectedItem === page.link" routerLinkActive="selected">
           <mat-icon style="color: #8f5b35;">{{ page?.icon }}</mat-icon>
           <span mat-line class="ng-star-inserted">{{ page?.id}} </span>
           <span style="font-weight: 400;" mat-line [@animateText]="linkText ? 'show' : 'hide'">{{ page?.name }} </span>

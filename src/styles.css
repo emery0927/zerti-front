@@ -131,6 +131,12 @@ body {
   padding-right: 1.5rem;
 }
 
+.mat-mdc-list-base {
+  --mdc-list-list-item-one-line-container-height: 50px;
+  --mdc-list-list-item-two-line-container-height: 64px;
+  --mdc-list-list-item-three-line-container-height: 88px;
+}
+
 .mat-mdc-dialog-container {
   --mdc-dialog-container-elevation-shadow: 0px 11px 15px -7px rgb(0 0 0 / 38%), 0px 24px 38px 3px rgb(0 0 0 / 0%), 0px 9px 46px 8px rgb(0 0 0 / 0%) !important;
   --mdc-dialog-container-shadow-color: #000;

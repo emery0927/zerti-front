@@ -21,7 +21,7 @@
 .right-sidebar .navbar-options {
   background: #c3994ca6;
   color: #fff;
-  height: 50px;
+  height: 64px;
 }
 
 .v-center {
@@ -141,7 +141,7 @@ img, svg {
 }
 
 .selected {
-  background-color: #e0e0e0; /* Estilo para el ítem seleccionado */
+  background-color: #a76a34ad !important; /* Estilo para el ítem seleccionado */
 }
 
 .role::selection {
@@ -162,12 +162,20 @@ img, svg {
 
 }
 
+.active {
+  background-color: #59320f;
+}
+
 .role {
   cursor: pointer;
-  padding: 1.2rem 0.9rem;
+  padding: 1.1rem 2.9rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   margin-bottom: 15px;
-   border-radius: 10px;
-  background: #e9d165a6;
+  border-radius: 7px;
+  background-color: #e9d165a6;
+  border-width: thin;
+  border-color: transparent;
 }
 
 .mat-ripple:not(:empty) {
