@@ -37,7 +37,7 @@
   font-size: inherit;
   font-weight: 400;
   line-height: 1.125;
-  font-family: Roboto,Helvetica Neue,sans-serif;
+  font-family: 'Lato', sans-serif;
   letter-spacing: normal;
 }
 
@@ -106,6 +106,7 @@ table {
   color: #3d3d3d;
   font-weight: 400;
   font-size: 14px;
+  font-family: 'Lato', sans-serif !important;
 }
 
 .mat-mdc-row:hover {
@@ -200,7 +201,7 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .h1-empty-data {
-  font-family: 'Inria Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
   font-size: 17px;
   color: #59320f;
   margin-top: 0;

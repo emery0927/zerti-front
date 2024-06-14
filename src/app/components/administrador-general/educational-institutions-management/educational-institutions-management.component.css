@@ -37,7 +37,7 @@
   font-size: inherit;
   font-weight: 400;
   line-height: 1.125;
-  font-family: Roboto,Helvetica Neue,sans-serif;
+  font-family: "Lato", sans-serif;
   letter-spacing: normal;
 }
 
@@ -97,22 +97,23 @@ table {
 .header-style {
   background-color: #b3885263 !important;
   color: #59320f;
-  font-weight: 900;
+  font-weight: 600;
   font-size: 16px;
-  font-family: 'Inria Sans', sans-serif !important;
+  font-family: "Inria Sans", sans-serif !important;
 }
 
 .paginator-style {
   color: #c3994ca6;
   font-weight: 900;
   font-size: 16px;
-  font-family: 'Inria Sans', sans-serif !important;
+  font-family: "Lato", sans-serif !important;
 }
 
 .row-style {
-  color: #000000de;
+  color: #000000;
   font-weight: 400;
   font-size: 14px;
+  font-family: "Lato", sans-serif;
 }
 
 tr.mat-mdc-row:nth-child(4n-1) {
@@ -179,13 +180,19 @@ tr.mat-mdc-row:nth-child(4n-1) {
 }
 
 .specific-select-input {
+    --mat-form-field-container-text-font: 'Lato', sans-serif !important;
+    --mat-select-trigger-text-font: 'Lato', sans-serif !important;
+    --mat-select-trigger-text-size: 14px !important;
+    --mat-form-field-container-text-size: 14px !important;
     .mdc-text-field {
       border: solid;
-      border-color: lightgrey;
+      border-color: #959595;
       border-width: thin;
       --mdc-filled-text-field-active-indicator-height: 0;
       --mdc-filled-text-field-focus-active-indicator-height: 0px;
-      --mdc-filled-text-field-container-shape: 4px;
+      --mdc-filled-text-field-container-shape: 6px;
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
     }
 }
 
@@ -224,7 +231,7 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .h1-empty-data {
-  font-family: 'Inria Sans', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 17px;
   color: #59320f;
   margin-top: 0;
@@ -319,7 +326,7 @@ tr.example-element-row:not(.example-expanded-row):hover {
     font-size: 14px;
     color: #673600;
     font-weight: 400;
-    font-family: 'Fira Sans', sans-serif;
+    font-family: "Lato", sans-serif;
   }
 }
 

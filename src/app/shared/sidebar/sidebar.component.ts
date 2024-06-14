@@ -42,7 +42,7 @@ export class SidebarComponent implements OnInit {
     {id:2 ,name: 'Usuarios Administrativos', link:'admin-users', icon: 'people'},
     {id:3 ,name: 'Usuarios Estudiantes', link:'students-users', icon: 'square_foot'},
     {id:4 ,name: 'Certificados de Estudio', link:'educational-certificates', icon: 'history_edu'},
-    {id:5 ,name: 'Libros Digitales de Valoraciones Finales', link:'final-valuation-digital-books', icon: 'book_online'},
+    {id:5 ,name: 'Libros de Valoraciones Finales', link:'final-valuation-digital-books', icon: 'book_online'},
     {id:6 ,name: 'Libro Digital de Validaciones de Grado', link:'digital-grade-validation-book', icon: 'auto_stories'},
     {id:7 ,name: 'Libros de Graduación/Reconocimientos', link:'graduation-books', icon: 'book'},
     {id:8 ,name: 'Equipos de Servicio Zeti', link:'service-team', icon: 'support_agent'},

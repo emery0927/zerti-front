@@ -12,8 +12,8 @@ export const onSideNavChange = trigger('onSideNavChange', [
       'min-width': '200px'
     })
   ),
-  transition('close => open', animate('250ms ease-in')),
-  transition('open => close', animate('250ms ease-in')),
+  transition('close => open', animate('5s ease-in')),
+  transition('open => close', animate('250ms ease-out')),
 ]);
 
 
@@ -47,7 +47,7 @@ export const animateText = trigger('animateText', [
       'margin-left': '10px',
       'font-weight': '400',
       'font-size': '.9375rem',
-      'font-family': 'Roboto, sans-serif',
+      'font-family': 'Lato, sans-serif'
     })
   ),
   transition('close => open', animate('250ms ease-in')),
@@ -63,5 +63,5 @@ export const expandCollapse = trigger('expandCollapse', [
     width: '*',
     display: 'block'
   })),
-  transition('collapsed <=> expanded', animate('800ms ease-out'))
+  transition('collapsed <=> expanded', animate('250ms ease-out'))
 ]);

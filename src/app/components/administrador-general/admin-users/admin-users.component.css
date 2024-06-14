@@ -88,12 +88,26 @@
 }
 
 .specific-select-input {
+  --mat-form-field-container-text-font: 'Lato', sans-serif !important;
+  --mat-select-trigger-text-font: 'Lato', sans-serif !important;
+  --mat-select-trigger-text-size: 14px !important;
+  --mat-form-field-container-text-size: 14px !important;
   .mdc-text-field {
     border: solid;
-    border-color: lightgrey;
+    border-color: #959595;
     border-width: thin;
     --mdc-filled-text-field-active-indicator-height: 0;
     --mdc-filled-text-field-focus-active-indicator-height: 0px;
-    --mdc-filled-text-field-container-shape: 4px;
+    --mdc-filled-text-field-container-shape: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+
+  .mdc-text-field--filled.mdc-text-field--disabled {
+    background-color: #fff5c280;
+  }
+
+  .mdc-text-field--filled.mdc-text-field--disabled .mdc-floating-label, .mdc-text-field--filled.mdc-text-field--disabled .mdc-floating-label--float-above {
+    color: #00000099;
   }
 }

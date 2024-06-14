@@ -41,44 +41,14 @@
 }
 
 .selected {
-  background-color: #59320f;
-  border-right: solid 3px #59320f;
-  .mat-icon {
-    color: #ffffff !important;
-  }
+  border-left: solid 8px #59320f;
 
-  .ng-star-inserted {
-    color: #ffffff !important;
-  }
-
-  .mdc-list-item__primary-text {
-    color: #ffffff !important;
-  }
 }
 
 .mdc-list-item:focus {
   outline: none;
-  background-color: #59320f;
-  border-right: solid 3px #59320f;
-  .mat-icon {
-    color: #ffffff !important;
-  }
-
-  .ng-star-inserted {
-    color: #ffffff !important;
-  }
-}
-
-.mdc-list-item:local-link {
-  background-color: #59320f;
-  border-right: solid 3px #59320f;
-  .mat-icon {
-    color: #ffffff !important;
-  }
-
-  .ng-star-inserted {
-    color: #ffffff !important;
-  }
+  background-color: #0000000e;
+  border-left: solid 8px #59320f;
 }
 
 .mat-divider.mat-divider-inset {

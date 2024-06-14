@@ -90,6 +90,8 @@ import { CrearCertificadoComponent } from './components/gestion-operacional-ieo/
 import { InicioGestionOperacionalComponent } from './components/gestion-operacional-ieo/inicio-gestion-operacional/inicio-gestion-operacional.component';
 import { RecargaDirective } from './directives/recarga.directive';
 import { SeleccionarInstitucionComponent } from './components/gestion-operacional-ieo/seleccionar-institucion/seleccionar-institucion.component';
+import { LibrosAnnioLectivoComponent } from './components/administrador-general/libros-annio-lectivo/libros-annio-lectivo.component';
+import { FormularioCreacionLibrosComponent } from './components/administrador-general/formulario-creacion-libros/formulario-creacion-libros.component';
 
 @NgModule({
   declarations: [
@@ -145,6 +147,8 @@ import { SeleccionarInstitucionComponent } from './components/gestion-operaciona
     InicioGestionOperacionalComponent,
     RecargaDirective,
     SeleccionarInstitucionComponent,
+    LibrosAnnioLectivoComponent,
+    FormularioCreacionLibrosComponent,
   ],
   imports: [
     BrowserModule,

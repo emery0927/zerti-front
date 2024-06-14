@@ -1,0 +1,110 @@
+<div style="text-align: left; padding-top: 1.5rem;">
+  <mat-form-field style="max-width: 100%; width: 325px;" appearance="fill" class=" ancho-igual specific-select-input" >
+    <mat-label style="font-size: 16px;  color: #59320f;">Entidad Territorial</mat-label>
+    <mat-select class="" tabIndex="0" role="combobox" #entidadSeleccionada (selectionChange)="onSelect($event)" [value]="1">
+      <mat-option *ngFor="let entidadTerritorial of entidadesTerritoriales" [value]="entidadTerritorial.id_et">{{entidadTerritorial.nombre_et}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field style="max-width: 100%; width: 359px; margin-left: 10px;" appearance="fill" class=" ancho-instituciones specific-select-input" >
+  <mat-label style="font-size: 16px;  color: #59320f;">Nombre de Institución Educativa</mat-label>
+  <mat-select class="select" tabIndex="0" role="combobox" #entidadSeleccionada value="hola">
+  <mat-option value="hola">Franciscano del Virrey Solís</mat-option>
+</mat-select>
+</mat-form-field>
+<mat-form-field appearance="fill" class=" ancho-igual specific-select-input" >
+  <mat-label style="font-size: 16px;  color: #59320f;">Año Lectivo</mat-label>
+  <mat-select class="select" tabIndex="0" role="combobox" #entidadSeleccionada value="hola">
+  <mat-option value="hola">Hola</mat-option>
+</mat-select>
+</mat-form-field>
+</div>
+
+<!------------------------------>
+<!-- Esta división contiene la tabla con las siguientes columnas: NOMBRE DE INSTITUCIÓN EDUCATIVA / EN CUSTODIA | NOMBRE CORTO
+  | CÓDIGO | NIT | UBICACIÓN |ZONA | CLASE | OPCIONES, con su respectivo páginador -->
+  <div style="max-width: fit-content;"  class="mat-elevation-z8">
+      <!-- Esta división contiene el páginador de la tabla con su resectiva configuración -->
+      <mat-table mat-table [dataSource]="data" multiTemplateDataRows>
+        <!-- Año Lectivo / Calendario -->
+        <ng-container matColumnDef="annio_lectivo">
+          <th class="header-style header-nombre" role="columnheader" mat-header-cell *matHeaderCellDef>
+          Año Lectivo / Cal</th>
+          <td class="row-style espacios cursor-pointer" role="row" mat-cell *matCellDef="let element">{{element.annio_lectivo}} - {{element.calendario}}</td>
+          <ng-container>
+            <td class="row-style cursor-pointer" role="row" mat-cell>&nbsp;</td>
+          </ng-container>
+        </ng-container>
+        <!-- NIT - Columna -->
+        <ng-container matColumnDef="nombre_sede">
+          <th class="header-style header-nit" role="columnheader" mat-header-cell *matHeaderCellDef> Nombre Sede </th>
+          <td class="row-style cursor-pointer" role="row" mat-cell>&nbsp;</td>
+          <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.sede.nombre_sede}} </td>
+        </ng-container>
+        <!-- Código - Columna -->
+        <ng-container matColumnDef="cantidad_libros">
+      <th class="header-style header-codigo" role="columnheader" mat-header-cell *matHeaderCellDef > n.º Libros </th>
+      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.cantidad_libros}} </td>
+    </ng-container>
+    <!-- Ubicación - Columna -->
+    <ng-container matColumnDef="cantidad_folios">
+      <th class="header-style header-ubicacion" role="columnheader" mat-header-cell *matHeaderCellDef > n.º Folios </th>
+      <td class="row-style cursor-pointer celda-ubicacion"  mat-cell *matCellDef="let element"> {{element.cantidad_folios}} </td>
+    </ng-container>
+    <!-- Ubicación - Columna -->
+    <ng-container matColumnDef="porcentaje_aprobo">
+      <th class="header-style header-ubicacion" role="columnheader" mat-header-cell *matHeaderCellDef > % Aprobó </th>
+      <td class="row-style cursor-pointer celda-ubicacion"  mat-cell *matCellDef="let element"> {{element.cantidad_aprobo}} / 93% </td>
+    </ng-container>
+    <!-- Ubicación - Columna -->
+    <ng-container matColumnDef="porcentaje_no_aprobo">
+      <th class="header-style header-ubicacion" role="columnheader" mat-header-cell *matHeaderCellDef > % No Aprobó </th>
+      <td class="row-style cursor-pointer celda-ubicacion"  mat-cell *matCellDef="let element"> {{element.cantidad_desaprobo}} / 5%</td>
+    </ng-container>
+    <!-- crear - Columna -->
+    <ng-container matColumnDef="opciones">
+      <th class="header-style" style="z-index: 1; padding: 9px 16px 9px 39px;" role="columnheader" mat-header-cell *matHeaderCellDef [ngClass]="{'align-right': true}">
+        <div style="margin-right: -20px;">
+          <button mat-button (click)="abrirCrearLibro()"
+          style="cursor: pointer;background-color: transparent; border: none;">
+            <span>
+              <mat-icon style="color: #59320f;">add_circle_outline</mat-icon>
+            </span>
+          </button>
+        </div>
+      </th>
+      <td class="cursor-pointer" mat-cell *matCellDef="let element" [ngClass]="{'align-right': true}">
+        <div style="margin-right: -20px;">
+          <button mat-button [matMenuTriggerFor]="menu" style="cursor: pointer; background-color: transparent; border: none;"
+          aria-haspopup="true">
+          <span>
+            <mat-icon style="color: #8c8c8c;">more_horiz</mat-icon>
+          </span>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editar(element)">Editar
+              <mat-icon>create</mat-icon>
+            </button>
+            <button mat-menu-item (click)="eliminar()">Eliminar
+              <mat-icon>delete</mat-icon>
+            </button>
+              <button mat-menu-item (click)="abrirCreacionSedes(element)">Crear Sede
+                <mat-icon>home_filed</mat-icon>
+              </button>
+            </mat-menu>
+
+          </button>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </mat-table>
+  <!-- Contenedor que muestra mensaje si el filtro no arroja resultados -->
+  <ng-container *ngIf="data.filteredData.length == 0">
+    <div class="filter-empty">
+      <img class="img-empty-data" src="../../../assets/img/empty-data.png" alt="">
+      <h1 class="h1-empty-data">No hay registros.</h1>
+    </div>
+  </ng-container>
+</div>
+
+

@@ -131,7 +131,7 @@
               <mat-label style="font-size: 14px;">Equipo de Servicio Zerti</mat-label>
               <mat-label style="color: red;"> *</mat-label>
               <div>
-                <mat-select [(value)]="equipoSeleccionado"  name="equipo">
+                <mat-select [(value)]="equipoSeleccionado"  name="equipo" style="font-size: 14px;">
                   <mat-option *ngFor="let equipo of equipos" [value]="equipo.id_equipo">{{equipo.nombre_es}}</mat-option>
                 </mat-select>
               </div>

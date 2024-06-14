@@ -1,0 +1,139 @@
+<h2 style="font-weight: 600; padding-inline: 32px;" mat-dialog-title>Creación de Libro de Año Lectivo</h2>
+<mat-dialog-content class="mat-dialog-container">
+  <form action="">
+    <!--Territorial Entity and Zeti Code Row-->
+    <div>
+      <div class="mb-2">
+        <div>
+          <mat-form-field style="width: 135px;" appearance="fill" class="ancho-igual specific-select-input fondo-color-input">
+            <mat-label style="font-size: 14px;">Año Lectivo</mat-label>
+            <mat-label style="color: red;"> *</mat-label>
+            <div class="mat-form-field-wrapper">
+              <input style="font-size: 14px;" matInput>
+            </div>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="end-input specific-select-input">
+            <mat-label style="font-size: 14px;">Calendario</mat-label>
+            <div class="mat-form-field-wrapper">
+              <mat-select style="font-size: 14px;">
+                <mat-option> A </mat-option>
+              </mat-select>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <!--Educational Institution name Row-->
+    <div>
+      <div class="row-full-width mb-2">
+        <div>
+          <div>
+            <mat-form-field appearance="fill" style="margin-left: 10px; width: 370px;" class="end-input specific-select-input">
+              <mat-label style="font-size: 14px;">Sede</mat-label>
+              <mat-label style="color: red;"> *</mat-label>
+              <div class="mat-form-field-wrapper">
+                <mat-select style="font-size: 14px;">
+                  <mat-option> 1  Liceo Departamental </mat-option>
+                </mat-select>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Shortname and NIT Row-->
+    <div>
+      <div class="mb-2">
+        <div>
+            <mat-form-field appearance="fill" style="width: 135px;" class="ancho-igual specific-select-input">
+              <mat-label style="font-size: 14px;">Número</mat-label>
+              <mat-label style="color: red;"> *</mat-label>
+              <div>
+                <input style="font-size: 14px;" matInput>
+              </div>
+            </mat-form-field>
+            <mat-form-field style="margin-left: 0; margin-right: 0; width: 360px;" appearance="fill" class="ancho-igual specific-select-input">
+              <mat-label style="font-size: 14px;">Descripción Corta</mat-label>
+                  <mat-label style="color: red;"> *</mat-label>
+                  <div>
+                    <input style="font-size: 14px;" matInput>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="mb-2">
+              <div>
+              <mat-form-field style="width: 506px;" appearance="fill" class=" ancho-igual specific-select-input h125">
+                <mat-label style="font-size: 14px;">Observación</mat-label>
+                <div class="mat-form-field-wrapper">
+                  <textarea style="font-size: 14px; height: 45px; resize: none;" matInput placeholder="Observación"></textarea>
+                </div>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+<!--Persiana para ingresar otros datos en un futuro-->
+<!--
+<mat-accordion>
+  <mat-expansion-panel class="expansion-panel" style="margin: 10px;">
+    <mat-expansion-panel-header class="panel-header" style="height: 35px;">
+      <mat-panel-title>
+        Otros Datos
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+</mat-accordion> -->
+  </form>
+
+  <!------------------------------>
+<!-- Esta división contiene la tabla con las siguientes columnas: NOMBRE DE INSTITUCIÓN EDUCATIVA / EN CUSTODIA | NOMBRE CORTO
+  | CÓDIGO | NIT | UBICACIÓN |ZONA | CLASE | OPCIONES, con su respectivo páginador -->
+  <div style="max-width: fit-content; margin-left: 17px;"  class="mat-elevation-z8">
+    <!-- Esta división contiene el páginador de la tabla con su resectiva configuración -->
+    <mat-table mat-table [dataSource]="data" multiTemplateDataRows>
+      <!-- Año Lectivo / Calendario -->
+      <ng-container matColumnDef="anio">
+        <th class="header-style header-nombre" role="columnheader" mat-header-cell *matHeaderCellDef>
+        Año</th>
+        <td class="row-style espacios cursor-pointer" role="row" mat-cell *matCellDef="let element">{{element.annio_lectivo}}</td>
+        <ng-container>
+          <td class="row-style cursor-pointer" role="row" mat-cell>&nbsp;</td>
+        </ng-container>
+      </ng-container>
+      <!-- NIT - Columna -->
+      <ng-container matColumnDef="calendario">
+        <th class="header-style header-nit" role="columnheader" mat-header-cell *matHeaderCellDef> Cal </th>
+        <td class="row-style cursor-pointer" role="row" mat-cell>&nbsp;</td>
+        <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.calendario}} </td>
+      </ng-container>
+      <!-- Código - Columna -->
+      <ng-container matColumnDef="nombre_libro">
+    <th class="header-style header-codigo" role="columnheader" mat-header-cell *matHeaderCellDef > No. / Descripción Corta </th>
+    <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.numero}} &nbsp; {{element.descripcion_corta}} </td>
+  </ng-container>
+  <!-- Ubicación - Columna -->
+  <ng-container matColumnDef="folios">
+    <th class="header-style header-ubicacion" role="columnheader" mat-header-cell *matHeaderCellDef > Folios </th>
+    <td class="row-style cursor-pointer celda-ubicacion"  mat-cell *matCellDef="let element"> {{element.cantidad_folios}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</mat-table>
+<!-- Contenedor que muestra mensaje si el filtro no arroja resultados -->
+<ng-container *ngIf="data.filteredData.length == 0">
+  <div class="filter-empty">
+    <img class="img-empty-data" src="../../../assets/img/empty-data.png" alt="">
+    <h1 class="h1-empty-data">No hay registros.</h1>
+  </div>
+</ng-container>
+</div>
+  <div>
+    <mat-dialog-actions style="min-height: 78px; padding-top: 0; margin-top: -13px; margin-right: -10px;" align="end">
+      <button style="background-color: #ffeab0;" mat-button [mat-dialog-close]="true">Guardar</button>
+      <button style="border: solid; border-width: thin; border-color: #59320f; background-color: #59320f; color: white !important;" mat-button mat-dialog-close>Salir</button>
+    </mat-dialog-actions>
+  </div>
+</mat-dialog-content>
