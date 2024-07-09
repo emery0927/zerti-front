@@ -7,23 +7,19 @@ import { CentroPoblado } from 'src/app/models/centro-poblado';
 import { ClaseInstitucion } from 'src/app/models/clase-institucion';
 import { Departamento } from 'src/app/models/departamento';
 import { InstitucionEducativa } from 'src/app/models/instititucion-educativa';
+import { LibroValoracionFinal } from 'src/app/models/libro-valoraciones-finales';
+import { ModalidadEducativa } from 'src/app/models/modalidad';
+import { Municipio } from 'src/app/models/municipio';
 import { Sede } from 'src/app/models/sede';
 import Swal from 'sweetalert2';
 import { CrearSedeComponent } from '../crear-sede/crear-sede.component';
-import { CreateEducationalInstituteComponent } from '../create-educational-institute/create-educational-institute.component';
-import { EditEducationalInstitutionComponent } from '../edit-educational-institution/edit-educational-institution.component';
 import { EditarSedeComponent } from '../editar-sede/editar-sede.component';
 import { EntidadTerritorial } from 'src/app/models/entidad-territorial';
 import { EquipoServicio } from 'src/app/models/equipo-servicio';
-import { LibroValoracionFinal } from 'src/app/models/libro-valoraciones-finales';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-
-import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
-import { MatTreeFlatDataSource, MatTreeFlattener, MatTreeNestedDataSource } from '@angular/material/tree';
 import { FormularioCreacionLibrosComponent } from '../formulario-creacion-libros/formulario-creacion-libros.component';
 import { FormularioEdicionLibrosComponent } from '../formulario-edicion-libros/formulario-edicion-libros.component';
-import { ModalidadEducativa } from 'src/app/models/modalidad';
-import { Municipio } from 'src/app/models/municipio';
+import { Pagina } from 'src/app/models/pagina';
+
 export interface AnioLectivo {
   id_anio: number;
   annio_lectivo: string;
@@ -47,33 +43,12 @@ export interface AgrupacionPorSede {
   libros: LibroValoracionFinal[];
 }
 
-
 @Component({
-  selector: 'app-libros-annio-lectivo',
-  templateUrl: './libros-annio-lectivo.component.html',
-  styleUrls: ['./libros-annio-lectivo.component.css'],
-  animations: [
-    trigger('expandCollapse', [
-      state('collapsed', style({
-        width: '*',
-        opacity: '1',
-        'z-index': '3'
-      })),
-      state('expanded', style({
-        width: '*',
-        opacity: '1',
-        'z-index': '3'
-      })),
-      transition('collapsed <=> expanded', animate('350ms ease-out'))
-    ]),
-    trigger('detailExpand', [
-      state('collapsed', style({height: '*'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+  selector: 'app-paginas-folios',
+  templateUrl: './paginas-folios.component.html',
+  styleUrls: ['./paginas-folios.component.css']
 })
-export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
+export class PaginasFoliosComponent implements AfterViewInit, OnInit {
 
   constructor(public dialog: MatDialog) {
     this.itemsPerPage = 5;
@@ -81,71 +56,94 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
     this.groupedData = this.groupByYear(this.libros);
   }
 
+  paginasV : Pagina[] = [
+    {id_pagina: 1, numero: '01' , tipo_pagina: 'P', archivo_pdf: '2308-001-P'},
+    {id_pagina: 2, numero: '02' , tipo_pagina: 'L', archivo_pdf: '2308-1250-L'},
+    {id_pagina: 3, numero: '03' , tipo_pagina: 'F', archivo_pdf: '2308-1250'},
+    {id_pagina: 4, numero: '04' , tipo_pagina: 'F', archivo_pdf: '2308-004'},
+    {id_pagina: 5, numero: '05' , tipo_pagina: 'F', archivo_pdf: '2308-005'},
+    {id_pagina: 6, numero: '06' , tipo_pagina: 'F', archivo_pdf: '2308-006'},
+    {id_pagina: 7, numero: '07' , tipo_pagina: 'F', archivo_pdf: '2308-007'},
+    {id_pagina: 8, numero: '08' , tipo_pagina: 'F', archivo_pdf: '2308-008'},
+    {id_pagina: 9, numero: '09' , tipo_pagina: 'F', archivo_pdf: '2308-009'},
+    {id_pagina: 10, numero: '10' , tipo_pagina: 'O', archivo_pdf: '2308-010-O'},
+    {id_pagina: 11, numero: '11' , tipo_pagina: 'F', archivo_pdf: '2308-011'},
+    {id_pagina: 12, numero: '12' , tipo_pagina: 'F', archivo_pdf: '2308-012'},
+    {id_pagina: 13, numero: '13' , tipo_pagina: 'F', archivo_pdf: '2308-013'},
+    {id_pagina: 14, numero: '14' , tipo_pagina: 'F', archivo_pdf: '2308-014'},
+    {id_pagina: 15, numero: '15' , tipo_pagina: 'F', archivo_pdf: '2308-015'},
+    {id_pagina: 16, numero: '16' , tipo_pagina: 'L', archivo_pdf: '2308-016-L'},
+    {id_pagina: 17, numero: '17' , tipo_pagina: 'F', archivo_pdf: '2308-017'},
+    {id_pagina: 18, numero: '18' , tipo_pagina: 'F', archivo_pdf: '2308-018'},
+    {id_pagina: 19, numero: '19' , tipo_pagina: 'F', archivo_pdf: '2308-019'},
+    {id_pagina: 20, numero: '20' , tipo_pagina: 'F', archivo_pdf: '2308-020'}
+  ];
+
   libros: LibroValoracionFinal[] = [
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[0],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[0],
     numero: '1-1', descripcion_corta: 'Grados 6 a 9', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 750 },
     {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[1],
     numero: '1-1', descripcion_corta: 'Grados 10 y 11', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 800 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[2],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2020', calendario: 'A', sede: SEDES_LICEO[2],
     numero: '1-1', descripcion_corta: 'Grado 8', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 900 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[3],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2021', calendario: 'A', sede: SEDES_LICEO[3],
     numero: '1-1', descripcion_corta: 'Grado 9', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 300 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[0],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[0],
     numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[4],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[4],
       numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
       cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[5],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[5],
     numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[6],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[6],
       numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
       cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[7],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[7],
     numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[8],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[8],
     numero: '1-1', descripcion_corta: 'Grados 6 a 9', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 750 },
     {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[9],
     numero: '1-1', descripcion_corta: 'Grados 10 y 11', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 800 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[10],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2020', calendario: 'A', sede: SEDES_LICEO[10],
     numero: '1-1', descripcion_corta: 'Grado 8', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 900 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[11],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2021', calendario: 'A', sede: SEDES_LICEO[11],
     numero: '1-1', descripcion_corta: 'Grado 9', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 300 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[11],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[11],
     numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[11],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[11],
       numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
       cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[11],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[11],
     numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[10],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[10],
       numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
       cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[9],
+    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[9],
     numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
 
   ]
 
-  data = new MatTableDataSource<AgrupacionPorSede>(this.agruparPorSede(this.libros));
+  data = new MatTableDataSource<Pagina>();
 
   librosAgrupadosPorAnio:{ [key: string]: LibroValoracionFinal[]} = {};
 
   //dataSource = this.librosAgrupadosPorAnio;
-  columnsToDisplay = ['anio_lectivo', 'nombre_sede', 'cantidad_libros', 'cantidad_folios', 'cantidad_aprobo', 'cantidad_desaprobo', 'opciones']
-  displayedColumns: string[] = ['nombre_sede', 'cantidad_libros', 'cantidad_folios', 'porcentaje_aprobo', 'porcentaje_no_aprobo', 'opciones'];
+  columnsToDisplay = ['pagina', 'tipo', 'nombre_archivo', 'opciones']
+  displayedColumns: string[] =  ['pagina', 'tipo', 'nombre_archivo', 'opciones']
   expandedElement!: InstitucionEducativa | null;
 
   entidadesTerritoriales: EntidadTerritorial[] = ENTIDAD_TERRITORIAL;
@@ -155,6 +153,7 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
   anios = AnioLectivo;
 
   institucionSeleccionada!: any;
+  sedesPorInstitucion!: Sede[];
 
   institucionesPorET!: InstitucionEducativa[];
 
@@ -189,6 +188,135 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
 
   groupedData: any[];
 
+  archivos: File[] = [];
+  paginas: Pagina[] = [];
+  checkedAll: boolean = false;
+  selectedItems: boolean[] = [];
+  selectedPaginas: Pagina[] = [];
+  selectedPaginasSet = new Set<number>();
+  tempSelectedPaginas: Pagina[] = [];
+  allSelected = false;
+
+  botonCopiarHabilitado = false;
+
+  selectedPath: string | null = null;
+
+  ngOnInit(): void {
+    this.selectedItems = new Array(this.paginas.length).fill(false);
+    this.onEntidadTerritorialChange({value:2});
+    this.onInstitucionChange({value:1});
+    console.log(this.data.data);
+    this.agruparLibrosPorAnio();
+  }
+
+  onFileChange(event: any): void {
+
+
+    const input = event.target as HTMLInputElement;
+    this.archivos = [];
+    if (input.files && input.files.length > 0) {
+      const path = input.files[0].webkitRelativePath;
+      const folderName = path.substring(0, path.indexOf('/'));
+      this.selectedPath = folderName;
+      for (let i = 0; i < input.files.length; i++) {
+        this.archivos.push(input.files[i]);
+      }
+    } else {
+      this.selectedPath = null;
+    }
+    this.archivos.sort((a, b) => a.name.localeCompare(b.name));
+    const nuevasPaginas = this.archivos.map((file, index) => this.createPaginaFromFile(file, this.paginas.length + index + 1));
+    this.paginas = [...this.paginas, ...nuevasPaginas];
+    this.selectedItems = [...this.selectedItems, ...new Array(nuevasPaginas.length).fill(false)];
+
+    console.log(this.archivos);
+    console.log(this.selectedItems);
+
+
+  }
+
+  onFilesSelectionChange(event: Event): void{
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      for (let i = 0; i < input.files.length; i++) {
+        this.archivos.push(input.files[i]);
+      }
+    }
+    console.log(this.archivos);
+
+  }
+
+  toggleAllSelection(event: any) {
+    this.allSelected = event.checked;
+    this.paginas.forEach((pagina, index) => {
+      this.selectedItems[index] = this.allSelected;
+      if (this.allSelected) {
+        this.tempSelectedPaginas.push(pagina);
+      } else {
+        this.tempSelectedPaginas = [];
+      }
+    });
+
+   /*  this.allSelected = event.checked;
+    //this.selectedItems.fill(this.allSelected);
+    this.paginas.forEach((pagina, index) => {
+      this.selectedItems[index] = this.allSelected;
+      if (this.allSelected) {
+        this.selectedPaginasSet.add(pagina.id_pagina);
+      } else {
+        this.selectedPaginasSet.delete(pagina.id_pagina);
+      }
+    });
+    this.updateSelectedPaginas(); */
+  }
+
+  isPaginaSelected(pagina: Pagina): boolean {
+    return this.selectedPaginas.some(p => p.id_pagina === pagina.id_pagina);
+  }
+
+  onSelectionChange(pagina: Pagina, event: any) {
+    if (event.checked) {
+      this.tempSelectedPaginas.push(pagina);
+      console.log('Cuando es checked',this.tempSelectedPaginas);
+
+    } else {
+      this.tempSelectedPaginas = this.tempSelectedPaginas.filter(p => p.id_pagina !== pagina.id_pagina);
+      console.log('Cuando no es checked', this.tempSelectedPaginas);
+
+    }
+    this.tempSelectedPaginas.sort((a, b) => a.archivo_pdf.localeCompare(b.archivo_pdf));
+    console.log(this.tempSelectedPaginas);
+
+  }
+
+  updateSelectedPaginas() {
+    //this.selectedPaginas = this.paginas.filter((_, index) => this.selectedItems[index]);
+
+    //this.selectedPaginas = this.paginas.filter(pagina => this.selectedPaginasSet.has(pagina.id_pagina));
+
+    this.selectedPaginas = [...this.tempSelectedPaginas];
+    this.selectedPaginas.sort((a, b) => a.archivo_pdf.localeCompare(b.archivo_pdf));
+
+    /* this.paginas.forEach((pagina, index) => {
+      if (this.selectedItems[index] && !this.isPaginaSelected(pagina)) {
+        this.selectedPaginas.push(pagina);
+      }
+    }); */
+
+    console.log(this.selectedPaginas);
+
+  }
+
+  createPaginaFromFile(file: File, id: number): Pagina {
+    const fileName = file.name;
+    const tipoPagina = fileName.charAt(fileName.length - 5).match(/[A-Z]/i) ? fileName.charAt(fileName.length - 5) : 'F';
+    return {
+      id_pagina: id,
+      numero: id.toString(),
+      tipo_pagina: tipoPagina,
+      archivo_pdf: fileName
+    };
+  }
 
   agruparPorAnnioYSede(): any {
     const agrupado: { [annio: string]: { [sedeId: number]: LibroValoracionFinal[], cantidad_libros: number } } = {};
@@ -299,9 +427,8 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
   }
 
   onInstitucionChange(event: any) {
-    const institucionId = event.value;
-    this.institucionSeleccionada = this.institucionesPorET.find(institucion => institucion.id_ie === institucionId);
-
+    const institucion = this.institucionesPorET.find(inst => inst.id_ie === event.value);
+    this.sedesPorInstitucion = institucion ? institucion.sedes : [];
    /*  debugger;
 
     let filteredData = this.libros.filter((element: any) => {
@@ -314,12 +441,6 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.onEntidadTerritorialChange({value:2});
-    this.onInstitucionChange({value:1});
-    console.log(this.data.data);
-    this.agruparLibrosPorAnio();
-  }
 
   habilitarInputPaginador() {
     this.inputDeshabilitado = false;
@@ -332,57 +453,30 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {
     this.data.paginator = this.paginator;
   }
+  /**Falta organizar lógica: se debe implementar que para
+  * realizar el filtro se utilice el id que representa el estado de la Institución Educativa
+  * (Activo/Inactivo) */
+  showIdle() {
+  }
 
-  // filtrarEntidadTerritorial() {
-    //   if (this.filtroSeleccionado != '') {
-      //     this.data = this.data.filter(op => op.territorialEntities === this.filtroSeleccionado);
-      //   } else {
-        //     this.data = [...this.data];
-        //   }
-        // }
+  showOnCustody() {
+  }
 
-        /**Falta organizar lógica: se debe implementar que para
-         * realizar el filtro se utilice el id que representa el tipo de clase de Institución Educativa
-         * (Oficial/No Oficial) */
-
- /*  showOficials() {
-    let filteredData = this.libros.filter((element: any) => {
-      return element.clase.clase_ie === 'Oficial';
-    })
-    this.data.data = filteredData;
-
-    console.log(filteredData);
-
-
-    console.log(this.habilitarCrear);
-  } */
-
-        /**Falta organizar lógica: se debe implementar que para
-         * realizar el filtro se utilice el id que representa el estado de la Institución Educativa
-         * (Activo/Inactivo) */
-         showIdle() {
-
-        }
-
-        showOnCustody() {
-
-        }
-
-        eliminar() {
-          Swal.fire({
-            title: "¿Estás seguro?",
-            text: "El libro será eliminado de forma permanente",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonColor: "#b16448",
+  eliminar() {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "El archivo será eliminado del libro de forma permanente",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#b16448",
       cancelButtonColor: "#d5a14f",
       cancelButtonText: "Cancelar",
       confirmButtonText: "Eliminar"
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: "Libro Eliminado",
-          text: "El libro ha sido eliminado satisfactoriamente",
+          title: "Archivo Eliminado",
+          text: "El archivo ha sido eliminado satisfactoriamente",
           icon: "success",
           confirmButtonColor: "#b16448"
         });
@@ -534,7 +628,7 @@ const EDUCATIONAL_INSTITUTION: InstitucionEducativa[] = [
   {id_ie: 1, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10001', cod_zeti: '1001', nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.125.539-1', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '../../../assets/img/liceo_escudo.jpg' },
   {id_ie: 2, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10002', cod_zeti: '1002', nombre_ie: 'Institución Educativa DE SANTA LIBRADA', nombre_c: 'Santa Librada', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.145.251-0', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_SANTA_LIBRADA, escudo: '' },
   {id_ie: 3, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10003', cod_zeti: '1003', nombre_ie: 'Institución Educativa Técnico Industrial ANTONIO JOSÉ CAMACHO', nombre_c: 'Antonio José Camacho', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '805.235.444-7', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },
-  {id_ie: 4, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10004', cod_zeti: '1004', nombre_ie: 'Institución Educativa SIMÓN BOLIVAR', nombre_c: 'Simón Bolivar', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.145.478-5', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },
+  {id_ie: 4, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10004', cod_zeti: '1004', nombre_ie: 'Institución Educativa SIMÓN BOLIVAR', nombre_c: 'Simón Bolivar', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.145.478-5', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: [], escudo: '' },
   {id_ie: 5, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10005', cod_zeti: '1005', nombre_ie: 'Institución Educativa GENERAL FRANCISCO DE PAULA SANTANDER', nombre_c: 'Francisco De Paula Santander', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '900.478.565-3', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },
   {id_ie: 6, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10006', cod_zeti: '1006', nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', clase: CLASES_INSTITUCION[1], modalidad: MODALIDADES[0], nit: '800.125.539-1', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },
   {id_ie: 7, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10007', cod_zeti: '1007', nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.125.539-1', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },

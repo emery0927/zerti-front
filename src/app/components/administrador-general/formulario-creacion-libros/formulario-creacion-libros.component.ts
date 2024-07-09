@@ -1,6 +1,6 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { AfterViewInit, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -38,16 +38,16 @@ export interface LibroXSede {
   templateUrl: './formulario-creacion-libros.component.html',
   styleUrls: ['./formulario-creacion-libros.component.css']
 })
-export class FormularioCreacionLibrosComponent implements AfterViewInit, OnInit {
+export class FormularioCreacionLibrosComponent implements OnInit {
 
-  //dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  calendario = CALENDARIO;
+  sedes = this.sede.sedes;
+  sedeSeleccionada!: Sede;
 
-  //displayedColumns: string[] = ['name', 'actions'];
 
-  constructor(public dialog: MatDialog) {
-    //this.dataSource.data = TREE_DATA;
-    this.itemsPerPage = 5;
-    this.currentPage = 0
+
+
+  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public sede:any) {
     this.groupedData = this.groupByYear(this.libros);
   }
 
@@ -79,36 +79,8 @@ export class FormularioCreacionLibrosComponent implements AfterViewInit, OnInit 
   expandedElement!: InstitucionEducativa | null;
 
   entidadesTerritoriales: EntidadTerritorial[] = ENTIDAD_TERRITORIAL;
-  typeOfClass: string[]=['Oficial', 'No Oficial'];
-
-  filtroSeleccionado: string = '';
 
 
-  showFormField: boolean = false;
-
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-
-  @ViewChild('menuTrigger')
-  menuTrigger!: MatMenuTrigger;
-
-  @ViewChild('inputField') inputField: any;
-
-  @Input()
-  pageIndex!: number;
-
-  defaultValue!: "Todas";
-
-  pageNumberInput!: number;
-  inputDeshabilitado!: boolean;
-  habilitarCrear = true;
-  mostrarTooltip = true;
-
-  totalItems = this.data.data.length;
-  itemsPerPage = 5;
-  currentPage = 0;
-
-  filterDictionary= new Map<string,string>();
 
   groupedData: any[];
 
@@ -160,50 +132,11 @@ export class FormularioCreacionLibrosComponent implements AfterViewInit, OnInit 
     }, {}));
   }
 
-  /* Metodo encargado de filtrar la información de la tabla */
-  applyFilter(event: Event, columnName: string) {
-    if (columnName === 'shortname') {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.data.filter = filterValue.trim().toLowerCase();
-
-      // Si la tabla tiene paginación, regresa a la primera página al aplicar el filtro
-      if (this.data.paginator) {
-        this.paginator.length = this.data.filteredData.length;
-        this.data.paginator.firstPage();
-      }
-
-      if (this.paginator.length < 1) {
-        this.deshabilitarInputPaginador();
-      } else {
-        this.habilitarInputPaginador();
-      }
-    }
-  }
-
-
-
-  onSelect(item: any) {
-    let filteredData = this.libros.filter((element: any) => {
-      return element.entidad_territorial.id_et === item.value;
-    })
-    if (item.value !== 1) {
-      this.data.data = []
-      this.data.data = filteredData;
-      this.habilitarCrear = false;
-      this.mostrarTooltip = false;
-    } else if (item.value === 1) {
-      this.data.data = []
-      this.data.data = this.libros;
-      this.habilitarCrear = true;
-      this.mostrarTooltip = true;
-    }
-
-    console.log(this.habilitarCrear);
-
-  }
-
   ngOnInit(): void {
-    console.log(this.habilitarCrear);
+    console.log(this.sede)
+    this.sedeSeleccionada = this.sede.sedes[0];
+    console.log(this.sedeSeleccionada);
+
     this.agruparLibrosPorAnio();
     console.log(this.librosAgrupadosPorAnio);
 
@@ -211,136 +144,20 @@ export class FormularioCreacionLibrosComponent implements AfterViewInit, OnInit 
 
     console.log(AnioLectivo)
 
-
-
   }
-
-  habilitarInputPaginador() {
-    this.inputDeshabilitado = false;
-  }
-
-  deshabilitarInputPaginador() {
-    this.inputDeshabilitado = true;
-  }
-
-  ngAfterViewInit() {
-    this.data.paginator = this.paginator;
-  }
-
-  // filtrarEntidadTerritorial() {
-    //   if (this.filtroSeleccionado != '') {
-      //     this.data = this.data.filter(op => op.territorialEntities === this.filtroSeleccionado);
-      //   } else {
-        //     this.data = [...this.data];
-        //   }
-        // }
-
-        /**Falta organizar lógica: se debe implementar que para
-         * realizar el filtro se utilice el id que representa el tipo de clase de Institución Educativa
-         * (Oficial/No Oficial) */
-
-  showOficials() {
-    let filteredData = this.libros.filter((element: any) => {
-      return element.clase.clase_ie === 'Oficial';
-    })
-    this.data.data = filteredData;
-
-    console.log(filteredData);
-
-
-    console.log(this.habilitarCrear);
-  }
-
-        /**Falta organizar lógica: se debe implementar que para
-         * realizar el filtro se utilice el id que representa el estado de la Institución Educativa
-         * (Activo/Inactivo) */
-         showIdle() {
-
-        }
-
-        showOnCustody() {
-
-        }
-
-        eliminar() {
-          Swal.fire({
-            title: "¿Estás seguro?",
-            text: "La Institución será eliminada de forma permanente",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonColor: "#b16448",
-      cancelButtonColor: "#d5a14f",
-      cancelButtonText: "Cancelar",
-      confirmButtonText: "Eliminar"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Institución Eliminada",
-          text: "La Institución ha sido eliminada satisfactoriamente",
-          icon: "success",
-          confirmButtonColor: "#b16448"
-        });
-      }
-    });
-  }
-
-  editar(institucion: HTMLElement) {
-    const dialogRef = this.dialog.open(EditEducationalInstitutionComponent, {restoreFocus: false, data:{institucion} ,disableClose: true});
-    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
-  }
-
-  abrirEdicionSedes(sede: HTMLElement, colegio: HTMLElement) {
-    const dialogRef = this.dialog.open(EditarSedeComponent, {restoreFocus: true, data: {sede, colegio}, disableClose: true});
-    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
-  }
-
-  abrirCreacionSedes(colegio: HTMLElement) {
-    const dialogRef = this.dialog.open(CrearSedeComponent, {restoreFocus: true, data: colegio, disableClose: true});
-    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
-  }
-
-  addFilter() {
-    this.showFormField = !this.showFormField;
-    if (this.showFormField) {
-      setTimeout(() => {
-        this.inputField.nativeElement.focus();
-      }, 0);
-    }
-  }
-
-
-
-
-  irAPaginaEspecifica() {
-    this.paginator.pageIndex = this.pageNumberInput - 1;
-    // Siempre y cuando el filtro arroje resultados, de lo contrario no va funcionar el input
-    if (this.paginator.length > 1) {
-      // Validar que la página deseada esté dentro del rango válido
-      const totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-      if (this.pageNumberInput == totalPages || this.pageNumberInput <= totalPages) {
-        this.currentPage = this.pageNumberInput;
-        this.paginator.page.next({
-          pageIndex: this.pageNumberInput - 1,
-          pageSize: this.paginator.pageSize,
-          length: this.paginator.length
-        });
-      } else {
-        this.paginator.pageIndex = totalPages -1
-        this.paginator.page.next({
-          pageIndex: totalPages - 1,
-          pageSize: this.paginator.pageSize,
-          length: this.paginator.length
-        });
-      }
-    }
-  }
-
-  replaceEspacios(texto: string) {
-    return texto.replace(/ /g, '&nbsp');
-  }
-
 
 }
+
+export interface Calendario {
+  id_calendario: number;
+  descripcion: string;
+}
+
+const CALENDARIO: Calendario[] = [
+  { id_calendario: 1, descripcion: 'A' },
+  { id_calendario: 2, descripcion: 'B' },
+]
+
 const ENTIDAD_TERRITORIAL: EntidadTerritorial[] = [
   { id_et: 1, id_dep: 1, id_divipol: 1, nombre_et: 'Todas', observacion: 'ob' },
   { id_et: 2, id_dep: 1, id_divipol: 1, nombre_et: 'Santiago de Cali', observacion: 'ob' },
@@ -376,10 +193,10 @@ const libros: LibroValoracionFinal[] = [
     cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
     ]
 
-    const LibroXSede: LibroXSede[] = [
+const LibroXSede: LibroXSede[] = [
       {nombre_sede: 'Sede Principal', cantidad_libros_total: 2, cantidad_folios_total: 800, cantidad_aprobados: 790, cantidad_desaprobados: 10, libros: libros}
     ]
 
-    const AnioLectivo: AnioLectivo[] = [
+const AnioLectivo: AnioLectivo[] = [
       {annio_lectivo: '2012', calendario: 'B', cantidad_libros_total: 2, cantidad_folios_total: 750, cantidad_aprobados: 700, cantidad_desaprobados: 50, SedesLibro: LibroXSede}
     ]

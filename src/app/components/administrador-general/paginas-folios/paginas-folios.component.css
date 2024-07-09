@@ -108,9 +108,9 @@ table {
 
 .mat-mdc-table {
   width: 914px;
-  max-height: 500px;
+  max-height: 600px;
   overflow: auto;
-  height: 500px;
+  height: 553px;
 
 
   .mdc-data-table__header-cell {
@@ -138,8 +138,9 @@ table {
   width: 100%;
   table-layout: fixed;
   display: block;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-color: #59320f #ffffff;
+
 }
 
 table {
@@ -173,7 +174,7 @@ mat-header-cell, mat-cell {
 }
 
 .celda-ubicacion {
-  text-align: center;
+  padding-left: 66px;
 }
 
 .cell-numero-libros {
@@ -307,22 +308,17 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] { -moz-appearance:textfield; }
 
 .img-empty-data {
-  width: 10rem;
-  margin-bottom: 0;
-  margin-top: 39px;
-  margin-left: 310px;
+  width: 9rem;
 }
 
 .h1-empty-data {
   font-family: 'Lato', sans-serif;
   font-size: 17px;
   color: #59320f;
-  margin-top: 0;
-  margin-left: 330px;
 }
 
 .filter-empty {
-  padding-bottom: 5px;
+  margin-top: -350px;
 }
 
 .mat-cell.espacios {
@@ -422,3 +418,86 @@ tr.example-element-row:not(.example-expanded-row):hover {
 .cursor-pointer {
   cursor: pointer;
 }
+
+
+.card-content {
+  overflow-y: auto;
+  max-height: 556px;
+  padding: 0px 0px 0px 0px !important;
+  scrollbar-color: #59320f #ffffff;
+}
+
+.texto-archivos {
+  height: 25px;
+  text-align: left;
+  padding-left: 6px;
+  .mdc-list-item__primary-text {
+    color: #615959;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.texto-tabla-libro {
+  text-align: center;
+  padding: 0 0 0 25px;
+}
+
+.checkbox {
+  --mdc-checkbox-selected-focus-icon-color: #59320f;
+  --mdc-checkbox-selected-hover-icon-color: #59320f;
+  --mdc-checkbox-selected-icon-color: #59320f;
+  --mdc-checkbox-selected-pressed-icon-color: #59320f;
+  --mdc-checkbox-selected-focus-state-layer-color: #59320f;
+  --mdc-checkbox-selected-hover-state-layer-color: #59320f;
+  --mdc-checkbox-selected-pressed-state-layer-color: #59320f;
+}
+
+.checkbox-todos {
+  --mdc-checkbox-selected-focus-icon-color: #59320f;
+  --mdc-checkbox-selected-hover-icon-color: #59320f;
+  --mdc-checkbox-selected-icon-color: #59320f;
+  --mdc-checkbox-selected-pressed-icon-color: #59320f;
+  --mdc-checkbox-selected-focus-state-layer-color: #59320f;
+  --mdc-checkbox-selected-hover-state-layer-color: #59320f;
+  --mdc-checkbox-selected-pressed-state-layer-color: #59320f;
+  padding-left: 6px;
+}
+
+
+
+
+.boton-copiar {
+  background-color: #E1D1BC;
+  margin-right: 10px;
+}
+
+.boton-copiar:hover {
+  background-color: #c7b9a7;
+}
+
+.file-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  height: 48px !important;
+}
+
+span {
+  font-size: 14px;
+  color: #333;
+  margin-top: 14px;
+}
+

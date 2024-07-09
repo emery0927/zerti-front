@@ -92,6 +92,8 @@ import { RecargaDirective } from './directives/recarga.directive';
 import { SeleccionarInstitucionComponent } from './components/gestion-operacional-ieo/seleccionar-institucion/seleccionar-institucion.component';
 import { LibrosAnnioLectivoComponent } from './components/administrador-general/libros-annio-lectivo/libros-annio-lectivo.component';
 import { FormularioCreacionLibrosComponent } from './components/administrador-general/formulario-creacion-libros/formulario-creacion-libros.component';
+import { FormularioEdicionLibrosComponent } from './components/administrador-general/formulario-edicion-libros/formulario-edicion-libros.component';
+import { PaginasFoliosComponent } from './components/administrador-general/paginas-folios/paginas-folios.component';
 
 @NgModule({
   declarations: [
@@ -149,6 +151,8 @@ import { FormularioCreacionLibrosComponent } from './components/administrador-ge
     SeleccionarInstitucionComponent,
     LibrosAnnioLectivoComponent,
     FormularioCreacionLibrosComponent,
+    FormularioEdicionLibrosComponent,
+    PaginasFoliosComponent,
   ],
   imports: [
     BrowserModule,

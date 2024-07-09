@@ -199,7 +199,7 @@ tr.mat-mdc-row:nth-child(4n-1) {
 .specific-name-input {
   .mdc-text-field {
     border: solid;
-    border-color: lightgrey;
+    border-color: #959595;
     border-width: thin;
     --mdc-filled-text-field-active-indicator-height: 0;
     --mdc-filled-text-field-focus-active-indicator-height: 0px;
