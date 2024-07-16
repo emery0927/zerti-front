@@ -19,6 +19,7 @@ import { EquipoServicio } from 'src/app/models/equipo-servicio';
 import { FormularioCreacionLibrosComponent } from '../formulario-creacion-libros/formulario-creacion-libros.component';
 import { FormularioEdicionLibrosComponent } from '../formulario-edicion-libros/formulario-edicion-libros.component';
 import { Pagina } from 'src/app/models/pagina';
+import { FormularioEdicionPaginaComponent } from '../formulario-edicion-pagina/formulario-edicion-pagina.component';
 
 export interface AnioLectivo {
   id_anio: number;
@@ -56,28 +57,6 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     this.groupedData = this.groupByYear(this.libros);
   }
 
-  paginasV : Pagina[] = [
-    {id_pagina: 1, numero: '01' , tipo_pagina: 'P', archivo_pdf: '2308-001-P'},
-    {id_pagina: 2, numero: '02' , tipo_pagina: 'L', archivo_pdf: '2308-1250-L'},
-    {id_pagina: 3, numero: '03' , tipo_pagina: 'F', archivo_pdf: '2308-1250'},
-    {id_pagina: 4, numero: '04' , tipo_pagina: 'F', archivo_pdf: '2308-004'},
-    {id_pagina: 5, numero: '05' , tipo_pagina: 'F', archivo_pdf: '2308-005'},
-    {id_pagina: 6, numero: '06' , tipo_pagina: 'F', archivo_pdf: '2308-006'},
-    {id_pagina: 7, numero: '07' , tipo_pagina: 'F', archivo_pdf: '2308-007'},
-    {id_pagina: 8, numero: '08' , tipo_pagina: 'F', archivo_pdf: '2308-008'},
-    {id_pagina: 9, numero: '09' , tipo_pagina: 'F', archivo_pdf: '2308-009'},
-    {id_pagina: 10, numero: '10' , tipo_pagina: 'O', archivo_pdf: '2308-010-O'},
-    {id_pagina: 11, numero: '11' , tipo_pagina: 'F', archivo_pdf: '2308-011'},
-    {id_pagina: 12, numero: '12' , tipo_pagina: 'F', archivo_pdf: '2308-012'},
-    {id_pagina: 13, numero: '13' , tipo_pagina: 'F', archivo_pdf: '2308-013'},
-    {id_pagina: 14, numero: '14' , tipo_pagina: 'F', archivo_pdf: '2308-014'},
-    {id_pagina: 15, numero: '15' , tipo_pagina: 'F', archivo_pdf: '2308-015'},
-    {id_pagina: 16, numero: '16' , tipo_pagina: 'L', archivo_pdf: '2308-016-L'},
-    {id_pagina: 17, numero: '17' , tipo_pagina: 'F', archivo_pdf: '2308-017'},
-    {id_pagina: 18, numero: '18' , tipo_pagina: 'F', archivo_pdf: '2308-018'},
-    {id_pagina: 19, numero: '19' , tipo_pagina: 'F', archivo_pdf: '2308-019'},
-    {id_pagina: 20, numero: '20' , tipo_pagina: 'F', archivo_pdf: '2308-020'}
-  ];
 
   libros: LibroValoracionFinal[] = [
     {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[0],
@@ -143,7 +122,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
 
   //dataSource = this.librosAgrupadosPorAnio;
   columnsToDisplay = ['pagina', 'tipo', 'nombre_archivo', 'opciones']
-  displayedColumns: string[] =  ['pagina', 'tipo', 'nombre_archivo', 'opciones']
+  displayedColumns: string[] =  ['pagina', 'tipo', 'nombre_archivo', 'estado', 'opciones']
   expandedElement!: InstitucionEducativa | null;
 
   entidadesTerritoriales: EntidadTerritorial[] = ENTIDAD_TERRITORIAL;
@@ -211,9 +190,9 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
 
   onFileChange(event: any): void {
 
-
     const input = event.target as HTMLInputElement;
     this.archivos = [];
+    this.paginas = [];
     if (input.files && input.files.length > 0) {
       const path = input.files[0].webkitRelativePath;
       const folderName = path.substring(0, path.indexOf('/'));
@@ -232,6 +211,19 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     console.log(this.archivos);
     console.log(this.selectedItems);
 
+
+  }
+
+  getClaseFila(row: Pagina) {
+    return {
+      'fila-portada': row.tipo_pagina === 'P',
+      'fila-lista-estudiantes': row.tipo_pagina === 'L',
+      'fila-folio': row.tipo_pagina === 'F',
+      'fila-recuperaciones': row.tipo_pagina === 'R',
+      'fila-novedades-academicas': row.tipo_pagina === 'N',
+      'fila-promocion': row.tipo_pagina === 'M',
+      'fila-otro-uso': row.tipo_pagina === 'O'
+    };
 
   }
 
@@ -277,11 +269,8 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
   onSelectionChange(pagina: Pagina, event: any) {
     if (event.checked) {
       this.tempSelectedPaginas.push(pagina);
-      console.log('Cuando es checked',this.tempSelectedPaginas);
-
     } else {
       this.tempSelectedPaginas = this.tempSelectedPaginas.filter(p => p.id_pagina !== pagina.id_pagina);
-      console.log('Cuando no es checked', this.tempSelectedPaginas);
 
     }
     this.tempSelectedPaginas.sort((a, b) => a.archivo_pdf.localeCompare(b.archivo_pdf));
@@ -293,9 +282,10 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     //this.selectedPaginas = this.paginas.filter((_, index) => this.selectedItems[index]);
 
     //this.selectedPaginas = this.paginas.filter(pagina => this.selectedPaginasSet.has(pagina.id_pagina));
-
     this.selectedPaginas = [...this.tempSelectedPaginas];
-    this.selectedPaginas.sort((a, b) => a.archivo_pdf.localeCompare(b.archivo_pdf));
+    this.renumerarPaginas();
+
+
 
     /* this.paginas.forEach((pagina, index) => {
       if (this.selectedItems[index] && !this.isPaginaSelected(pagina)) {
@@ -314,8 +304,15 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
       id_pagina: id,
       numero: id.toString(),
       tipo_pagina: tipoPagina,
-      archivo_pdf: fileName
+      archivo_pdf: fileName,
+      estado: false
     };
+  }
+
+  guardarPaginas() {
+    this.selectedPaginas.forEach(pagina => {
+      pagina.estado = true;
+    });
   }
 
   agruparPorAnnioYSede(): any {
@@ -462,26 +459,45 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
   showOnCustody() {
   }
 
-  eliminar() {
+  eliminar(pagina: Pagina) {
+    console.log(pagina.archivo_pdf);
     Swal.fire({
       title: "¿Estás seguro?",
-      text: "El archivo será eliminado del libro de forma permanente",
-      icon: "question",
+      text: 'La página '+pagina.numero+'.) '+pagina.archivo_pdf+' será eliminada del libro de valoraciones finales',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#b16448",
+      confirmButtonColor: "#59320f",
       cancelButtonColor: "#d5a14f",
       cancelButtonText: "Cancelar",
       confirmButtonText: "Eliminar"
     }).then((result) => {
       if (result.isConfirmed) {
+         // Eliminar la página de la lista de páginas seleccionadas
+        this.selectedPaginas = this.selectedPaginas.filter(p => p.id_pagina !== pagina.id_pagina);
+
+        // Renumerar las páginas restantes
+        this.renumerarPaginas();
+
+        // Habilitar la página en la lista de archivos
+        const index = this.paginas.findIndex(p => p.id_pagina === pagina.id_pagina);
+        if (index > -1) {
+          this.selectedItems[index] = false;
+          this.tempSelectedPaginas = this.tempSelectedPaginas.filter(p => p.id_pagina !== pagina.id_pagina);
+        }
         Swal.fire({
-          title: "Archivo Eliminado",
-          text: "El archivo ha sido eliminado satisfactoriamente",
+          title: "Página eliminada",
+          text: "La página ha sido eliminada con éxito",
           icon: "success",
-          confirmButtonColor: "#b16448"
+          confirmButtonColor: "#59320f"
         });
       }
     });
+  }
+
+  renumerarPaginas() {
+    this.selectedPaginas.forEach((pagina, index) => {
+      pagina.numero = (index + 1).toString().padStart(2, '0')
+    })
   }
 
   abrirCrearLibro() {
@@ -489,8 +505,8 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
   }
 
-  editar(libro: HTMLElement) {
-    const dialogRef = this.dialog.open(FormularioEdicionLibrosComponent, {restoreFocus: false, data:{libro} ,disableClose: true});
+  editar(pagina: HTMLElement) {
+    const dialogRef = this.dialog.open(FormularioEdicionPaginaComponent, {restoreFocus: false, data:{pagina} ,disableClose: true});
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
   }
 

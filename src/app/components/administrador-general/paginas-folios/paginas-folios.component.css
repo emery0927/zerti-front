@@ -174,7 +174,7 @@ mat-header-cell, mat-cell {
 }
 
 .celda-ubicacion {
-  padding-left: 66px;
+  padding-left: 20px;
 }
 
 .cell-numero-libros {
@@ -192,10 +192,6 @@ mat-header-cell, mat-cell {
   color: #000000de;
   font-weight: 400;
   font-size: 14px;
-}
-
-tr.mat-mdc-row:nth-child(2n-1) {
-  background-color: #efce8224;
 }
 
 tr.mat-mdc-row:hover {
@@ -444,6 +440,11 @@ tr.example-element-row:not(.example-expanded-row):hover {
   padding: 0 0 0 25px;
 }
 
+.texto-tabla-estado {
+  padding: 0;
+  padding-left: 20px;
+}
+
 .checkbox {
   --mdc-checkbox-selected-focus-icon-color: #59320f;
   --mdc-checkbox-selected-hover-icon-color: #59320f;
@@ -473,10 +474,19 @@ tr.example-element-row:not(.example-expanded-row):hover {
   margin-right: 10px;
 }
 
+.boton-guardar {
+  background-color: #E1D1BC;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
 .boton-copiar:hover {
   background-color: #c7b9a7;
 }
 
+.boton-guardar:hover {
+  background-color: #c7b9a7;
+}
 .file-input-container {
   display: flex;
   flex-direction: column;
@@ -499,5 +509,33 @@ span {
   font-size: 14px;
   color: #333;
   margin-top: 14px;
+}
+
+.fila-portada {
+  background-color: #fff8d4;
+}
+
+.fila-lista-estudiantes {
+  background-color: #cef1ff;
+}
+
+.fila-folio {
+  background-color: #ffffff;
+}
+
+.fila-recuperaciones {
+  background-color: #ffd4ab;
+}
+
+.fila-novedades-academicas {
+  background-color: #c8ffe3;
+}
+
+.fila-promocion {
+  background-color: #ffcd28;
+}
+
+.fila-otro-uso {
+  background-color: #ffd5f0;
 }
 

@@ -1,0 +1,56 @@
+<h2 style="font-weight: 600; padding-inline: 32px;" mat-dialog-title>Edición de Página</h2>
+<mat-dialog-content class="mat-dialog-container">
+  <form action="">
+    <!--Territorial Entity and Zeti Code Row-->
+    <div>
+      <div class="mb-2">
+        <div>
+          <mat-form-field appearance="fill" class="end-input specific-select-input">
+            <mat-label style="font-size: 14px;">Tipo de página</mat-label>
+            <div class="mat-form-field-wrapper">
+              <mat-select [(value)]="tipoPagina" style="font-size: 14px;">
+                <mat-option *ngFor="let calendario of calendario" [value]="tipoPagina">{{tipoPagina}} </mat-option>
+              </mat-select>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <!--Educational Institution name Row-->
+    <div>
+      <div class="row-full-width mb-2">
+        <div>
+          <div>
+            <mat-form-field appearance="fill" style="margin-left: 10px;" class="end-input specific-select-input">
+              <mat-label style="font-size: 14px;">Nº de página</mat-label>
+              <div class="mat-form-field-wrapper">
+                <mat-select [(value)]="numeroPagina" style="font-size: 14px;">
+                  <mat-option *ngFor="let sede of sedes" [value]="numeroPagina">{{numeroPagina}} </mat-option>
+                </mat-select>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Shortname and NIT Row-->
+    <div>
+      <div class="mb-2">
+        <div>
+            <mat-form-field style="margin-left: 10px; margin-right: 0; width: 360px;" appearance="fill" class="ancho-igual specific-select-input">
+              <mat-label style="font-size: 14px;">Nombre archivo</mat-label>
+                  <div>
+                    <input [value]="nombreArchivo" style="font-size: 14px;" matInput>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+      </form>
+      <div>
+        <mat-dialog-actions style="min-height: 78px; padding-top: 0; margin-top: -13px; margin-right: -10px;" align="end">
+          <button style="background-color: #ffeab0;" mat-button [mat-dialog-close]="true">Guardar</button>
+          <button style="border: solid; border-width: thin; border-color: #59320f; background-color: #59320f; color: white !important;" mat-button mat-dialog-close>Salir</button>
+        </mat-dialog-actions>
+      </div>
+</mat-dialog-content>

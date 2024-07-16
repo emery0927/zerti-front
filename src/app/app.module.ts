@@ -94,6 +94,7 @@ import { LibrosAnnioLectivoComponent } from './components/administrador-general/
 import { FormularioCreacionLibrosComponent } from './components/administrador-general/formulario-creacion-libros/formulario-creacion-libros.component';
 import { FormularioEdicionLibrosComponent } from './components/administrador-general/formulario-edicion-libros/formulario-edicion-libros.component';
 import { PaginasFoliosComponent } from './components/administrador-general/paginas-folios/paginas-folios.component';
+import { FormularioEdicionPaginaComponent } from './components/administrador-general/formulario-edicion-pagina/formulario-edicion-pagina.component';
 
 @NgModule({
   declarations: [
@@ -153,6 +154,7 @@ import { PaginasFoliosComponent } from './components/administrador-general/pagin
     FormularioCreacionLibrosComponent,
     FormularioEdicionLibrosComponent,
     PaginasFoliosComponent,
+    FormularioEdicionPaginaComponent,
   ],
   imports: [
     BrowserModule,

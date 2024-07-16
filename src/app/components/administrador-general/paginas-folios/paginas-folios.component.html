@@ -36,25 +36,33 @@
 <div style="display: flex;">
   <div style="max-width: 425px;" class="mat-elevation-z8">
     <table mat-table [dataSource]="selectedPaginas" multiTemplateDataRows class="full-width-table">
-      <!-- Nombre Sede - Columna -->
+      <!-- Pagina - Columna -->
       <ng-container matColumnDef="pagina">
         <th style="padding: 0px 0px 0px 25px;" class="header-style header-sede" role="columnheader" mat-header-cell *matHeaderCellDef>Pag</th>
         <td class="row-style cursor-pointer cell-sede texto-tabla-libro" mat-cell *matCellDef="let element">{{ element.numero }}</td>
       </ng-container>
-      <!-- n.º Libros - Columna -->
+      <!-- Tipo - Columna -->
       <ng-container matColumnDef="tipo">
         <th style="padding: 0px 0px 0px 25px;" class="header-style header-codigo" role="columnheader" mat-header-cell *matHeaderCellDef>Tipo</th>
         <td class="row-style cursor-pointer cell-numero-libros texto-tabla-libro" mat-cell *matCellDef="let element">{{element.tipo_pagina}}</td>
       </ng-container>
-      <!-- n.º Folios - Columna -->
+      <!-- Archivo PDF - Columna -->
       <ng-container matColumnDef="nombre_archivo">
-        <th class="header-style header-ubicacion" style="padding: 0px 66px 0px 66px;" role="columnheader" mat-header-cell *matHeaderCellDef>Archivo PDF</th>
+        <th class="header-style header-ubicacion" style="padding: 0px 50px 0px 20px;" role="columnheader" mat-header-cell *matHeaderCellDef>Archivo PDF</th>
         <td class="row-style cursor-pointer celda-ubicacion" mat-cell *matCellDef="let element">{{element.archivo_pdf}}</td>
+      </ng-container>
+      <!--Estado - Columna -->
+      <ng-container matColumnDef="estado">
+        <th class="header-style header-codigo" style="padding: 0;" role="columnheader" mat-header-cell *matHeaderCellDef>Guardado</th>
+        <td class="row-style cursor-pointer cell-sede texto-tabla-estado" mat-cell *matCellDef="let element">
+          <mat-icon matTooltip="Guardado" style="color: #0cad0a" *ngIf="element.estado">check_circle</mat-icon>
+          <mat-icon matTooltip="Sin guardar" style="color: #cf0e04" *ngIf="!element.estado">cancel</mat-icon>
+        </td>
       </ng-container>
       <!-- Opciones - Columna -->
       <ng-container matColumnDef="opciones">
         <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef [ngClass]="{'align-right': true}">
-            <button mat-button  style="cursor: pointer;background-color: transparent; border: none;">
+            <button mat-button  style="cursor: inherit; background-color: transparent; border: none;">
               <mat-icon style="color: #59320f; margin-right: -39px; font-size: 21px;">more_vert</mat-icon>
             </button>
         </th>
@@ -66,8 +74,11 @@
               <mat-icon style="color: #59320f; margin-right: -22px;">more_horiz</mat-icon>
             </span>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="eliminar()">Eliminar
+              <button mat-menu-item (click)="eliminar(element)">Eliminar
                 <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-menu-item (click)="editar(element)">Editar
+                <mat-icon>edit</mat-icon>
               </button>
             </mat-menu>
 
@@ -77,7 +88,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="getClaseFila(row)"></tr>
     </table>
 
     <ng-container *ngIf="selectedPaginas.length == 0">
@@ -87,10 +98,15 @@
       </div>
     </ng-container>
   </div>
-  <div style="align-content: center;">
+  <div style="display: flex; flex-direction: column; align-self: center;">
+    <button (click)="guardarPaginas()" matTooltip="Guardar o actualizar libro" class="boton-guardar" mat-button>
+      <mat-icon style="color: #59320f; font-size: 36px; height: fit-content; width: max-content; margin-right: 0px;">
+        cloud_upload
+      </mat-icon>
+    </button>
     <button (click)="updateSelectedPaginas()" matTooltip="Copiar archivos a libro" class="boton-copiar" mat-button>
       <mat-icon style="color: #59320f; font-size: 36px; height: fit-content; width: max-content; margin-right: 0px;">
-        keyboard_backspace
+        arrow_back
       </mat-icon>
     </button>
   </div>
@@ -103,6 +119,9 @@
           <mat-icon style="color: #59320f;">drive_file_move</mat-icon>
         </button>
         <span>{{ selectedPath || 'No se ha seleccionado ninguna carpeta' }}</span>
+        <!-- <button mat-button matTooltip="Recargar carpeta" style="margin-left: 49px; justify-content: end;" (click)="fileInput.click()">
+          <mat-icon style="margin: 0; color: #59320f;">sync</mat-icon>
+        </button> -->
       </mat-card-content>
     </mat-card>
     <mat-card style="width: 425px; margin-bottom: 10px; margin-right: 10px; border: solid; border-color: #959595; border-width: thin; height: 500px;">
@@ -117,7 +136,7 @@
       <mat-card-content class="card-content">
         <mat-list>
           <mat-list-item class="texto-archivos" *ngFor="let pagina of paginas; let i = index">
-            <mat-checkbox [(ngModel)]="selectedItems[i]" (change)="onSelectionChange(pagina, $event)" class="checkbox"></mat-checkbox>
+            <mat-checkbox [(ngModel)]="selectedItems[i]" (change)="onSelectionChange(pagina, $event)" [disabled]="isPaginaSelected(pagina)" class="checkbox"></mat-checkbox>
             {{pagina.archivo_pdf}}
           </mat-list-item>
         </mat-list>
