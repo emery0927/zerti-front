@@ -27,6 +27,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -95,6 +97,9 @@ import { FormularioCreacionLibrosComponent } from './components/administrador-ge
 import { FormularioEdicionLibrosComponent } from './components/administrador-general/formulario-edicion-libros/formulario-edicion-libros.component';
 import { PaginasFoliosComponent } from './components/administrador-general/paginas-folios/paginas-folios.component';
 import { FormularioEdicionPaginaComponent } from './components/administrador-general/formulario-edicion-pagina/formulario-edicion-pagina.component';
+import { NgxDocViewerModule } from "ngx-doc-viewer";
+import { ConsultarLibrosFinalesComponent } from './components/administrador-general/consultar-libros-finales/consultar-libros-finales.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -155,6 +160,7 @@ import { FormularioEdicionPaginaComponent } from './components/administrador-gen
     FormularioEdicionLibrosComponent,
     PaginasFoliosComponent,
     FormularioEdicionPaginaComponent,
+    ConsultarLibrosFinalesComponent,
   ],
   imports: [
     BrowserModule,
@@ -191,6 +197,10 @@ import { FormularioEdicionPaginaComponent } from './components/administrador-gen
     RouterModule,
     CommonModule,
     NgbCollapseModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    NgxDocViewerModule,
+    NgxExtendedPdfViewerModule
   ],
   providers: [SidenavService],
   bootstrap: [AppComponent]

@@ -9,7 +9,7 @@
             <mat-label style="font-size: 14px;">Tipo de página</mat-label>
             <div class="mat-form-field-wrapper">
               <mat-select [(value)]="tipoPagina" style="font-size: 14px;">
-                <mat-option *ngFor="let calendario of calendario" [value]="tipoPagina">{{tipoPagina}} </mat-option>
+                <mat-option *ngFor="let tipoDePagina of tiposPagina" [value]="tipoDePagina.id_tipo_pagina">{{tipoDePagina.codigo}} </mat-option>
               </mat-select>
             </div>
           </mat-form-field>
@@ -25,7 +25,7 @@
               <mat-label style="font-size: 14px;">Nº de página</mat-label>
               <div class="mat-form-field-wrapper">
                 <mat-select [(value)]="numeroPagina" style="font-size: 14px;">
-                  <mat-option *ngFor="let sede of sedes" [value]="numeroPagina">{{numeroPagina}} </mat-option>
+                  <mat-option *ngFor="let numero of numerosPagina" [value]="numero">{{numero}} </mat-option>
                 </mat-select>
               </div>
             </mat-form-field>
@@ -49,7 +49,7 @@
       </form>
       <div>
         <mat-dialog-actions style="min-height: 78px; padding-top: 0; margin-top: -13px; margin-right: -10px;" align="end">
-          <button style="background-color: #ffeab0;" mat-button [mat-dialog-close]="true">Guardar</button>
+          <button style="background-color: #ffeab0;" mat-button (click)="guardarCambios()">Guardar</button>
           <button style="border: solid; border-width: thin; border-color: #59320f; background-color: #59320f; color: white !important;" mat-button mat-dialog-close>Salir</button>
         </mat-dialog-actions>
       </div>

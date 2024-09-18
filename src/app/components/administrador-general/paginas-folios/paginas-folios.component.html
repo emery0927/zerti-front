@@ -1,40 +1,61 @@
-<div style="text-align: left; padding-top: 1.5rem;">
-  <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
-    <mat-label style="font-size: 16px; color: #59320f;">Entidad Territorial</mat-label>
-    <mat-select tabIndex="0" role="combobox" (selectionChange)="onEntidadTerritorialChange($event)" [value]="2">
-      <mat-option *ngFor="let entidadTerritorial of entidadesTerritoriales.slice(1);" [value]="entidadTerritorial.id_et">{{entidadTerritorial.nombre_et}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field style="max-width: 100%; width: 359px; margin-left: 10px;" appearance="fill" class="ancho-instituciones specific-select-input">
-    <mat-label style="font-size: 16px; color: #59320f;">Nombre de Institución Educativa</mat-label>
-    <mat-select tabIndex="1" role="combobox" (selectionChange)="onInstitucionChange($event)" [value]="1">
-      <mat-option *ngFor="let institucion of institucionesPorET" [value]="institucion.id_ie">{{institucion.nombre_c}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div style="text-align: left;">
-  <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
-    <mat-label style="font-size: 16px; color: #59320f;">Año Lectivo</mat-label>
-    <mat-select tabIndex="2" role="combobox" [value]="1">
-      <mat-option *ngFor="let anio of anios" [value]="anio.id_anio">{{anio.annio_lectivo}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field style="max-width: 100%; width: 359px; margin-left: 10px;" appearance="fill" class="ancho-instituciones specific-select-input">
-    <mat-label style="font-size: 16px; color: #59320f;">Nombre de Sede</mat-label>
-    <mat-select tabIndex="3" role="combobox" (selectionChange)="onInstitucionChange($event)" [value]="1">
-      <mat-option *ngFor="let sede of sedesPorInstitucion" [value]="sede.id_sede">{{sede.nombre_sede}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field style="width: 339px;" appearance="fill" class="ancho-igual specific-select-input">
-    <mat-label style="font-size: 16px; color: #59320f;">Libro No.</mat-label>
-    <mat-select tabIndex="4" role="combobox" [value]="1">
-      <mat-option *ngFor="let libro of libros" [value]="libro.id_libro_valoracion_final">{{libro.numero}}&nbsp; {{libro.descripcion_corta}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+<mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
+<div style="display: flex;">
+  <div>
+    <div style="text-align: left; padding-top: 1.5rem;">
+      <mat-form-field appearance="fill" class="ancho-igual specific-select-input padding-izquierdo-modulo">
+        <mat-label style="font-size: 16px; color: #59320f;">Entidad Territorial</mat-label>
+        <mat-select tabIndex="0" role="combobox" (selectionChange)="onEntidadTerritorialChange($event)" [value]="2">
+          <mat-option *ngFor="let entidadTerritorial of entidadesTerritoriales.slice(1);" [value]="entidadTerritorial.id_et">{{entidadTerritorial.nombre_et}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="max-width: 100%; width: 285px; margin-left: 10px;" appearance="fill" class="ancho-instituciones specific-select-input">
+        <mat-label style="font-size: 16px; color: #59320f;">Nombre de Institución Educativa</mat-label>
+        <mat-select tabIndex="1" role="combobox" (selectionChange)="onInstitucionChange($event)" [value]="1">
+          <mat-option *ngFor="let institucion of institucionesPorET" [value]="institucion.id_ie">{{institucion.nombre_c}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div style="text-align: left;">
+      <mat-form-field appearance="fill" class="ancho-igual specific-select-input padding-izquierdo-modulo">
+        <mat-label style="font-size: 16px; color: #59320f;">Año Lectivo</mat-label>
+        <mat-select tabIndex="2" role="combobox" [value]="1">
+          <mat-option *ngFor="let anio of anios" [value]="anio.id_anio">{{anio.annio_lectivo}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="max-width: 100%; width: 285px; margin-left: 10px;" appearance="fill" class="ancho-instituciones specific-select-input">
+        <mat-label style="font-size: 16px; color: #59320f;">Nombre de Sede</mat-label>
+        <mat-select tabIndex="3" role="combobox" (selectionChange)="onInstitucionChange($event)" [value]="1">
+          <mat-option *ngFor="let sede of sedesPorInstitucion" [value]="sede.id_sede">{{sede.nombre_sede}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 424px;" appearance="fill" class="ancho-igual specific-select-input padding-izquierdo-libros">
+        <mat-label style="font-size: 16px; color: #59320f;">Libro No.</mat-label>
+        <mat-select tabIndex="4" role="combobox" [value]="1">
+          <mat-option *ngFor="let libro of libros" [value]="libro.id_libro_valoracion_final">{{libro.numero}}&nbsp; {{libro.descripcion_corta}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div style="margin-top: 1.5rem; margin-left: 5.6rem; height: 826px; max-height: 826px;">
+    <mat-card class="ancho-card-vista-archivo altura-card-vista-archivo" style="box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0);
+    border: solid; border-color: #959595; border-width: thin; width:600px;height:826px;">
+      <mat-card-content class="card-content" style="overflow-y: hidden; overflow-x: hidden ; height: 826px; max-height: 826px; align-content: center;">
+        <p *ngIf="pdfSrc.length === 0">Vista previa de archivos</p>
+        <ngx-doc-viewer class="altura-doc-viewer" *ngIf="pdfSrc.length > 0"
+        [url]="pdfSrc"
+        zoom="auto"
+        viewer="pdf"
+        style="width:600px;height:826px;"
+        disableContent="all"
+        ></ngx-doc-viewer>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
 
-<div style="display: flex;">
-  <div style="max-width: 425px;" class="mat-elevation-z8">
+<div class="padding-izquierdo-modulo contenedor-tablas" style="display: flex; margin-top: -667px; ">
+  <div style="max-width: 427px; height: 670px !important; border-radius: 5px; border: solid; border-color: #959595; border-width: thin;"
+  class="mat-elevation-z8">
     <table mat-table [dataSource]="selectedPaginas" multiTemplateDataRows class="full-width-table">
       <!-- Pagina - Columna -->
       <ng-container matColumnDef="pagina">
@@ -44,7 +65,7 @@
       <!-- Tipo - Columna -->
       <ng-container matColumnDef="tipo">
         <th style="padding: 0px 0px 0px 25px;" class="header-style header-codigo" role="columnheader" mat-header-cell *matHeaderCellDef>Tipo</th>
-        <td class="row-style cursor-pointer cell-numero-libros texto-tabla-libro" mat-cell *matCellDef="let element">{{element.tipo_pagina}}</td>
+        <td class="row-style cursor-pointer cell-numero-libros texto-tabla-libro" mat-cell *matCellDef="let element">{{element.tipo_pagina.codigo}}</td>
       </ng-container>
       <!-- Archivo PDF - Columna -->
       <ng-container matColumnDef="nombre_archivo">
@@ -62,8 +83,7 @@
       <!-- Opciones - Columna -->
       <ng-container matColumnDef="opciones">
         <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef [ngClass]="{'align-right': true}">
-            <button mat-button  style="cursor: inherit; background-color: transparent; border: none;">
-              <mat-icon style="color: #59320f; margin-right: -39px; font-size: 21px;">more_vert</mat-icon>
+            <button mat-button  style="cursor: inherit; background-color: transparent; border: none; height: 36px !important;">
             </button>
         </th>
         <td mat-cell *matCellDef="let element">
@@ -88,7 +108,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="getClaseFila(row)"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="getClaseFila(row)" [class.selected]="selectedTableItem === row" (click)="selectItem(row, 'tabla')"></tr>
     </table>
 
     <ng-container *ngIf="selectedPaginas.length == 0">
@@ -112,19 +132,20 @@
   </div>
 
   <div class="file-input-container">
-    <mat-card style="width: 425px; height: 48px; border: solid; border-color: #959595; border-width: thin;">
+    <mat-card class="ancho-cargar-archivos" style="width: 425px; height: 48px; border: solid; border-color: #959595; border-width: thin;">
       <mat-card-content style="padding: 0; display: flex;">
         <input type="file" #fileInput webkitdirectory multiple (change)="onFileChange($event)">
         <button mat-button (click)="fileInput.click()">
           <mat-icon style="color: #59320f;">drive_file_move</mat-icon>
         </button>
-        <span>{{ selectedPath || 'No se ha seleccionado ninguna carpeta' }}</span>
+        <span style="margin-left: -15px;">{{ selectedPath || 'No se ha seleccionado ninguna carpeta' }}</span>
         <!-- <button mat-button matTooltip="Recargar carpeta" style="margin-left: 49px; justify-content: end;" (click)="fileInput.click()">
           <mat-icon style="margin: 0; color: #59320f;">sync</mat-icon>
         </button> -->
       </mat-card-content>
     </mat-card>
-    <mat-card style="width: 425px; margin-bottom: 10px; margin-right: 10px; border: solid; border-color: #959595; border-width: thin; height: 500px;">
+    <mat-card class="ancho-lista-archivos" style="width: 425px; margin-bottom: 10px; margin-right: 10px; border: solid; border-color: #959595; border-width: thin; height: 614px;
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0);">
       <mat-card-header style="padding: 0;">
         <div style="display: flex; align-content: center; background-color: #e1d1bc; height: 40px; width: 100%;">
           <mat-checkbox (change)="toggleAllSelection($event)" [checked]="allSelected" matTooltip="Seleccionar todos" class="checkbox-todos"></mat-checkbox>
@@ -135,7 +156,7 @@
       </mat-card-header>
       <mat-card-content class="card-content">
         <mat-list>
-          <mat-list-item class="texto-archivos" *ngFor="let pagina of paginas; let i = index">
+          <mat-list-item (click)="selectItem(pagina, 'lista')" class="texto-archivos" *ngFor="let pagina of paginas; let i = index" [class.selected]="selectedListItem === pagina">
             <mat-checkbox [(ngModel)]="selectedItems[i]" (change)="onSelectionChange(pagina, $event)" [disabled]="isPaginaSelected(pagina)" class="checkbox"></mat-checkbox>
             {{pagina.archivo_pdf}}
           </mat-list-item>
@@ -143,6 +164,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-
+  <div style="display: flex; flex-direction: column; align-self: center;">
+  </div>
 </div>
 

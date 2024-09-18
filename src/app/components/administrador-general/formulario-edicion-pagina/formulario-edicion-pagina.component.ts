@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 import { CrearSedeComponent } from '../crear-sede/crear-sede.component';
 import { EditEducationalInstitutionComponent } from '../edit-educational-institution/edit-educational-institution.component';
 import { EditarSedeComponent } from '../editar-sede/editar-sede.component';
+import { TipoPagina } from 'src/app/models/tipo-pagina';
+import { Pagina } from 'src/app/models/pagina';
 
 @Component({
   selector: 'app-formulario-edicion-pagina',
@@ -25,18 +27,32 @@ export class FormularioEdicionPaginaComponent implements AfterViewInit, OnInit {
   numeroPagina!: string;
   tipoPagina!: string;
   nombreArchivo!: string;
+  numerosPagina: string[] = [];
 
 
   //dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   //displayedColumns: string[] = ['name', 'actions'];
 
-  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public dataPagina:any) {
+  constructor(public dialogRef: MatDialogRef<FormularioEdicionPaginaComponent>, @Inject(MAT_DIALOG_DATA) public dataPagina:any) {
+    this.numeroPagina = this.dataPagina.pagina.numero;
+    this.tipoPagina = this.dataPagina.pagina.tipo_pagina.id_tipo_pagina;
+    this.nombreArchivo = this.dataPagina.pagina.archivo_pdf;
     //this.dataSource.data = TREE_DATA;
     this.itemsPerPage = 5;
     this.currentPage = 0
     this.groupedData = this.groupByYear(this.libros);
   }
+
+  tiposPagina: TipoPagina[] = [
+    {id_tipo_pagina: 1, tipo_pagina: 'Portada y Contraportada', codigo: 'P'},
+    {id_tipo_pagina: 2, tipo_pagina: 'Lista de Estudiantes por Grupo o Grado', codigo: 'L'},
+    {id_tipo_pagina: 3, tipo_pagina: 'Recuperaciones', codigo: 'R'},
+    {id_tipo_pagina: 4, tipo_pagina: 'Novedades Académicas', codigo: 'N'},
+    {id_tipo_pagina: 5, tipo_pagina: 'Promoción', codigo: 'M'},
+    {id_tipo_pagina: 6, tipo_pagina: 'Otro uso', codigo: 'O'},
+    {id_tipo_pagina: 7, tipo_pagina: 'Folio de Certificado, ninguna letra', codigo: 'F'}
+  ]
 
   libros: LibroValoracionFinal[] = [
     {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[0],
@@ -98,6 +114,19 @@ export class FormularioEdicionPaginaComponent implements AfterViewInit, OnInit {
   filterDictionary= new Map<string,string>();
 
   groupedData: any[];
+
+
+  guardarCambios(): void {
+    const updatedPagina: Pagina = {
+      ...this.dataPagina.pagina,
+      tipo_pagina: this.tiposPagina.find(t => t.id_tipo_pagina === this.dataPagina.pagina.tipo_pagina.id_tipo_pagina),
+      numero: this.numeroPagina,
+      archivo_pdf: this.nombreArchivo
+    };
+    console.log(updatedPagina);
+
+    this.dialogRef.close(updatedPagina);
+  }
 
 
   agruparPorAnnioYSede(): any {
@@ -192,8 +221,17 @@ export class FormularioEdicionPaginaComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     console.log(this.dataPagina);
     this.numeroPagina = this.dataPagina.pagina.numero;
-    this.tipoPagina = this.dataPagina.pagina.tipo_pagina;
+    this.tipoPagina = this.dataPagina.pagina.tipo_pagina.id_tipo_pagina;
     this.nombreArchivo = this.dataPagina.pagina.archivo_pdf;
+    console.log(this.dataPagina.pagina.tipo_pagina);
+    console.log(this.tiposPagina);
+
+    for (let i = 1; i <= this.dataPagina.paginas.length; i++) {
+        this.numerosPagina.push(i.toString().padStart(2, '0'));
+    }
+
+    console.log(this.numerosPagina);
+
 
     /* this.anioLectivo = this.dataLibro.libro.annio_lectivo;
     this.calendarioSeleccionado = this.dataLibro.libro.calendario;
@@ -271,22 +309,6 @@ export class FormularioEdicionPaginaComponent implements AfterViewInit, OnInit {
       }
     });
   }
-
-  editar(institucion: HTMLElement) {
-    const dialogRef = this.dialog.open(EditEducationalInstitutionComponent, {restoreFocus: false, data:{institucion} ,disableClose: true});
-    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
-  }
-
-  abrirEdicionSedes(sede: HTMLElement, colegio: HTMLElement) {
-    const dialogRef = this.dialog.open(EditarSedeComponent, {restoreFocus: true, data: {sede, colegio}, disableClose: true});
-    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
-  }
-
-  abrirCreacionSedes(colegio: HTMLElement) {
-    const dialogRef = this.dialog.open(CrearSedeComponent, {restoreFocus: true, data: colegio, disableClose: true});
-    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
-  }
-
   addFilter() {
     this.showFormField = !this.showFormField;
     if (this.showFormField) {

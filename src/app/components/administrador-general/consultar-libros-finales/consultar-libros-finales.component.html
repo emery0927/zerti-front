@@ -1,0 +1,72 @@
+<div style="display: flex; height: 868px; width: 1842px;">
+  <!-- Columna izquierda con los mat-select -->
+  <div style="display: flex; flex-direction: column; padding-right: 1rem; margin-top: 36px;">
+    <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
+      <mat-label style="font-size: 16px; color: #59320f;">Entidad Territorial</mat-label>
+      <mat-select tabIndex="0" role="combobox" (selectionChange)="onEntidadTerritorialChange($event)" [value]="2">
+        <mat-option *ngFor="let entidadTerritorial of entidadesTerritoriales.slice(1);" [value]="entidadTerritorial.id_et">{{entidadTerritorial.nombre_et}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="ancho-instituciones specific-select-input">
+      <mat-label style="font-size: 16px; color: #59320f;">Nombre de Institución Educativa</mat-label>
+      <mat-select tabIndex="1" role="combobox" (selectionChange)="onInstitucionChange($event)" [value]="1">
+        <mat-option *ngFor="let institucion of institucionesPorET" [value]="institucion.id_ie">{{institucion.nombre_c}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 200px;" class="ancho-instituciones specific-select-input">
+      <mat-label style="font-size: 16px; color: #59320f;">Año Lectivo</mat-label>
+      <mat-select tabIndex="2" role="combobox" [value]="1">
+        <mat-option *ngFor="let anio of anios" [value]="anio.id_anio">{{anio.annio_lectivo}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="ancho-instituciones specific-select-input">
+      <mat-label style="font-size: 16px; color: #59320f;">Nombre de Sede</mat-label>
+      <mat-select tabIndex="1" role="combobox" (selectionChange)="onInstitucionChange($event)" [value]="1">
+        <mat-option *ngFor="let sede of sedesPorInstitucion" [value]="sede.id_sede">{{sede.nombre_sede}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="ancho-instituciones specific-select-input">
+      <mat-label style="font-size: 16px; color: #59320f;">Libro No.</mat-label>
+      <mat-select tabIndex="4" role="combobox" [value]="1">
+        <mat-option *ngFor="let libro of libros" [value]="libro.id_libro_valoracion_final">{{libro.numero}}&nbsp; {{libro.descripcion_corta}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Visor de PDF en la derecha -->
+  <div style="flex-grow: 1;">
+    <ngx-extended-pdf-viewer
+      [src]="'assets/files/Libro_prueba.pdf'"
+      style="width: 500px; height: 600px;"
+      [zoom]="'69%'"
+      [pageViewMode]="'book'"
+      [textLayer]="false"
+      [showToolbar]="true"
+      [showSidebarButton]="false"
+      [showFindButton]="false"
+      [showPagingButtons]="true"
+      [showPageNumber]="true"
+      [showPresentationModeButton]="false"
+      [showOpenFileButton]="false"
+      [showPrintButton]="false"
+      [showDownloadButton]="false"
+      [showRotateButton]="false"
+      [showZoomButtons]="false"
+      [showDrawEditor]="false"
+      [showHighlightEditor]="false"
+      [showTextEditor]="false"
+      [showStampEditor]="false"
+      [showSecondaryToolbarButton]="false"
+      [handTool]="false"
+      [customToolbar]="ajustesPaginador">
+    </ngx-extended-pdf-viewer>
+    <ng-template #ajustesPaginador>
+      <pdf-paging-area></pdf-paging-area>
+    </ng-template>
+    <ng-template #viewerContainer></ng-template>
+  </div>
+</div>

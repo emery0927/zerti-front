@@ -1,6 +1,6 @@
 <!-- Esta división contiene los inputs que realizan un filtro en la tabla de Instituciones Educativas
                             con base a la Entidad Territorial y el Nombre -->
-<div class="select">
+<div class="select padding-izquierdo-modulo padding-derecho-modulo">
   <mat-form-field style="max-width: 25%;" appearance="fill" class=" ancho-igual specific-select-input" >
     <mat-label style="font-size: 16px;  color: #59320f;">Entidad Territorial</mat-label>
     <mat-select class="" tabIndex="0" role="combobox" #entidadSeleccionada (selectionChange)="onSelect($event)" [value]="1">
@@ -33,28 +33,29 @@
     </div>
 </div>
 
-<div class="cantidad-instituciones-educativas">
+<div class="cantidad-instituciones-educativas padding-izquierdo-modulo padding-derecho-modulo">
   <p style="text-align: end;font-size: 13.58px; color: #59320f;">{{data.filteredData.length}} Institucion(es) Educativa(s)</p>
 </div>
 <!-------------------------------------------------------------------------------------------------------------------------------->
 
 <!-- Esta división contiene la tabla con las siguientes columnas: NOMBRE DE INSTITUCIÓN EDUCATIVA / EN CUSTODIA | NOMBRE CORTO
   | CÓDIGO | NIT | UBICACIÓN |ZONA | CLASE | OPCIONES, con su respectivo páginador -->
-<div  class="mat-elevation-z8">
-  <!-- Esta división contiene el páginador de la tabla con su resectiva configuración -->
-  <table mat-table [dataSource]="data" multiTemplateDataRows>
+  <div class="padding-izquierdo-modulo padding-derecho-modulo">
+    <div  class="mat-elevation-z8">
+      <!-- Esta división contiene el páginador de la tabla con su resectiva configuración -->
+      <table mat-table [dataSource]="data" multiTemplateDataRows>
 
-    <!-- Nombre de Institución Educativa - Columna -->
-    <ng-container matColumnDef="nombre_ie">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef>
-        Nombre de Institución Educativa / En Custodia </th>
-      <td [innerHTML]="replaceEspacios(element.nombre_ie)" class="row-style espacios cursor-pointer" role="row" mat-cell *matCellDef="let element"></td>
-    </ng-container>
+        <!-- Nombre de Institución Educativa - Columna -->
+        <ng-container matColumnDef="nombre_ie">
+          <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef>
+            Nombre de Institución Educativa / En Custodia </th>
+            <td [innerHTML]="replaceEspacios(element.nombre_ie)" class="row-style espacios cursor-pointer" role="row" mat-cell *matCellDef="let element"></td>
+          </ng-container>
 
-    <!-- Nombre Corto - Columna -->
-    <ng-container matColumnDef="nombre_c">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Nombre Corto </th>
-      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.nombre_c}} </td>
+          <!-- Nombre Corto - Columna -->
+          <ng-container matColumnDef="nombre_c">
+            <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Nombre Corto </th>
+            <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.nombre_c}} </td>
     </ng-container>
 
     <!-- Código - Columna -->
@@ -90,87 +91,88 @@
     <!-- Opciones - Columna -->
     <ng-container matColumnDef="options">
       <th class="header-style" style="z-index: 1;" role="columnheader" mat-header-cell *matHeaderCellDef [ngClass]="{'align-right': true}"
-       matTooltip="Debe de seleccionar una (1) Entidad Territorial" [matTooltipDisabled]="!mostrarTooltip">
+      matTooltip="Debe de seleccionar una (1) Entidad Territorial" [matTooltipDisabled]="!mostrarTooltip">
         <div style="margin-right: -20px;">
           <button [disabled]="habilitarCrear" mat-button  [matMenuTriggerFor]="menu"
           style="cursor: pointer;background-color: transparent; border: none;">
-            <span>
-              <mat-icon style="color: #59320f;">more_vert</mat-icon>
-            </span>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="abrirCrearIE(entidadSeleccionada)">Crear IE
-                <mat-icon>add_circle_outline</mat-icon>
-              </button>
-              <button mat-menu-item (click)="showOficials()">Ver Oficiales
-                <mat-icon>visibility</mat-icon>
-              </button>
-              <button mat-menu-item (click)="showIdle()">Ver Inactivas
-                <mat-icon>disabled_visible</mat-icon>
-              </button>
-              <button mat-menu-item (click)="showOnCustody()">Ver en Custodia
-                <mat-icon>cast_for_education</mat-icon>
-              </button>
-            </mat-menu>
+          <span>
+            <mat-icon style="color: #59320f;">more_vert</mat-icon>
+          </span>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="abrirCrearIE(entidadSeleccionada)">Crear IE
+              <mat-icon>add_circle_outline</mat-icon>
+            </button>
+            <button mat-menu-item (click)="showOficials()">Ver Oficiales
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-menu-item (click)="showIdle()">Ver Inactivas
+              <mat-icon>disabled_visible</mat-icon>
+            </button>
+            <button mat-menu-item (click)="showOnCustody()">Ver en Custodia
+              <mat-icon>cast_for_education</mat-icon>
+            </button>
+          </mat-menu>
+        </button>
+      </div>
+    </th>
+    <td class="cursor-pointer" mat-cell *matCellDef="let element" [ngClass]="{'align-right': true}">
+      <div style="margin-right: -20px;">
+        <button mat-button [matMenuTriggerFor]="menu" style="cursor: pointer; background-color: transparent; border: none;"
+        aria-haspopup="true">
+        <span>
+          <mat-icon style="color: #8c8c8c;">more_horiz</mat-icon>
+        </span>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editar(element)">Editar
+            <mat-icon>create</mat-icon>
           </button>
-        </div>
-      </th>
-      <td class="cursor-pointer" mat-cell *matCellDef="let element" [ngClass]="{'align-right': true}">
-        <div style="margin-right: -20px;">
-          <button mat-button [matMenuTriggerFor]="menu" style="cursor: pointer; background-color: transparent; border: none;"
-          aria-haspopup="true">
-            <span>
-              <mat-icon style="color: #8c8c8c;">more_horiz</mat-icon>
-            </span>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="editar(element)">Editar
-                <mat-icon>create</mat-icon>
-              </button>
-              <button mat-menu-item (click)="eliminar()">Eliminar
-                <mat-icon>delete</mat-icon>
-              </button>
-              <button mat-menu-item (click)="abrirCreacionSedes(element)">Crear Sede
-                <mat-icon>home_filed</mat-icon>
-              </button>
-            </mat-menu>
-
+          <button mat-menu-item (click)="eliminar()">Eliminar
+            <mat-icon>delete</mat-icon>
           </button>
-        </div>
-       </td>
-      </ng-container>
+          <button mat-menu-item (click)="abrirCreacionSedes(element)">Crear Sede
+            <mat-icon>home_filed</mat-icon>
+          </button>
+        </mat-menu>
 
-      <ng-container matColumnDef="expandedDetail">
-        <td style="background-color: #f9f9f9;" [ngClass]="{'expand-hover': true}" mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-          <div class="element-detail"
-               [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-              <div style="display: flex; align-items: center;">
-                <mat-list role="list">
-                  <span *ngFor="let item of element.sedes" (click)="abrirEdicionSedes(item, element)">
-                    <mat-list-item style="cursor: pointer;" class="item-lista" role="listitem">{{item.orden}}&nbsp;&nbsp;{{item.nombre_sede}}</mat-list-item>
-                  </span>
-                  </mat-list>
-              </div>
-              <div *ngIf="element.sedes.length === 0" style="display: flex; align-items: center;">
-                <p>No hay sedes</p>
-              </div>
-            </div>
-        </td>
-      </ng-container>
+      </button>
+    </div>
+  </td>
+</ng-container>
+
+<ng-container matColumnDef="expandedDetail">
+  <td style="background-color: #f9f9f9;" [ngClass]="{'expand-hover': true}" mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+    <div class="element-detail"
+    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+    <div style="display: flex; align-items: center;">
+      <mat-list role="list">
+        <span *ngFor="let item of element.sedes" (click)="abrirEdicionSedes(item, element)">
+          <mat-list-item style="cursor: pointer;" class="item-lista" role="listitem">{{item.orden}}&nbsp;&nbsp;{{item.nombre_sede}}</mat-list-item>
+        </span>
+      </mat-list>
+    </div>
+    <div *ngIf="element.sedes.length === 0" style="display: flex; align-items: center;">
+      <p>No hay sedes</p>
+    </div>
+  </div>
+</td>
+</ng-container>
 
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let element; columns: displayedColumns;"
-      class="example-element-row"
-      [class.example-expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element">
-  </tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-    </table>
-    <!-- Contenedor que muestra mensaje si el filtro no arroja resultados -->
-    <ng-container *ngIf="data.filteredData.length == 0">
-     <div class="filter-empty">
-       <img class="img-empty-data" src="../../../assets/img/empty-data.png" alt="">
-       <h1 class="h1-empty-data">No hay registros.</h1>
-     </div>
-  </ng-container>
+<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+<tr mat-row *matRowDef="let element; columns: displayedColumns;"
+class="example-element-row"
+[class.example-expanded-row]="expandedElement === element"
+(click)="expandedElement = expandedElement === element ? null : element">
+</tr>
+<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+<!-- Contenedor que muestra mensaje si el filtro no arroja resultados -->
+<ng-container *ngIf="data.filteredData.length == 0">
+  <div class="filter-empty">
+    <img class="img-empty-data" src="../../../assets/img/empty-data.png" alt="">
+    <h1 class="h1-empty-data">No hay registros.</h1>
+  </div>
+</ng-container>
+</div>
 </div>
 <!-------------------------------------------------------------------------------------------------------------------------------->

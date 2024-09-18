@@ -66,6 +66,12 @@ body {
   }
 }
 
+.mat-mdc-tab-header {
+  --mat-tab-header-label-text-font: Roboto, sans-serif;
+  --mat-tab-header-label-text-size: 0.9rem;
+  --mdc-secondary-navigation-tab-container-height: 40px;
+}
+
 .mdc-tab__text-label{
   font-weight: 600;
   color: #573509;
@@ -105,6 +111,11 @@ body {
 
 }
 
+.mat-mdc-progress-bar {
+  --mdc-linear-progress-active-indicator-color: #59320f;
+  --mdc-linear-progress-track-color: #59320f3a;
+}
+
 .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
   color: #8f5b35;
 }
@@ -130,11 +141,6 @@ body {
 
 .mat-mdc-tab-labels {
   background-color:#c3994ca6;
-}
-
-.mat-mdc-tab-body-wrapper {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 
 .mat-mdc-list-base {
@@ -219,4 +225,13 @@ mat-paginator {
   color:  #573509 !important;
   padding: 0 16px 0 16px !important;
   height: 40px !important;
+}
+
+ngx-extended-pdf-viewer #viewerContainer {
+  top: 45px !important;
+}
+
+ngx-extended-pdf-viewer #numPages {
+  word-spacing: 3px;
+  margin-left: 4px;
 }

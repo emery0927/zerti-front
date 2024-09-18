@@ -20,6 +20,9 @@ import { FormularioCreacionLibrosComponent } from '../formulario-creacion-libros
 import { FormularioEdicionLibrosComponent } from '../formulario-edicion-libros/formulario-edicion-libros.component';
 import { Pagina } from 'src/app/models/pagina';
 import { FormularioEdicionPaginaComponent } from '../formulario-edicion-pagina/formulario-edicion-pagina.component';
+import { TipoPagina } from 'src/app/models/tipo-pagina';
+
+//import * as pdfjs from 'pdfjs-dist/build/pdf';
 
 export interface AnioLectivo {
   id_anio: number;
@@ -54,67 +57,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
   constructor(public dialog: MatDialog) {
     this.itemsPerPage = 5;
     this.currentPage = 0
-    this.groupedData = this.groupByYear(this.libros);
   }
-
-
-  libros: LibroValoracionFinal[] = [
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[0],
-    numero: '1-1', descripcion_corta: 'Grados 6 a 9', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 750 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[1],
-    numero: '1-1', descripcion_corta: 'Grados 10 y 11', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 800 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2020', calendario: 'A', sede: SEDES_LICEO[2],
-    numero: '1-1', descripcion_corta: 'Grado 8', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 900 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2021', calendario: 'A', sede: SEDES_LICEO[3],
-    numero: '1-1', descripcion_corta: 'Grado 9', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 300 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[0],
-    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[4],
-      numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
-      cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[5],
-    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[6],
-      numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
-      cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[7],
-    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[8],
-    numero: '1-1', descripcion_corta: 'Grados 6 a 9', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 750 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[9],
-    numero: '1-1', descripcion_corta: 'Grados 10 y 11', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 800 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2020', calendario: 'A', sede: SEDES_LICEO[10],
-    numero: '1-1', descripcion_corta: 'Grado 8', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 900 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2021', calendario: 'A', sede: SEDES_LICEO[11],
-    numero: '1-1', descripcion_corta: 'Grado 9', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 300 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[11],
-    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[11],
-      numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
-      cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[11],
-    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[10],
-      numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
-      cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-    {id_libro_valoracion_final: 1, annio_lectivo: '2018', calendario: 'A', sede: SEDES_LICEO[9],
-    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
-    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
-
-  ]
 
   data = new MatTableDataSource<Pagina>();
 
@@ -165,7 +108,6 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
 
   filterDictionary= new Map<string,string>();
 
-  groupedData: any[];
 
   archivos: File[] = [];
   paginas: Pagina[] = [];
@@ -174,9 +116,20 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
   selectedPaginas: Pagina[] = [];
   selectedPaginasSet = new Set<number>();
   tempSelectedPaginas: Pagina[] = [];
+  tipoPaginaObject!: TipoPagina;
   allSelected = false;
 
+  selectedItem!: Pagina;
+  selectedListItem!: any;
+  selectedTableItem!: any;
+
+  expandirVisualizacion!: boolean;
+
+  pdfSrc = "";
+
   botonCopiarHabilitado = false;
+
+  isLoading: boolean = false;
 
   selectedPath: string | null = null;
 
@@ -185,10 +138,34 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     this.onEntidadTerritorialChange({value:2});
     this.onInstitucionChange({value:1});
     console.log(this.data.data);
-    this.agruparLibrosPorAnio();
   }
 
+  selectItem(item: Pagina, source: string) {
+    this.pdfSrc = "assets/files/"+item.archivo_pdf;
+    console.log(this.pdfSrc);
+
+
+
+    if (source === 'tabla') {
+      this.selectedTableItem = item;
+      this.selectedListItem = null;
+      console.log("entré a tabla");
+    } else if (source === 'lista') {
+      this.selectedListItem = item;
+      this.selectedTableItem = null;
+      console.log("entré a lista");
+    }
+
+  }
+
+  expandirVisualizacionPDF() {
+    this.expandirVisualizacion =!this.expandirVisualizacion;
+  }
+
+
   onFileChange(event: any): void {
+
+    this.pdfSrc = "";
 
     const input = event.target as HTMLInputElement;
     this.archivos = [];
@@ -214,15 +191,26 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
 
   }
 
+
+  tiposPagina: TipoPagina[] = [
+    {id_tipo_pagina: 1, tipo_pagina: 'Portada y Contraportada', codigo: 'P'},
+    {id_tipo_pagina: 2, tipo_pagina: 'Lista de Estudiantes por Grupo o Grado', codigo: 'L'},
+    {id_tipo_pagina: 3, tipo_pagina: 'Recuperaciones', codigo: 'R'},
+    {id_tipo_pagina: 4, tipo_pagina: 'Novedades Académicas', codigo: 'N'},
+    {id_tipo_pagina: 5, tipo_pagina: 'Promoción', codigo: 'M'},
+    {id_tipo_pagina: 6, tipo_pagina: 'Otro uso', codigo: 'O'},
+    {id_tipo_pagina: 7, tipo_pagina: 'Folio de Certificado, ninguna letra', codigo: 'F'}
+  ]
+
   getClaseFila(row: Pagina) {
     return {
-      'fila-portada': row.tipo_pagina === 'P',
-      'fila-lista-estudiantes': row.tipo_pagina === 'L',
-      'fila-folio': row.tipo_pagina === 'F',
-      'fila-recuperaciones': row.tipo_pagina === 'R',
-      'fila-novedades-academicas': row.tipo_pagina === 'N',
-      'fila-promocion': row.tipo_pagina === 'M',
-      'fila-otro-uso': row.tipo_pagina === 'O'
+      'fila-portada': row.tipo_pagina.codigo === 'P',
+      'fila-lista-estudiantes': row.tipo_pagina.codigo === 'L',
+      'fila-folio': row.tipo_pagina.codigo === 'F',
+      'fila-recuperaciones': row.tipo_pagina.codigo === 'R',
+      'fila-novedades-academicas': row.tipo_pagina.codigo === 'N',
+      'fila-promocion': row.tipo_pagina.codigo === 'M',
+      'fila-otro-uso': row.tipo_pagina.codigo === 'O'
     };
 
   }
@@ -299,42 +287,49 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
 
   createPaginaFromFile(file: File, id: number): Pagina {
     const fileName = file.name;
-    const tipoPagina = fileName.charAt(fileName.length - 5).match(/[A-Z]/i) ? fileName.charAt(fileName.length - 5) : 'F';
+    const tipoPaginaCodigo = fileName.charAt(fileName.length - 5).match(/[A-Z]/i) ? fileName.charAt(fileName.length - 5) : 'F';
+    const tipoPagina = this.tiposPagina.find(tp => tp.codigo === tipoPaginaCodigo) || this.tiposPagina.find(tp => tp.codigo === 'F');
+
+    console.log(tipoPaginaCodigo);
+
+ /*    const tipoPagina: TipoPagina = {
+      id_tipo_pagina: id, // Asignar un ID único o manejarlo de manera diferente según las necesidades
+      tipo_pagina: tipoPaginaCodigo,
+      codigo: tipoPaginaCodigo
+    } */
     return {
       id_pagina: id,
       numero: id.toString(),
-      tipo_pagina: tipoPagina,
+      tipo_pagina: tipoPagina!,
       archivo_pdf: fileName,
       estado: false
     };
   }
 
   guardarPaginas() {
-    this.selectedPaginas.forEach(pagina => {
-      pagina.estado = true;
+    this.isLoading = true;
+
+    const requests = [
+      this.simulateRequest(2000),
+      this.simulateRequest(3000),
+      this.simulateRequest(4000)
+    ];
+
+    Promise.all(requests).finally(() => {
+      this.isLoading = false;
+      this.selectedPaginas.forEach(pagina => {
+        pagina.estado = true;
+      });
     });
+
   }
 
-  agruparPorAnnioYSede(): any {
-    const agrupado: { [annio: string]: { [sedeId: number]: LibroValoracionFinal[], cantidad_libros: number } } = {};
-
-    this.libros.forEach(libro => {
-      const { annio_lectivo, sede } = libro;
-
-      if (!agrupado[annio_lectivo]) {
-        agrupado[annio_lectivo] = {cantidad_libros: 0 };
-      }
-
-      if (!agrupado[annio_lectivo][sede.id_sede]) {
-        agrupado[annio_lectivo][sede.id_sede] = [];
-      }
-
-      agrupado[annio_lectivo][sede.id_sede].push(libro);
-
+  simulateRequest(delay: number) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(null);
+      }, delay);
     });
-
-    return agrupado;
-
   }
 
   agruparPorSede(libros: LibroValoracionFinal[]): AgrupacionPorSede[] {
@@ -370,13 +365,6 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     console.log(resultado);
 
     return resultado;
-  }
-
-  agruparLibrosPorAnio(): void {
-    this.librosAgrupadosPorAnio = this.libros.reduce((acc: { [key: string]: LibroValoracionFinal[] }, libro) => {
-      (acc[libro.annio_lectivo] = acc[libro.annio_lectivo] || []).push(libro);
-      return acc;
-    }, {});
   }
 
   getAnios(): string[] {
@@ -506,9 +494,40 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
   }
 
   editar(pagina: HTMLElement) {
-    const dialogRef = this.dialog.open(FormularioEdicionPaginaComponent, {restoreFocus: false, data:{pagina} ,disableClose: true});
-    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
+    const dialogRef = this.dialog.open(FormularioEdicionPaginaComponent, {restoreFocus: false, data:{pagina, paginas: this.selectedPaginas} ,disableClose: true});
+    dialogRef.afterClosed().subscribe(
+      result => {
+        console.log(result);
+
+        if (result) {
+          this.actualizarPagina(result);
+        }
+      });
   }
+
+  actualizarPagina(paginaActualizada: Pagina) {
+
+    const indexPagina1 = this.paginas.findIndex(p => p.id_pagina === paginaActualizada.id_pagina);
+    const indexPagina2 = this.paginas.findIndex(p => p.numero === paginaActualizada.numero);
+
+    if (indexPagina1 !== -1) {
+      this.paginas[indexPagina2].numero = this.paginas[indexPagina1].numero;
+      this.paginas[indexPagina1] = paginaActualizada;
+      this.reorganizarPaginas();
+      this.selectedPaginas = [...this.paginas];
+    }
+  }
+
+  reorganizarPaginas() {
+    // Ordenar por número
+    this.paginas.sort((a, b) => parseInt(a.numero) - parseInt(b.numero));
+
+    // Renumerar las páginas después de la reorganización
+    this.paginas.forEach((pagina, index) => {
+      pagina.numero = (index+1).toString().padStart(2, '0');
+    });
+  }
+
 
   abrirEdicionSedes(sede: HTMLElement, colegio: HTMLElement) {
     const dialogRef = this.dialog.open(EditarSedeComponent, {restoreFocus: true, data: {sede, colegio}, disableClose: true});
@@ -559,6 +578,64 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
   replaceEspacios(texto: string) {
     return texto.replace(/ /g, '&nbsp');
   }
+
+  libros: LibroValoracionFinal[] = [
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[0],
+    numero: '1-1', descripcion_corta: 'Grados 6 a 9', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 750 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[1],
+    numero: '1-1', descripcion_corta: 'Grados 10 y 11', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 800 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[2],
+    numero: '1-1', descripcion_corta: 'Grado 8', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 900 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[3],
+    numero: '1-1', descripcion_corta: 'Grado 9', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 300 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[0],
+    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[4],
+      numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
+      cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[5],
+    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[6],
+      numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
+      cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[7],
+    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[8],
+    numero: '1-1', descripcion_corta: 'Grados 6 a 9', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 750 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[9],
+    numero: '1-1', descripcion_corta: 'Grados 10 y 11', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 800 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[10],
+    numero: '1-1', descripcion_corta: 'Grado 8', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 900 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[11],
+    numero: '1-1', descripcion_corta: 'Grado 9', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 300 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[11],
+    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[11],
+      numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
+      cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[11],
+    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[10],
+      numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
+      cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
+    {id_libro_valoracion_final: 1, annio_lectivo: '2019', calendario: 'A', sede: SEDES_LICEO[9],
+    numero: '1-1', descripcion_corta: 'Grado 3', observacion: 'observación',
+    cantidad_aprobo: 700, cantidad_desaprobo: 35, cantidad_folios: 150 },
+
+  ]
 
 
 }

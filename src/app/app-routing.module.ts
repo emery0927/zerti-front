@@ -21,7 +21,19 @@ import { InicioGestionOperacionalComponent } from './components/gestion-operacio
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/landing'
+  },
+  {
+    path: 'landing',
+    component: LandingComponent
+  },
+  /* {
+    path: 'app',
+    canActivate: [AuthGuard]
+  } */
   { path: 'home', component: HomeComponent },
   { path: 'educational-institutions', component: EducationalInstitutionsComponent },
   { path: 'students-users', component: StudentsUsersComponent },

@@ -108,10 +108,9 @@ table {
 
 .mat-mdc-table {
   width: 914px;
-  max-height: 600px;
+  max-height: 670px;
   overflow: auto;
-  height: 553px;
-
+  height: 666px;
 
   .mdc-data-table__header-cell {
     padding: 0px 0px 0px 0px;
@@ -125,6 +124,8 @@ table {
 }
 
 
+
+
 .header-style {
   background-color: #E1D1BC !important;
   color: #59320f;
@@ -135,12 +136,11 @@ table {
 }
 
 .full-width-table {
-  width: 100%;
+  width: 425px;
   table-layout: fixed;
   display: block;
   overflow-y: auto;
   scrollbar-color: #59320f #ffffff;
-
 }
 
 table {
@@ -153,6 +153,11 @@ mat-header-cell, mat-cell {
   text-overflow: ellipsis;
   white-space: nowrap;
   padding: 8px;
+}
+
+th.mat-header-cell {
+  height: 64px; /* Ajusta este valor según tus necesidades */
+  line-height: 64px; /* Asegura que el texto esté centrado verticalmente */
 }
 
 .mat-column-nombre_sede {
@@ -171,6 +176,11 @@ mat-header-cell, mat-cell {
   padding: 0 16px 0 16px;
   font-family: 'Lato', sans-serif !important;
   align-content: center;
+}
+
+.custom-table th.mat-header-cell {
+  height: 64px; /* Ajusta este valor según tus necesidades */
+  line-height: 64px; /* Centra el texto verticalmente */
 }
 
 .celda-ubicacion {
@@ -195,7 +205,7 @@ mat-header-cell, mat-cell {
 }
 
 tr.mat-mdc-row:hover {
-  background-color: #fff5c2;
+  background-color: #f3f3f3;
 }
 
 .mat-mdc-row:focus-visible {
@@ -314,7 +324,7 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .filter-empty {
-  margin-top: -350px;
+  margin-top: -410px;
 }
 
 .mat-cell.espacios {
@@ -423,8 +433,9 @@ tr.example-element-row:not(.example-expanded-row):hover {
   scrollbar-color: #59320f #ffffff;
 }
 
+
 .texto-archivos {
-  height: 25px;
+  height: 28px;
   text-align: left;
   padding-left: 6px;
   .mdc-list-item__primary-text {
@@ -435,6 +446,11 @@ tr.example-element-row:not(.example-expanded-row):hover {
   }
 }
 
+.texto-archivos:hover {
+  background-color: #f3f3f3;
+  color: #ffffff;
+}
+
 .texto-tabla-libro {
   text-align: center;
   padding: 0 0 0 25px;
@@ -443,6 +459,17 @@ tr.example-element-row:not(.example-expanded-row):hover {
 .texto-tabla-estado {
   padding: 0;
   padding-left: 20px;
+}
+
+.selected {
+  background-color: #e1d1bc !important;
+  --mdc-list-list-item-hover-state-layer-color: #cccccc9a;
+  --mdc-list-list-item-hover-state-layer-opacity: 0.3;
+  --mdc-list-list-item-focus-state-layer-color: transparent;
+  --mdc-list-list-item-focus-state-layer-opacity: 0.3;
+  --mdc-list-list-item-hover-label-text-color: #924d34;
+  --mdc-list-list-item-focus-label-text-color: #924d34;
+
 }
 
 .checkbox {
@@ -466,7 +493,57 @@ tr.example-element-row:not(.example-expanded-row):hover {
   padding-left: 6px;
 }
 
+.padding-izquierdo-modulo {
+  padding-left: 1.5rem;
+}
 
+@media (max-width: 1368px) {
+
+  .contenedor-tablas {
+    margin-top: -589px !important;
+    max-width: 330px !important;
+  }
+
+  .padding-izquierdo-libros {
+    padding-left: 1.5rem;
+    width: 534px !important;
+  }
+
+  .altura-card-vista-archivo {
+    height: 908px !important;
+  }
+
+  .full-width-table {
+    width: 328px !important;
+  }
+
+  .ancho-cargar-archivos {
+    width: 327px !important;
+  }
+
+  .ancho-lista-archivos {
+    width: 327px !important;
+  }
+
+  .ancho-card-vista-archivo {
+    width: 442px !important;
+    margin-right: 1.5rem !important;
+  }
+
+  .altura-doc-viewer {
+    height: 908px!important;
+    max-height: 908px !important;
+  }
+
+  .card-content {
+    height: 908px !important;
+    max-height: 908px !important;
+  }
+}
+
+.padding-derecho-modulo {
+  padding-right: 1.5rem;
+}
 
 
 .boton-copiar {
@@ -496,6 +573,12 @@ tr.example-element-row:not(.example-expanded-row):hover {
 
 input[type="file"] {
   display: none;
+}
+
+.mdc-list-item:focus {
+  outline: none;
+  background-color: #0000000e;
+  border-left: solid 8px #59320f;
 }
 
 button {

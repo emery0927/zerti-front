@@ -1,4 +1,9 @@
-<div *ngIf="inicioSesion">
+<div *ngIf="isLandingOrLogin()">
+  <app-navbar-landing></app-navbar-landing>
+  <app-landing></app-landing>
+</div>
+
+<div *ngIf="!isLandingOrLogin()">
     <mat-sidenav-container [hasBackdrop]="false" class="sidenav-container">
       <mat-sidenav #leftSidenav mode="side" opened>
         <app-sidebar *appRecarga="recarga"></app-sidebar>
@@ -9,8 +14,7 @@
       </mat-sidenav>
       <mat-sidenav-content [@onMainContentChange]="onSideNavChange ? 'open': 'close'">
         <div class="main_content">
-          <app-navbar *ngIf="inicioSesion" [sidenav]="sidenav">
-          </app-navbar>
+          <app-navbar [sidenav]="sidenav"></app-navbar>
           <div>
             <router-outlet></router-outlet>
           </div>

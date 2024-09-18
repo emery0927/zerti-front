@@ -163,6 +163,14 @@ mat-header-cell, mat-cell {
   width: 14%;
 }
 
+.padding-izquierdo-modulo {
+  padding-left: 1.5rem;
+}
+
+.padding-derecho-modulo {
+  padding-right: 1.5rem;
+}
+
 .row-style {
   color: #3d3d3d;
   font-weight: 400;
