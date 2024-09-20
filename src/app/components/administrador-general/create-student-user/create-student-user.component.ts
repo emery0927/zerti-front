@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatOptionModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 interface InstitutionsClasses {
   class: string;
@@ -25,6 +30,8 @@ interface VillageCenter {
 
 @Component({
   selector: 'app-create-student-user',
+  standalone: true,
+  imports: [MatDialogModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatCheckboxModule],
   templateUrl: './create-student-user.component.html',
   styleUrls: ['./create-student-user.component.css']
 })

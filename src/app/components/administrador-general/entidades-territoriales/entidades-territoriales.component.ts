@@ -1,11 +1,11 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSelectChange } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
@@ -14,9 +14,15 @@ import { EditEducationalInstitutionComponent } from '../edit-educational-institu
 import { TerritorialEntitiesFilter } from '../educational-institutions-management/educational-institutions-management.component';
 import { FormularioCreacionEntidadesComponent } from '../formulario-creacion-entidades/formulario-creacion-entidades.component';
 import { FormularioEdicionEntidadesComponent } from '../formulario-edicion-entidades/formulario-edicion-entidades.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-entidades-territoriales',
+  standalone: true,
+  imports: [MatTableModule, MatIconModule, MatMenuModule, MatCardModule, MatFormFieldModule, MatSelectModule, CommonModule],
   templateUrl: './entidades-territoriales.component.html',
   styleUrls: ['./entidades-territoriales.component.css']
 })

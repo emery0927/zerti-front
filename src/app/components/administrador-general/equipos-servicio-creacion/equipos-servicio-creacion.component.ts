@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { CreateStudentUserComponent } from '../create-student-user/create-student-user.component';
@@ -11,9 +11,16 @@ import { EditEducationalInstitutionComponent } from '../edit-educational-institu
 import { TerritorialEntitiesFilter } from '../educational-institutions-management/educational-institutions-management.component';
 import { FormularioCreacionEquiposComponent } from '../formulario-creacion-equipos/formulario-creacion-equipos.component';
 import { FormularioEdicionEquiposComponent } from '../formulario-edicion-equipos/formulario-edicion-equipos.component';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-equipos-servicio-creacion',
+  standalone: true,
+  imports: [MatTableModule, MatIconModule, MatMenuModule, MatCardModule, MatFormFieldModule, MatSelectModule, CommonModule],
   templateUrl: './equipos-servicio-creacion.component.html',
   styleUrls: ['./equipos-servicio-creacion.component.css']
 })

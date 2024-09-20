@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
@@ -10,9 +10,12 @@ import Swal from 'sweetalert2';
 import { CreateStudentUserComponent } from '../create-student-user/create-student-user.component';
 import { EditEducationalInstitutionComponent } from '../edit-educational-institution/edit-educational-institution.component';
 import { TerritorialEntitiesFilter } from '../educational-institutions-management/educational-institutions-management.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-editar-sede',
+  standalone: true,
+  imports: [MatFormFieldModule, MatDialogModule],
   templateUrl: './editar-sede.component.html',
   styleUrls: ['./editar-sede.component.css']
 })

@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, Injectable, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogConfig, MatDialogModule} from '@angular/material/dialog';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CreateEducationalInstituteComponent } from '../create-educational-institute/create-educational-institute.component';
-import { MatSelectChange } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
 import { EditEducationalInstitutionComponent } from '../edit-educational-institution/edit-educational-institution.component';
 import Swal from 'sweetalert2';
@@ -21,6 +21,15 @@ import { CentroPoblado } from 'src/app/models/centro-poblado';
 import { ClaseInstitucion } from 'src/app/models/clase-institucion';
 import { ModalidadEducativa } from 'src/app/models/modalidad';
 import { Subject } from 'rxjs/internal/Subject';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BubblePaginationDirective } from 'src/app/directives/bubble-pagination.directive';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule, NgClass } from '@angular/common';
+import { MatListModule } from '@angular/material/list';
+import { FormsModule } from '@angular/forms';
 
 
 export interface TerritorialEntitiesFilter {
@@ -49,6 +58,11 @@ export class PaginatorIntl implements MatPaginatorIntl {
 
 @Component({
   selector: 'app-educational-institutions-management',
+  standalone: true,
+  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule,
+    MatOptionModule, MatTableModule, MatIconModule, MatPaginatorModule,
+    MatTooltipModule, BubblePaginationDirective, MatMenuModule,
+    MatInputModule, FormsModule, NgClass, MatListModule, CommonModule ],
   templateUrl: './educational-institutions-management.component.html',
   styleUrls: ['./educational-institutions-management.component.css'],
   providers: [{ provide: MatPaginatorIntl}],

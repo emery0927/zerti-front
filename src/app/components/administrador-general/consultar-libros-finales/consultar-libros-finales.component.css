@@ -277,23 +277,11 @@ tr.mat-mdc-row:hover {
   --mat-select-trigger-text-font: 'Lato', sans-serif !important;
   --mat-select-trigger-text-size: 14px !important;
   --mat-form-field-container-text-size: 14px !important;
-  .mdc-text-field {
-    border: solid;
-    border-color: #959595;
-    border-width: thin;
-    --mdc-filled-text-field-active-indicator-height: 0;
-    --mdc-filled-text-field-focus-active-indicator-height: 0px;
-    --mdc-filled-text-field-container-shape: 6px;
-    border-bottom-right-radius: 6px;
-    border-bottom-left-radius: 6px;
-  }
 }
 
 .mat-dialog-container {
   padding: 10px 24px 20px 24px;
 }
-
-.ng
 
 .specific-name-input {
   .mdc-text-field {

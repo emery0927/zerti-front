@@ -1,16 +1,22 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { CreateStudentUserComponent } from '../create-student-user/create-student-user.component';
 import { EditEducationalInstitutionComponent } from '../edit-educational-institution/edit-educational-institution.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FormularioCreacionUsuarioAdminComponent } from '../formulario-creacion-usuario-admin/formulario-creacion-usuario-admin.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { BubblePaginationDirective } from 'src/app/directives/bubble-pagination.directive';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 export interface TerritorialEntitiesFilter {
   name:string;
@@ -20,6 +26,8 @@ export interface TerritorialEntitiesFilter {
 
 @Component({
   selector: 'app-administrative-users-management',
+  standalone: true,
+  imports: [MatFormFieldModule, MatTooltipModule, MatIconModule, MatPaginatorModule, MatMenuModule, MatTableModule, BubblePaginationDirective, FormsModule, CommonModule],
   templateUrl: './administrative-users-management.component.html',
   styleUrls: ['./administrative-users-management.component.css'],
   animations: [

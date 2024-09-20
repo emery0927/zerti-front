@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { CentroPoblado } from 'src/app/models/centro-poblado';
 import { ClaseInstitucion } from 'src/app/models/clase-institucion';
 import { Departamento } from 'src/app/models/departamento';
@@ -9,9 +9,16 @@ import { Sede } from 'src/app/models/sede';
 import { EntidadTerritorial } from 'src/app/models/entidad-territorial';
 import { EquipoServicio } from 'src/app/models/equipo-servicio';
 import { InstitucionEducativa } from 'src/app/models/instititucion-educativa';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-edit-educational-institution',
+  standalone: true,
+  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatCheckboxModule, MatExpansionModule, ],
   templateUrl: './edit-educational-institution.component.html',
   styleUrls: ['./edit-educational-institution.component.css']
 })

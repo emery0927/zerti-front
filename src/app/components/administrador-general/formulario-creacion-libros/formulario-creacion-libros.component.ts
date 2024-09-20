@@ -1,9 +1,9 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { AfterViewInit, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTreeFlattener } from '@angular/material/tree';
 import { InstitucionEducativa } from 'src/app/models/instititucion-educativa';
 import { LibroValoracionFinal } from 'src/app/models/libro-valoraciones-finales';
@@ -13,6 +13,10 @@ import { CrearSedeComponent } from '../crear-sede/crear-sede.component';
 import { EditEducationalInstitutionComponent } from '../edit-educational-institution/edit-educational-institution.component';
 import { EditarSedeComponent } from '../editar-sede/editar-sede.component';
 import { EntidadTerritorial } from 'src/app/models/entidad-territorial';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
 
 export interface AnioLectivo {
   annio_lectivo: string;
@@ -35,6 +39,8 @@ export interface LibroXSede {
 
 @Component({
   selector: 'app-formulario-creacion-libros',
+  standalone: true,
+  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatTableModule, CommonModule],
   templateUrl: './formulario-creacion-libros.component.html',
   styleUrls: ['./formulario-creacion-libros.component.css']
 })

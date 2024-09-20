@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EntidadTerritorial } from 'src/app/models/entidad-territorial';
 import { InstitucionEducativa } from 'src/app/models/instititucion-educativa';
 import { LibroValoracionFinal } from 'src/app/models/libro-valoraciones-finales';
@@ -11,6 +11,9 @@ import Swal from 'sweetalert2';
 import { CrearSedeComponent } from '../crear-sede/crear-sede.component';
 import { EditEducationalInstitutionComponent } from '../edit-educational-institution/edit-educational-institution.component';
 import { EditarSedeComponent } from '../editar-sede/editar-sede.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 export interface AnioLectivo {
   annio_lectivo: string;
@@ -33,6 +36,8 @@ export interface LibroXSede {
 
 @Component({
   selector: 'app-formulario-edicion-libros',
+  standalone: true,
+  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatTableModule],
   templateUrl: './formulario-edicion-libros.component.html',
   styleUrls: ['./formulario-edicion-libros.component.css']
 })

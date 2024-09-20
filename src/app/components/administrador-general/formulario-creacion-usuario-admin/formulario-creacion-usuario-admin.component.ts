@@ -1,4 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatOptionModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 interface InstitutionsClasses {
   class: string;
@@ -25,6 +33,8 @@ interface VillageCenter {
 
 @Component({
   selector: 'app-formulario-creacion-usuario-admin',
+  standalone: true,
+  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatTableModule, CommonModule, MatExpansionModule, MatDatepickerModule],
   templateUrl: './formulario-creacion-usuario-admin.component.html',
   styleUrls: ['./formulario-creacion-usuario-admin.component.css']
 })
