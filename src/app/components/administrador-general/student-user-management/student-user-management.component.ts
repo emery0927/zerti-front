@@ -1,17 +1,21 @@
 import { AfterViewInit, Component, Injectable, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CreateEducationalInstituteComponent } from '../create-educational-institute/create-educational-institute.component';
 import { Subject } from 'rxjs';
-import { MatSelectChange } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
 import { EditEducationalInstitutionComponent } from '../edit-educational-institution/edit-educational-institution.component';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CreateStudentUserComponent } from '../create-student-user/create-student-user.component';
 import { BubblePaginationDirective } from 'src/app/directives/bubble-pagination.directive';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 export interface TerritorialEntitiesFilter {
   name:string;
@@ -21,6 +25,9 @@ export interface TerritorialEntitiesFilter {
 
 @Component({
   selector: 'app-student-user-management',
+  standalone: true,
+  imports: [MatFormFieldModule, MatSelectModule, MatIconModule, MatPaginatorModule,
+    MatTableModule, MatMenuModule, FormsModule, BubblePaginationDirective, CommonModule],
   templateUrl: './student-user-management.component.html',
   styleUrls: ['./student-user-management.component.css']
 })

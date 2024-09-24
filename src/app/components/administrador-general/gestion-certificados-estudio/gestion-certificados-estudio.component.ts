@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-gestion-certificados-estudio',
+  standalone: true,
+  imports: [],
   templateUrl: './gestion-certificados-estudio.component.html',
   styleUrls: ['./gestion-certificados-estudio.component.css'],
   animations: [

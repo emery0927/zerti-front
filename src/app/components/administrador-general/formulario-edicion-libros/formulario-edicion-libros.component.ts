@@ -14,6 +14,7 @@ import { EditarSedeComponent } from '../editar-sede/editar-sede.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
 
 export interface AnioLectivo {
   annio_lectivo: string;
@@ -37,7 +38,7 @@ export interface LibroXSede {
 @Component({
   selector: 'app-formulario-edicion-libros',
   standalone: true,
-  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatTableModule],
+  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatTableModule, CommonModule],
   templateUrl: './formulario-edicion-libros.component.html',
   styleUrls: ['./formulario-edicion-libros.component.css']
 })
@@ -159,8 +160,7 @@ export class FormularioEdicionLibrosComponent implements AfterViewInit, OnInit {
     return Object.keys(this.librosAgrupadosPorAnio);
   }
   crearLibro(): void {
-    console.log('Crear libro');
-  }
+      }
 
   groupByYear(data: any[]): any[] {
     return Object.values(data.reduce((acc, obj) => {
@@ -211,14 +211,11 @@ export class FormularioEdicionLibrosComponent implements AfterViewInit, OnInit {
       this.mostrarTooltip = true;
     }
 
-    console.log(this.habilitarCrear);
-
+    
   }
 
   ngOnInit(): void {
-    console.log(this.dataLibro);
-    console.log(this.dataLibro.libro.sede.id_sede);
-
+        
     this.anioLectivo = this.dataLibro.libro.annio_lectivo;
     this.calendarioSeleccionado = this.dataLibro.libro.calendario;
     this.sedeSeleccionada = this.dataLibro.libro.sede.id_sede;
@@ -257,11 +254,9 @@ export class FormularioEdicionLibrosComponent implements AfterViewInit, OnInit {
     })
     this.data.data = filteredData;
 
-    console.log(filteredData);
+    
 
-
-    console.log(this.habilitarCrear);
-  }
+      }
 
         /**Falta organizar lógica: se debe implementar que para
          * realizar el filtro se utilice el id que representa el estado de la Institución Educativa

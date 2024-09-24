@@ -167,13 +167,11 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
       this.mostrarTooltip = true;
     }
 
-    console.log(this.habilitarCrear);
-
+    
   }
 
   ngOnInit(): void {
-    console.log(this.habilitarCrear);
-
+    
   }
 
   habilitarInputPaginador() {
@@ -206,11 +204,9 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
     })
     this.data.data = filteredData;
 
-    console.log(filteredData);
+    
 
-
-    console.log(this.habilitarCrear);
-  }
+      }
 
         /**Falta organizar lógica: se debe implementar que para
          * realizar el filtro se utilice el id que representa el estado de la Institución Educativa

@@ -124,8 +124,7 @@ export class FormularioCreacionLibrosComponent implements OnInit {
     return Object.keys(this.librosAgrupadosPorAnio);
   }
   crearLibro(): void {
-    console.log('Crear libro');
-  }
+      }
 
   groupByYear(data: any[]): any[] {
     return Object.values(data.reduce((acc, obj) => {
@@ -139,17 +138,13 @@ export class FormularioCreacionLibrosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.sede)
-    this.sedeSeleccionada = this.sede.sedes[0];
-    console.log(this.sedeSeleccionada);
-
+        this.sedeSeleccionada = this.sede.sedes[0];
+    
     this.agruparLibrosPorAnio();
-    console.log(this.librosAgrupadosPorAnio);
+    
+    );
 
-    console.log(this.agruparPorAnnioYSede());
-
-    console.log(AnioLectivo)
-
+    
   }
 
 }

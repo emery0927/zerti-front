@@ -1,10 +1,14 @@
+import { CommonModule, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import emailjs  from '@emailjs/browser'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-landing',
+  standalone: true,
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })

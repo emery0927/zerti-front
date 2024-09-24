@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,9 +13,13 @@ import { EditEducationalInstitutionComponent } from '../edit-educational-institu
 import { EditarSedeComponent } from '../editar-sede/editar-sede.component';
 import { TipoPagina } from 'src/app/models/tipo-pagina';
 import { Pagina } from 'src/app/models/pagina';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-formulario-edicion-pagina',
+  standalone: true,
+  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule],
   templateUrl: './formulario-edicion-pagina.component.html',
   styleUrls: ['./formulario-edicion-pagina.component.css']
 })
@@ -123,8 +127,7 @@ export class FormularioEdicionPaginaComponent implements AfterViewInit, OnInit {
       numero: this.numeroPagina,
       archivo_pdf: this.nombreArchivo
     };
-    console.log(updatedPagina);
-
+    
     this.dialogRef.close(updatedPagina);
   }
 
@@ -162,8 +165,7 @@ export class FormularioEdicionPaginaComponent implements AfterViewInit, OnInit {
     return Object.keys(this.librosAgrupadosPorAnio);
   }
   crearLibro(): void {
-    console.log('Crear libro');
-  }
+      }
 
   groupByYear(data: any[]): any[] {
     return Object.values(data.reduce((acc, obj) => {
@@ -214,24 +216,19 @@ export class FormularioEdicionPaginaComponent implements AfterViewInit, OnInit {
       this.mostrarTooltip = true;
     }
 
-    console.log(this.habilitarCrear);
-
+    
   }
 
   ngOnInit(): void {
-    console.log(this.dataPagina);
-    this.numeroPagina = this.dataPagina.pagina.numero;
+        this.numeroPagina = this.dataPagina.pagina.numero;
     this.tipoPagina = this.dataPagina.pagina.tipo_pagina.id_tipo_pagina;
     this.nombreArchivo = this.dataPagina.pagina.archivo_pdf;
-    console.log(this.dataPagina.pagina.tipo_pagina);
-    console.log(this.tiposPagina);
-
+        
     for (let i = 1; i <= this.dataPagina.paginas.length; i++) {
         this.numerosPagina.push(i.toString().padStart(2, '0'));
     }
 
-    console.log(this.numerosPagina);
-
+    
 
     /* this.anioLectivo = this.dataLibro.libro.annio_lectivo;
     this.calendarioSeleccionado = this.dataLibro.libro.calendario;
@@ -271,11 +268,9 @@ export class FormularioEdicionPaginaComponent implements AfterViewInit, OnInit {
     })
     this.data.data = filteredData;
 
-    console.log(filteredData);
+    
 
-
-    console.log(this.habilitarCrear);
-  }
+      }
 
         /**Falta organizar lógica: se debe implementar que para
          * realizar el filtro se utilice el id que representa el estado de la Institución Educativa

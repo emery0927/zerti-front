@@ -140,23 +140,16 @@ export class ConsultarLibrosFinalesComponent {
     this.selectedItems = new Array(this.paginas.length).fill(false);
     this.onEntidadTerritorialChange({value:2});
     this.onInstitucionChange({value:1});
-    console.log(this.data.data);
   }
 
   selectItem(item: Pagina, source: string) {
     this.pdfSrc = "assets/files/"+item.archivo_pdf;
-    console.log(this.pdfSrc);
-
-
-
     if (source === 'tabla') {
       this.selectedTableItem = item;
       this.selectedListItem = null;
-      console.log("entré a tabla");
     } else if (source === 'lista') {
       this.selectedListItem = item;
       this.selectedTableItem = null;
-      console.log("entré a lista");
     }
 
   }
@@ -187,11 +180,6 @@ export class ConsultarLibrosFinalesComponent {
     const nuevasPaginas = this.archivos.map((file, index) => this.createPaginaFromFile(file, this.paginas.length + index + 1));
     this.paginas = [...this.paginas, ...nuevasPaginas];
     this.selectedItems = [...this.selectedItems, ...new Array(nuevasPaginas.length).fill(false)];
-
-    console.log(this.archivos);
-    console.log(this.selectedItems);
-
-
   }
 
 
@@ -225,8 +213,6 @@ export class ConsultarLibrosFinalesComponent {
         this.archivos.push(input.files[i]);
       }
     }
-    console.log(this.archivos);
-
   }
 
   toggleAllSelection(event: any) {
@@ -265,27 +251,11 @@ export class ConsultarLibrosFinalesComponent {
 
     }
     this.tempSelectedPaginas.sort((a, b) => a.archivo_pdf.localeCompare(b.archivo_pdf));
-    console.log(this.tempSelectedPaginas);
-
   }
 
   updateSelectedPaginas() {
-    //this.selectedPaginas = this.paginas.filter((_, index) => this.selectedItems[index]);
-
-    //this.selectedPaginas = this.paginas.filter(pagina => this.selectedPaginasSet.has(pagina.id_pagina));
     this.selectedPaginas = [...this.tempSelectedPaginas];
     this.renumerarPaginas();
-
-
-
-    /* this.paginas.forEach((pagina, index) => {
-      if (this.selectedItems[index] && !this.isPaginaSelected(pagina)) {
-        this.selectedPaginas.push(pagina);
-      }
-    }); */
-
-    console.log(this.selectedPaginas);
-
   }
 
   createPaginaFromFile(file: File, id: number): Pagina {
@@ -293,13 +263,6 @@ export class ConsultarLibrosFinalesComponent {
     const tipoPaginaCodigo = fileName.charAt(fileName.length - 5).match(/[A-Z]/i) ? fileName.charAt(fileName.length - 5) : 'F';
     const tipoPagina = this.tiposPagina.find(tp => tp.codigo === tipoPaginaCodigo) || this.tiposPagina.find(tp => tp.codigo === 'F');
 
-    console.log(tipoPaginaCodigo);
-
- /*    const tipoPagina: TipoPagina = {
-      id_tipo_pagina: id, // Asignar un ID único o manejarlo de manera diferente según las necesidades
-      tipo_pagina: tipoPaginaCodigo,
-      codigo: tipoPaginaCodigo
-    } */
     return {
       id_pagina: id,
       numero: id.toString(),
@@ -365,8 +328,6 @@ export class ConsultarLibrosFinalesComponent {
       });
     });
 
-    console.log(resultado);
-
     return resultado;
   }
 
@@ -374,7 +335,6 @@ export class ConsultarLibrosFinalesComponent {
     return Object.keys(this.librosAgrupadosPorAnio);
   }
   crearLibro(): void {
-    console.log('Crear libro');
   }
 
   groupByYear(data: any[]): any[] {
@@ -417,16 +377,6 @@ export class ConsultarLibrosFinalesComponent {
   onInstitucionChange(event: any) {
     const institucion = this.institucionesPorET.find(inst => inst.id_ie === event.value);
     this.sedesPorInstitucion = institucion ? institucion.sedes : [];
-   /*  debugger;
-
-    let filteredData = this.libros.filter((element: any) => {
-      return element.id_ie === this.institucionSeleccionada.id_ie;
-    })
-    this.data.data = this.agruparPorSede(filteredData);
-
-    console.log(this.institucionSeleccionada); */
-    console.log(this.data.data);
-
   }
 
 
@@ -451,7 +401,6 @@ export class ConsultarLibrosFinalesComponent {
   }
 
   eliminar(pagina: Pagina) {
-    console.log(pagina.archivo_pdf);
     Swal.fire({
       title: "¿Estás seguro?",
       text: 'La página '+pagina.numero+'.) '+pagina.archivo_pdf+' será eliminada del libro de valoraciones finales',
@@ -500,8 +449,6 @@ export class ConsultarLibrosFinalesComponent {
     const dialogRef = this.dialog.open(FormularioEdicionPaginaComponent, {restoreFocus: false, data:{pagina, paginas: this.selectedPaginas} ,disableClose: true});
     dialogRef.afterClosed().subscribe(
       result => {
-        console.log(result);
-
         if (result) {
           this.actualizarPagina(result);
         }

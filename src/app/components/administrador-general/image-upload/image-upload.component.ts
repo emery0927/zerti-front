@@ -1,7 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-image-upload',
+  standalone: true,
+  imports: [MatIconModule, CommonModule],
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.css']
 })

@@ -1,4 +1,11 @@
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 export interface RolXUser {
   id: number;
@@ -23,6 +30,8 @@ const ELEMENT_DATA: RolXUser[] = [
 
 @Component({
   selector: 'app-funcionarios',
+  standalone: true,
+  imports: [MatFormFieldModule, MatCardModule, MatSelectModule, MatTableModule, NgClass, MatIconModule],
   templateUrl: './funcionarios.component.html',
   styleUrls: ['./funcionarios.component.css']
 })

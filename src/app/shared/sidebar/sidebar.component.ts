@@ -1,5 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { Router, RouterModule } from '@angular/router';
 import { onSideNavChange, animateText } from 'src/app/animations/animations';
 import { SidenavService } from 'src/app/services/sidenav.service';
 
@@ -23,12 +26,14 @@ interface Menu {
 
 @Component({
   selector: 'app-sidebar',
+  standalone: true,
+  imports: [MatListModule, MatIconModule, RouterModule, CommonModule],
+  providers: [SidenavService],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
   animations: [onSideNavChange, animateText]
 })
 export class SidebarComponent implements OnInit {
-
   public sideNavState: boolean = false;
   public linkText: boolean = false;
   rol!: number;
@@ -70,8 +75,7 @@ export class SidebarComponent implements OnInit {
 
     this.sidenavService.buttonClick$.subscribe(res => {
       this.cdr.detectChanges();
-      console.log(res);
-      if (res === null) {
+            if (res === null) {
         this.rol = 1;
       } else {
         this.rol = res.rol;

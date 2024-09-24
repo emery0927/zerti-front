@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CentroPoblado } from 'src/app/models/centro-poblado';
 import { ClaseInstitucion } from 'src/app/models/clase-institucion';
 import { Departamento } from 'src/app/models/departamento';
@@ -11,16 +11,21 @@ import { EntidadTerritorial } from 'src/app/models/entidad-territorial';
 import { EquipoServicio } from 'src/app/models/equipo-servicio';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
-import { MatSelectChange } from '@angular/material/select';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { TerritorialEntitiesFilter } from '../../administrador-general/educational-institutions/educational-institutions.component';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { VentanaTrabajo } from 'src/app/models/ventana-trabajo';
 import { DialogRef } from '@angular/cdk/dialog';
 import { Subject } from 'rxjs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-seleccionar-institucion',
+  standalone: true,
+  imports: [MatFormFieldModule, MatDialogModule, MatIconModule, MatSelectModule, MatTableModule, CommonModule ],
   templateUrl: './seleccionar-institucion.component.html',
   styleUrls: ['./seleccionar-institucion.component.css'],
   animations: [
@@ -95,8 +100,7 @@ export class SeleccionarInstitucionComponent implements AfterViewInit, OnInit {
   }
 
   async cargarVentanaRol(institucion: InstitucionEducativa) {
-    console.log(institucion);
-
+    
     this.rol = 2;
     this.ventanaTrabajo = new VentanaTrabajo(this.rol, this.rol, institucion.nombre_ie);
     this.sidenavService.cargarVentanasRolAdmin(this.ventanaTrabajo);
@@ -139,13 +143,11 @@ export class SeleccionarInstitucionComponent implements AfterViewInit, OnInit {
       this.mostrarTooltip = true;
     }
 
-    console.log(this.habilitarCrear);
-
+    
   }
 
   ngOnInit(): void {
-    console.log(this.habilitarCrear);
-
+    
   }
 
   habilitarInputPaginador() {

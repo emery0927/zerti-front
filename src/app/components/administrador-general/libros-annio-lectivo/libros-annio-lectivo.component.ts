@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CentroPoblado } from 'src/app/models/centro-poblado';
 import { ClaseInstitucion } from 'src/app/models/clase-institucion';
 import { Departamento } from 'src/app/models/departamento';
@@ -24,6 +24,11 @@ import { FormularioCreacionLibrosComponent } from '../formulario-creacion-libros
 import { FormularioEdicionLibrosComponent } from '../formulario-edicion-libros/formulario-edicion-libros.component';
 import { ModalidadEducativa } from 'src/app/models/modalidad';
 import { Municipio } from 'src/app/models/municipio';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { CommonModule, NgClass } from '@angular/common';
 export interface AnioLectivo {
   id_anio: number;
   annio_lectivo: string;
@@ -50,6 +55,8 @@ export interface AgrupacionPorSede {
 
 @Component({
   selector: 'app-libros-annio-lectivo',
+  standalone: true,
+  imports: [MatFormFieldModule, MatTableModule, MatSelectModule, MatIconModule, MatListModule, MatMenuModule, NgClass, CommonModule],
   templateUrl: './libros-annio-lectivo.component.html',
   styleUrls: ['./libros-annio-lectivo.component.css'],
   animations: [
@@ -242,8 +249,7 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
       });
     });
 
-    console.log(resultado);
-
+    
     return resultado;
   }
 
@@ -258,8 +264,7 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
     return Object.keys(this.librosAgrupadosPorAnio);
   }
   crearLibro(): void {
-    console.log('Crear libro');
-  }
+      }
 
   groupByYear(data: any[]): any[] {
     return Object.values(data.reduce((acc, obj) => {
@@ -309,16 +314,14 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
     })
     this.data.data = this.agruparPorSede(filteredData);
 
-    console.log(this.institucionSeleccionada); */
-    console.log(this.data.data);
-
+     */
+    
   }
 
   ngOnInit(): void {
     this.onEntidadTerritorialChange({value:2});
     this.onInstitucionChange({value:1});
-    console.log(this.data.data);
-    this.agruparLibrosPorAnio();
+        this.agruparLibrosPorAnio();
   }
 
   habilitarInputPaginador() {
@@ -351,11 +354,9 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
     })
     this.data.data = filteredData;
 
-    console.log(filteredData);
+    
 
-
-    console.log(this.habilitarCrear);
-  } */
+      } */
 
         /**Falta organizar lógica: se debe implementar que para
          * realizar el filtro se utilice el id que representa el estado de la Institución Educativa

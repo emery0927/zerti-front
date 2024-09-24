@@ -1,15 +1,15 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { animateText, onSideNavChange } from 'src/app/animations/animations';
-import { CreateEducationalInstituteComponent } from 'src/app/components/administrador-general/create-educational-institute/create-educational-institute.component';
-import { InicioGestionOperacionalComponent } from 'src/app/components/gestion-operacional-ieo/inicio-gestion-operacional/inicio-gestion-operacional.component';
 import { SeleccionarInstitucionComponent } from 'src/app/components/gestion-operacional-ieo/seleccionar-institucion/seleccionar-institucion.component';
 import { VentanaTrabajo } from 'src/app/models/ventana-trabajo';
 import { SidenavService } from 'src/app/services/sidenav.service';
-import { RouterLinkActive } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule, NgClass } from '@angular/common';
+import { MatListModule } from '@angular/material/list';
+
 
 interface Rol {
   id: number;
@@ -20,6 +20,9 @@ interface Rol {
 }
 @Component({
   selector: 'app-right-sidebar',
+  standalone: true,
+  imports: [MatIconModule, NgClass, MatListModule, CommonModule, RouterModule, MatDialogModule],
+  providers: [SidenavService],
   templateUrl: './right-sidebar.component.html',
   styleUrls: ['./right-sidebar.component.css'],
   animations: []
@@ -53,8 +56,7 @@ export class RightSidebarComponent implements OnInit {
 
   ngOnInit(): void {
      this.setSelectedItemFromRoute();
-     console.log(this.role$);
-  }
+       }
 
   setSelectedItemFromRoute() {
     const currentUrl = this.router.url;
@@ -83,8 +85,7 @@ export class RightSidebarComponent implements OnInit {
 
   openClientSelectionDialog(role: Rol) {
 
-    console.log(this.role$);
-
+    
     if (role.id === 1) {
       this.elegirContexto(role.id);
 

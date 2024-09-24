@@ -1,8 +1,11 @@
+import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
+  imports: [NgClass, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

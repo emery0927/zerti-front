@@ -1,9 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { EditarSedeComponent } from '../editar-sede/editar-sede.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import Swal from 'sweetalert2';
 import { CrearSedeComponent } from '../crear-sede/crear-sede.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { NgClass } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 export interface Sedes {
   id: number;
@@ -28,6 +33,8 @@ const ELEMENT_DATA: Sedes[] = [
 
 @Component({
   selector: 'app-sedes-management',
+  standalone: true,
+  imports: [MatFormFieldModule, MatSelectModule, MatTableModule, NgClass, MatMenuModule, MatIconModule],
   templateUrl: './sedes-management.component.html',
   styleUrls: ['./sedes-management.component.css']
 })

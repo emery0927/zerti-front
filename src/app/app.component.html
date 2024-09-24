@@ -1,11 +1,16 @@
-<div *ngIf="isLandingOrLogin()">
+<div *ngIf="isLanding()">
   <app-navbar-landing></app-navbar-landing>
   <app-landing></app-landing>
 </div>
 
-<div *ngIf="!isLandingOrLogin()">
+<div *ngIf="isLogin()">
+  <app-navbar-landing></app-navbar-landing>
+  <app-login></app-login>
+</div>
+
+<div *ngIf="!isLanding() && !isLogin()">
     <mat-sidenav-container [hasBackdrop]="false" class="sidenav-container">
-      <mat-sidenav #leftSidenav mode="side" opened>
+      <mat-sidenav mode="side" opened>
         <app-sidebar *appRecarga="recarga"></app-sidebar>
       </mat-sidenav>
 

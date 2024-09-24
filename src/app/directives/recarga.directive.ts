@@ -1,7 +1,8 @@
 import { Directive, Input, OnChanges, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[appRecarga]'
+  selector: '[appRecarga]',
+  standalone: true
 })
 export class RecargaDirective implements OnChanges {
 

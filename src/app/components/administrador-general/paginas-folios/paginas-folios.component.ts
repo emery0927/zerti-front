@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CentroPoblado } from 'src/app/models/centro-poblado';
 import { ClaseInstitucion } from 'src/app/models/clase-institucion';
 import { Departamento } from 'src/app/models/departamento';
@@ -21,6 +21,16 @@ import { FormularioEdicionLibrosComponent } from '../formulario-edicion-libros/f
 import { Pagina } from 'src/app/models/pagina';
 import { FormularioEdicionPaginaComponent } from '../formulario-edicion-pagina/formulario-edicion-pagina.component';
 import { TipoPagina } from 'src/app/models/tipo-pagina';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { CommonModule, NgClass } from '@angular/common';
+import { MatListModule } from '@angular/material/list';
+import { FormsModule } from '@angular/forms';
 
 //import * as pdfjs from 'pdfjs-dist/build/pdf';
 
@@ -49,6 +59,10 @@ export interface AgrupacionPorSede {
 
 @Component({
   selector: 'app-paginas-folios',
+  standalone: true,
+  imports: [MatFormFieldModule, MatSelectModule, MatProgressBarModule, MatCardModule,
+    MatTableModule, MatCheckboxModule, MatIconModule, NgxDocViewerModule, NgClass, MatListModule,
+    MatMenuModule, CommonModule, FormsModule],
   templateUrl: './paginas-folios.component.html',
   styleUrls: ['./paginas-folios.component.css']
 })
@@ -137,24 +151,20 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     this.selectedItems = new Array(this.paginas.length).fill(false);
     this.onEntidadTerritorialChange({value:2});
     this.onInstitucionChange({value:1});
-    console.log(this.data.data);
-  }
+      }
 
   selectItem(item: Pagina, source: string) {
     this.pdfSrc = "assets/files/"+item.archivo_pdf;
-    console.log(this.pdfSrc);
-
+    
 
 
     if (source === 'tabla') {
       this.selectedTableItem = item;
       this.selectedListItem = null;
-      console.log("entré a tabla");
-    } else if (source === 'lista') {
+          } else if (source === 'lista') {
       this.selectedListItem = item;
       this.selectedTableItem = null;
-      console.log("entré a lista");
-    }
+          }
 
   }
 
@@ -185,9 +195,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     this.paginas = [...this.paginas, ...nuevasPaginas];
     this.selectedItems = [...this.selectedItems, ...new Array(nuevasPaginas.length).fill(false)];
 
-    console.log(this.archivos);
-    console.log(this.selectedItems);
-
+        
 
   }
 
@@ -222,8 +230,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
         this.archivos.push(input.files[i]);
       }
     }
-    console.log(this.archivos);
-
+    
   }
 
   toggleAllSelection(event: any) {
@@ -262,8 +269,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
 
     }
     this.tempSelectedPaginas.sort((a, b) => a.archivo_pdf.localeCompare(b.archivo_pdf));
-    console.log(this.tempSelectedPaginas);
-
+    
   }
 
   updateSelectedPaginas() {
@@ -281,8 +287,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
       }
     }); */
 
-    console.log(this.selectedPaginas);
-
+    
   }
 
   createPaginaFromFile(file: File, id: number): Pagina {
@@ -290,8 +295,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     const tipoPaginaCodigo = fileName.charAt(fileName.length - 5).match(/[A-Z]/i) ? fileName.charAt(fileName.length - 5) : 'F';
     const tipoPagina = this.tiposPagina.find(tp => tp.codigo === tipoPaginaCodigo) || this.tiposPagina.find(tp => tp.codigo === 'F');
 
-    console.log(tipoPaginaCodigo);
-
+    
  /*    const tipoPagina: TipoPagina = {
       id_tipo_pagina: id, // Asignar un ID único o manejarlo de manera diferente según las necesidades
       tipo_pagina: tipoPaginaCodigo,
@@ -362,8 +366,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
       });
     });
 
-    console.log(resultado);
-
+    
     return resultado;
   }
 
@@ -371,8 +374,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     return Object.keys(this.librosAgrupadosPorAnio);
   }
   crearLibro(): void {
-    console.log('Crear libro');
-  }
+      }
 
   groupByYear(data: any[]): any[] {
     return Object.values(data.reduce((acc, obj) => {
@@ -421,9 +423,8 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     })
     this.data.data = this.agruparPorSede(filteredData);
 
-    console.log(this.institucionSeleccionada); */
-    console.log(this.data.data);
-
+     */
+    
   }
 
 
@@ -448,8 +449,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
   }
 
   eliminar(pagina: Pagina) {
-    console.log(pagina.archivo_pdf);
-    Swal.fire({
+        Swal.fire({
       title: "¿Estás seguro?",
       text: 'La página '+pagina.numero+'.) '+pagina.archivo_pdf+' será eliminada del libro de valoraciones finales',
       icon: "warning",
@@ -497,8 +497,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     const dialogRef = this.dialog.open(FormularioEdicionPaginaComponent, {restoreFocus: false, data:{pagina, paginas: this.selectedPaginas} ,disableClose: true});
     dialogRef.afterClosed().subscribe(
       result => {
-        console.log(result);
-
+        
         if (result) {
           this.actualizarPagina(result);
         }
