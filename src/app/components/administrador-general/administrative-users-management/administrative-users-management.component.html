@@ -1,5 +1,5 @@
-<div class="select-modulo">
-  <button matPrefix [matTooltip]="showFormField ? 'Ocultar filtro por nombre' : 'Mostrar filtro por nombre' " style="height: 58px !important; margin-left: 10px;" (click)="addFilter()" mat-button>
+<div style="padding-left: 1.5rem; padding-right: 1.5rem;" class="select-modulo">
+  <button matPrefix [matTooltip]="showFormField ? 'Ocultar filtro por nombre' : 'Mostrar filtro por nombre' " style="height: 58px !important; margin-left: 0; min-width: 60px !important;" (click)="addFilter()" mat-button>
     <span>
       <mat-icon style="color: #7e7e7e;">{{ showFormField ? 'search' : 'search' }}</mat-icon>
     </span>
@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="mat-elevation-z8">
+<div style="margin-top: 0; margin-left: 1.5rem; margin-right: 1.5rem;" class="mat-elevation-z8">
   <table mat-table [dataSource]="data" matSort>
 
     <!-- Position Column -->

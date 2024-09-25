@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,7 +25,7 @@ const ELEMENT_DATA: EducationalInstitutionsCustody[] = [
 @Component({
   selector: 'app-eduacational-institutions-custody',
   standalone: true,
-  imports: [MatFormFieldModule, MatCardModule, MatSelectModule, MatTableModule, MatIconModule, NgClass],
+  imports: [MatFormFieldModule, MatCardModule, MatSelectModule, MatTableModule, MatIconModule, NgClass, MatButtonModule],
   templateUrl: './eduacational-institutions-custody.component.html',
   styleUrls: ['./eduacational-institutions-custody.component.css']
 })

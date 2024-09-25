@@ -3,11 +3,12 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [MatIconModule, MatButtonModule],
   providers: [SidenavService],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
@@ -34,7 +35,7 @@ export class NavbarComponent implements OnInit {
       } else {
         this.titulo_ventana = res.nombre;
       }
-      
+
     })
 
 

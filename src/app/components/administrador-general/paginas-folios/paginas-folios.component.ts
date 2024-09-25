@@ -31,6 +31,9 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { CommonModule, NgClass } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 //import * as pdfjs from 'pdfjs-dist/build/pdf';
 
@@ -62,7 +65,7 @@ export interface AgrupacionPorSede {
   standalone: true,
   imports: [MatFormFieldModule, MatSelectModule, MatProgressBarModule, MatCardModule,
     MatTableModule, MatCheckboxModule, MatIconModule, NgxDocViewerModule, NgClass, MatListModule,
-    MatMenuModule, CommonModule, FormsModule],
+    MatMenuModule, CommonModule, FormsModule, MatButtonModule, MatInputModule, MatTooltipModule],
   templateUrl: './paginas-folios.component.html',
   styleUrls: ['./paginas-folios.component.css']
 })
@@ -155,7 +158,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
 
   selectItem(item: Pagina, source: string) {
     this.pdfSrc = "assets/files/"+item.archivo_pdf;
-    
+
 
 
     if (source === 'tabla') {
@@ -195,7 +198,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     this.paginas = [...this.paginas, ...nuevasPaginas];
     this.selectedItems = [...this.selectedItems, ...new Array(nuevasPaginas.length).fill(false)];
 
-        
+
 
   }
 
@@ -230,7 +233,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
         this.archivos.push(input.files[i]);
       }
     }
-    
+
   }
 
   toggleAllSelection(event: any) {
@@ -269,7 +272,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
 
     }
     this.tempSelectedPaginas.sort((a, b) => a.archivo_pdf.localeCompare(b.archivo_pdf));
-    
+
   }
 
   updateSelectedPaginas() {
@@ -287,7 +290,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
       }
     }); */
 
-    
+
   }
 
   createPaginaFromFile(file: File, id: number): Pagina {
@@ -295,7 +298,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     const tipoPaginaCodigo = fileName.charAt(fileName.length - 5).match(/[A-Z]/i) ? fileName.charAt(fileName.length - 5) : 'F';
     const tipoPagina = this.tiposPagina.find(tp => tp.codigo === tipoPaginaCodigo) || this.tiposPagina.find(tp => tp.codigo === 'F');
 
-    
+
  /*    const tipoPagina: TipoPagina = {
       id_tipo_pagina: id, // Asignar un ID único o manejarlo de manera diferente según las necesidades
       tipo_pagina: tipoPaginaCodigo,
@@ -366,7 +369,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
       });
     });
 
-    
+
     return resultado;
   }
 
@@ -424,7 +427,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     this.data.data = this.agruparPorSede(filteredData);
 
      */
-    
+
   }
 
 
@@ -497,7 +500,7 @@ export class PaginasFoliosComponent implements AfterViewInit, OnInit {
     const dialogRef = this.dialog.open(FormularioEdicionPaginaComponent, {restoreFocus: false, data:{pagina, paginas: this.selectedPaginas} ,disableClose: true});
     dialogRef.afterClosed().subscribe(
       result => {
-        
+
         if (result) {
           this.actualizarPagina(result);
         }

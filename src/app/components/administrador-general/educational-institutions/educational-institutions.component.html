@@ -16,30 +16,32 @@
     </div>
     <mat-tab-group preserveContent>
       <mat-tab label="1. Instituciones Educativas">
-        <!-- <app-educational-institutions-management></app-educational-institutions-management> -->
+        <app-educational-institutions-management></app-educational-institutions-management>
       </mat-tab>
       <mat-tab label="2. Usuarios Administrativos / IE en Custodia">
-        <div class="select">
-          <mat-form-field appearance="fill" style="max-width: 20%;" class="ancho-igual specific-select-input">
-              <mat-label style="font-size: 16px;  color: #59320f;">Entidad Territorial</mat-label>
-              <mat-select tabIndex="0" role="combobox" value="Santiago de Cali">
-                 <mat-option *ngFor="let op of territorialEntities" [value]="op">{{op}}</mat-option>
-              </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="fill" class="ancho-igual specific-select-input">
-              <mat-label style="font-size: 16px;  color: #59320f;">Nombre de Institución Educativa</mat-label>
-             <mat-select value="Liceo Departamental">
-                <mat-option value="Liceo Departamental">Liceo Departamental</mat-option>
-                <mat-option value="Santa Librada">Santa Librada</mat-option>
-             </mat-select>
-          </mat-form-field>
-      </div>
-        <div style="display: flex; margin-top: -30px">
-          <div>
-            <!-- <app-funcionarios></app-funcionarios> -->
+          <div style="display: flex;">
+            <div>
+              <div class="select">
+                <mat-form-field appearance="fill" style="max-width: 39%;" class="ancho-igual specific-select-input">
+                  <mat-label style="font-size: 16px;  color: #59320f;">Entidad Territorial</mat-label>
+                  <mat-select tabIndex="0" role="combobox" value="Santiago de Cali">
+                    <mat-option *ngFor="let op of territorialEntities" [value]="op">{{op}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="max-width: 100%; margin-right: 1.5rem;" class="ancho-igual specific-select-input">
+                  <mat-label style="font-size: 16px;  color: #59320f;">Nombre de Institución Educativa</mat-label>
+                  <mat-select value="Liceo Departamental">
+                    <mat-option value="Liceo Departamental">Liceo Departamental</mat-option>
+                    <mat-option value="Santa Librada">Santa Librada</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            <app-funcionarios></app-funcionarios>
           </div>
           <div>
-            <!-- <app-eduacational-institutions-custody></app-eduacational-institutions-custody> -->
+            <div class="select" style="height: 6.5rem;">
+            </div>
+            <app-eduacational-institutions-custody></app-eduacational-institutions-custody>
           </div>
         </div>
       </mat-tab>

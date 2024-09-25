@@ -12,6 +12,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { RecargaDirective } from './directives/recarga.directive';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { LoginComponent } from './components/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-root',
@@ -49,9 +50,14 @@ export class AppComponent implements AfterViewInit {
   recarga: number = 0;
   rol!: number;
 
-  @ViewChild('sidenav') sidenav!: MatSidenav;
+  @ViewChild('sidenav')
+  sidenav!: MatSidenav;
 
-  constructor(private sidenavService: SidenavService, private router: Router) {}
+  constructor(private sidenavService: SidenavService, private router: Router) {
+    this.sidenavService.sideNavState$.subscribe( res=> {
+      this.onSideNavChange = res;
+    })
+  }
 
   isLanding(): boolean {
     const currentRoute = this.router.url;
@@ -65,5 +71,8 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.sidenavService.setSidenav(this.sidenav);
+    console.log(this.isLogin());
+    console.log(this.isLanding());
+
   }
 }

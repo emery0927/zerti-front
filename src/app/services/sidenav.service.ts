@@ -15,6 +15,8 @@ export class SidenavService {
 
 
   setSidenav(sidenav: MatSidenav) {
+    console.log(sidenav);
+
     this.sidenav = sidenav;
   }
 
@@ -29,6 +31,8 @@ export class SidenavService {
 
   cerrarSidenav() {
     this.sidenav.close();
+    console.log('quiero pero no puedo');
+
   }
 
   toggleSidenav() {

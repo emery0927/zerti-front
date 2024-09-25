@@ -79,6 +79,10 @@ body {
   }
 }
 
+.mat-mdc-tab-body-wrapper {
+  height: 835px;
+}
+
 .mat-mdc-tab-header {
   --mat-tab-header-label-text-font: Roboto, sans-serif;
   --mat-tab-header-label-text-size: 0.9rem;
@@ -92,7 +96,6 @@ body {
 
 .mat-elevation-z8 {
   display: block;;
-  margin: 13px;
   -webkit-text-stroke-width: 0.2px;
   font-family: "Lato", sans-serif;
   margin-top: 0.2rem;

@@ -23,6 +23,8 @@ import { EntidadTerritorial } from 'src/app/models/entidad-territorial';
 import { EquipoServicio } from 'src/app/models/equipo-servicio';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
 
 export interface AnioLectivo {
   id_anio: number;
@@ -50,7 +52,7 @@ export interface AgrupacionPorSede {
 @Component({
   selector: 'app-consultar-libros-finales',
   standalone: true,
-  imports: [MatFormFieldModule, MatSelectModule, NgxExtendedPdfViewerModule],
+  imports: [MatFormFieldModule, MatSelectModule, NgxExtendedPdfViewerModule, MatInputModule, CommonModule],
   templateUrl: './consultar-libros-finales.component.html',
   styleUrls: ['./consultar-libros-finales.component.css'],
 })

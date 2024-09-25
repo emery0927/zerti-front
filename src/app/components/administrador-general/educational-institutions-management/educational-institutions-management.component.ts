@@ -30,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule, NgClass } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 
 export interface TerritorialEntitiesFilter {
@@ -62,7 +63,7 @@ export class PaginatorIntl implements MatPaginatorIntl {
   imports: [MatFormFieldModule, MatDialogModule, MatSelectModule,
     MatOptionModule, MatTableModule, MatIconModule, MatPaginatorModule,
     MatTooltipModule, BubblePaginationDirective, MatMenuModule,
-    MatInputModule, FormsModule, NgClass, MatListModule, CommonModule ],
+    MatInputModule, FormsModule, NgClass, MatListModule, CommonModule, MatButtonModule ],
   templateUrl: './educational-institutions-management.component.html',
   styleUrls: ['./educational-institutions-management.component.css'],
   providers: [{ provide: MatPaginatorIntl}],
@@ -167,11 +168,11 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
       this.mostrarTooltip = true;
     }
 
-    
+
   }
 
   ngOnInit(): void {
-    
+
   }
 
   habilitarInputPaginador() {
@@ -204,7 +205,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
     })
     this.data.data = filteredData;
 
-    
+
 
       }
 

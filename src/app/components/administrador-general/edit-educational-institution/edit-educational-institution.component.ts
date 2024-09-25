@@ -14,11 +14,24 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { ImageUploadComponent } from '../image-upload/image-upload.component';
 
 @Component({
   selector: 'app-edit-educational-institution',
   standalone: true,
-  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatCheckboxModule, MatExpansionModule, ],
+  imports: [MatFormFieldModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatButtonModule,
+    CommonModule,
+    MatInputModule,
+    ImageUploadComponent],
   templateUrl: './edit-educational-institution.component.html',
   styleUrls: ['./edit-educational-institution.component.css']
 })

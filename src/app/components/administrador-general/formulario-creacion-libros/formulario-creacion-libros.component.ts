@@ -138,13 +138,8 @@ export class FormularioCreacionLibrosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-        this.sedeSeleccionada = this.sede.sedes[0];
-    
+    this.sedeSeleccionada = this.sede.sedes[0];
     this.agruparLibrosPorAnio();
-    
-    );
-
-    
   }
 
 }

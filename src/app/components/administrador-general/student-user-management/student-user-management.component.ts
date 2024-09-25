@@ -16,6 +16,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 export interface TerritorialEntitiesFilter {
   name:string;
@@ -27,7 +29,8 @@ export interface TerritorialEntitiesFilter {
   selector: 'app-student-user-management',
   standalone: true,
   imports: [MatFormFieldModule, MatSelectModule, MatIconModule, MatPaginatorModule,
-    MatTableModule, MatMenuModule, FormsModule, BubblePaginationDirective, CommonModule],
+    MatTableModule, MatMenuModule, FormsModule, BubblePaginationDirective, CommonModule, MatButtonModule,
+  MatInputModule],
   templateUrl: './student-user-management.component.html',
   styleUrls: ['./student-user-management.component.css']
 })

@@ -17,7 +17,8 @@
   <mat-label style="font-size: 16px; color: #59320f;">Buscar por Nombre
   </mat-label>
   <input #inputField matInput (keyup)="applyFilter($event, 'shortname')" #input>
-  </mat-form-field>
+</mat-form-field>
+<p style="text-align: end;font-size: 13.58px; color: #59320f; align-content: center;">{{data.filteredData.length}} &nbsp; Instituciones Educativas</p>
 
   <div class="paginator-container">
       <mat-paginator appBubblePagination
@@ -33,9 +34,6 @@
     </div>
 </div>
 
-<div class="cantidad-instituciones-educativas padding-izquierdo-modulo padding-derecho-modulo">
-  <p style="text-align: end;font-size: 13.58px; color: #59320f;">{{data.filteredData.length}} Institucion(es) Educativa(s)</p>
-</div>
 <!-------------------------------------------------------------------------------------------------------------------------------->
 
 <!-- Esta división contiene la tabla con las siguientes columnas: NOMBRE DE INSTITUCIÓN EDUCATIVA / EN CUSTODIA | NOMBRE CORTO

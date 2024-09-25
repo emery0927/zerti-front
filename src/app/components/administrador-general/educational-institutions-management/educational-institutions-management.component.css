@@ -88,7 +88,6 @@ table {
 
 .ancho-igual {
   flex: 1;
-  margin-left: 13px;
   margin-right: 20px; /* Puedes ajustar este margen según tus necesidades */
   max-width: 50%;
   box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
@@ -157,6 +156,7 @@ tr.mat-mdc-row:nth-child(4n-1) {
   height: 53px;
   padding: 10px;
   padding-top: 13px;
+  padding-right: 0;
   width: 53px;
   margin-right: 4px;
   font-size: 15px;

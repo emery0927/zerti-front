@@ -10,7 +10,7 @@
 
 <div *ngIf="!isLanding() && !isLogin()">
     <mat-sidenav-container [hasBackdrop]="false" class="sidenav-container">
-      <mat-sidenav mode="side" opened>
+      <mat-sidenav #sidenavleft mode="side" opened>
         <app-sidebar *appRecarga="recarga"></app-sidebar>
       </mat-sidenav>
 

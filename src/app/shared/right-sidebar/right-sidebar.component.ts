@@ -9,6 +9,7 @@ import { SidenavService } from 'src/app/services/sidenav.service';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, NgClass } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 
 interface Rol {
@@ -21,7 +22,7 @@ interface Rol {
 @Component({
   selector: 'app-right-sidebar',
   standalone: true,
-  imports: [MatIconModule, NgClass, MatListModule, CommonModule, RouterModule, MatDialogModule],
+  imports: [MatIconModule, NgClass, MatListModule, CommonModule, RouterModule, MatDialogModule, MatButtonModule],
   providers: [SidenavService],
   templateUrl: './right-sidebar.component.html',
   styleUrls: ['./right-sidebar.component.css'],
@@ -85,7 +86,7 @@ export class RightSidebarComponent implements OnInit {
 
   openClientSelectionDialog(role: Rol) {
 
-    
+
     if (role.id === 1) {
       this.elegirContexto(role.id);
 

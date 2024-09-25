@@ -17,6 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { BubblePaginationDirective } from 'src/app/directives/bubble-pagination.directive';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 export interface TerritorialEntitiesFilter {
   name:string;
@@ -27,7 +29,17 @@ export interface TerritorialEntitiesFilter {
 @Component({
   selector: 'app-administrative-users-management',
   standalone: true,
-  imports: [MatFormFieldModule, MatTooltipModule, MatIconModule, MatPaginatorModule, MatMenuModule, MatTableModule, BubblePaginationDirective, FormsModule, CommonModule],
+  imports: [MatFormFieldModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatMenuModule,
+    MatTableModule,
+    BubblePaginationDirective,
+    FormsModule,
+    CommonModule,
+    MatInputModule,
+    MatButtonModule],
   templateUrl: './administrative-users-management.component.html',
   styleUrls: ['./administrative-users-management.component.css'],
   animations: [

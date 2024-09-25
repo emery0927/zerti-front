@@ -143,11 +143,14 @@ table {
 }
 
 .specific-page-input {
-  height: 60px;
+  height: 53px;
   padding: 10px;
-  width: 60px;
+  padding-top: 13px;
+  padding-right: 0;
+  width: 53px;
   margin-right: 4px;
   font-size: 15px;
+  box-sizing: content-box;
 
     .mdc-text-field {
       align-items: center !important;

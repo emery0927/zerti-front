@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,7 +32,7 @@ const ELEMENT_DATA: RolXUser[] = [
 @Component({
   selector: 'app-funcionarios',
   standalone: true,
-  imports: [MatFormFieldModule, MatCardModule, MatSelectModule, MatTableModule, NgClass, MatIconModule],
+  imports: [MatFormFieldModule, MatCardModule, MatSelectModule, MatTableModule, NgClass, MatIconModule, MatButtonModule],
   templateUrl: './funcionarios.component.html',
   styleUrls: ['./funcionarios.component.css']
 })
