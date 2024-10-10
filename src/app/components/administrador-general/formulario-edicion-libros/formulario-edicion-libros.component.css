@@ -12,6 +12,10 @@
 }
 }
 
+.mat-mdc-table {
+  white-space: nowrap !important;
+}
+
 .ancho-50 {
   margin-left: 15px;
   margin-right: 20px; /* Puedes ajustar este margen según tus necesidades */

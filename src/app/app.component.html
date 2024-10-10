@@ -15,7 +15,7 @@
       </mat-sidenav>
 
       <mat-sidenav #sidenav mode="over" [@sidenavAnimation]="sidenav._animationState" position="end">
-        <app-right-sidebar [rol]="rol"></app-right-sidebar>
+        <app-right-sidebar (cerrarSidebarEvent)="cerrarSidenavDerecho()" [rol]="rol"></app-right-sidebar>
       </mat-sidenav>
       <mat-sidenav-content [@onMainContentChange]="onSideNavChange ? 'open': 'close'">
         <div class="main_content">

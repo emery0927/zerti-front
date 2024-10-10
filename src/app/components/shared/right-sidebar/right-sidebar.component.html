@@ -18,7 +18,7 @@
     </div>
     <ul class="user-options">
       <li><a> Administrar Cuenta </a></li>
-      <li><a>Cerrar Sesión</a></li>
+      <li (click)="logout()"><a>Cerrar Sesión</a></li>
     </ul>
   </div>
   <ng-container *ngIf="roles.length > 0; else noRoles">
@@ -27,7 +27,7 @@
         <mat-list-item class="role" style="height: 68px;"
         *ngFor="let role of roles; last as last" [routerLink]="role.link" (click)="openClientSelectionDialog(role)"
         [class.selected]="selectedItem === role.link" routerLinkActive="selected">
-        <span class="role-description">
+        <span class="role-description" routerLinkActive="color-selected ">
           <mat-icon _ngcontent-eln-c241="" role="img" fontset="material-icons-outlined" class="mat-icon notranslate icon-xxs
           me-1 material-icons-outlined mat-icon-no-color" aria-hidden="true"
           data-mat-icon-type="font" data-mat-icon-namespace="material-icons-outlined"> {{role.icon}}

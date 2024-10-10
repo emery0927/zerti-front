@@ -254,13 +254,13 @@ $container-max-widths: (
   sm: 485px,
   md: 545px,
   lg: 1300px,
-  xl: 1160px
+  xl: 1340px
 );
 
 $secs-margin-top: (
   sm: -163px,
-  md: -315px,
-  lg: -250px,
+  md: -340px,
+  lg: -334px,
 );
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");

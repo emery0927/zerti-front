@@ -22,11 +22,13 @@ import { LandingComponent } from './app/components/landing/landing.component';
 import { LoginComponent } from './app/components/login/login.component';
 import { PasswordRecoveryComponent } from './app/components/password-recovery/password-recovery.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { authGuard } from './app/guards/auth.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/landing' },
   { path: 'landing', component: LandingComponent},
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'educational-institutions', component: EducationalInstitutionsComponent },
   { path: 'students-users', component: StudentsUsersComponent },
   { path: 'admin-users', component: UsuariosAdministrativosComponent },
@@ -47,6 +49,6 @@ const routes: Routes = [
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    importProvidersFrom(BrowserAnimationsModule)
+    importProvidersFrom(BrowserAnimationsModule, HttpClientModule),
   ]
 }).catch(err => console.error(err));

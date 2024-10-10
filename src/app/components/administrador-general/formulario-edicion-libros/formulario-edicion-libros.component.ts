@@ -15,6 +15,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 export interface AnioLectivo {
   annio_lectivo: string;
@@ -38,7 +40,7 @@ export interface LibroXSede {
 @Component({
   selector: 'app-formulario-edicion-libros',
   standalone: true,
-  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatTableModule, CommonModule],
+  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule, MatOptionModule, MatTableModule, CommonModule, MatButtonModule, MatInputModule],
   templateUrl: './formulario-edicion-libros.component.html',
   styleUrls: ['./formulario-edicion-libros.component.css']
 })
@@ -211,11 +213,11 @@ export class FormularioEdicionLibrosComponent implements AfterViewInit, OnInit {
       this.mostrarTooltip = true;
     }
 
-    
+
   }
 
   ngOnInit(): void {
-        
+
     this.anioLectivo = this.dataLibro.libro.annio_lectivo;
     this.calendarioSeleccionado = this.dataLibro.libro.calendario;
     this.sedeSeleccionada = this.dataLibro.libro.sede.id_sede;
@@ -254,7 +256,7 @@ export class FormularioEdicionLibrosComponent implements AfterViewInit, OnInit {
     })
     this.data.data = filteredData;
 
-    
+
 
       }
 

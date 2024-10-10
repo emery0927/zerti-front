@@ -15,11 +15,14 @@ import { TipoPagina } from 'src/app/models/tipo-pagina';
 import { Pagina } from 'src/app/models/pagina';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-formulario-edicion-pagina',
   standalone: true,
-  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule],
+  imports: [MatFormFieldModule, MatDialogModule, MatSelectModule, CommonModule, MatButtonModule, MatInputModule],
   templateUrl: './formulario-edicion-pagina.component.html',
   styleUrls: ['./formulario-edicion-pagina.component.css']
 })
@@ -127,7 +130,7 @@ export class FormularioEdicionPaginaComponent implements AfterViewInit, OnInit {
       numero: this.numeroPagina,
       archivo_pdf: this.nombreArchivo
     };
-    
+
     this.dialogRef.close(updatedPagina);
   }
 
@@ -216,19 +219,19 @@ export class FormularioEdicionPaginaComponent implements AfterViewInit, OnInit {
       this.mostrarTooltip = true;
     }
 
-    
+
   }
 
   ngOnInit(): void {
         this.numeroPagina = this.dataPagina.pagina.numero;
     this.tipoPagina = this.dataPagina.pagina.tipo_pagina.id_tipo_pagina;
     this.nombreArchivo = this.dataPagina.pagina.archivo_pdf;
-        
+
     for (let i = 1; i <= this.dataPagina.paginas.length; i++) {
         this.numerosPagina.push(i.toString().padStart(2, '0'));
     }
 
-    
+
 
     /* this.anioLectivo = this.dataLibro.libro.annio_lectivo;
     this.calendarioSeleccionado = this.dataLibro.libro.calendario;
@@ -268,7 +271,7 @@ export class FormularioEdicionPaginaComponent implements AfterViewInit, OnInit {
     })
     this.data.data = filteredData;
 
-    
+
 
       }
 

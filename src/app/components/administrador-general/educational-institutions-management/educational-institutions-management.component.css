@@ -330,18 +330,17 @@ tr.example-element-row:not(.example-expanded-row):hover {
 
 .item-lista {
   height: 28px;
-  .mdc-list-item__primary-text {
-    font-size: 14px;
-    color: #673600;
-    font-weight: 400;
-    font-family: "Lato", sans-serif;
-  }
 }
-
 .mat-list-item::before {
   margin-right: 8px; /* Espacio entre el punto y el texto */
 }
 
+::ng-deep .mdc-list-item__primary-text {
+  font-size: 14px;
+  color: #673600;
+  font-weight: 400;
+  font-family: "Lato", sans-serif;
+}
 
 .cursor-pointer {
   cursor: pointer;

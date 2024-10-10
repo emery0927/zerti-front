@@ -28,7 +28,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BubblePaginationDirective } from 'src/app/directives/bubble-pagination.directive';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule, NgClass } from '@angular/common';
-import { MatListModule } from '@angular/material/list';
+import { MatListItem, MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -63,7 +63,7 @@ export class PaginatorIntl implements MatPaginatorIntl {
   imports: [MatFormFieldModule, MatDialogModule, MatSelectModule,
     MatOptionModule, MatTableModule, MatIconModule, MatPaginatorModule,
     MatTooltipModule, BubblePaginationDirective, MatMenuModule,
-    MatInputModule, FormsModule, NgClass, MatListModule, CommonModule, MatButtonModule ],
+    MatInputModule, FormsModule, NgClass, MatListModule, CommonModule, MatButtonModule],
   templateUrl: './educational-institutions-management.component.html',
   styleUrls: ['./educational-institutions-management.component.css'],
   providers: [{ provide: MatPaginatorIntl}],

@@ -5,10 +5,10 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LandingComponent } from './components/landing/landing.component';
-import { NavbarLandingComponent } from './shared/navbar-landing/navbar-landing.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { RightSidebarComponent } from './shared/right-sidebar/right-sidebar.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+import { NavbarLandingComponent } from './components/shared/navbar-landing/navbar-landing.component';
+import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
+import { RightSidebarComponent } from './components/shared/right-sidebar/right-sidebar.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { RecargaDirective } from './directives/recarga.directive';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { LoginComponent } from './components/login/login.component';
@@ -69,10 +69,16 @@ export class AppComponent implements AfterViewInit {
     return currentRoute === '/login';
   }
 
-  ngAfterViewInit(): void {
-    this.sidenavService.setSidenav(this.sidenav);
-    console.log(this.isLogin());
-    console.log(this.isLanding());
+  cerrarSidenavDerecho() {
+    this.sidenavService.cerrarSidenav();
+  }
 
+  ngAfterViewInit(): void {
+    if (this.sidenav) {
+      this.sidenavService.setSidenav(this.sidenav);
+      console.warn('Sidenav inicializado');
+    } else {
+      console.error('Sidenav no inicializado');
+    }
   }
 }

@@ -1,5 +1,5 @@
 <div style="text-align: left; padding-top: 1.5rem;">
-  <mat-form-field style="max-width: 100%; width: 325px;" appearance="fill" class="ancho-igual padding-izquierdo-modulo specific-select-input">
+  <mat-form-field style="max-width: 100%; width: 325px; margin-left: 0;" appearance="fill" class="ancho-igual padding-izquierdo-modulo specific-select-input">
     <mat-label style="font-size: 16px; color: #59320f;">Entidad Territorial</mat-label>
     <mat-select tabIndex="0" role="combobox" (selectionChange)="onEntidadTerritorialChange($event)" [value]="2">
       <mat-option *ngFor="let entidadTerritorial of entidadesTerritoriales.slice(1);" [value]="entidadTerritorial.id_et">{{entidadTerritorial.nombre_et}}</mat-option>
@@ -19,7 +19,7 @@
   </mat-form-field>
 </div>
 <div class="padding-izquierdo-modulo">
-  <div style="max-width: 927px;" class="mat-elevation-z8 ">
+  <div style="max-width: 910px;" class="mat-elevation-z8 ">
     <table mat-table [dataSource]="data" multiTemplateDataRows class="full-width-table">
       <!-- Nombre Sede - Columna -->
       <ng-container matColumnDef="nombre_sede">

@@ -101,7 +101,6 @@ table {
 
 .ancho-igual {
   flex: 1;
-  margin-left: 10px;
   max-width: 100%;
   box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
 }
@@ -118,13 +117,9 @@ table {
 }
 }
 
-
 .mat-mdc-header-row {
   height: 10px;
 }
-
-
-
 
 .header-style {
   background-color: #E1D1BC !important;

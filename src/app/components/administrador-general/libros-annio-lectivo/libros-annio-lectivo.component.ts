@@ -29,6 +29,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule, NgClass } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 export interface AnioLectivo {
   id_anio: number;
   annio_lectivo: string;
@@ -56,7 +57,7 @@ export interface AgrupacionPorSede {
 @Component({
   selector: 'app-libros-annio-lectivo',
   standalone: true,
-  imports: [MatFormFieldModule, MatTableModule, MatSelectModule, MatIconModule, MatListModule, MatMenuModule, NgClass, CommonModule],
+  imports: [MatFormFieldModule, MatTableModule, MatSelectModule, MatIconModule, MatListModule, MatMenuModule, NgClass, CommonModule, MatButtonModule],
   templateUrl: './libros-annio-lectivo.component.html',
   styleUrls: ['./libros-annio-lectivo.component.css'],
   animations: [
@@ -249,7 +250,7 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
       });
     });
 
-    
+
     return resultado;
   }
 
@@ -315,7 +316,7 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
     this.data.data = this.agruparPorSede(filteredData);
 
      */
-    
+
   }
 
   ngOnInit(): void {
@@ -354,7 +355,7 @@ export class LibrosAnnioLectivoComponent implements AfterViewInit, OnInit {
     })
     this.data.data = filteredData;
 
-    
+
 
       } */
 

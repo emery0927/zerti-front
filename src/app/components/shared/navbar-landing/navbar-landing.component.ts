@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd, RouterLink } from '@angular/router';
 import { Location, PopStateEvent } from '@angular/common';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'app-navbar-landing',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './navbar-landing.component.html',
   styleUrls: ['./navbar-landing.component.css']
 })

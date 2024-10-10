@@ -4,8 +4,9 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding-bottom: 13px;
+  padding-bottom: 7px;
   box-shadow: 0 3px 4px #0003, 0 3px 3px -2px #00000024, 0 1px 8px #0000001f;
+  padding-left: 35px;
 }
 
 .spacer-title {
@@ -22,6 +23,7 @@
 
 .module-text {
   margin-bottom: 5px;
+  font-size: 1rem!important;
 }
 
 .py-4 {

@@ -28,7 +28,7 @@
           <mat-option *ngFor="let sede of sedesPorInstitucion" [value]="sede.id_sede">{{sede.nombre_sede}}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field style="width: 424px;" appearance="fill" class="ancho-igual specific-select-input padding-izquierdo-libros">
+      <mat-form-field style="width: 424px; margin-left: 10px;" appearance="fill" class="ancho-igual specific-select-input padding-izquierdo-libros">
         <mat-label style="font-size: 16px; color: #59320f;">Libro No.</mat-label>
         <mat-select tabIndex="4" role="combobox" [value]="1">
           <mat-option *ngFor="let libro of libros" [value]="libro.id_libro_valoracion_final">{{libro.numero}}&nbsp; {{libro.descripcion_corta}}</mat-option>

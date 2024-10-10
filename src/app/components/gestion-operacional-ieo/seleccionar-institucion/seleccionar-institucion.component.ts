@@ -22,10 +22,12 @@ import { Subject } from 'rxjs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-seleccionar-institucion',
   standalone: true,
-  imports: [MatFormFieldModule, MatDialogModule, MatIconModule, MatSelectModule, MatTableModule, CommonModule ],
+  imports: [MatFormFieldModule, MatDialogModule, MatIconModule, MatSelectModule, MatTableModule, CommonModule, MatButtonModule, MatInputModule ],
   templateUrl: './seleccionar-institucion.component.html',
   styleUrls: ['./seleccionar-institucion.component.css'],
   animations: [
@@ -100,7 +102,7 @@ export class SeleccionarInstitucionComponent implements AfterViewInit, OnInit {
   }
 
   async cargarVentanaRol(institucion: InstitucionEducativa) {
-    
+
     this.rol = 2;
     this.ventanaTrabajo = new VentanaTrabajo(this.rol, this.rol, institucion.nombre_ie);
     this.sidenavService.cargarVentanasRolAdmin(this.ventanaTrabajo);
@@ -143,11 +145,11 @@ export class SeleccionarInstitucionComponent implements AfterViewInit, OnInit {
       this.mostrarTooltip = true;
     }
 
-    
+
   }
 
   ngOnInit(): void {
-    
+
   }
 
   habilitarInputPaginador() {

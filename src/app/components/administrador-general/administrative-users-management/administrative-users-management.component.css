@@ -203,15 +203,14 @@ table {
     --mdc-filled-text-field-focus-active-indicator-height: 0px;
     --mdc-filled-text-field-container-shape: 4px;
   }
-
-  .mat-mdc-form-field-infix {
-    flex: auto;
-    min-width: 0;
-    width: 180px;
-    position: relative;
-    box-sizing: border-box;
-    margin-left: 47px;
 }
+::ng-deep .hola .mat-mdc-form-field-infix {
+  flex: auto;
+  min-width: 0;
+  width: 180px;
+  position: relative;
+  box-sizing: border-box;
+  margin-left: 47px;
 }
 
 input[type=number]::-webkit-inner-spin-button,

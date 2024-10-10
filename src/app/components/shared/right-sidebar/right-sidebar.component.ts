@@ -1,6 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MatSidenav } from '@angular/material/sidenav';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { SeleccionarInstitucionComponent } from 'src/app/components/gestion-operacional-ieo/seleccionar-institucion/seleccionar-institucion.component';
@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, NgClass } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 interface Rol {
@@ -22,17 +23,19 @@ interface Rol {
 @Component({
   selector: 'app-right-sidebar',
   standalone: true,
-  imports: [MatIconModule, NgClass, MatListModule, CommonModule, RouterModule, MatDialogModule, MatButtonModule],
+  imports: [MatIconModule, NgClass, MatListModule, CommonModule, RouterModule, MatDialogModule, MatButtonModule, MatSidenavModule],
   providers: [SidenavService],
   templateUrl: './right-sidebar.component.html',
   styleUrls: ['./right-sidebar.component.css'],
   animations: []
 })
-export class RightSidebarComponent implements OnInit {
+export class RightSidebarComponent implements OnInit, AfterViewInit {
+
+  @Output() cerrarSidebarEvent = new EventEmitter<void>();
 
   isCollapsed = true;
 
-  @Input()
+  @ViewChild('sidenav')
   sidenav!: MatSidenav;
 
   @Input()
@@ -53,7 +56,21 @@ export class RightSidebarComponent implements OnInit {
   ]
 
 
-  constructor(private sidenavService: SidenavService, private router: Router, public dialog: MatDialog) { }
+  constructor
+  (
+    private sidenavService: SidenavService,
+    private router: Router,
+    public dialog: MatDialog,
+    private authService: AuthService
+  ) { }
+  ngAfterViewInit(): void {
+    if (this.sidenav) {
+      this.sidenavService.setSidenav(this.sidenav);
+      console.warn('Sidenav inicializado');
+    } else {
+      console.error('Sidenav no inicializado');
+    }
+  }
 
   ngOnInit(): void {
      this.setSelectedItemFromRoute();
@@ -71,7 +88,7 @@ export class RightSidebarComponent implements OnInit {
   }
 
   closeSidenav() {
-    this.sidenavService.cerrarSidenav();
+    this.cerrarSidebarEvent.emit();
   }
 
   elegirContexto(rol: number) {
@@ -82,6 +99,12 @@ export class RightSidebarComponent implements OnInit {
     } else if (rol === 2) {
       this.router.navigate(['inicio-gestion-operacional']);
     }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+    this.closeSidenav();
   }
 
   openClientSelectionDialog(role: Rol) {

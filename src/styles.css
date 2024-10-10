@@ -69,18 +69,20 @@ body {
   border: none;
 }
 
-.mat-mdc-tab-body {
-   .mat-mdc-tab-body-active {
-    position: fixed;
-    overflow-x: hidden;
-    overflow-y: auto;
+.mat-mdc-tab-body.mat-mdc-tab-body.mat-mdc-tab-body-active  {
+    position: relative;
+    overflow-x: hidden!important;
+    overflow-y: hidden!important;
     z-index: 1;
     flex-grow: 1;
-  }
 }
 
 .mat-mdc-tab-body-wrapper {
-  height: 835px;
+  height: 868px;
+}
+
+.mat-mdc-tab-body-content {
+  overflow: hidden!important;
 }
 
 .mat-mdc-tab-header {
