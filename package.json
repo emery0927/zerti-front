@@ -27,6 +27,7 @@
     "@sweetalert2/theme-material-ui": "5.0.16",
     "bootstrap": "5.3.2",
     "emailjs": "4.0.3",
+    "jwt-decode": "^4.0.0",
     "ngx-doc-viewer": "15.0.1",
     "ngx-extended-pdf-viewer": "21.3.5",
     "ngx-spinner": "16.0.2",

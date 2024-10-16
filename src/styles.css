@@ -245,6 +245,10 @@ mat-paginator {
   height: 40px !important;
 }
 
+.mdc-snackbar__surface {
+  background-color: #ff000093 !important;
+}
+
 ngx-extended-pdf-viewer #viewerContainer {
   top: 45px !important;
 }

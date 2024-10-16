@@ -35,6 +35,14 @@ export class AuthService {
     this.tokenSubject.next(authResult.access);
   }
 
+  cargarUsuario(uuid: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.get<Usuario>(apiUrl + '/api/usuarios/' + uuid + '/', { headers });
+  }
+
   logout(): void {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
