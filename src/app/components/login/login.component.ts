@@ -39,9 +39,11 @@ export class LoginComponent implements OnInit {
       console.log(this.authService.login(username, password).subscribe({
         next: (respuesta) => {
           console.log(respuesta);
-
+          const tokenPayload: JwtPayload = jwtDecode(respuesta.access);
+          const jsonDecoded = JSON.stringify(tokenPayload);
+          const parsedDecode = JSON.parse(jsonDecoded);
+          this.authService.setUuid(parsedDecode.user_id);
           this.router.navigate(['/home']);
-          this.cargarUsuario(respuesta.access);
         },
         error: (err) => {
           this.errorMessage = 'Error de autenticación. Por favor, verifica tus credenciales.';
@@ -50,24 +52,6 @@ export class LoginComponent implements OnInit {
         }
       }));
     }
-  }
-
-  cargarUsuario(accessToken: string): void {
-    console.log(accessToken);
-    const tokenPayload: JwtPayload = jwtDecode(accessToken);
-    const jsonDecoded = JSON.stringify(tokenPayload);
-    const parsedDecode = JSON.parse(jsonDecoded);
-    console.log(parsedDecode);
-
-    this.authService.cargarUsuario(parsedDecode.user_id).subscribe({
-      next: (usuario) => {
-        console.log(usuario);
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    })
-
   }
 
   showError(mensaje: string) {

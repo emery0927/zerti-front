@@ -11,6 +11,7 @@ import { AuthResponse } from '../models/auth/auth-response';
 export class AuthService {
   private tokenSubject: BehaviorSubject<string | null>;
   public token$: Observable<string | null>;
+  private uuid!: string;
 
   constructor(private http: HttpClient) {
     this.tokenSubject = new BehaviorSubject<string | null>(localStorage.getItem('token'));
@@ -61,5 +62,13 @@ export class AuthService {
 
   get token(): string | null {
     return this.tokenSubject.value;
+  }
+
+  setUuid(uuid: string): void {
+    this.uuid = uuid;
+  }
+
+  getUuid(): string {
+    return this.uuid;
   }
 }

@@ -27,6 +27,8 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('yo ya inicié hace rato perrooooooo');
+
     this.titulo_ventana = 'Administrador General';
     this._sidenavService.buttonClick$.subscribe(res => {
             this.cdr.detectChanges();

@@ -11,6 +11,8 @@ import { CommonModule, NgClass } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from 'src/app/services/auth.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Usuario } from 'src/app/models/usuario';
 
 
 interface Rol {
@@ -47,6 +49,8 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
 
   selectedItem!: string;
 
+  nombreUsuario!: string;
+
   public roles: Rol[] = [
     {id:1 ,name: 'Administracion General', rol: 'Administrador General', link:'home', icon: 'admin_panel_settings'},
     {id:2 ,name: 'Gestión Operacional IE', rol: 'Rectoría', link:'inicio-gestion-operacional', icon: 'school'},
@@ -61,7 +65,8 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     private sidenavService: SidenavService,
     private router: Router,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private usuarioService: UsuarioService
   ) { }
   ngAfterViewInit(): void {
     if (this.sidenav) {
@@ -73,8 +78,12 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-     this.setSelectedItemFromRoute();
-       }
+    this.setSelectedItemFromRoute();
+    console.log(this.usuarioService.getUsuario());
+    this.nombreUsuario = this.usuarioService.getUsuario().first_name + this.usuarioService.getUsuario().last_name;
+
+
+    }
 
   setSelectedItemFromRoute() {
     const currentUrl = this.router.url;
