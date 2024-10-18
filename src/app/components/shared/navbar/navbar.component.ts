@@ -27,8 +27,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('yo ya inicié hace rato perrooooooo');
-
     this.titulo_ventana = 'Administrador General';
     this._sidenavService.buttonClick$.subscribe(res => {
             this.cdr.detectChanges();
@@ -39,18 +37,6 @@ export class NavbarComponent implements OnInit {
       }
 
     })
-
-
-
-  }
-
-  onSinenavToggle() {
-    this.sideNavState = !this.sideNavState
-
-    setTimeout(() => {
-      this.linkText = this.sideNavState;
-    }, 100)
-    this._sidenavService.sideNavState$.next(this.sideNavState)
   }
 
 }

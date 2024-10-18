@@ -17,27 +17,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const uuid = this.authService.getUuid();
-    this.cargarUsuario(uuid)
   }
 
-  cargarUsuario(uuid: string): void {
-    this.authService.cargarUsuario(uuid).subscribe({
-      next: (usuario) => {
-        console.log(usuario);
-        const usuarioEnSesion = new Usuario(
-          usuario.username,
-          usuario.first_name,
-          usuario.last_name,
-          usuario.email
-        )
-        this.usuarioService.setUsuario(usuarioEnSesion);
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    })
 
-  }
 
 }

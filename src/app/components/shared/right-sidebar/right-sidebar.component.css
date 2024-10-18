@@ -14,14 +14,12 @@
 }
 
 .right-sidebar.open {
-  right: 0;
-  box-shadow: 7px 0 70px -9px #00000059;
 }
 
 .right-sidebar .navbar-options {
-  background: #c3994ca6;
+  background: #59320f;
   color: #fff;
-  height: 64px;
+  height: 40px;
 }
 
 .v-center {

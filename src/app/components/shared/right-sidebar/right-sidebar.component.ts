@@ -37,19 +37,21 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
 
   isCollapsed = true;
 
+  @Input()
+  rol!: number;
+
   @ViewChild('sidenav')
   sidenav!: MatSidenav;
 
-  @Input()
-  rol!: number;
+  public sideNavState: boolean = false;
 
   role$!: Observable<Rol>;
 
   ventanaTrabajo!: VentanaTrabajo;
 
   selectedItem!: string;
-
-  nombreUsuario!: string;
+  usuario: Usuario | null = null;
+  nombreUsuario: string | undefined;
 
   public roles: Rol[] = [
     {id:1 ,name: 'Administracion General', rol: 'Administrador General', link:'home', icon: 'admin_panel_settings'},
@@ -69,21 +71,44 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     private usuarioService: UsuarioService
   ) { }
   ngAfterViewInit(): void {
-    if (this.sidenav) {
-      this.sidenavService.setSidenav(this.sidenav);
-      console.warn('Sidenav inicializado');
-    } else {
-      console.error('Sidenav no inicializado');
-    }
   }
 
   ngOnInit(): void {
     this.setSelectedItemFromRoute();
-    console.log(this.usuarioService.getUsuario());
-    this.nombreUsuario = this.usuarioService.getUsuario().first_name + this.usuarioService.getUsuario().last_name;
+    const uuid = this.authService.getUuid();
+    this.cargarUsuario(uuid)
+    this.usuarioService.usuario$.subscribe((usuario) => {
+      this.usuario = usuario;
+      console.log(this.usuario?.first_name);
+      this.nombreUsuario = this.usuario?.first_name + ' ' + this.usuario?.last_name;
 
+    });
+    console.log(this.nombreUsuario);
 
-    }
+  }
+
+  cargarUsuario(uuid: string): void {
+    this.authService.cargarUsuario(uuid).subscribe({
+      next: (usuario) => {
+        console.log(usuario);
+        const usuarioEnSesion = new Usuario(
+          usuario.uuid,
+          usuario.username,
+          usuario.first_name,
+          usuario.last_name,
+          usuario.email
+        )
+        console.log(usuarioEnSesion);
+
+        this.usuarioService.setUsuario(usuarioEnSesion);
+
+        console.log(this.usuarioService.getUsuario());
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
+  }
 
   setSelectedItemFromRoute() {
     const currentUrl = this.router.url;
@@ -97,7 +122,7 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
   }
 
   closeSidenav() {
-    this.cerrarSidebarEvent.emit();
+    this.sidenavService.cerrarSidenav();
   }
 
   elegirContexto(rol: number) {

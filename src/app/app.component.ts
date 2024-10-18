@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { SidenavService } from './services/sidenav.service';
 import { onMainContentChange } from './animations/animations';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LandingComponent } from './components/landing/landing.component';
 import { NavbarLandingComponent } from './components/shared/navbar-landing/navbar-landing.component';
@@ -13,6 +13,7 @@ import { RecargaDirective } from './directives/recarga.directive';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -43,10 +44,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ]),
 ],
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit {
   title = 'zerti';
   public onSideNavChange!: boolean;
   public inicioSesion = false;
+  public showRightSidebar = false;
   recarga: number = 0;
   rol!: number;
 
@@ -56,7 +58,29 @@ export class AppComponent implements AfterViewInit {
   constructor(private sidenavService: SidenavService, private router: Router) {
     this.sidenavService.sideNavState$.subscribe( res=> {
       this.onSideNavChange = res;
-    })
+    });
+
+
+    console.log(this.showRightSidebar);
+
+
+  }
+  ngOnInit(): void {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      console.log('Navigation Event:', event);
+
+      this.evaluateSidebarVisibility(event.urlAfterRedirects);
+    });
+
+  }
+
+  
+
+  evaluateSidebarVisibility(currentRoute: string) {
+    const routesWithoutSidebar = ['/login', '/landing'];
+    this.showRightSidebar = !routesWithoutSidebar.includes(currentRoute);
   }
 
   isLanding(): boolean {
@@ -69,11 +93,17 @@ export class AppComponent implements AfterViewInit {
     return currentRoute === '/login';
   }
 
+  isHome(): boolean {
+    const currentRoute = this.router.url;
+    return currentRoute === '/home';
+  }
+
   cerrarSidenavDerecho() {
     this.sidenavService.cerrarSidenav();
   }
 
   ngAfterViewInit(): void {
+
     if (this.sidenav) {
       this.sidenavService.setSidenav(this.sidenav);
       console.warn('Sidenav inicializado');
