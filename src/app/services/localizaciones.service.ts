@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Departamento } from '../models/departamento';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpService } from './utils/http-service';
 import { apiUrl } from 'src/environments/local';
 import { AuthService } from './auth.service';
 import { Municipio } from '../models/municipio';
