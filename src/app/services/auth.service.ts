@@ -22,6 +22,8 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
+    console.log(headers);
+
     return this.http.post<AuthResponse>(apiUrl + '/api/token/', { username, password }, { headers })
     .pipe(
       tap(response => {
@@ -31,7 +33,7 @@ export class AuthService {
   }
 
   private setSession(authResult: AuthResponse): void {
-    localStorage.setItem('access_token', authResult.access);
+    localStorage.setItem('token', authResult.access);
     localStorage.setItem('refresh_token', authResult.refresh);
     this.tokenSubject.next(authResult.access);
   }

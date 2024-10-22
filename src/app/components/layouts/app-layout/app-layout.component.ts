@@ -1,33 +1,22 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { SidenavService } from './services/sidenav.service';
-import { onMainContentChange } from './animations/animations';
+import { CommonModule } from '@angular/common';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { LandingComponent } from './components/landing/landing.component';
-import { NavbarLandingComponent } from './components/shared/navbar-landing/navbar-landing.component';
-import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
-import { RightSidebarComponent } from './components/shared/right-sidebar/right-sidebar.component';
-import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { RecargaDirective } from './directives/recarga.directive';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
+import { RightSidebarComponent } from '../../shared/right-sidebar/right-sidebar.component';
+import { filter } from 'rxjs';
+import { SidenavService } from 'src/app/services/sidenav.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { LoginComponent } from './components/login/login.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { filter } from 'rxjs/operators';
+import { onMainContentChange } from 'src/app/animations/animations';
+import { RecargaDirective } from 'src/app/directives/recarga.directive';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-app-layout',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    LandingComponent,
-    NavbarLandingComponent,
-    LoginComponent
-  ],
-  providers: [SidenavService],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  imports: [CommonModule, MatSidenavModule, RouterModule, NavbarComponent, SidebarComponent, RightSidebarComponent, RecargaDirective],
+  templateUrl: './app-layout.component.html',
+  styleUrls: ['./app-layout.component.css'],
   animations: [onMainContentChange, trigger('sidenavAnimation', [
     state('open', style({
       transform: 'translateX(0)',
@@ -39,23 +28,21 @@ import { filter } from 'rxjs/operators';
   ]),
 ],
 })
-export class AppComponent implements AfterViewInit, OnInit {
-  title = 'zerti';
+export class AppLayoutComponent implements AfterViewInit, OnInit {
   public onSideNavChange!: boolean;
   public inicioSesion = false;
   public showRightSidebar = false;
   recarga: number = 0;
   rol!: number;
 
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
   constructor(private sidenavService: SidenavService, private router: Router) {
+    console.log(this.sidenav);
+
     this.sidenavService.sideNavState$.subscribe( res=> {
       this.onSideNavChange = res;
     });
-
-
-    console.log(this.showRightSidebar);
-
-
   }
   ngOnInit(): void {
     this.router.events.pipe(
@@ -75,10 +62,31 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.showRightSidebar = !routesWithoutSidebar.includes(currentRoute);
   }
 
+  isLanding(): boolean {
+    const currentRoute = this.router.url;
+    return currentRoute === '/landing';
+  }
+
+  isLogin(): boolean {
+    const currentRoute = this.router.url;
+    return currentRoute === '/login';
+  }
+
+  isHome(): boolean {
+    const currentRoute = this.router.url;
+    return currentRoute === '/home';
+  }
+
   cerrarSidenavDerecho() {
     this.sidenavService.cerrarSidenav();
   }
 
   ngAfterViewInit(): void {
+    if (this.sidenav) {
+      this.sidenavService.setSidenav(this.sidenav);
+      console.warn('Sidenav inicializado');
+    } else {
+      console.error('Sidenav no inicializado');
+    }
   }
 }

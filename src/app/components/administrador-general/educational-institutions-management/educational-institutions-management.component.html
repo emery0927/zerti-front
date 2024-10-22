@@ -2,11 +2,18 @@
                             con base a la Entidad Territorial y el Nombre -->
 <div class="select padding-izquierdo-modulo padding-derecho-modulo">
   <mat-form-field style="max-width: 25%;" appearance="fill" class=" ancho-igual specific-select-input" >
-    <mat-label style="font-size: 16px;  color: #59320f;">Entidad Territorial</mat-label>
+    <mat-label style="font-size: 16px;  color: #59320f;">Departamento</mat-label>
     <mat-select class="" tabIndex="0" role="combobox" #entidadSeleccionada (selectionChange)="onSelect($event)" [value]="1">
-    <mat-option *ngFor="let entidadTerritorial of entidadesTerritoriales" [value]="entidadTerritorial.id_et">{{entidadTerritorial.nombre_et}}</mat-option>
-  </mat-select>
-</mat-form-field>
+      <mat-option *ngFor="let departamento of departamentos" [value]="departamento">{{departamento.nombre}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field style="max-width: 25%;" appearance="fill" class=" ancho-igual specific-select-input" >
+    <mat-label style="font-size: 16px;  color: #59320f;">Muncipio</mat-label>
+    <mat-select class="" tabIndex="0" role="combobox" #entidadSeleccionada (selectionChange)="onSelect($event)" value="Selecciona un Municipio">
+      <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio.nombre}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
 <button matPrefix [matTooltip]="showFormField ? 'Ocultar filtro por nombre' : 'Mostrar filtro por nombre' " style="height: 58px !important;" (click)="addFilter()" mat-button>
   <span>

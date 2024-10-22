@@ -97,7 +97,7 @@ export class SidebarComponent implements OnInit {
 
   selectItem(item: string) {
     this.selectedItem = item;
-    this.router.navigateByUrl('/' + item);
+    this.router.navigate([`/app/${item}`]);
     localStorage.setItem('selectedItem', item);
   }
 

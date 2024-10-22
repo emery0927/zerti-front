@@ -6,10 +6,11 @@ import { User } from 'src/app/models/auth/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import {MatSnackBar,MatSnackBarModule} from '@angular/material/snack-bar';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { NavbarLandingComponent } from '../shared/navbar-landing/navbar-landing.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [NgClass, RouterModule, ReactiveFormsModule, CommonModule, MatSnackBarModule],
+  imports: [NgClass, RouterModule, ReactiveFormsModule, CommonModule, MatSnackBarModule, NavbarLandingComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit {
           const jsonDecoded = JSON.stringify(tokenPayload);
           const parsedDecode = JSON.parse(jsonDecoded);
           this.authService.setUuid(parsedDecode.user_id);
-          this.router.navigate(['/home']);
+          this.router.navigate(['app/home']);
         },
         error: (err) => {
           this.errorMessage = 'Error de autenticación. Por favor, verifica tus credenciales.';

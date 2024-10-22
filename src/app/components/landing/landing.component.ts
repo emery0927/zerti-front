@@ -4,11 +4,12 @@ import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } 
 import emailjs  from '@emailjs/browser'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import { NavbarLandingComponent } from '../shared/navbar-landing/navbar-landing.component';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, NavbarLandingComponent],
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })

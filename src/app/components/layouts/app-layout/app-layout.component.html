@@ -1,0 +1,17 @@
+<mat-sidenav-container [hasBackdrop]="false" class="sidenav-container">
+  <mat-sidenav #sidenavleft mode="side" opened>
+    <app-sidebar *appRecarga="recarga"></app-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav #sidenav mode="over" [@sidenavAnimation]="sidenav._animationState" position="end">
+    <app-right-sidebar *ngIf="showRightSidebar" [rol]="rol"></app-right-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content [@onMainContentChange]="onSideNavChange ? 'open': 'close'">
+    <div class="main_content">
+      <app-navbar [sidenav]="sidenav"></app-navbar>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

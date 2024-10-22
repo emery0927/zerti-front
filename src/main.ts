@@ -24,26 +24,35 @@ import { PasswordRecoveryComponent } from './app/components/password-recovery/pa
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { authGuard } from './app/guards/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { AppLayoutComponent } from './app/components/layouts/app-layout/app-layout.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/landing' },
   { path: 'landing', component: LandingComponent},
-  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
-  { path: 'educational-institutions', component: EducationalInstitutionsComponent, canActivate: [authGuard] },
-  { path: 'students-users', component: StudentsUsersComponent, canActivate: [authGuard] },
-  { path: 'admin-users', component: UsuariosAdministrativosComponent, canActivate: [authGuard] },
-  { path: 'areas', component: AreasComponent, canActivate: [authGuard] },
-  { path: 'digital-grade-validation-book', component: DigitalGradeValidationBookComponent, canActivate: [authGuard] },
-  { path: 'educational-certificates', component: EducationalCertificatesComponent, canActivate: [authGuard] },
-  { path: 'final-valuation-digital-books', component: FinalValuationDigitalBooksComponent, canActivate: [authGuard] },
-  { path: 'goods-and-services-suppliers', component: GoodsAndServicesSuppliersComponent, canActivate: [authGuard] },
-  { path: 'graduation-books', component: GraduationBooksComponent, canActivate: [authGuard] },
-  { path: 'operational-roles', component: OperationalRolesComponent, canActivate: [authGuard] },
-  { path: 'service-team', component: ServiceTeamComponent, canActivate: [authGuard] },
-  { path: 'territorial-entities', component: TerritorialEntitiesComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'password-recovery', component: PasswordRecoveryComponent, canActivate: [authGuard] },
-  { path: 'inicio-gestion-operacional', component: InicioGestionOperacionalComponent, canActivate: [authGuard] }
+  {
+    path: 'app',
+    component: AppLayoutComponent,
+    canActivate: [authGuard],
+    children: [
+      { path: 'home', component: HomeComponent, canActivate: [authGuard]},
+      { path: 'educational-institutions', component: EducationalInstitutionsComponent, canActivate: [authGuard] },
+      { path: 'students-users', component: StudentsUsersComponent, canActivate: [authGuard] },
+      { path: 'admin-users', component: UsuariosAdministrativosComponent, canActivate: [authGuard] },
+      { path: 'areas', component: AreasComponent, canActivate: [authGuard] },
+      { path: 'digital-grade-validation-book', component: DigitalGradeValidationBookComponent, canActivate: [authGuard] },
+      { path: 'educational-certificates', component: EducationalCertificatesComponent, canActivate: [authGuard] },
+      { path: 'final-valuation-digital-books', component: FinalValuationDigitalBooksComponent, canActivate: [authGuard] },
+      { path: 'goods-and-services-suppliers', component: GoodsAndServicesSuppliersComponent, canActivate: [authGuard] },
+      { path: 'graduation-books', component: GraduationBooksComponent, canActivate: [authGuard] },
+      { path: 'operational-roles', component: OperationalRolesComponent, canActivate: [authGuard] },
+      { path: 'service-team', component: ServiceTeamComponent, canActivate: [authGuard] },
+      { path: 'territorial-entities', component: TerritorialEntitiesComponent, canActivate: [authGuard] },
+      { path: 'password-recovery', component: PasswordRecoveryComponent, canActivate: [authGuard] },
+      { path: 'inicio-gestion-operacional', component: InicioGestionOperacionalComponent, canActivate: [authGuard] }
+    ],
+  },
+  { path: '**', redirectTo: '/landing' },
 ];
 
 bootstrapApplication(AppComponent, {

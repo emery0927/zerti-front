@@ -36,13 +36,14 @@ import { ImageUploadComponent } from '../image-upload/image-upload.component';
 })
 export class CreateEducationalInstituteComponent implements OnInit {
 
+
   constructor(@Inject(MAT_DIALOG_DATA) public entidadSeleccionada:any) { }
 
   clases_institucion = CLASES_INSTITUCION;
   entidad_territorial = ENTIDAD_TERRITORIAL;
   entidad_territorial_seleccionada!: any;
-  municipios = MUNICIPIOS;
-  departamentos = DEPARTAMENTOS;
+  municipios: Municipio[] = [];
+  departamentos: Departamento[] = [];
   equipos = EQUIPOS;
   centros_poblados = CENTROS_POBLADOS;
   modalidades = MODALIDADES;
@@ -83,22 +84,6 @@ const SEDES_SANTA_LIBRADA: Sede[] = [
   {id_sede: 1, nombre_sede: 'Sede Principal', orden: '01', observacion: 'op'},
   {id_sede: 2, nombre_sede: 'La Pintada', orden: '02', observacion: 'op'},
   {id_sede: 3, nombre_sede: 'El Portal', orden: '03', observacion: 'op'},
-]
-
-const MUNICIPIOS: Municipio[] = [
-  {id_municipio: 1, nombre_mun: 'Santiago de Cali', id_departamento: 1, codigo_dane: 76001, id_et: 2, zona: 'Urb'},
-  {id_municipio: 2, nombre_mun: 'Alcalá', id_departamento: 1, codigo_dane: 76020, id_et: 3, zona: 'Urb'},
-  {id_municipio: 3, nombre_mun: 'Buenaventura', id_departamento: 1, codigo_dane: 76109, id_et: 5, zona: 'Urb'},
-  {id_municipio: 4, nombre_mun: 'Buga', id_departamento: 1, codigo_dane: 76111, id_et: 6, zona: 'Urb'},
-  {id_municipio: 5, nombre_mun: 'Jamundí', id_departamento: 1, codigo_dane: 76364, id_et: 4, zona: 'Urb'},
-  {id_municipio: 6, nombre_mun: 'Palmira', id_departamento: 1, codigo_dane: 76520, id_et: 7, zona: 'Urb'}
-]
-
-const DEPARTAMENTOS: Departamento[] = [
-  {id_departamento: 1, nombre_dep: 'Valle del Cauca', codigo_dane: 76415, id_et: 1},
-  {id_departamento: 1, nombre_dep: 'Cundinamarca', codigo_dane: 45544, id_et: 2},
-  {id_departamento: 1, nombre_dep: 'Antioquia', codigo_dane: 21556, id_et: 3},
-  {id_departamento: 1, nombre_dep: 'Cauca', codigo_dane: 55645, id_et: 4},
 ]
 
 const EQUIPOS: EquipoServicio[] = [

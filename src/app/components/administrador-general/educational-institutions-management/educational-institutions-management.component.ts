@@ -31,6 +31,7 @@ import { CommonModule, NgClass } from '@angular/common';
 import { MatListItem, MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { LocalizacionesService } from 'src/app/services/localizaciones.service';
 
 
 export interface TerritorialEntitiesFilter {
@@ -91,7 +92,13 @@ export class PaginatorIntl implements MatPaginatorIntl {
 })
 export class EducationalInstitutionsManagementComponent implements AfterViewInit, OnInit {
 
-  data = new MatTableDataSource<InstitucionEducativa>(EDUCATIONAL_INSTITUTION);
+  departamentos: Departamento[] = [];
+  municipios: Municipio[] = [];
+
+  institucion: InstitucionEducativa[] = [
+  ];
+  data = new MatTableDataSource<InstitucionEducativa>(this.institucion);
+
   displayedColumns = ['nombre_ie', 'nombre_c', 'cod_zerti', 'nit', 'id_mun', 'zone', 'clase', 'options'];
   expandedElement!: InstitucionEducativa | null;
 
@@ -99,6 +106,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
   typeOfClass: string[]=['Oficial', 'No Oficial'];
 
   filtroSeleccionado: string = '';
+
 
 
   showFormField: boolean = false;
@@ -127,9 +135,29 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
 
   filterDictionary= new Map<string,string>();
 
-  constructor(public dialog: MatDialog) {
+  /*********************************** */
+
+
+
+  constructor(public dialog: MatDialog, private unidadTerritorialService: LocalizacionesService) {
     this.itemsPerPage = 5;
     this.currentPage = 0
+  }
+  ngOnInit(): void {
+    this.unidadTerritorialService.getDepartamentos().subscribe({
+      next: (data: Departamento[]) => {
+        this.departamentos = data;
+        console.log(this.departamentos);
+
+      }
+    });
+
+    this.unidadTerritorialService.getMunicipiosPorDepartamento('a47a54ad-ca16-4048-8f56-9f1000fe7407').subscribe({
+      next: (data: Municipio[]) => {
+        this.municipios = data;
+        console.log(this.municipios);
+      }
+    })
   }
 
   /* Metodo encargado de filtrar la información de la tabla */
@@ -153,7 +181,9 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
   }
 
   onSelect(item: any) {
-    let filteredData = EDUCATIONAL_INSTITUTION.filter((element: any) => {
+    console.log(item);
+
+    let filteredData = this.institucion.filter((element: any) => {
       return element.entidad_territorial.id_et === item.value;
     })
     if (item.value !== 1) {
@@ -163,7 +193,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
       this.mostrarTooltip = false;
     } else if (item.value === 1) {
       this.data.data = []
-      this.data.data = EDUCATIONAL_INSTITUTION;
+      this.data.data = this.institucion;
       this.habilitarCrear = true;
       this.mostrarTooltip = true;
     }
@@ -171,9 +201,6 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
 
   }
 
-  ngOnInit(): void {
-
-  }
 
   habilitarInputPaginador() {
     this.inputDeshabilitado = false;
@@ -200,7 +227,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
          * (Oficial/No Oficial) */
 
   showOficials() {
-    let filteredData = EDUCATIONAL_INSTITUTION.filter((element: any) => {
+    let filteredData = this.institucion.filter((element: any) => {
       return element.clase.clase_ie === 'Oficial';
     })
     this.data.data = filteredData;
@@ -326,22 +353,6 @@ const SEDES_SANTA_LIBRADA: Sede[] = [
   {id_sede: 3, nombre_sede: 'El Portal', orden: '03', observacion: 'op'},
 ]
 
-const MUNICIPIOS: Municipio[] = [
-  {id_municipio: 1, nombre_mun: 'Santiago de Cali', id_departamento: 1, codigo_dane: 76001, id_et: 2, zona: 'Urb'},
-  {id_municipio: 2, nombre_mun: 'Alcalá', id_departamento: 1, codigo_dane: 76020, id_et: 3, zona: 'Urb'},
-  {id_municipio: 3, nombre_mun: 'Buenaventura', id_departamento: 1, codigo_dane: 76109, id_et: 5, zona: 'Urb'},
-  {id_municipio: 4, nombre_mun: 'Buga', id_departamento: 1, codigo_dane: 76111, id_et: 6, zona: 'Urb'},
-  {id_municipio: 5, nombre_mun: 'Jamundí', id_departamento: 1, codigo_dane: 76364, id_et: 4, zona: 'Urb'},
-  {id_municipio: 6, nombre_mun: 'Palmira', id_departamento: 1, codigo_dane: 76520, id_et: 7, zona: 'Urb'}
-]
-
-const DEPARTAMENTOS: Departamento[] = [
-  {id_departamento: 1, nombre_dep: 'Valle del Cauca', codigo_dane: 76415, id_et: 1},
-  {id_departamento: 1, nombre_dep: 'Cundinamarca', codigo_dane: 45544, id_et: 2},
-  {id_departamento: 1, nombre_dep: 'Antioquia', codigo_dane: 21556, id_et: 3},
-  {id_departamento: 1, nombre_dep: 'Cauca', codigo_dane: 55645, id_et: 4},
-]
-
 const EQUIPOS: EquipoServicio[] = [
   {id_equipo: 1, id_admin: 1, nombre_es: 'Equipo 1', observacion: ''},
   {id_equipo: 2, id_admin: 2, nombre_es: 'Equipo 2', observacion: ''},
@@ -366,16 +377,3 @@ const MODALIDADES: ModalidadEducativa[] = [
 ]
 
 
-
-const EDUCATIONAL_INSTITUTION: InstitucionEducativa[] = [
-  {id_ie: 1, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10001', cod_zeti: '1001', nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.125.539-1', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '../../../assets/img/liceo_escudo.jpg' },
-  {id_ie: 2, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10002', cod_zeti: '1002', nombre_ie: 'Institución Educativa DE SANTA LIBRADA', nombre_c: 'Santa Librada', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.145.251-0', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_SANTA_LIBRADA, escudo: '' },
-  {id_ie: 3, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10003', cod_zeti: '1003', nombre_ie: 'Institución Educativa Técnico Industrial ANTONIO JOSÉ CAMACHO', nombre_c: 'Antonio José Camacho', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '805.235.444-7', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: [], escudo: '' },
-  {id_ie: 4, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10004', cod_zeti: '1004', nombre_ie: 'Institución Educativa SIMÓN BOLIVAR', nombre_c: 'Simón Bolivar', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.145.478-5', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },
-  {id_ie: 5, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10005', cod_zeti: '1005', nombre_ie: 'Institución Educativa GENERAL FRANCISCO DE PAULA SANTANDER', nombre_c: 'Francisco De Paula Santander', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '900.478.565-3', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },
-  {id_ie: 6, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10006', cod_zeti: '1006', nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', clase: CLASES_INSTITUCION[1], modalidad: MODALIDADES[0], nit: '800.125.539-1', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },
-  {id_ie: 7, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10007', cod_zeti: '1007', nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.125.539-1', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },
-  {id_ie: 8, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10008', cod_zeti: '1008', nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.125.539-1', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },
-  {id_ie: 9, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10009', cod_zeti: '1009', nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.125.539-1', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },
-  {id_ie: 10, entidad_territorial: ENTIDAD_TERRITORIAL[1], cod_zerti: '10010', cod_zeti: '1010', nombre_ie: 'Institución Educativa Liceo Departamental', nombre_c: 'Liceo Departamental', clase: CLASES_INSTITUCION[0], modalidad: MODALIDADES[0], nit: '800.125.539-1', cod_dane: '25788', cod_trd: 'ABC123', equipo_servicio: EQUIPOS[1], cerrada: false, id_custo: 0, departamento: DEPARTAMENTOS[0], municipio: MUNICIPIOS[0], centro_poblado: CENTROS_POBLADOS[1], direccion: 'Carrera 96 #53-172', correo: 'emeryesro2008@hotmail.com', telefonos: '3106360320 - 3153785132', observacion: '', estado: true, id_crea: 1, sedes: SEDES_LICEO, escudo: '' },
-];
