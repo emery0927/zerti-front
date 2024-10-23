@@ -15,25 +15,12 @@ export class LocalizacionesService {
   }
 
   getDepartamentos(): Observable<any> {
-    console.log(this.authService.token$);
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.authService.token}`
-    });
-
-    console.log(headers);
-
-    return this.http.get<Departamento[]>(apiUrl + '/api/departamentos/', {headers}).pipe(
+    return this.http.get<Departamento[]>(apiUrl + '/departamentos/').pipe(
       map((response: any[]) => response.map(depto => new Departamento(depto.uuid, depto.codigo, depto.nombre))));
   }
 
   getMunicipiosPorDepartamento(uuid: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.authService.token}`
-    })
-    return this.http.get<any>(apiUrl + '/api/departamentos/'+ uuid +'/municipios/', {headers}).pipe(
+    return this.http.get<any>(apiUrl + '/departamentos/'+ uuid +'/municipios/').pipe(
       map((response: any[]) => response.map(municipio => new Municipio(municipio.uuid, municipio.codigo, municipio.nombre))));
 
   }

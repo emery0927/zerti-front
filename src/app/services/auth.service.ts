@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 import { Usuario } from '../models/usuario';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrl } from 'src/environments/local';
@@ -19,47 +19,53 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    console.log(headers);
-
-    return this.http.post<AuthResponse>(apiUrl + '/api/token/', { username, password }, { headers })
+      return this.http.post<AuthResponse>(apiUrl + '/token/', { username, password })
     .pipe(
       tap(response => {
-        this.setSession(response);
+        this.storeTokens(response);
       })
     )
   }
 
-  private setSession(authResult: AuthResponse): void {
-    localStorage.setItem('token', authResult.access);
-    localStorage.setItem('refresh_token', authResult.refresh);
-    this.tokenSubject.next(authResult.access);
+  storeTokens(tokens: any): void {
+    localStorage.setItem('access_token', tokens.access);
+    localStorage.setItem('refresh_token', tokens.refresh);
   }
 
   cargarUsuario(uuid: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.token}`
-    });
-    return this.http.get<Usuario>(apiUrl + '/api/usuarios/' + uuid + '/', { headers });
+    return this.http.get<Usuario>(apiUrl + '/usuarios/' + uuid + '/');
   }
 
   logout(): void {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
-    this.tokenSubject.next(null);
   }
 
-  refreshToken(): Observable<any> {
-    const refreshToken = localStorage.getItem('refresh_token');
-    return this.http.post<AuthResponse>(apiUrl + '/api/token/refresh/', { refresh: refreshToken })
+  refreshToken(): Observable<string> {
+    const refreshToken = this.getRefreshToken();
+    return this.http.post<AuthResponse>(`${apiUrl}/token/refresh/`, { refresh: refreshToken })
     .pipe(
       tap(response => {
-        this.setSession(response);
+        this.storeTokens(response);
+      }),
+      map(tokens => tokens.access), // Extrae y retorna el nuevo token de acceso
+      catchError(error => {
+        console.error('Error al refrescar el token:', error);
+        return throwError(() => error); // Manejo de errores
       })
     );
+  }
+
+  isRefreshing(): boolean {
+    return!!this.getRefreshToken();
+  }
+
+  getRefreshToken(): string | null {
+    return localStorage.getItem('refresh_token');
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('access_token');
   }
 
   get token(): string | null {

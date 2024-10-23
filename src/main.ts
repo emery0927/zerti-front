@@ -23,8 +23,9 @@ import { LoginComponent } from './app/components/login/login.component';
 import { PasswordRecoveryComponent } from './app/components/password-recovery/password-recovery.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { authGuard } from './app/guards/auth.guard';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { AppLayoutComponent } from './app/components/layouts/app-layout/app-layout.component';
+import { AuthInterceptor } from './app/interceptors/auth.interceptor';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/landing' },
@@ -59,5 +60,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
     importProvidersFrom(BrowserAnimationsModule, HttpClientModule),
+    provideHttpClient(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ]
 }).catch(err => console.error(err));

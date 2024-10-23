@@ -32,6 +32,8 @@ import { MatListItem, MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { LocalizacionesService } from 'src/app/services/localizaciones.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
 
 
 export interface TerritorialEntitiesFilter {
@@ -64,7 +66,7 @@ export class PaginatorIntl implements MatPaginatorIntl {
   imports: [MatFormFieldModule, MatDialogModule, MatSelectModule,
     MatOptionModule, MatTableModule, MatIconModule, MatPaginatorModule,
     MatTooltipModule, BubblePaginationDirective, MatMenuModule,
-    MatInputModule, FormsModule, NgClass, MatListModule, CommonModule, MatButtonModule],
+    MatInputModule, FormsModule, NgClass, MatListModule, CommonModule, MatButtonModule, HttpClientModule],
   templateUrl: './educational-institutions-management.component.html',
   styleUrls: ['./educational-institutions-management.component.css'],
   providers: [{ provide: MatPaginatorIntl}],
@@ -95,8 +97,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
   departamentos: Departamento[] = [];
   municipios: Municipio[] = [];
 
-  institucion: InstitucionEducativa[] = [
-  ];
+  institucion: InstitucionEducativa[] = [];
   data = new MatTableDataSource<InstitucionEducativa>(this.institucion);
 
   displayedColumns = ['nombre_ie', 'nombre_c', 'cod_zerti', 'nit', 'id_mun', 'zone', 'clase', 'options'];

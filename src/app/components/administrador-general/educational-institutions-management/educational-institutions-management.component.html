@@ -3,7 +3,8 @@
 <div class="select padding-izquierdo-modulo padding-derecho-modulo">
   <mat-form-field style="max-width: 25%;" appearance="fill" class=" ancho-igual specific-select-input" >
     <mat-label style="font-size: 16px;  color: #59320f;">Departamento</mat-label>
-    <mat-select class="" tabIndex="0" role="combobox" #entidadSeleccionada (selectionChange)="onSelect($event)" [value]="1">
+    <mat-select #entidadSeleccionada (selectionChange)="onSelect($event)" value="seleccionar">
+      <mat-option value="seleccionar">Elige un Departamento</mat-option>
       <mat-option *ngFor="let departamento of departamentos" [value]="departamento">{{departamento.nombre}}</mat-option>
     </mat-select>
   </mat-form-field>
