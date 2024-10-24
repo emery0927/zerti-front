@@ -34,6 +34,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { LocalizacionesService } from 'src/app/services/localizaciones.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
+import { EstablecimientosEducativosService } from 'src/app/services/establecimientos-educativos.service';
 
 
 export interface TerritorialEntitiesFilter {
@@ -97,6 +98,9 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
   departamentos: Departamento[] = [];
   municipios: Municipio[] = [];
 
+  departamentoSeleccionado!: Departamento;
+  municipioSeleccionado!: Municipio;
+
   institucion: InstitucionEducativa[] = [];
   data = new MatTableDataSource<InstitucionEducativa>(this.institucion);
 
@@ -140,7 +144,10 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
 
 
 
-  constructor(public dialog: MatDialog, private unidadTerritorialService: LocalizacionesService) {
+  constructor(
+    public dialog: MatDialog,
+    private unidadTerritorialService: LocalizacionesService,
+    private establecimientoEducativoService: EstablecimientosEducativosService) {
     this.itemsPerPage = 5;
     this.currentPage = 0
   }
@@ -148,17 +155,9 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
     this.unidadTerritorialService.getDepartamentos().subscribe({
       next: (data: Departamento[]) => {
         this.departamentos = data;
-        console.log(this.departamentos);
-
-      }
+              }
     });
 
-    this.unidadTerritorialService.getMunicipiosPorDepartamento('a47a54ad-ca16-4048-8f56-9f1000fe7407').subscribe({
-      next: (data: Municipio[]) => {
-        this.municipios = data;
-        console.log(this.municipios);
-      }
-    })
   }
 
   /* Metodo encargado de filtrar la información de la tabla */
@@ -181,8 +180,25 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
     }
   }
 
+  consultarColegio(item: any) {
+    this.municipioSeleccionado = item.value;
+    this.establecimientoEducativoService.getEstablecimientosEducativos().subscribe({
+      next: (data: InstitucionEducativa[]) => {
+        console.log(data);
+      }
+    })
+  }
+
   onSelect(item: any) {
-    console.log(item);
+    this.departamentoSeleccionado = item.value;
+    this.unidadTerritorialService.getMunicipiosPorDepartamento(item.value.uuid).subscribe({
+      next: (data: Municipio[]) => {
+        this.municipios = data;
+      }
+    })
+
+
+
 
     let filteredData = this.institucion.filter((element: any) => {
       return element.entidad_territorial.id_et === item.value;
@@ -270,8 +286,8 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
     });
   }
 
-  abrirCrearIE(entidadSeleccionada: any) {
-    const dialogRef = this.dialog.open(CreateEducationalInstituteComponent, {data: {entidadSeleccionada}, disableClose: true});
+  abrirCrearIE() {
+    const dialogRef = this.dialog.open(CreateEducationalInstituteComponent, {data: {departamento:this.departamentoSeleccionado, municipio: this.municipioSeleccionado}, disableClose: true});
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
   }
 

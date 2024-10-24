@@ -11,7 +11,7 @@ import { Municipio } from '../models/municipio';
 })
 export class LocalizacionesService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient) {
   }
 
   getDepartamentos(): Observable<any> {

@@ -56,10 +56,7 @@ export class CreateEducationalInstituteComponent implements OnInit {
   cpoSeleccionado!: number;
 
   ngOnInit(): void {
-    let entidadFiltrada = ENTIDAD_TERRITORIAL.filter((element: any) => {
-      return element.id_et === this.entidadSeleccionada.entidadSeleccionada._value;
-    })
-    this.entidad_territorial_seleccionada = entidadFiltrada[0];
+    console.log(this.entidadSeleccionada);
   }
 }
 

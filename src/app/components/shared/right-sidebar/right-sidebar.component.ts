@@ -79,33 +79,28 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     this.cargarUsuario(uuid)
     this.usuarioService.usuario$.subscribe((usuario) => {
       this.usuario = usuario;
-      console.log(this.usuario?.first_name);
       this.nombreUsuario = this.usuario?.first_name + ' ' + this.usuario?.last_name;
 
     });
-    console.log(this.nombreUsuario);
 
   }
 
   cargarUsuario(uuid: string): void {
     this.authService.cargarUsuario(uuid).subscribe({
       next: (usuario) => {
-        console.log(usuario);
-        const usuarioEnSesion = new Usuario(
+          const usuarioEnSesion = new Usuario(
           usuario.uuid,
           usuario.username,
           usuario.first_name,
           usuario.last_name,
           usuario.email
         )
-        console.log(usuarioEnSesion);
 
         this.usuarioService.setUsuario(usuarioEnSesion);
 
-        console.log(this.usuarioService.getUsuario());
       },
       error: (err) => {
-        console.error(err);
+
       }
     })
   }

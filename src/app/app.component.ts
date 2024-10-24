@@ -53,16 +53,14 @@ export class AppComponent implements AfterViewInit, OnInit {
     });
 
 
-    console.log(this.showRightSidebar);
-
+    
 
   }
   ngOnInit(): void {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
-      console.log('Navigation Event:', event);
-
+      
       this.evaluateSidebarVisibility(event.urlAfterRedirects);
     });
 

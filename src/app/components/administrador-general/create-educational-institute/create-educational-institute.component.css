@@ -14,7 +14,7 @@
 
 .ancho-50 {
   margin-left: 15px;
-  margin-right: 20px; /* Puedes ajustar este margen según tus necesidades */
+  margin-right: 15px; /* Puedes ajustar este margen según tus necesidades */
   box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
 }
 
@@ -105,16 +105,17 @@
 }
 
 .end-input {
-  box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
+  box-sizing: border-box;
   float: inline-end;
   width: 130px;
+  margin-right: 10px;
 }
 
 .row-crear-institucion {
   --bs-gutter-x: 24px;
   --bs-gutter-y: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
   margin-right: calc(-.5 * var(--bs-gutter-x));
 }

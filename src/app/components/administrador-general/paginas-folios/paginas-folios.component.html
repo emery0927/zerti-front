@@ -11,7 +11,7 @@
       <mat-form-field style="max-width: 100%; width: 285px; margin-left: 10px;" appearance="fill" class="ancho-instituciones specific-select-input">
         <mat-label style="font-size: 16px; color: #59320f;">Nombre de Institución Educativa</mat-label>
         <mat-select tabIndex="1" role="combobox" (selectionChange)="onInstitucionChange($event)" [value]="1">
-          <mat-option *ngFor="let institucion of institucionesPorET" [value]="institucion.id_ie">{{institucion.nombre_c}}</mat-option>
+          <mat-option *ngFor="let institucion of institucionesPorET"></mat-option>
         </mat-select>
       </mat-form-field>
     </div>

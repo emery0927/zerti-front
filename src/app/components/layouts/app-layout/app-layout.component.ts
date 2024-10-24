@@ -38,8 +38,7 @@ export class AppLayoutComponent implements AfterViewInit, OnInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
   constructor(private sidenavService: SidenavService, private router: Router) {
-    console.log(this.sidenav);
-
+    
     this.sidenavService.sideNavState$.subscribe( res=> {
       this.onSideNavChange = res;
     });
@@ -48,8 +47,7 @@ export class AppLayoutComponent implements AfterViewInit, OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
-      console.log('Navigation Event:', event);
-
+      
       this.evaluateSidebarVisibility(event.urlAfterRedirects);
     });
 

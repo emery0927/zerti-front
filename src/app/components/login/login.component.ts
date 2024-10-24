@@ -37,9 +37,8 @@ export class LoginComponent implements OnInit {
   login(): void {
     if (this.authForm.valid) {
       const { username, password } = this.authForm.value;
-      console.log(this.authService.login(username, password).subscribe({
+      this.authService.login(username, password).subscribe({
         next: (respuesta) => {
-          console.log(respuesta);
           const tokenPayload: JwtPayload = jwtDecode(respuesta.access);
           const jsonDecoded = JSON.stringify(tokenPayload);
           const parsedDecode = JSON.parse(jsonDecoded);
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit {
           this.showError(this.errorMessage);
           console.error(this.errorMessage);
         }
-      }));
+      });
     }
   }
 

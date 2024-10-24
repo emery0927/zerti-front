@@ -1,7 +1,8 @@
 <div style="padding: 92px;" *ngIf="!imageUrl">
-  <label for="fileInput">
+  <label style="text-align: center;" for="fileInput">
     <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color"
     aria-hidden="true" data-mat-icon-type="font">photo_library</mat-icon>
+    <p>Escudo</p>
   </label>
   <input id="fileInput" type="file" (change)="onFileSelected($event)" />
 </div>

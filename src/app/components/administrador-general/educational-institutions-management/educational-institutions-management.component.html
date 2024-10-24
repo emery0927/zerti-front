@@ -3,15 +3,16 @@
 <div class="select padding-izquierdo-modulo padding-derecho-modulo">
   <mat-form-field style="max-width: 25%;" appearance="fill" class=" ancho-igual specific-select-input" >
     <mat-label style="font-size: 16px;  color: #59320f;">Departamento</mat-label>
-    <mat-select #entidadSeleccionada (selectionChange)="onSelect($event)" value="seleccionar">
+    <mat-select (selectionChange)="onSelect($event)" value="seleccionar">
       <mat-option value="seleccionar">Elige un Departamento</mat-option>
       <mat-option *ngFor="let departamento of departamentos" [value]="departamento">{{departamento.nombre}}</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field style="max-width: 25%;" appearance="fill" class=" ancho-igual specific-select-input" >
-    <mat-label style="font-size: 16px;  color: #59320f;">Muncipio</mat-label>
-    <mat-select class="" tabIndex="0" role="combobox" #entidadSeleccionada (selectionChange)="onSelect($event)" value="Selecciona un Municipio">
+    <mat-label style="font-size: 16px;  color: #59320f;">Municipio</mat-label>
+    <mat-select (selectionChange)="consultarColegio($event)" class="" tabIndex="0" role="combobox" value="seleccionar">
+      <mat-option value="seleccionar">Elige un Municipio</mat-option>
       <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio.nombre}}</mat-option>
     </mat-select>
   </mat-form-field>
@@ -105,7 +106,7 @@
             <mat-icon style="color: #59320f;">more_vert</mat-icon>
           </span>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="abrirCrearIE(entidadSeleccionada)">Crear IE
+            <button mat-menu-item (click)="abrirCrearIE()">Crear IE
               <mat-icon>add_circle_outline</mat-icon>
             </button>
             <button mat-menu-item (click)="showOficials()">Ver Oficiales
