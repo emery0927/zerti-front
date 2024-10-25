@@ -702,13 +702,6 @@ const EQUIPOS: EquipoServicio[] = [
   {id_equipo: 3, id_admin: 3, nombre_es: 'Equipo 3', observacion: ''},
 ]
 
-const CENTROS_POBLADOS: CentroPoblado[] = [
-  {id_et: 1, id_dep: 1, id_divipol: 56561, nombre_cpo: 'La Buitrera', observacion: ''},
-  {id_et: 2, id_dep: 1, id_divipol: 65561, nombre_cpo: 'CPO2', observacion: ''},
-  {id_et: 3, id_dep: 1, id_divipol: 56556, nombre_cpo: 'CPO3', observacion: ''},
-  {id_et: 4, id_dep: 1, id_divipol: 65984, nombre_cpo: 'CPO4', observacion: ''},
-]
-
 const CLASES_INSTITUCION: ClaseInstitucion[] = [
   {id_clase: 1, clase_ie: 'Oficial'},
   {id_clase: 2, clase_ie: 'No Oficial'},

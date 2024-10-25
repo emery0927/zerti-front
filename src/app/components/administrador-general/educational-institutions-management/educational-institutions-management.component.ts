@@ -101,10 +101,10 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
   departamentoSeleccionado!: Departamento;
   municipioSeleccionado!: Municipio;
 
-  institucion: InstitucionEducativa[] = [];
-  data = new MatTableDataSource<InstitucionEducativa>(this.institucion);
+  instituciones: InstitucionEducativa[] = [];
+  data = new MatTableDataSource<InstitucionEducativa>(this.instituciones);
 
-  displayedColumns = ['nombre_ie', 'nombre_c', 'cod_zerti', 'nit', 'id_mun', 'zone', 'clase', 'options'];
+  displayedColumns = ['nombre_ie', 'cod_zerti', 'nit', 'ubicacion', 'clase', 'options'];
   expandedElement!: InstitucionEducativa | null;
 
   entidadesTerritoriales: EntidadTerritorial[] = ENTIDAD_TERRITORIAL;
@@ -155,7 +155,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
     this.unidadTerritorialService.getDepartamentos().subscribe({
       next: (data: Departamento[]) => {
         this.departamentos = data;
-              }
+      }
     });
 
   }
@@ -182,11 +182,28 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
 
   consultarColegio(item: any) {
     this.municipioSeleccionado = item.value;
-    this.establecimientoEducativoService.getEstablecimientosEducativos().subscribe({
-      next: (data: InstitucionEducativa[]) => {
-        console.log(data);
+    this.unidadTerritorialService.getCentrosPobladosPorMunicipio(this.municipioSeleccionado.uuid).subscribe({
+      next: (response: CentroPoblado[]) => {
       }
-    })
+    });
+
+    this.establecimientoEducativoService.getEstablecimientoEducativoPorMunicipio(this.municipioSeleccionado.uuid).subscribe({
+      next: (data: InstitucionEducativa[]) => {
+        this.instituciones = data;
+        this.data.data = this.instituciones;
+        console.log(data);
+        console.log(this.instituciones);
+        console.log(this.data);
+
+      },
+      error: (err) => {
+        console.error('Error al obtener instituciones', err);
+
+      }
+    });
+
+
+
   }
 
   onSelect(item: any) {
@@ -194,13 +211,12 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
     this.unidadTerritorialService.getMunicipiosPorDepartamento(item.value.uuid).subscribe({
       next: (data: Municipio[]) => {
         this.municipios = data;
+        console.log(this.municipios);
+
       }
     })
 
-
-
-
-    let filteredData = this.institucion.filter((element: any) => {
+    let filteredData = this.instituciones.filter((element: any) => {
       return element.entidad_territorial.id_et === item.value;
     })
     if (item.value !== 1) {
@@ -210,7 +226,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
       this.mostrarTooltip = false;
     } else if (item.value === 1) {
       this.data.data = []
-      this.data.data = this.institucion;
+      this.data.data = this.instituciones;
       this.habilitarCrear = true;
       this.mostrarTooltip = true;
     }
@@ -244,7 +260,7 @@ export class EducationalInstitutionsManagementComponent implements AfterViewInit
          * (Oficial/No Oficial) */
 
   showOficials() {
-    let filteredData = this.institucion.filter((element: any) => {
+    let filteredData = this.instituciones.filter((element: any) => {
       return element.clase.clase_ie === 'Oficial';
     })
     this.data.data = filteredData;
@@ -374,13 +390,6 @@ const EQUIPOS: EquipoServicio[] = [
   {id_equipo: 1, id_admin: 1, nombre_es: 'Equipo 1', observacion: ''},
   {id_equipo: 2, id_admin: 2, nombre_es: 'Equipo 2', observacion: ''},
   {id_equipo: 3, id_admin: 3, nombre_es: 'Equipo 3', observacion: ''},
-]
-
-const CENTROS_POBLADOS: CentroPoblado[] = [
-  {id_et: 1, id_dep: 1, id_divipol: 56561, nombre_cpo: 'La Buitrera', observacion: ''},
-  {id_et: 2, id_dep: 1, id_divipol: 65561, nombre_cpo: 'CPO2', observacion: ''},
-  {id_et: 3, id_dep: 1, id_divipol: 56556, nombre_cpo: 'CPO3', observacion: ''},
-  {id_et: 4, id_dep: 1, id_divipol: 65984, nombre_cpo: 'CPO4', observacion: ''},
 ]
 
 const CLASES_INSTITUCION: ClaseInstitucion[] = [

@@ -55,98 +55,86 @@
         <!-- Nombre de Institución Educativa - Columna -->
         <ng-container matColumnDef="nombre_ie">
           <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef>
-            Nombre de Institución Educativa / En Custodia </th>
-            <td [innerHTML]="replaceEspacios(element.nombre_ie)" class="row-style espacios cursor-pointer" role="row" mat-cell *matCellDef="let element"></td>
-          </ng-container>
+            Nombre de Institución Educativa </th>
+          <td class="row-style espacios cursor-pointer" role="row" mat-cell *matCellDef="let element">{{element.nombre}}</td>
+        </ng-container>
 
-          <!-- Nombre Corto - Columna -->
-          <ng-container matColumnDef="nombre_c">
-            <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Nombre Corto </th>
-            <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.nombre_c}} </td>
-    </ng-container>
+        <!-- Código - Columna -->
+        <ng-container matColumnDef="cod_zerti">
+          <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Código </th>
+          <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.codigo_trd}} </td>
+        </ng-container>
 
-    <!-- Código - Columna -->
-    <ng-container matColumnDef="cod_zerti">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Código </th>
-      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.cod_zerti}} </td>
-    </ng-container>
+        <!-- NIT - Columna -->
+        <ng-container matColumnDef="nit">
+          <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef> NIT </th>
+          <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.nit}} </td>
+        </ng-container>
 
-    <!-- NIT - Columna -->
-    <ng-container matColumnDef="nit">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef> NIT </th>
-      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.nit}} </td>
-    </ng-container>
+        <!-- Ubicación - Columna -->
+        <ng-container matColumnDef="ubicacion">
+          <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Ubicación </th>
+          <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.direccion}} </td>
+        </ng-container>
 
-    <!-- Ubicación - Columna -->
-    <ng-container matColumnDef="id_mun">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Ubicación </th>
-      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.municipio.nombre_mun}} </td>
-    </ng-container>
+        <!-- Clase - Columna -->
+        <ng-container matColumnDef="clase">
+          <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Clase </th>
+          <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.oficial}} </td>
+        </ng-container>
 
-    <!-- Zona - Columna -->
-    <ng-container matColumnDef="zone">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Zona </th>
-      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.municipio.zona}} </td>
-    </ng-container>
-
-    <!-- Clase - Columna -->
-    <ng-container matColumnDef="clase">
-      <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Clase </th>
-      <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.clase.clase_ie}} </td>
-    </ng-container>
-
-    <!-- Opciones - Columna -->
-    <ng-container matColumnDef="options">
-      <th class="header-style" style="z-index: 1;" role="columnheader" mat-header-cell *matHeaderCellDef [ngClass]="{'align-right': true}"
-      matTooltip="Debe de seleccionar una (1) Entidad Territorial" [matTooltipDisabled]="!mostrarTooltip">
-        <div style="margin-right: -20px;">
-          <button [disabled]="habilitarCrear" mat-button  [matMenuTriggerFor]="menu"
-          style="cursor: pointer;background-color: transparent; border: none;">
-          <span>
-            <mat-icon style="color: #59320f;">more_vert</mat-icon>
-          </span>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="abrirCrearIE()">Crear IE
-              <mat-icon>add_circle_outline</mat-icon>
+        <!-- Opciones - Columna -->
+        <ng-container matColumnDef="options">
+          <th class="header-style" style="z-index: 1;" role="columnheader" mat-header-cell *matHeaderCellDef [ngClass]="{'align-right': true}"
+          matTooltip="Debe de seleccionar una (1) Entidad Territorial" [matTooltipDisabled]="!mostrarTooltip">
+            <div style="margin-right: -20px;">
+              <button [disabled]="habilitarCrear" mat-button  [matMenuTriggerFor]="menu"
+              style="cursor: pointer;background-color: transparent; border: none;">
+              <span>
+                <mat-icon style="color: #59320f;">more_vert</mat-icon>
+              </span>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="abrirCrearIE()">Crear IE
+                  <mat-icon>add_circle_outline</mat-icon>
+                </button>
+                <button mat-menu-item (click)="showOficials()">Ver Oficiales
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-menu-item (click)="showIdle()">Ver Inactivas
+                  <mat-icon>disabled_visible</mat-icon>
+                </button>
+                <button mat-menu-item (click)="showOnCustody()">Ver en Custodia
+                  <mat-icon>cast_for_education</mat-icon>
+                </button>
+              </mat-menu>
             </button>
-            <button mat-menu-item (click)="showOficials()">Ver Oficiales
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button mat-menu-item (click)="showIdle()">Ver Inactivas
-              <mat-icon>disabled_visible</mat-icon>
-            </button>
-            <button mat-menu-item (click)="showOnCustody()">Ver en Custodia
-              <mat-icon>cast_for_education</mat-icon>
-            </button>
-          </mat-menu>
-        </button>
-      </div>
-    </th>
-    <td class="cursor-pointer" mat-cell *matCellDef="let element" [ngClass]="{'align-right': true}">
-      <div style="margin-right: -20px;">
-        <button mat-button [matMenuTriggerFor]="menu" style="cursor: pointer; background-color: transparent; border: none;"
-        aria-haspopup="true">
-        <span>
-          <mat-icon style="color: #8c8c8c;">more_horiz</mat-icon>
-        </span>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="editar(element)">Editar
-            <mat-icon>create</mat-icon>
+          </div>
+        </th>
+        <td class="cursor-pointer" mat-cell *matCellDef="let element" [ngClass]="{'align-right': true}">
+          <div style="margin-right: -20px;">
+            <button mat-button [matMenuTriggerFor]="menu" style="cursor: pointer; background-color: transparent; border: none;"
+            aria-haspopup="true">
+            <span>
+              <mat-icon style="color: #8c8c8c;">more_horiz</mat-icon>
+            </span>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editar(element)">Editar
+                <mat-icon>create</mat-icon>
+              </button>
+              <button mat-menu-item (click)="eliminar()">Eliminar
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-menu-item (click)="abrirCreacionSedes(element)">Crear Sede
+                <mat-icon>home_filed</mat-icon>
+              </button>
+            </mat-menu>
+
           </button>
-          <button mat-menu-item (click)="eliminar()">Eliminar
-            <mat-icon>delete</mat-icon>
-          </button>
-          <button mat-menu-item (click)="abrirCreacionSedes(element)">Crear Sede
-            <mat-icon>home_filed</mat-icon>
-          </button>
-        </mat-menu>
+        </div>
+      </td>
+    </ng-container>
 
-      </button>
-    </div>
-  </td>
-</ng-container>
-
-<ng-container matColumnDef="expandedDetail">
+<!-- <ng-container matColumnDef="expandedDetail">
   <td style="background-color: #f9f9f9;" [ngClass]="{'expand-hover': true}" mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
     <div class="element-detail"
     [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
@@ -162,7 +150,7 @@
     </div>
   </div>
 </td>
-</ng-container>
+</ng-container> -->
 
 
 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -171,7 +159,7 @@ class="example-element-row"
 [class.example-expanded-row]="expandedElement === element"
 (click)="expandedElement = expandedElement === element ? null : element">
 </tr>
-<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+<!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr> -->
 </table>
 <!-- Contenedor que muestra mensaje si el filtro no arroja resultados -->
 <ng-container *ngIf="data.filteredData.length == 0">

@@ -45,7 +45,6 @@ export class CreateEducationalInstituteComponent implements OnInit {
   municipios: Municipio[] = [];
   departamentos: Departamento[] = [];
   equipos = EQUIPOS;
-  centros_poblados = CENTROS_POBLADOS;
   modalidades = MODALIDADES;
 
   claseSeleccionada!: number;
@@ -87,13 +86,6 @@ const EQUIPOS: EquipoServicio[] = [
   {id_equipo: 1, id_admin: 1, nombre_es: 'Equipo 1', observacion: ''},
   {id_equipo: 2, id_admin: 2, nombre_es: 'Equipo 2', observacion: ''},
   {id_equipo: 3, id_admin: 3, nombre_es: 'Equipo 3', observacion: ''},
-]
-
-const CENTROS_POBLADOS: CentroPoblado[] = [
-  {id_et: 1, id_dep: 1, id_divipol: 56561, nombre_cpo: 'La Buitrera', observacion: ''},
-  {id_et: 2, id_dep: 1, id_divipol: 65561, nombre_cpo: 'CPO2', observacion: ''},
-  {id_et: 3, id_dep: 1, id_divipol: 56556, nombre_cpo: 'CPO3', observacion: ''},
-  {id_et: 4, id_dep: 1, id_divipol: 65984, nombre_cpo: 'CPO4', observacion: ''},
 ]
 
 const CLASES_INSTITUCION: ClaseInstitucion[] = [
