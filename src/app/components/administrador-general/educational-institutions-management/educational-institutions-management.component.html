@@ -80,7 +80,7 @@
         <!-- Clase - Columna -->
         <ng-container matColumnDef="clase">
           <th class="header-style" role="columnheader" mat-header-cell *matHeaderCellDef > Clase </th>
-          <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.oficial}} </td>
+          <td class="row-style cursor-pointer" mat-cell *matCellDef="let element"> {{element.oficial ? 'Oficial' : 'No Oficial'}} </td>
         </ng-container>
 
         <!-- Opciones - Columna -->

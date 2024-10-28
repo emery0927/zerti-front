@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
+import { LocalizacionesService } from 'src/app/services/localizaciones.service';
 @Component({
   selector: 'app-create-educational-institute',
   standalone: true,
@@ -37,15 +38,20 @@ import { ImageUploadComponent } from '../image-upload/image-upload.component';
 export class CreateEducationalInstituteComponent implements OnInit {
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public entidadSeleccionada:any) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public entidadSeleccionada:any,
+    private unidadTerritorialService: LocalizacionesService ) { }
 
   clases_institucion = CLASES_INSTITUCION;
   entidad_territorial = ENTIDAD_TERRITORIAL;
-  entidad_territorial_seleccionada!: any;
+  entidadTerritorialSeleccionada!: any;
   municipios: Municipio[] = [];
   departamentos: Departamento[] = [];
   equipos = EQUIPOS;
   modalidades = MODALIDADES;
+  municipio!: Municipio;
+  departamento!: Departamento;
+  centrosPoblados: CentroPoblado[] = [];
 
   claseSeleccionada!: number;
   modalidadSeleccionada!: number;
@@ -55,7 +61,20 @@ export class CreateEducationalInstituteComponent implements OnInit {
   cpoSeleccionado!: number;
 
   ngOnInit(): void {
-    console.log(this.entidadSeleccionada);
+    this.municipio = this.entidadSeleccionada.municipio;
+    this.departamento = this.entidadSeleccionada.departamento;
+    if (this.municipio.certificado === true) {
+      this.entidadTerritorialSeleccionada = this.municipio;
+    } else {
+      this.entidadTerritorialSeleccionada = this.departamento;
+    }
+    this.unidadTerritorialService.getCentrosPobladosPorMunicipio(this.municipio.uuid).subscribe({
+      next: (response: CentroPoblado[]) => {
+        this.centrosPoblados = response;
+
+      }
+    });
+
   }
 }
 

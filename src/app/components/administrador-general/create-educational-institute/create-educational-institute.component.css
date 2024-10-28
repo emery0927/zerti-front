@@ -27,7 +27,7 @@
 
 .ancho-mitad {
   width: 100%;
-  margin-left: 7px;
+  margin-left: 10px;
   box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
 }
 
