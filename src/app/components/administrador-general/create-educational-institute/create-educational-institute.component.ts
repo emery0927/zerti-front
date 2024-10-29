@@ -102,9 +102,7 @@ const SEDES_SANTA_LIBRADA: Sede[] = [
 ]
 
 const EQUIPOS: EquipoServicio[] = [
-  {id_equipo: 1, id_admin: 1, nombre_es: 'Equipo 1', observacion: ''},
-  {id_equipo: 2, id_admin: 2, nombre_es: 'Equipo 2', observacion: ''},
-  {id_equipo: 3, id_admin: 3, nombre_es: 'Equipo 3', observacion: ''},
+  {id_equipo: 1, id_admin: 1, nombre_es: 'Zerti Cali', observacion: ''},
 ]
 
 const CLASES_INSTITUCION: ClaseInstitucion[] = [
